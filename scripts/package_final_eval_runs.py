@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
-"""Package latest eval-runs/*-final-run records into results/clean-final.
+"""Package eval run records into results/clean-final.
 
 This creates the same publication layout consumed by build_publication_analysis.py:
 results/clean-final/manifest.json and results/clean-final/models/<slug>/{artifacts,reports,prompts,logs}.
 """
 from __future__ import annotations
+import argparse
 import json, re, shutil
 from collections import Counter
 from pathlib import Path
@@ -69,13 +70,26 @@ def vision_counts(reports_dir):
     return dict(c)
 
 def main():
+    ap = argparse.ArgumentParser(description=__doc__)
+    ap.add_argument(
+        "--label-suffix",
+        default="final-run",
+        help="Run label suffix to package, e.g. final-run or publish-run.",
+    )
+    ap.add_argument(
+        "--description",
+        help="Manifest description. Defaults to a description derived from --label-suffix.",
+    )
+    args = ap.parse_args()
+    suffix = args.label_suffix.strip("-")
+
     if OUT.exists(): shutil.rmtree(OUT)
     (OUT / 'models').mkdir(parents=True)
     records = []
-    run_jsons = sorted((ROOT / 'eval-runs' / 'reports').glob('skill-with-shell-*-final-run/*-run.json'))
+    run_jsons = sorted((ROOT / 'eval-runs' / 'reports').glob(f'skill-with-shell-*-{suffix}/*-run.json'))
     for run_json in run_jsons:
         label = run_json.parent.name
-        m = re.match(r'skill-with-shell-(.+)-final-run$', label)
+        m = re.match(rf'skill-with-shell-(.+)-{re.escape(suffix)}$', label)
         if not m: continue
         slug = m.group(1)
         model = MODEL_NAMES.get(slug, slug)
@@ -119,11 +133,12 @@ def main():
         })
     manifest = {
         'created_at': '2026-05-23',
-        'description': 'Clean final run packaged from eval-runs/*-final-run records. Includes generation and VLM fast-agent traces where available.',
+        'description': args.description or f'Clean final run packaged from eval-runs/*-{suffix} records. Includes generation and VLM fast-agent traces where available.',
+        'label_suffix': suffix,
         'records': records,
     }
     (OUT / 'manifest.json').write_text(json.dumps(manifest, indent=2) + '\n')
-    (OUT / 'README.md').write_text(f'# Clean final results\n\nPackaged {len(records)} model records from `eval-runs/*-final-run`.\n')
+    (OUT / 'README.md').write_text(f'# Clean final results\n\nPackaged {len(records)} model records from `eval-runs/*-{suffix}`.\n')
     print(f'packaged {len(records)} records into {OUT.relative_to(ROOT)}')
 
 if __name__ == '__main__': main()

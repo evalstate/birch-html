@@ -41,6 +41,13 @@ def fmt_s(n):
         return "0s"
 
 
+def human_label(value):
+    text = str(value or "").strip()
+    if not text:
+        return "Result bundle"
+    return " ".join(part.capitalize() for part in text.replace("_", "-").split("-") if part)
+
+
 def model_rank_rows(models):
     rows = sorted(models, key=lambda r: (
         -int(r.get("generation_ok", 0)),
@@ -165,12 +172,34 @@ def main():
     total_tools = sum(int(m.get("tool_calls",0)) for m in models)
     suites = sorted({m.get("suite","") for m in models if m.get("suite")})
     source_kinds = sorted({m.get("source_kind","") for m in models if m.get("source_kind")})
-    is_clean_final = suites == ["clean-final"] or source_kinds == ["clean-final"]
-    run_label = "Clean final run" if is_clean_final else "Current evidence bundle"
+    manifests = []
+    for suite in suites:
+        path = ROOT / "results" / suite / "manifest.json"
+        if path.exists():
+            try:
+                manifests.append(json.loads(path.read_text()))
+            except json.JSONDecodeError:
+                pass
+    label_suffixes = sorted({m.get("label_suffix", "") for m in manifests if m.get("label_suffix")})
+    run_label = (
+        f"{human_label(label_suffixes[0])} bundle"
+        if len(label_suffixes) == 1 else
+        "Packaged evidence bundle"
+    )
+    generation_traces = sum(int(m.get("generation_trace_count", 0)) for m in models)
+    vlm_traces = sum(int(m.get("vlm_trace_count", 0)) for m in models)
+    complete_models = sum(
+        1 for m in models
+        if int(m.get("generation_ok", 0)) == int(m.get("generation_total", 0)) and int(m.get("generation_total", 0)) > 0
+    )
+    suite_label = ", ".join(suites) or "analysis/data"
+    source_label = ", ".join(source_kinds) or "packaged records"
+    source_phrase = suite_label if suite_label == source_label else f"{suite_label} ({source_label})"
     run_note = (
-        "This report is generated from the packaged clean-final run. All records in this bundle have generated artifacts, deterministic viewport reports, screenshots, generation traces, and VLM fast-agent traces."
-        if is_clean_final else
-        "The current old/pre-rerun data has known caveats: VLM fast-agent traces were not captured for those runs, and those records predate the checker-packaging fix. Those caveats should be reduced in the new clean run."
+        f"Generated from {source_phrase}: {total_models} model records, "
+        f"{total_artifacts} artifact rows, {generation_traces} generation traces, and "
+        f"{vlm_traces} VLM traces. {complete_models}/{total_models} model records completed "
+        "all expected artifacts; partial runs remain visible in the tables and matrix."
     )
 
     html_doc = f"""<!doctype html>
@@ -323,6 +352,7 @@ select {{ min-width: 210px; padding: 7px 10px; border: 1px solid var(--line); ba
   <section>
     <h2>How to read this report</h2>
     <p>The benchmark is best read as evidence, not as a single model-quality ranking. Raw counts are shown next to any derived index. The most important dimensions are: artifact completion, deterministic render-check failures/warnings, VLM screenshot smoke-review failures/warnings, and generation cost in seconds, tokens, and tool calls.</p>
+    <p>Read more at the Github Repository here: <a href="https://github.com/evalstate/birch-html">https://github.com/evalstate/birch-html</a></p>
     <p class="note">{esc(run_note)}</p>
   </section>
 
@@ -452,7 +482,8 @@ select {{ min-width: 210px; padding: 7px 10px; border: 1px solid var(--line); ba
   <section>
     <h2>Generated data files</h2>
     <p>The microsite is generated programmatically from consolidated JSON/CSV tables. Rebuild with:</p>
-    <pre class="panel"><code>python3 scripts/build_publication_analysis.py
+    <pre class="panel"><code>python3 scripts/package_final_eval_runs.py --label-suffix publish-run
+python3 scripts/build_publication_analysis.py --suite clean-final
 python3 scripts/generate_responsive_report.py</code></pre>
     <div class="table-wrap">
       <table>
@@ -479,7 +510,7 @@ python3 scripts/generate_responsive_report.py</code></pre>
   </main>
 
   <div class="footer">
-    Generated from <code>analysis/data/*.json</code>. Suggested next pass: add screenshot/report links, add new clean-run labels, and replace old/pre-rerun caveats after the publication run.
+    Generated from <code>analysis/data/*.json</code> and packaged <code>results/*/manifest.json</code> metadata. Raw dimensions remain visible so readers can inspect partial runs, render findings, traces, and efficiency tradeoffs directly.
   </div>
 </div>
 <div id="tooltip" class="tooltip"></div>

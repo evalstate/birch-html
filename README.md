@@ -60,6 +60,120 @@ It's also useful for leaning in to model assumptions; and answering questions li
 
 > GPT-5.5 does respond correctly to being told the length of the file early in the `SKILL.md` and reads further chunks :)
 
+### Running GEPA
+
+The active skill loop is:
+
+```bash
+uv run scripts/optimize_birch_skill_with_gepa.py --help
+```
+
+It mutates only the LLM-facing skill files:
+
+- `skill/SKILL.md`
+- selected files under `skill/recipes/`
+
+Each candidate is copied into an isolated directory under:
+
+```text
+eval-runs/gepa/<run-name>/candidate-XXX/
+```
+
+so failed generations or bad candidates do not modify the working tree.
+
+Quick smoke score of the current seed skill, without proposing changes:
+
+```bash
+BIRCH_VISION_REVIEW_CMD=off \
+uv run scripts/optimize_birch_skill_with_gepa.py \
+  --run-name smoke-seed \
+  --task-model codexspark \
+  --reflection-model codexresponses.gpt-5.5 \
+  --evaluate-only \
+  --eval-jobs 2 \
+  --generation-timeout 900 \
+  --eval-timeout 1800
+```
+
+Small GEPA search:
+
+```bash
+BIRCH_VISION_REVIEW_CMD=off \
+uv run scripts/optimize_birch_skill_with_gepa.py \
+  --run-name birch-skill-codexspark-p4 \
+  --task-model codexspark \
+  --reflection-model codexresponses.gpt-5.5 \
+  --proposals 4 \
+  --eval-jobs 2 \
+  --generation-timeout 900 \
+  --eval-timeout 2400
+```
+
+Use a previous best candidate as the seed:
+
+```bash
+uv run scripts/optimize_birch_skill_with_gepa.py \
+  --run-name continue-from-best \
+  --seed-skill-dir eval-runs/gepa/birch-skill-codexspark-p4/best/skills/birch-html \
+  --task-model codexspark \
+  --reflection-model codexresponses.gpt-5.5 \
+  --proposals 4
+```
+
+The script expects GEPA sources at `~/source/gepa/src` by default. Override with:
+
+```bash
+--gepa-src /path/to/gepa/src
+```
+
+### GEPA ASI / feedback sources
+
+GEPA scoring and feedback currently use two evidence streams:
+
+1. **Deterministic ASI** — always on. Each candidate runs
+   `scripts/run_skill_evals.py`, which generates the five eval artifacts and
+   runs `scripts/check_birch_renderings.py` across desktop/mobile/deep
+   viewports. Failures and warnings feed `score.json` and actionable feedback.
+2. **VLM ASI** — optional screenshot smoke review. By default the GEPA evaluator
+   calls `scripts/review_birch_screenshots_with_vision.py` after deterministic
+   screenshots exist. VLM findings are surfaced in `score.json` and feedback as
+   visual smoke evidence.
+
+Disable VLM review for cheaper deterministic-only loops:
+
+```bash
+BIRCH_VISION_REVIEW_CMD=off uv run scripts/optimize_birch_skill_with_gepa.py ...
+```
+
+Use the default VLM reviewer:
+
+```bash
+uv run scripts/optimize_birch_skill_with_gepa.py ...
+```
+
+Or provide a custom reviewer command. It must accept:
+
+```text
+<candidate_dir> <reports_dir>
+```
+
+and write:
+
+```text
+<reports_dir>/vision-findings.json
+```
+
+in the same shape as `scripts/review_birch_screenshots_with_vision.py`.
+
+Candidate outputs to inspect:
+
+```text
+eval-runs/gepa/<run-name>/candidate-XXX/artifacts/
+eval-runs/gepa/<run-name>/candidate-XXX/reports/
+eval-runs/gepa/<run-name>/candidate-XXX/score.json
+eval-runs/gepa/<run-name>/best/
+```
+
 
 ## Active layout
 
@@ -71,17 +185,33 @@ It's also useful for leaning in to model assumptions; and answering questions li
 | `scripts/birch-copy.js` | Optional browser enhancer for copyable code/command blocks. |
 | `scripts/birch_mpl.py` | Matplotlib helpers for Birch-styled chart generation. |
 | `scripts/check_birch_renderings.py` | Static/browser rendering checker for Birch artifacts. |
-| `scripts/run_migration_evals.py` | Harness for running the migration eval suite. |
+| `scripts/run_skill_evals.py` | Single-model skill benchmark runner. |
+| `scripts/run_multimodel_skill_evals.py` | Multi-model benchmark runner. |
+| `scripts/optimize_birch_skill_with_gepa.py` | GEPA loop for skill/recipe candidate experiments. |
 | `evals/` | Prompt fixtures, sources, and rubrics for the eval harness. |
 | `eval-runs/` | Committed baseline and comparison artifacts. |
 
 
 ## Running checks
 
-Run the migration eval comparison harness:
+Run one benchmark model:
 
 ```bash
-uv run scripts/run_migration_evals.py
+uv run scripts/run_skill_evals.py \
+  --model codexspark \
+  --label smoke-codexspark \
+  --jobs 2
+```
+
+Run the multi-model benchmark:
+
+```bash
+uv run scripts/run_multimodel_skill_evals.py \
+  --experiment my-run \
+  --model codexspark \
+  --model codexresponses.gpt-5.5 \
+  --vision \
+  --jobs 2
 ```
 
 Run the Birch rendering checker directly against generated artifacts:
