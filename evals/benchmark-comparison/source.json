@@ -1,0 +1,82 @@
+{
+  "report_context": {
+    "title": "Birch skill seed comparison",
+    "timestamp": "2026-05-20T18:40:00Z",
+    "eval_set": ["numeric-data", "code-review", "module-explainer", "implementation-plan"],
+    "command": "python3 scripts/run_skill_evals.py --skill-dir birch-html --model codexresponses.gpt-5.5 --label skill-candidate-b-gpt55",
+    "seed_report_path": "eval-runs/reports/skill-seed-gpt55/summary.json",
+    "candidate_report_path": "eval-runs/reports/skill-candidate-b-gpt55/summary.json",
+    "question": "Should Candidate B be promoted as the next GEPA seed?"
+  },
+  "scoring_formula": {
+    "expression": "0.30 * generation_score + 0.55 * checker_score + 0.15 * hygiene_score",
+    "generation_score": "generated_ok / total_evals",
+    "checker_score": "max(0, 1 - 0.20 * checker_failures - 0.03 * checker_warnings)",
+    "hygiene_score": "average artifact compliance score after unsupported classes, external assets, and missing CSS penalties"
+  },
+  "caveats": [
+    "Provider token schemas differ; cached, reasoning, and effective tokens are not apples-to-apples.",
+    "Checker warnings are mechanical contract signals, not a complete human quality score.",
+    "Same:same screenshot pairs primarily validate geometry and rendering contracts, not aesthetic quality.",
+    "Wall time includes model latency and harness overhead, so small differences should be treated as noisy."
+  ],
+  "runs": [
+    {
+      "label": "Seed A",
+      "model": "codexresponses.gpt-5.5",
+      "skill_version": "birch-html seed",
+      "generated_ok": 4,
+      "total_evals": 4,
+      "generation_score": 1.0,
+      "checker_failures": 0,
+      "checker_warnings": 5,
+      "checker_score": 0.85,
+      "hygiene_score": 1.0,
+      "final_score": 0.9175,
+      "wall_time_s": 412,
+      "input_tokens": 84200,
+      "output_tokens": 31800,
+      "total_tokens": 116000,
+      "estimated_cost_usd": 1.92,
+      "decision_notes": [
+        "All four artifacts generated and passed failure checks.",
+        "Mobile warnings remain around split rail alignment and dense chart text.",
+        "Good baseline, but warning gradient leaves room for optimization."
+      ]
+    },
+    {
+      "label": "Candidate B",
+      "model": "codexresponses.gpt-5.5",
+      "skill_version": "birch-html candidate-b",
+      "generated_ok": 4,
+      "total_evals": 4,
+      "generation_score": 1.0,
+      "checker_failures": 0,
+      "checker_warnings": 2,
+      "checker_score": 0.94,
+      "hygiene_score": 0.99,
+      "final_score": 0.9655,
+      "wall_time_s": 489,
+      "input_tokens": 90100,
+      "output_tokens": 34600,
+      "total_tokens": 124700,
+      "estimated_cost_usd": 2.14,
+      "decision_notes": [
+        "Checker warnings dropped from five to two with no generation failures.",
+        "Cost rose by 11.5% and wall time rose by 18.7%.",
+        "One code-review artifact still needs inspection for long diff wrapping."
+      ]
+    }
+  ],
+  "per_eval": [
+    {"eval": "numeric-data", "seed_score": 0.930, "candidate_score": 0.970, "seed_warnings": 2, "candidate_warnings": 1, "seed_wall_time_s": 94, "candidate_wall_time_s": 113, "regression_note": "Candidate chart is clearer but uses more SVG text."},
+    {"eval": "code-review", "seed_score": 0.910, "candidate_score": 0.955, "seed_warnings": 1, "candidate_warnings": 0, "seed_wall_time_s": 102, "candidate_wall_time_s": 121, "regression_note": "No mechanical regression; inspect finding severity wording."},
+    {"eval": "module-explainer", "seed_score": 0.925, "candidate_score": 0.944, "seed_warnings": 1, "candidate_warnings": 1, "seed_wall_time_s": 111, "candidate_wall_time_s": 132, "regression_note": "Runtime path improved; mobile flow caption remains dense."},
+    {"eval": "implementation-plan", "seed_score": 0.905, "candidate_score": 0.993, "seed_warnings": 1, "candidate_warnings": 0, "seed_wall_time_s": 105, "candidate_wall_time_s": 123, "regression_note": "Plan quality improved; no checker regression."}
+  ],
+  "recommendation": {
+    "promote_candidate_b": true,
+    "rationale": "Candidate B improves final score by 0.048 and reduces checker warnings from five to two without adding failures. The latency and cost increases are material but acceptable for GEPA seed quality.",
+    "next_experiment": "Promote Candidate B for a single-model GEPA run, then rerun on Kimi and Gemini before broad model-suite validation. Inspect code-review diff wrapping manually before committing."
+  }
+}

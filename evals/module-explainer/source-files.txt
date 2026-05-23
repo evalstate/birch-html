@@ -1,0 +1,6 @@
+scripts/check_birch_renderings.py
+scripts/birch_mpl.py
+evals/charts/run_eval.py
+evals/charts/build_chart_brief.py
+docs/birch-llm-style-guide.md
+styles/birch-system.css

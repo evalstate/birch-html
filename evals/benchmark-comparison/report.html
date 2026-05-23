@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Birch skill seed comparison • Candidate B</title>
+  <style data-birch-system>
+__BIRCH_SYSTEM_CSS__
+  </style>
+  <style>
+    .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(148px, 1fr)); gap: var(--space-3); }
+    .stat-card { padding: var(--space-3); }
+    .tradeoff-svg { width: 100%; height: auto; max-width: 620px; }
+    .numeric-table code { font-size: 0.875em; }
+    .regression { color: var(--danger); }
+    .improvement { color: var(--success); }
+  </style>
+</head>
+<body>
+<main class="page stack" data-gap="lg">
+  <header class="stack" data-gap="sm">
+    <div class="eyebrow">GEPA seed evaluation • 2026-05-20</div>
+    <h1>Candidate B improves final score to 0.9655; promote as next GEPA seed</h1>
+    <p class="lede">Seed A (0.9175) vs Candidate B (0.9655) on four evals. Warnings reduced from 5→2 with no new failures. Latency +18.7% and cost +11.5% are acceptable for the quality gain.</p>
+  </header>
+
+  <section class="section stack" data-gap="lg">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Evidence in first viewport</span>
+        <h2>KPI summary and primary tradeoff</h2>
+      </div>
+    </div>
+
+    <div class="kpi-grid">
+      <div class="card stat-card">
+        <div class="caption">Final score</div>
+        <div class="stat-value">0.9655</div>
+        <div class="note">Candidate B • +0.048 vs Seed</div>
+      </div>
+      <div class="card stat-card">
+        <div class="caption">Checker warnings</div>
+        <div class="stat-value">2</div>
+        <div class="note improvement">↓ 3 from Seed (5)</div>
+      </div>
+      <div class="card stat-card">
+        <div class="caption">Wall time</div>
+        <div class="stat-value">489 s</div>
+        <div class="note regression">+77 s (+18.7%)</div>
+      </div>
+      <div class="card stat-card">
+        <div class="caption">Total tokens</div>
+        <div class="stat-value">124.7k</div>
+        <div class="note regression">+8.7k (+7.5%)</div>
+      </div>
+      <div class="card stat-card">
+        <div class="caption">Est. cost</div>
+        <div class="stat-value">$2.14</div>
+        <div class="note regression">+$0.22 (+11.5%)</div>
+      </div>
+    </div>
+
+    <div class="panel chart-panel stack" data-gap="sm">
+      <div class="section-head"><h3>Quality vs cost &amp; latency tradeoff</h3></div>
+      <svg class="chart-svg tradeoff-svg" viewBox="0 0 620 240" xmlns="http://www.w3.org/2000/svg" aria-labelledby="chart-title" role="img">
+        <title id="chart-title">Final score vs estimated cost and wall time for Seed A and Candidate B</title>
+        <!-- Axes -->
+        <line x1="70" y1="200" x2="580" y2="200" stroke="var(--border-color)" stroke-width="1"/>
+        <line x1="70" y1="30" x2="70" y2="200" stroke="var(--border-color)" stroke-width="1"/>
+        <!-- Y ticks (score 0.85–1.0) -->
+        <text x="60" y="205" font-size="10" fill="var(--text-muted)" text-anchor="end">0.85</text>
+        <text x="60" y="160" font-size="10" fill="var(--text-muted)" text-anchor="end">0.90</text>
+        <text x="60" y="115" font-size="10" fill="var(--text-muted)" text-anchor="end">0.95</text>
+        <text x="60" y="70" font-size="10" fill="var(--text-muted)" text-anchor="end">1.00</text>
+        <!-- X labels -->
+        <text x="150" y="220" font-size="10" fill="var(--text-muted)" text-anchor="middle">Seed A</text>
+        <text x="310" y="220" font-size="10" fill="var(--text-muted)" text-anchor="middle">Candidate B</text>
+        <!-- Bars: score (olive), cost scaled (clay), time scaled (sky) -->
+        <!-- Seed A score bar -->
+        <rect x="110" y="42" width="80" height="158" fill="var(--olive)" rx="2"/>
+        <text x="150" y="38" font-size="11" fill="var(--text)" text-anchor="middle" font-weight="600">0.9175</text>
+        <!-- Candidate B score bar -->
+        <rect x="270" y="18" width="80" height="182" fill="var(--olive)" rx="2"/>
+        <text x="310" y="14" font-size="11" fill="var(--text)" text-anchor="middle" font-weight="600">0.9655</text>
+        <!-- Cost indicators (scaled to height) -->
+        <rect x="130" y="175" width="40" height="25" fill="var(--clay)" rx="1"/>
+        <text x="150" y="192" font-size="9" fill="white" text-anchor="middle">$1.92</text>
+        <rect x="290" y="162" width="40" height="38" fill="var(--clay)" rx="1"/>
+        <text x="310" y="185" font-size="9" fill="white" text-anchor="middle">$2.14</text>
+        <!-- Time indicators -->
+        <rect x="175" y="168" width="15" height="32" fill="var(--sky)" rx="1"/>
+        <rect x="335" y="155" width="15" height="45" fill="var(--sky)" rx="1"/>
+        <!-- Legend -->
+        <rect x="420" y="40" width="12" height="12" fill="var(--olive)" rx="1"/>
+        <text x="440" y="50" font-size="10" fill="var(--text)">Final score</text>
+        <rect x="420" y="60" width="12" height="12" fill="var(--clay)" rx="1"/>
+        <text x="440" y="70" font-size="10" fill="var(--text)">Est. cost (USD)</text>
+        <rect x="420" y="80" width="12" height="12" fill="var(--sky)" rx="1"/>
+        <text x="440" y="90" font-size="10" fill="var(--text)">Wall time (scaled)</text>
+      </svg>
+      <p class="chart-caption">Candidate B raises score 5.2% while increasing cost 11.5% and time 18.7%. Source: eval-runs/reports/skill-candidate-b-gpt55/summary.json</p>
+    </div>
+
+    <div class="numeric-table-wrap">
+      <table class="numeric-table">
+        <thead>
+          <tr><th>Run</th><th>Final score</th><th>Gen. score</th><th>Checker score</th><th>Hygiene</th><th>Warnings</th><th>Time (s)</th><th>Tokens</th><th>Cost</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Seed A</strong></td><td class="metric">0.9175</td><td class="metric">1.000</td><td class="metric">0.850</td><td class="metric">1.000</td><td class="metric">5</td><td class="metric">412</td><td class="metric">116.0k</td><td class="metric">$1.92</td></tr>
+          <tr><td><strong>Candidate B</strong></td><td class="metric">0.9655</td><td class="metric">1.000</td><td class="metric">0.940</td><td class="metric">0.990</td><td class="metric">2</td><td class="metric">489</td><td class="metric">124.7k</td><td class="metric">$2.14</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="section stack" data-gap="lg">
+    <div class="section-head">
+      <div><span class="eyebrow">Analysis</span><h2>Improvements, regressions, and per-eval detail</h2></div>
+    </div>
+
+    <div class="callout">
+      <strong>Improvements:</strong> Checker warnings dropped from 5 to 2; final score +0.048; per-eval scores rose on all four tasks (largest gain on implementation-plan: 0.905 → 0.993).
+    </div>
+    <div class="callout" style="border-color: var(--danger);">
+      <strong>Regressions:</strong> Wall time +77 s (+18.7%); total tokens +8.7k; estimated cost +11.5%. One code-review artifact still requires manual inspection for long diff wrapping.
+    </div>
+
+    <div class="numeric-table-wrap">
+      <table class="numeric-table">
+        <thead><tr><th>Eval</th><th>Seed score</th><th>Cand. score</th><th>Seed warn</th><th>Cand. warn</th><th>Seed time</th><th>Cand. time</th><th>Note</th></tr></thead>
+        <tbody>
+          <tr><td>numeric-data</td><td class="metric">0.930</td><td class="metric">0.970</td><td>2</td><td>1</td><td>94s</td><td>113s</td><td class="note">Clearer chart, more SVG text</td></tr>
+          <tr><td>code-review</td><td class="metric">0.910</td><td class="metric">0.955</td><td>1</td><td>0</td><td>102s</td><td>121s</td><td class="note">Inspect diff wrapping</td></tr>
+          <tr><td>module-explainer</td><td class="metric">0.925</td><td class="metric">0.944</td><td>1</td><td>1</td><td>111s</td><td>132s</td><td class="note">Mobile caption still dense</td></tr>
+          <tr><td>implementation-plan</td><td class="metric">0.905</td><td class="metric">0.993</td><td>1</td><td>0</td><td>105s</td><td>123s</td><td class="note">Largest quality gain</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="section stack" data-gap="lg">
+    <div class="section-head">
+      <div><span class="eyebrow">Reproducibility</span><h2>Scoring formula &amp; run provenance</h2></div>
+    </div>
+    <div class="reference-panel">
+      <div class="caption">Formula</div>
+      <code class="code-block" data-wrap="true">0.30 × generation_score + 0.55 × checker_score + 0.15 × hygiene_score</code>
+      <div class="caption">Command</div>
+      <code class="code-block" data-wrap="true">python3 scripts/run_skill_evals.py --skill-dir birch-html --model codexresponses.gpt-5.5 --label skill-candidate-b-gpt55</code>
+      <div class="caption">Reports</div>
+      <div class="plain-list">
+        <div>Seed: eval-runs/reports/skill-seed-gpt55/summary.json</div>
+        <div>Candidate: eval-runs/reports/skill-candidate-b-gpt55/summary.json</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section stack" data-gap="lg">
+    <div class="section-head"><h2>Caveats</h2></div>
+    <ul class="plain-list">
+      <li>Provider token schemas differ; cached, reasoning, and effective tokens are not apples-to-apples.</li>
+      <li>Checker warnings are mechanical contract signals, not a complete human quality score.</li>
+      <li>Same:same screenshot pairs primarily validate geometry and rendering contracts, not aesthetic quality.</li>
+      <li>Wall time includes model latency and harness overhead; small differences are noisy.</li>
+    </ul>
+  </section>
+
+  <section class="section stack" data-gap="lg">
+    <div class="callout">
+      <strong>Next experiment:</strong> Promote Candidate B for a single-model GEPA run, then rerun on Kimi and Gemini before broad model-suite validation. Inspect code-review diff wrapping manually before committing.
+    </div>
+  </section>
+</main>
+</body>
+</html>

@@ -1,0 +1,1295 @@
+commit 5703e01795a1b353fd3530c6796d656c4c849c1c
+Author: evalstate <1936278+evalstate@users.noreply.github.com>
+Date:   Wed May 20 09:31:42 2026 +0100
+
+    updates
+
+diff --git a/evals/charts/build_chart_brief.py b/evals/charts/build_chart_brief.py
+new file mode 100644
+index 0000000..35b01ed
+--- /dev/null
++++ b/evals/charts/build_chart_brief.py
+@@ -0,0 +1,267 @@
++# /// script
++# requires-python = ">=3.10"
++# dependencies = [
++#   "matplotlib>=3.8,<4",
++# ]
++# ///
++from __future__ import annotations
++
++import csv
++from collections import defaultdict
++from html import escape
++from pathlib import Path
++import re
++import sys
++
++import matplotlib.pyplot as plt
++from matplotlib.ticker import PercentFormatter
++
++
++ROOT = Path(__file__).resolve().parents[2]
++sys.path.insert(0, str(ROOT / "scripts"))
++
++from birch_mpl import birch_theme, close, polish_axes, svg_string  # noqa: E402
++
++
++DATA = ROOT / "evals" / "charts" / "sample-data.csv"
++OUT = ROOT / "24-birch-chart-brief.html"
++
++
++def pct(value: float) -> str:
++    return f"{value * 100:.0f}%"
++
++
++def num(value: float, digits: int = 1) -> str:
++    return f"{value:.{digits}f}"
++
++
++def slug(value: str) -> str:
++    return value.replace("-", " ").title()
++
++
++def load_rows() -> list[dict[str, object]]:
++    with DATA.open(newline="", encoding="utf-8") as handle:
++        rows = list(csv.DictReader(handle))
++    for row in rows:
++        row["static_pass_rate"] = float(row["static_pass_rate"])
++        row["overflow_count"] = int(row["overflow_count"])
++        row["palette_close"] = float(row["palette_close"])
++        row["mean_rgb_delta"] = float(row["mean_rgb_delta"])
++        row["vision_score"] = float(row["vision_score"])
++    return rows
++
++
++def build_svg(rows: list[dict[str, object]]) -> str:
++    weeks = sorted({str(row["week"]) for row in rows})
++    by_artifact: dict[str, dict[str, dict[str, object]]] = defaultdict(dict)
++    for row in rows:
++        by_artifact[str(row["artifact"])][str(row["week"])] = row
++
++    with birch_theme():
++        fig, ax = plt.subplots(figsize=(5.8, 3.45))
++        for artifact in sorted(by_artifact):
++            values = [by_artifact[artifact][week]["static_pass_rate"] for week in weeks]
++            ax.plot(
++                weeks,
++                values,
++                marker="o",
++                linewidth=2.2,
++                markersize=4.2,
++                label=slug(artifact),
++            )
++        ax.set_title("Static pass rate improved across all tracked artifacts", loc="left", pad=12)
++        ax.set_ylabel("Static checks passing")
++        ax.set_ylim(0.78, 1.01)
++        ax.yaxis.set_major_formatter(PercentFormatter(1.0))
++        ax.legend(ncols=3, loc="lower right", columnspacing=0.9)
++        ax.set_xlabel("")
++        polish_axes(ax)
++        ax.tick_params(axis="x", labelrotation=0)
++        svg = svg_string(fig)
++        close(fig)
++
++    svg = re.sub(r"<svg\b", '<svg class="chart-svg" role="img" aria-label="Line chart showing weekly static pass rate by artifact"', svg, count=1)
++    return svg
++
++
++def latest_rows(rows: list[dict[str, object]]) -> list[dict[str, object]]:
++    latest_week = max(str(row["week"]) for row in rows)
++    return sorted((row for row in rows if row["week"] == latest_week), key=lambda row: str(row["artifact"]))
++
++
++def previous_latest(rows: list[dict[str, object]]) -> tuple[list[dict[str, object]], list[dict[str, object]]]:
++    weeks = sorted({str(row["week"]) for row in rows})
++    prev, latest = weeks[-2], weeks[-1]
++    return (
++        [row for row in rows if row["week"] == prev],
++        [row for row in rows if row["week"] == latest],
++    )
++
++
++def metric_rows(rows: list[dict[str, object]]) -> str:
++    ranked = sorted(rows, key=lambda row: float(row["vision_score"]), reverse=True)
++    parts = []
++    for row in ranked:
++        score = float(row["vision_score"])
++        tone = "var(--success)" if score >= 4.4 else "var(--accent)"
++        parts.append(
++            f"""          <div class="metric-row">
++            <span class="caption">{escape(slug(str(row["artifact"])))}</span>
++            <div class="meter"><span style="--value: {score / 5 * 100:.0f}%; --tone: {tone};"></span></div>
++            <code>{score:.1f}/5</code>
++          </div>"""
++        )
++    return "\n".join(parts)
++
++
++def table_rows(rows: list[dict[str, object]]) -> str:
++    parts = []
++    for row in sorted(rows, key=lambda row: str(row["artifact"])):
++        parts.append(
++            f"""            <tr>
++              <td class="entity">{escape(slug(str(row["artifact"])))}<span class="subtle">{escape(str(row["week"]))}</span></td>
++              <td class="metric" data-label="pass rate">{pct(float(row["static_pass_rate"]))}</td>
++              <td class="metric" data-label="overflow">{int(row["overflow_count"])}</td>
++              <td class="metric" data-label="palette">{pct(float(row["palette_close"]))}</td>
++              <td class="metric" data-label="vision">{num(float(row["vision_score"]))}/5</td>
++              <td class="note">{escape(str(row["notes"]))}</td>
++            </tr>"""
++        )
++    return "\n".join(parts)
++
++
++def main() -> None:
++    rows = load_rows()
++    latest = latest_rows(rows)
++    prev, current = previous_latest(rows)
++    svg = build_svg(rows)
++
++    avg_pass = sum(float(row["static_pass_rate"]) for row in latest) / len(latest)
++    total_overflow = sum(int(row["overflow_count"]) for row in latest)
++    avg_vision = sum(float(row["vision_score"]) for row in latest) / len(latest)
++    avg_delta = sum(float(row["mean_rgb_delta"]) for row in latest) / len(latest)
++    prev_overflow = sum(int(row["overflow_count"]) for row in prev)
++
++    html = f"""<!-- Copyright 2026 Anthropic PBC · SPDX-License-Identifier: Apache-2.0 -->
++<!doctype html>
++<html lang="en">
++<head>
++<meta charset="utf-8">
++<meta name="viewport" content="width=device-width, initial-scale=1">
++<title>Birch chart brief — rendering checker adoption signal</title>
++<link rel="stylesheet" href="styles/birch-system.css">
++</head>
++<body>
++<main class="page stack" data-gap="lg">
++  <header class="stack" data-gap="sm">
++    <div class="eyebrow">Numeric data brief</div>
++    <h1>Rendering checker stability is trending toward adoption.</h1>
++    <p class="lede">Sample evaluation data shows higher static pass rates, lower visible overflow, and improving vision scores across the three tracked Birch artifacts.</p>
++    <div class="cluster">
++      <span class="chip" data-tone="olive">Matplotlib SVG</span>
++      <span class="chip">Birch numeric table</span>
++      <span class="chip">Evidence first</span>
++    </div>
++  </header>
++
++  <section class="section stack" data-gap="lg">
++    <div class="section-head">
++      <div>
++        <span class="eyebrow">Latest week</span>
++        <h2>Adoption signal</h2>
++      </div>
++      <span class="badge" data-tone="success">2026-05-18</span>
++    </div>
++
++    <div class="grid" data-cols="4">
++      <article class="card stack" data-variant="outlined">
++        <span class="caption">Average static pass</span>
++        <strong class="stat-value">{pct(avg_pass)}</strong>
++        <p class="muted">Across design-system, component variants, and timeline pages.</p>
++      </article>
++      <article class="card stack" data-variant="outlined">
++        <span class="caption">Visible overflow</span>
++        <strong class="stat-value">{total_overflow}</strong>
++        <p class="muted">Down from {prev_overflow} in the previous weekly sample.</p>
++      </article>
++      <article class="card stack" data-variant="outlined">
++        <span class="caption">Average vision score</span>
++        <strong class="stat-value">{avg_vision:.1f}/5</strong>
++        <p class="muted">Validator-readiness proxy from visual review samples.</p>
++      </article>
++      <article class="card stack" data-variant="outlined">
++        <span class="caption">Mean RGB delta</span>
++        <strong class="stat-value">{avg_delta:.1f}</strong>
++        <p class="muted">Lower is better; visual drift continues to narrow.</p>
++      </article>
++    </div>
++  </section>
++
++  <section class="section stack" data-gap="lg">
++    <div class="section-head">
++      <span class="eyebrow">Trend</span>
++    </div>
++
++    <div class="split">
++      <div class="stack" data-gap="lg">
++        <h2>Static checks improved every week</h2>
++
++        <div class="panel chart-panel stack" data-gap="sm">
++          {svg}
++          <p class="chart-caption">Generated with <code>scripts/birch_mpl.py</code> and inlined as SVG. The plotted values are exact weekly static pass rates from <code>evals/charts/sample-data.csv</code>.</p>
++        </div>
++      </div>
++
++      <aside class="reference-panel stack" data-gap="md">
++        <h3>Vision-score ranking</h3>
++        <div class="metric-list">
++{metric_rows(latest)}
++        </div>
++        <p class="muted">The timeline artifact is the strongest candidate for adoption; component variants still has one visible overflow issue to remove.</p>
++      </aside>
++    </div>
++  </section>
++
++  <section class="section stack" data-gap="lg">
++    <div class="section-head">
++      <div>
++        <span class="eyebrow">Exact values</span>
++        <h2>Latest sample by artifact</h2>
++      </div>
++    </div>
++
++    <div class="numeric-table-wrap">
++      <table class="numeric-table">
++        <thead>
++          <tr>
++            <th class="label-cell">Artifact</th>
++            <th class="metric">Pass rate</th>
++            <th class="metric">Overflow</th>
++            <th class="metric">Palette</th>
++            <th class="metric">Vision</th>
++            <th>Note</th>
++          </tr>
++        </thead>
++        <tbody>
++{table_rows(latest)}
++        </tbody>
++      </table>
++    </div>
++  </section>
++
++  <section class="section stack" data-gap="md">
++    <div class="card stack" data-variant="flat">
++      <h2>Source and caveat</h2>
++      <p>Data is a synthetic chart-eval fixture for validating Birch chart generation. It is useful for exercising layout, Matplotlib SVG rendering, numeric tables, ranking bars, and visual validation, but it is not a production quality metric source.</p>
++    </div>
++  </section>
++</main>
++</body>
++</html>
++"""
++    OUT.write_text(html, encoding="utf-8")
++    print(OUT)
++
++
++if __name__ == "__main__":
++    main()
+diff --git a/evals/charts/run_eval.py b/evals/charts/run_eval.py
+new file mode 100644
+index 0000000..f32f694
+--- /dev/null
++++ b/evals/charts/run_eval.py
+@@ -0,0 +1,55 @@
++#!/usr/bin/env python3
++"""Regenerate and validate the Birch chart fixture.
++
++This is intentionally a tiny reusable eval runner around the fixture data in
++`evals/charts/sample-data.csv`. It exercises the Matplotlib SVG path and the
++Birch rendering checker at desktop and mobile viewports.
++"""
++
++from __future__ import annotations
++
++import subprocess
++from pathlib import Path
++
++
++ROOT = Path(__file__).resolve().parents[2]
++
++VIEWPORTS = {
++    "chart-brief": "desktop:1365x900",
++    "chart-brief-mobile": "mobile:390x900",
++    "chart-brief-deep": "deep:1365x2400",
++    "chart-brief-mobile-deep": "mobile-deep:390x3000",
++}
++
++
++def run(cmd: list[str]) -> None:
++    print("+", " ".join(cmd))
++    subprocess.run(cmd, cwd=ROOT, check=True)
++
++
++def main() -> None:
++    run(["uv", "run", "--with", "matplotlib", "python", "evals/charts/build_chart_brief.py"])
++
++    for name, viewport in VIEWPORTS.items():
++        run(
++            [
++                "uv",
++                "run",
++                "--with",
++                "pillow",
++                "python",
++                "scripts/check_birch_renderings.py",
++                "--pair",
++                "24-birch-chart-brief.html:24-birch-chart-brief.html",
++                "--out",
++                f"reports/birch-rendering-check-{name}.json",
++                "--markdown",
++                f"reports/birch-rendering-check-{name}.md",
++                "--viewport",
++                viewport,
++            ]
++        )
++
++
++if __name__ == "__main__":
++    main()
+diff --git a/scripts/check_birch_renderings.py b/scripts/check_birch_renderings.py
+index 14760ed..54410ac 100644
+--- a/scripts/check_birch_renderings.py
++++ b/scripts/check_birch_renderings.py
+@@ -111,160 +111,306 @@ PALETTE = {
+ }
+ 
+ 
+ @dataclass
+ class Finding:
+     level: str
+     name: str
+     evidence: str
+ 
+ 
+ @dataclass
+ class PageStats:
+     path: str
+     bytes: int
+     title: str
+     doctype: bool
+     viewport: bool
+     stylesheet_links: list[str]
+     style_blocks: int
+     style_bytes: int
+     script_blocks: int
+     tag_counts: dict[str, int]
+     class_counts: dict[str, int]
+     data_attrs: dict[str, int]
+     text_words: int
+     unique_words: int
+     css_vars_used: list[str]
+     css_vars_defined: list[str]
+     hex_colors: list[str]
+ 
+ 
+ class StatsParser(HTMLParser):
+     def __init__(self) -> None:
+         super().__init__(convert_charrefs=True)
+         self.title = ""
+         self.in_title = False
+         self.skip_depth = 0
+         self.text: list[str] = []
+         self.tags: Counter[str] = Counter()
+         self.classes: Counter[str] = Counter()
+         self.data_attrs: Counter[str] = Counter()
+         self.links: list[str] = []
+         self.inline_styles: list[str] = []
+         self.scripts = 0
+ 
+     def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+         tag = tag.lower()
+         attrs_dict = {k.lower(): v or "" for k, v in attrs}
+         self.tags[tag] += 1
+         if tag == "title":
+             self.in_title = True
+         if tag in {"style", "script"}:
+             self.skip_depth += 1
+         if tag == "script":
+             self.scripts += 1
+         if tag == "link" and attrs_dict.get("rel", "").lower() == "stylesheet":
+             self.links.append(attrs_dict.get("href", ""))
+         if "style" in attrs_dict:
+             self.inline_styles.append(attrs_dict["style"])
+         if "class" in attrs_dict:
+             for cls in attrs_dict["class"].split():
+                 self.classes[cls] += 1
+         for key in attrs_dict:
+             if key.startswith("data-"):
+                 self.data_attrs[key] += 1
+ 
+     def handle_endtag(self, tag: str) -> None:
+         tag = tag.lower()
+         if tag == "title":
+             self.in_title = False
+         if tag in {"style", "script"} and self.skip_depth:
+             self.skip_depth -= 1
+ 
+     def handle_data(self, data: str) -> None:
+         if self.in_title:
+             self.title += data
+         elif self.skip_depth == 0:
+             self.text.append(data)
+ 
+ 
++class GridListParser(HTMLParser):
++    """Find list items that will become accidental extra grid children."""
++
++    GRID_LIST_CLASSES = {"insight-list", "takeaway-list"}
++
++    def __init__(self) -> None:
++        super().__init__(convert_charrefs=True)
++        self.list_stack: list[bool] = []
++        self.li_stack: list[dict[str, object]] = []
++        self.bad_items: list[str] = []
++
++    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
++        attrs_dict = {k.lower(): v or "" for k, v in attrs}
++        if tag in {"ul", "ol"}:
++            classes = set(attrs_dict.get("class", "").split())
++            self.list_stack.append(bool(classes & self.GRID_LIST_CLASSES))
++        elif tag == "li" and self.list_stack and self.list_stack[-1]:
++            self.li_stack.append({"depth": 0, "chunks": 0, "preview": ""})
++        elif self.li_stack:
++            self.li_stack[-1]["depth"] = int(self.li_stack[-1]["depth"]) + 1
++            if int(self.li_stack[-1]["depth"]) == 1:
++                self.li_stack[-1]["chunks"] = int(self.li_stack[-1]["chunks"]) + 1
++
++    def handle_endtag(self, tag: str) -> None:
++        if tag in {"ul", "ol"} and self.list_stack:
++            self.list_stack.pop()
++        elif tag == "li" and self.li_stack:
++            item = self.li_stack.pop()
++            if int(item["chunks"]) > 1:
++                self.bad_items.append(str(item["preview"]).strip()[:90])
++        elif self.li_stack and int(self.li_stack[-1]["depth"]) > 0:
++            self.li_stack[-1]["depth"] = int(self.li_stack[-1]["depth"]) - 1
++
++    def handle_data(self, data: str) -> None:
++        if not self.li_stack or not data.strip():
++            return
++        item = self.li_stack[-1]
++        if int(item["depth"]) == 0:
++            item["chunks"] = int(item["chunks"]) + 1
++        if len(str(item["preview"])) < 120:
++            item["preview"] = f"{item['preview']} {data.strip()}".strip()
++
++
++class MetricRowParser(HTMLParser):
++    """Validate the Birch metric-row child contract."""
++
++    def __init__(self) -> None:
++        super().__init__(convert_charrefs=True)
++        self.in_metric_row = False
++        self.depth = 0
++        self.children: list[tuple[str, set[str]]] = []
++        self.preview = ""
++        self.bad_rows: list[str] = []
++
++    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
++        attrs_dict = {k.lower(): v or "" for k, v in attrs}
++        classes = set(attrs_dict.get("class", "").split())
++        if "metric-row" in classes:
++            self.in_metric_row = True
++            self.depth = 0
++            self.children = []
++            self.preview = ""
++            return
++        if not self.in_metric_row:
++            return
++        self.depth += 1
++        if self.depth == 1:
++            self.children.append((tag.lower(), classes))
++
++    def handle_endtag(self, tag: str) -> None:
++        if not self.in_metric_row:
++            return
++        if tag.lower() == "div" and self.depth == 0:
++            tags = [tag for tag, _classes in self.children]
++            classes = [classes for _tag, classes in self.children]
++            valid = (
++                len(self.children) == 3
++                and "caption" in classes[0]
++                and "meter" in classes[1]
++                and tags[2] == "code"
++            )
++            if not valid:
++                self.bad_rows.append(self.preview.strip()[:90])
++            self.in_metric_row = False
++            return
++        if self.depth > 0:
++            self.depth -= 1
++
++    def handle_data(self, data: str) -> None:
++        if self.in_metric_row and data.strip() and len(self.preview) < 120:
++            self.preview = f"{self.preview} {data.strip()}".strip()
++
++
++class TimelineParser(HTMLParser):
++    """Validate timeline item structure before browser geometry runs."""
++
++    def __init__(self) -> None:
++        super().__init__(convert_charrefs=True)
++        self.element_stack: list[tuple[str, set[str]]] = []
++        self.timeline_stack: list[set[str]] = []
++        self.item_stack: list[dict[str, object]] = []
++        self.bad_items: list[str] = []
++
++    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
++        attrs_dict = {k.lower(): v or "" for k, v in attrs}
++        classes = set(attrs_dict.get("class", "").split())
++        if self.timeline_stack and classes & {"timeline-item", "tl-entry"}:
++            self.item_stack.append({"timeline": set(self.timeline_stack[-1]), "depth": 0, "children": [], "preview": ""})
++        elif self.item_stack:
++            item = self.item_stack[-1]
++            item["depth"] = int(item["depth"]) + 1
++            if int(item["depth"]) == 1:
++                children = item["children"]
++                assert isinstance(children, list)
++                children.append(classes)
++        if "timeline" in classes:
++            self.timeline_stack.append(classes)
++        self.element_stack.append((tag.lower(), classes))
++
++    def handle_endtag(self, tag: str) -> None:
++        tag = tag.lower()
++        classes: set[str] = set()
++        if self.element_stack:
++            _tag, classes = self.element_stack.pop()
++        if classes & {"timeline-item", "tl-entry"} and self.item_stack:
++            item = self.item_stack.pop()
++            children = item["children"]
++            timeline_classes = item["timeline"]
++            assert isinstance(children, list)
++            assert isinstance(timeline_classes, set)
++            has_time = any({"timeline-time", "tl-time"} & child for child in children)
++            has_body = any({"timeline-body", "tl-body"} & child for child in children)
++            is_custom = len(timeline_classes - {"timeline"}) > 0
++            if not ((has_time and has_body) or is_custom):
++                self.bad_items.append(str(item["preview"]).strip()[:90])
++        elif self.item_stack and int(self.item_stack[-1]["depth"]) > 0:
++            self.item_stack[-1]["depth"] = int(self.item_stack[-1]["depth"]) - 1
++        if "timeline" in classes and self.timeline_stack:
++            self.timeline_stack.pop()
++
++    def handle_data(self, data: str) -> None:
++        if self.item_stack and data.strip() and len(str(self.item_stack[-1]["preview"])) < 120:
++            item = self.item_stack[-1]
++            item["preview"] = f"{item['preview']} {data.strip()}".strip()
++
++
+ def main() -> None:
+     parser = argparse.ArgumentParser(description=__doc__)
+     parser.add_argument(
+         "--pair",
+         action="append",
+         help="original:candidate pair. Can be repeated. Defaults to 05/06 Birch rewrites.",
+     )
+     parser.add_argument("--out", type=Path, default=ROOT / "reports" / "birch-rendering-check.json")
+     parser.add_argument("--markdown", type=Path, default=ROOT / "reports" / "birch-rendering-check.md")
+     parser.add_argument("--screenshots-dir", type=Path, default=ROOT / "reports" / "birch-screenshots")
+     parser.add_argument("--capture", action=argparse.BooleanOptionalAction, default=True)
+     parser.add_argument("--viewport", default="desktop:1365x900")
+     parser.add_argument("--delay-ms", type=int, default=140)
+     parser.add_argument("--fail-on-warn", action="store_true")
+     args = parser.parse_args()
+ 
+     pairs = parse_pairs(args.pair)
+     system_css = SYSTEM_CSS.read_text(encoding="utf-8") if SYSTEM_CSS.exists() else ""
+     defined_vars = css_defined_vars(system_css)
+ 
+     reports = []
+     all_findings: list[Finding] = []
+     browser = find_chrome() if args.capture else None
+     viewport_name, width, height = parse_viewport(args.viewport)
+     args.screenshots_dir.mkdir(parents=True, exist_ok=True)
+ 
+     for original, candidate in pairs:
+         original_path = (ROOT / original).resolve()
+         candidate_path = (ROOT / candidate).resolve()
+         pair_report = compare_pair(
+             original_path,
+             candidate_path,
+             system_defined_vars=defined_vars,
+             browser=browser,
+             screenshots_dir=args.screenshots_dir,
+             viewport=(viewport_name, width, height),
+             delay_ms=args.delay_ms,
+         )
+         reports.append(pair_report)
+         all_findings.extend(Finding(**item) for item in pair_report["findings"])
+ 
+     payload = {
+         "pairs": reports,
+         "summary": {
+             "pairs": len(reports),
+             "failures": sum(1 for f in all_findings if f.level == "fail"),
+             "warnings": sum(1 for f in all_findings if f.level == "warn"),
+             "notes": sum(1 for f in all_findings if f.level == "note"),
+         },
+     }
+ 
+     args.out.parent.mkdir(parents=True, exist_ok=True)
+     args.out.write_text(json.dumps(payload, indent=2), encoding="utf-8")
+     args.markdown.write_text(render_markdown(payload), encoding="utf-8")
+ 
+     print(args.markdown)
+     print(args.out)
+     failures = payload["summary"]["failures"]
+     warnings = payload["summary"]["warnings"]
+     if failures or (args.fail_on_warn and warnings):
+         raise SystemExit(1)
+ 
+ 
+ def parse_pairs(items: list[str] | None) -> list[tuple[str, str]]:
+     if not items:
+         return list(DEFAULT_PAIRS)
+     out = []
+     for item in items:
+         if ":" not in item:
+             raise SystemExit(f"--pair must be original:candidate, got {item!r}")
+         left, right = item.split(":", 1)
+         out.append((left, right))
+     return out
+ 
+ 
+ def parse_viewport(value: str) -> tuple[str, int, int]:
+     name, size = value.split(":", 1)
+     width, height = size.lower().split("x", 1)
+     return name, int(width), int(height)
+ 
+@@ -349,160 +495,213 @@ def page_stats(path: Path) -> PageStats:
+ 
+ 
+ def extract_style_blocks(html: str) -> list[str]:
+     return re.findall(r"<style[^>]*>(.*?)</style>", html, flags=re.I | re.S)
+ 
+ 
+ def css_used_vars(text: str) -> set[str]:
+     return set(re.findall(r"var\(\s*(--[-_a-zA-Z0-9]+)", text))
+ 
+ 
+ def css_defined_vars(css: str) -> set[str]:
+     return set(re.findall(r"(--[-_a-zA-Z0-9]+)\s*:", css))
+ 
+ 
+ def contract_findings(candidate: Path, stats: PageStats, system_defined_vars: set[str]) -> list[Finding]:
+     html = candidate.read_text(encoding="utf-8")
+     local_defined = set(stats.css_vars_defined)
+     available_vars = system_defined_vars | local_defined
+     unknown = sorted(set(stats.css_vars_used) - available_vars)
+     findings = [
+         check("doctype", stats.doctype, "doctype present", "missing doctype"),
+         check("viewport", stats.viewport, "viewport meta present", "missing viewport meta"),
+         check(
+             "uses_birch_system_css",
+             "styles/birch-system.css" in stats.stylesheet_links,
+             "links styles/birch-system.css",
+             f"stylesheet links: {stats.stylesheet_links}",
+         ),
+         check(
+             "has_page_shell",
+             stats.class_counts.get("page", 0) >= 1,
+             ".page found",
+             "candidate should use .page as the outer shell",
+         ),
+         check(
+             "uses_layout_primitives",
+             sum(stats.class_counts.get(cls, 0) for cls in LAYOUT_CLASSES) >= 8,
+             "layout primitive count is healthy",
+             "too few Birch layout primitives; LLM layout may be brittle",
+             warn=True,
+         ),
+         check(
+             "uses_semantic_components",
+             sum(stats.class_counts.get(cls, 0) for cls in SEMANTIC_CLASSES) >= 8,
+             "semantic component count is healthy",
+             "too few semantic components; likely still page-specific CSS",
+             warn=True,
+         ),
+         check(
+             "no_unknown_css_vars",
+             not unknown,
+             "all CSS variables are defined in Birch system or local CSS",
+             "undefined CSS vars: " + ", ".join(unknown[:8]),
+         ),
+         check(
+             "no_patch_markers",
+             not any(line.startswith("+") for line in html.splitlines()),
+             "no accidental patch marker lines",
+             "found line beginning with +",
+         ),
+     ]
+     if stats.style_bytes > 2500:
+         findings.append(
+             Finding(
+                 "warn",
+                 "local_css_size",
+                 f"{stats.style_bytes} bytes of local CSS; consider moving recurring patterns into birch-system.css",
+             )
+         )
+     hard_colors = [
+         c for c in stats.hex_colors if c.lower() not in {"#fff", "#ffffff"} and not is_palette_hex(c)
+     ]
+     if hard_colors:
+         findings.append(
+             Finding(
+                 "note",
+                 "local_literal_colors",
+                 "literal colors outside canonical palette: " + ", ".join(hard_colors[:8]),
+             )
+         )
++    grid_list_parser = GridListParser()
++    grid_list_parser.feed(html)
++    if grid_list_parser.bad_items:
++        findings.append(
++            Finding(
++                "fail",
++                "grid_list_item_children",
++                "grid-based insight/takeaway list items should wrap content in one child; examples: "
++                + " | ".join(item or "<empty>" for item in grid_list_parser.bad_items[:4]),
++            )
++        )
++    metric_row_parser = MetricRowParser()
++    metric_row_parser.feed(html)
++    if metric_row_parser.bad_rows:
++        findings.append(
++            Finding(
++                "fail",
++                "metric_row_contract",
++                ".metric-row must be caption + .meter + code; examples: "
++                + " | ".join(item or "<empty>" for item in metric_row_parser.bad_rows[:4]),
++            )
++        )
++    timeline_parser = TimelineParser()
++    timeline_parser.feed(html)
++    if timeline_parser.bad_items:
++        findings.append(
++            Finding(
++                "fail",
++                "timeline_item_contract",
++                ".timeline-item must use timeline-time + timeline-body, or a custom scoped timeline class; examples: "
++                + " | ".join(item or "<empty>" for item in timeline_parser.bad_items[:4]),
++            )
++        )
++    numeric_rich = (
++        stats.class_counts.get("numeric-table", 0) > 0
++        and (
++            stats.class_counts.get("stat-value", 0) >= 3
++            or stats.class_counts.get("metric", 0) >= 12
++        )
++    )
++    chart_count = (
++        stats.class_counts.get("chart-panel", 0)
++        + stats.class_counts.get("chart-svg", 0)
++        + stats.tag_counts.get("svg", 0)
++    )
++    if numeric_rich and chart_count == 0:
++        findings.append(
++            Finding(
++                "fail",
++                "missing_data_visualization",
++                "numeric-rich report has KPI/table data but no chart-panel, chart-svg, or inline SVG",
++            )
++        )
+     return findings
+ 
+ 
+ def compare_stats(original: PageStats, candidate: PageStats) -> list[Finding]:
+     findings: list[Finding] = []
+     original_words = original.unique_words
+     candidate_words = candidate.unique_words
+     if original_words and candidate_words / original_words < 0.45:
+         findings.append(
+             Finding(
+                 "warn",
+                 "text_coverage",
+                 f"candidate has {candidate_words} unique words vs source {original_words}; may be too compressed",
+             )
+         )
+ 
+     original_sections = original.tag_counts.get("section", 0)
+     candidate_sections = candidate.tag_counts.get("section", 0)
+     if original_sections and candidate_sections < max(2, math.floor(original_sections * 0.65)):
+         findings.append(
+             Finding(
+                 "warn",
+                 "section_count_drift",
+                 f"candidate sections {candidate_sections}, source sections {original_sections}",
+             )
+         )
+ 
+     orig_cards = original.class_counts.get("card", 0) + original.class_counts.get("component", 0)
+     cand_cards = candidate.class_counts.get("card", 0) + candidate.class_counts.get("panel", 0)
+     if orig_cards and cand_cards < orig_cards * 0.6:
+         findings.append(
+             Finding("warn", "component_density_drop", f"candidate card/panel count {cand_cards}, source rough count {orig_cards}")
+         )
+ 
+     source_birch_classes = sum(original.class_counts.get(cls, 0) for cls in BIRCH_CLASSES)
+     candidate_birch_classes = sum(candidate.class_counts.get(cls, 0) for cls in BIRCH_CLASSES)
+     findings.append(
+         Finding(
+             "note",
+             "birch_class_delta",
+             f"source Birch-contract class uses {source_birch_classes}; candidate {candidate_birch_classes}",
+         )
+     )
+     return findings
+ 
+ 
+ def check(name: str, passed: bool, ok: str, bad: str, *, warn: bool = False) -> Finding:
+     return Finding("pass" if passed else ("warn" if warn else "fail"), name, ok if passed else bad)
+ 
+ 
+ def deltas(original: PageStats, candidate: PageStats) -> dict[str, object]:
+     watched = sorted(BIRCH_CLASSES)
+     return {
+         "bytes": candidate.bytes - original.bytes,
+         "style_bytes": candidate.style_bytes - original.style_bytes,
+         "text_words": candidate.text_words - original.text_words,
+         "unique_words": candidate.unique_words - original.unique_words,
+         "sections": candidate.tag_counts.get("section", 0) - original.tag_counts.get("section", 0),
+         "scripts": candidate.script_blocks - original.script_blocks,
+         "class_counts": {
+             cls: candidate.class_counts.get(cls, 0) - original.class_counts.get(cls, 0)
+             for cls in watched
+             if candidate.class_counts.get(cls, 0) or original.class_counts.get(cls, 0)
+         },
+     }
+ 
+ 
+ def is_palette_hex(value: str, *, tolerance: int = 3) -> bool:
+     value = value.lstrip("#")
+     if len(value) == 3:
+         value = "".join(ch * 2 for ch in value)
+     if len(value) < 6:
+         return False
+     rgb = tuple(int(value[i : i + 2], 16) for i in (0, 2, 4))
+     return any(sum(abs(rgb[i] - color[i]) for i in range(3)) <= tolerance for color in PALETTE.values())
+ 
+ 
+ def find_chrome() -> str | None:
+     for name in ("google-chrome", "google-chrome-stable", "chromium", "chromium-browser"):
+         path = shutil.which(name)
+@@ -567,262 +766,421 @@ def make_contact_sheet(original, candidate, diff, out: Path) -> None:
+     from PIL import Image, ImageDraw
+ 
+     label_h = 28
+     gutter = 12
+     thumb_w = min(430, original.width)
+     scale = thumb_w / original.width
+     thumb_h = int(original.height * scale)
+ 
+     def thumb(img):
+         return img.resize((thumb_w, thumb_h))
+ 
+     tiles = [thumb(original), thumb(candidate), thumb(diff)]
+     sheet = Image.new("RGB", (thumb_w * 3 + gutter * 2, thumb_h + label_h), (250, 249, 245))
+     draw = ImageDraw.Draw(sheet)
+     labels = ["source", "birch candidate", "amplified diff"]
+     for i, tile in enumerate(tiles):
+         x = i * (thumb_w + gutter)
+         sheet.paste(tile, (x, label_h))
+         draw.text((x + 8, 8), labels[i], fill=(61, 61, 58))
+     sheet.save(out)
+ 
+ 
+ def palette_metrics(image) -> dict[str, float]:
+     resized = image.resize((max(1, image.width // 4), max(1, image.height // 4)))
+     pixels = resized.get_flattened_data() if hasattr(resized, "get_flattened_data") else resized.getdata()
+     total = 0
+     close = 0
+     ivory = 0
+     blackish = 0
+     for r, g, b in pixels:
+         total += 1
+         if min(sum(abs((r, g, b)[i] - color[i]) for i in range(3)) for color in PALETTE.values()) <= 34:
+             close += 1
+         if sum(abs((r, g, b)[i] - PALETTE["ivory"][i]) for i in range(3)) <= 18:
+             ivory += 1
+         if r < 12 and g < 12 and b < 12:
+             blackish += 1
+     return {
+         "palette_close_fraction": round(close / total, 4) if total else 0.0,
+         "ivory_fraction": round(ivory / total, 4) if total else 0.0,
+         "blackish_fraction": round(blackish / total, 4) if total else 0.0,
+     }
+ 
+ 
+ def screenshot_findings(metrics: dict[str, object] | None) -> list[Finding]:
+     if metrics is None:
+         return [Finding("note", "screenshot_compare", "Pillow/browser screenshot metrics unavailable")]
+     out = [
+         Finding(
+             "note",
+             "screenshot_distance",
+             f"mean RGB delta {metrics['mean_abs_rgb_delta']}, RMS {metrics['rms_rgb_delta']}",
+         )
+     ]
+     cand = metrics["candidate_palette"]
+     assert isinstance(cand, dict)
+     if float(cand["palette_close_fraction"]) < 0.55:
+         out.append(
+             Finding(
+                 "warn",
+                 "palette_drift",
+                 f"candidate palette-close fraction {cand['palette_close_fraction']} is low",
+             )
+         )
+     if float(cand["blackish_fraction"]) > 0.05:
+         out.append(
+             Finding(
+                 "warn",
+                 "black_pixel_fraction",
+                 f"candidate blackish fraction {cand['blackish_fraction']} may indicate unstyled SVG/code blocks",
+             )
+         )
+     return out
+ 
+ 
+ def geometry_audit(browser: str, html: Path, *, width: int, height: int) -> dict[str, object] | None:
+     """Run a small in-browser layout audit and return geometry symptoms.
+ 
+     This catches classes of problems a static parser cannot see:
+     - text/content overflowing its box,
+-    - metric bars not sharing the same relative x-position inside comparable cards.
++    - metric bars not sharing the same relative x-position inside comparable cards,
++    - split side-rail headings aligning to section chrome instead of content headings,
++    - numeric table headers not matching their column alignment.
+     """
+     audit_js = r"""
+ <script>
+ window.addEventListener('load', function () {
+   function path(el) {
+     var parts = [];
+     while (el && el.nodeType === 1 && parts.length < 5) {
+       var part = el.tagName.toLowerCase();
+       if (el.id) part += '#' + el.id;
+       if (el.className && typeof el.className === 'string') {
+         var cls = el.className.trim().split(/\s+/).slice(0, 3).join('.');
+         if (cls) part += '.' + cls;
+       }
+       parts.unshift(part);
+       el = el.parentElement;
+     }
+     return parts.join(' > ');
+   }
+   function text(el) {
+     return (el.textContent || '').replace(/\s+/g, ' ').trim().slice(0, 120);
+   }
++  var viewportWidth = document.documentElement.clientWidth;
+   var overflow = [];
+   document.querySelectorAll('p, li, h1, h2, h3, code, pre, .chip, .badge, .button, .btn').forEach(function (el) {
+     var cs = getComputedStyle(el);
+     if (cs.display === 'none' || cs.visibility === 'hidden') return;
+     var r = el.getBoundingClientRect();
+     if (r.width < 1 || r.height < 1) return;
+     var overX = el.scrollWidth - el.clientWidth;
+     var overY = el.scrollHeight - el.clientHeight;
+-    if (overX > 2 || overY > 2) {
+-      overflow.push({ selector: path(el), text: text(el), overX: Math.round(overX), overY: Math.round(overY) });
++    var offRight = r.right - viewportWidth;
++    var offLeft = -r.left;
++    if (overX > 2 || overY > 2 || offRight > 2 || offLeft > 2) {
++      overflow.push({
++        selector: path(el),
++        text: text(el),
++        overX: Math.round(overX),
++        overY: Math.round(overY),
++        offRight: Math.round(Math.max(0, offRight)),
++        offLeft: Math.round(Math.max(0, offLeft))
++      });
+     }
+   });
+ 
++  var timelineProblems = [];
++  document.querySelectorAll('.timeline').forEach(function (timeline) {
++    var timelineRect = timeline.getBoundingClientRect();
++    var line = timeline.querySelector('.timeline-item, .tl-entry');
++    timeline.querySelectorAll('.timeline-body, .tl-body, .timeline-item p, .timeline-item li, .timeline-item .badge').forEach(function (el) {
++      var r = el.getBoundingClientRect();
++      if (r.width < 1 || r.height < 1) return;
++      var offRight = r.right - viewportWidth;
++      var overX = el.scrollWidth - el.clientWidth;
++      if (offRight > 2 || overX > 2) {
++        timelineProblems.push({
++          selector: path(el),
++          text: text(el),
++          offRight: Math.round(Math.max(0, offRight)),
++          overX: Math.round(Math.max(0, overX))
++        });
++      }
++    });
++    timeline.querySelectorAll('.timeline-item, .tl-entry').forEach(function (item) {
++      var dotStyle = getComputedStyle(item, '::before');
++      var dotLeft = parseFloat(dotStyle.left);
++      if (!isFinite(dotLeft)) return;
++      var itemRect = item.getBoundingClientRect();
++      var dotCenter = itemRect.left + dotLeft + 5.5;
++      var expected = timelineRect.left + 9.75;
++      var delta = Math.round((dotCenter - expected) * 10) / 10;
++      if (Math.abs(delta) > 2.5) {
++        timelineProblems.push({
++          selector: path(item),
++          text: text(item),
++          markerDelta: delta
++        });
++      }
++    });
++  });
++
+   var metricGroups = [];
+   document.querySelectorAll('.metric-list').forEach(function (list) {
+     var owner = list.closest('.panel, .card, section, main') || list;
+     var ownerRect = owner.getBoundingClientRect();
+     var xs = [];
+     list.querySelectorAll('.metric-row .meter').forEach(function (meter) {
+       xs.push(Math.round(meter.getBoundingClientRect().left - ownerRect.left));
+     });
+     if (xs.length > 1) {
+       var min = Math.min.apply(Math, xs);
+       var max = Math.max.apply(Math, xs);
+       metricGroups.push({ owner: path(owner), meterXs: xs, spread: max - min });
+     }
+   });
+ 
++  var splitRailGroups = [];
++  document.querySelectorAll('.split').forEach(function (split) {
++    var children = Array.prototype.filter.call(split.children, function (el) {
++      var r = el.getBoundingClientRect();
++      return r.width > 1 && r.height > 1;
++    });
++    if (children.length < 2) return;
++    var leftHeading = children[0].querySelector('h1, h2, h3');
++    var rightHeading = children[1].querySelector('h1, h2, h3');
++    if (!leftHeading || !rightHeading) return;
++    var leftRect = leftHeading.getBoundingClientRect();
++    var rightRect = rightHeading.getBoundingClientRect();
++    if (Math.abs(leftRect.left - rightRect.left) < 8) return; // stacked mobile layout
++    splitRailGroups.push({
++      owner: path(split),
++      leftHeading: text(leftHeading),
++      rightHeading: text(rightHeading),
++      delta: Math.round((rightRect.top - leftRect.top) * 10) / 10
++    });
++  });
++
++  var numericHeaderGroups = [];
++  document.querySelectorAll('.numeric-table').forEach(function (table) {
++    var headers = table.querySelectorAll('thead th');
++    var firstRow = table.querySelector('tbody tr');
++    if (!headers.length || !firstRow) return;
++    Array.prototype.forEach.call(headers, function (th, index) {
++      var td = firstRow.children[index];
++      if (!td) return;
++      var thStyle = getComputedStyle(th);
++      var tdStyle = getComputedStyle(td);
++      if (thStyle.display === 'none' || tdStyle.display === 'none') return;
++      var thAlign = thStyle.textAlign;
++      var tdAlign = tdStyle.textAlign;
++      if (tdAlign === 'right' && thAlign !== 'right') {
++        numericHeaderGroups.push({
++          table: path(table),
++          header: text(th),
++          column: index + 1,
++          headerAlign: thAlign,
++          bodyAlign: tdAlign
++        });
++      }
++    });
++  });
++
+   document.body.setAttribute('data-birch-audit', JSON.stringify({
+     overflow: overflow,
+-    metricGroups: metricGroups
++    pageOverflowX: Math.round(document.documentElement.scrollWidth - document.documentElement.clientWidth),
++    timelineProblems: timelineProblems,
++    metricGroups: metricGroups,
++    splitRailGroups: splitRailGroups,
++    numericHeaderGroups: numericHeaderGroups
+   }));
+ });
+ </script>
+ """
+     source = html.read_text(encoding="utf-8")
+     base = f'<base href="{ROOT.resolve().as_uri()}/">'
+-    if "</head>" in source:
+-        source = source.replace("</head>", base + audit_js + "</head>", 1)
++    if re.search(r"<head(?:\s[^>]*)?>", source, flags=re.I):
++        # The base element must appear before relative stylesheet/script links.
++        # Otherwise the temp-file audit silently loses shared CSS and geometry
++        # checks run against unstyled HTML.
++        source = re.sub(r"(<head(?:\s[^>]*)?>)", lambda m: m.group(1) + base, source, count=1, flags=re.I)
++        source = re.sub(r"</head>", lambda _m: audit_js + "</head>", source, count=1, flags=re.I)
+     else:
+         source = base + audit_js + source
+     with tempfile.TemporaryDirectory(prefix="birch-audit-") as tmp:
+         temp = Path(tmp) / html.name
+         temp.write_text(source, encoding="utf-8")
+         cmd = [
+             browser,
+             "--headless=new",
+             "--disable-gpu",
+             "--no-sandbox",
+             f"--window-size={width},{height}",
+             "--virtual-time-budget=800",
+             "--dump-dom",
+             temp.resolve().as_uri(),
+         ]
+         completed = subprocess.run(cmd, text=True, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, timeout=45, check=False)
+     match = re.search(r'data-birch-audit="([^"]+)"', completed.stdout)
+     if not match:
+         return None
+     import html as html_lib
+ 
+     try:
+         return json.loads(html_lib.unescape(match.group(1)))
+     except json.JSONDecodeError:
+         return None
+ 
+ 
+ def geometry_findings(audit: dict[str, object] | None) -> list[Finding]:
+     if audit is None:
+         return [Finding("note", "geometry_audit", "browser geometry audit unavailable")]
+     findings: list[Finding] = []
+     overflow = audit.get("overflow") or []
++    page_overflow_x = int(audit.get("pageOverflowX") or 0)
++    timeline_problems = audit.get("timelineProblems") or []
+     metric_groups = audit.get("metricGroups") or []
++    split_rail_groups = audit.get("splitRailGroups") or []
++    numeric_header_groups = audit.get("numericHeaderGroups") or []
+     if isinstance(overflow, list) and overflow:
+         worst = overflow[:5]
+         findings.append(
+             Finding(
+-                "warn",
++                "fail",
+                 "layout_overflow",
+                 "; ".join(
+-                    f"{item.get('selector')} overX={item.get('overX')} overY={item.get('overY')}"
++                    f"{item.get('selector')} overX={item.get('overX')} overY={item.get('overY')} offRight={item.get('offRight', 0)}"
+                     for item in worst
+                     if isinstance(item, dict)
+                 ),
+             )
+         )
++    elif page_overflow_x > 2:
++        findings.append(Finding("fail", "layout_overflow", f"document overflows viewport horizontally by {page_overflow_x}px"))
+     else:
+         findings.append(Finding("pass", "layout_overflow", "no visible text/content overflow detected"))
+ 
++    if isinstance(timeline_problems, list) and timeline_problems:
++        findings.append(
++            Finding(
++                "fail",
++                "timeline_geometry",
++                "; ".join(
++                    (
++                        f"{item.get('selector')} markerDelta={item.get('markerDelta')}px"
++                        if "markerDelta" in item
++                        else f"{item.get('selector')} offRight={item.get('offRight', 0)} overX={item.get('overX', 0)}"
++                    )
++                    for item in timeline_problems[:6]
++                    if isinstance(item, dict)
++                ),
++            )
++        )
++    elif audit.get("timelineProblems") is not None:
++        findings.append(Finding("pass", "timeline_geometry", "timeline markers/content stay within expected geometry"))
++
+     bad_metrics = [
+         g for g in metric_groups
+         if isinstance(g, dict) and int(g.get("spread", 0)) > 2
+     ]
+     if bad_metrics:
+         findings.append(
+             Finding(
+                 "warn",
+                 "metric_alignment",
+                 "; ".join(f"{g.get('owner')} spread={g.get('spread')}px" for g in bad_metrics[:4]),
+             )
+         )
+     elif metric_groups:
+         findings.append(Finding("pass", "metric_alignment", "metric meters align within each metric-list"))
++
++    bad_split_rails = [
++        g for g in split_rail_groups
++        if isinstance(g, dict) and abs(float(g.get("delta", 0))) > 3
++    ]
++    if bad_split_rails:
++        findings.append(
++            Finding(
++                "warn",
++                "split_rail_heading_alignment",
++                "; ".join(
++                    f"{g.get('leftHeading')} ↔ {g.get('rightHeading')} delta={g.get('delta')}px"
++                    for g in bad_split_rails[:4]
++                ),
++            )
++        )
++    elif split_rail_groups:
++        findings.append(Finding("pass", "split_rail_heading_alignment", "split rail headings align with content headings"))
++
++    if numeric_header_groups:
++        findings.append(
++            Finding(
++                "warn",
++                "numeric_header_alignment",
++                "; ".join(
++                    f"{g.get('header')} column {g.get('column')} header={g.get('headerAlign')} body={g.get('bodyAlign')}"
++                    for g in numeric_header_groups[:6]
++                ),
++            )
++        )
++    else:
++        findings.append(Finding("pass", "numeric_header_alignment", "numeric table headers align with right-aligned numeric columns"))
+     return findings
+ 
+ 
+ def render_markdown(payload: dict[str, object]) -> str:
+     lines = [
+         "# Birch rendering check",
+         "",
+         "Compares original HTML examples with the Birch-system rewrites.",
+         "",
+         "## Summary",
+         "",
+     ]
+     summary = payload["summary"]
+     assert isinstance(summary, dict)
+     lines.extend(
+         [
+             f"- Pairs: **{summary['pairs']}**",
+             f"- Failures: **{summary['failures']}**",
+             f"- Warnings: **{summary['warnings']}**",
+             f"- Notes: **{summary['notes']}**",
+             "",
+         ]
+     )
+     for pair in payload["pairs"]:
+         assert isinstance(pair, dict)
+         lines.extend(
+             [
+                 f"## `{pair['original']}` → `{pair['candidate']}`",
+                 "",
+             ]
+         )
+         screenshot = pair.get("screenshot")
+         if screenshot:
+             lines.extend(
+                 [
+                     "### Screenshot metrics",
+                     "",
+                     f"- Source: `{screenshot['original_png']}`",
+                     f"- Candidate: `{screenshot['candidate_png']}`",
+                     f"- Contact sheet: `{screenshot['contact_png']}`",
+                     f"- Amplified diff: `{screenshot['diff_png']}`",
+                     f"- Mean RGB delta: `{screenshot['mean_abs_rgb_delta']}`",
+                     f"- RMS RGB delta: `{screenshot['rms_rgb_delta']}`",
+                     f"- Candidate palette close fraction: `{screenshot['candidate_palette']['palette_close_fraction']}`",
+                     f"- Candidate ivory fraction: `{screenshot['candidate_palette']['ivory_fraction']}`",
+                     "",
+                 ]
+             )
+         lines.extend(["### Deltas", "", "```json", json.dumps(pair.get("deltas", {}), indent=2), "```", ""])
+         lines.extend(["### Findings", "", "| level | check | evidence |", "|---|---|---|"])
+         for finding in pair.get("findings", []):
+             lines.append(f"| {finding['level']} | `{finding['name']}` | {finding['evidence']} |")
+         lines.append("")
+     return "\n".join(lines)
+ 
+ 
+ if __name__ == "__main__":
+     main()

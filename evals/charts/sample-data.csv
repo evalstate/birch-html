@@ -1,0 +1,16 @@
+week,artifact,static_pass_rate,overflow_count,palette_close,mean_rgb_delta,vision_score,notes
+2026-04-20,design-system,0.86,7,0.91,18.4,3.1,baseline extraction
+2026-04-27,design-system,0.91,5,0.94,15.2,3.4,spacing pass
+2026-05-04,design-system,0.94,3,0.96,12.8,3.8,component cleanup
+2026-05-11,design-system,0.97,1,0.98,8.1,4.2,copy/checklist fixes
+2026-05-18,design-system,0.98,0,0.98,6.7,4.4,meter alignment fixed
+2026-04-20,component-variants,0.82,9,0.88,24.6,2.8,first rewrite
+2026-04-27,component-variants,0.87,6,0.91,20.3,3.1,density adjustment
+2026-05-04,component-variants,0.91,4,0.93,17.5,3.5,variant cleanup
+2026-05-11,component-variants,0.94,2,0.95,13.2,3.8,interactive pass
+2026-05-18,component-variants,0.96,1,0.96,10.9,4.1,layout tightened
+2026-04-20,timeline,0.89,4,0.92,16.1,3.2,initial page
+2026-04-27,timeline,0.93,2,0.95,12.4,3.7,rail alignment
+2026-05-04,timeline,0.96,1,0.97,9.5,4.0,copy blocks added
+2026-05-11,timeline,0.98,0,0.98,6.2,4.4,section spacing pass
+2026-05-18,timeline,0.99,0,0.99,5.4,4.6,stable
