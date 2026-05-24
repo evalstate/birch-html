@@ -1,0 +1,172 @@
+{
+  "artifacts": [
+    {
+      "artifact": "benchmark-comparison-deep.png",
+      "findings": []
+    },
+    {
+      "artifact": "benchmark-comparison-mobile-deep.png",
+      "findings": []
+    },
+    {
+      "artifact": "benchmark-comparison-desktop.png",
+      "findings": []
+    },
+    {
+      "artifact": "benchmark-comparison-mobile.png",
+      "findings": []
+    },
+    {
+      "artifact": "code-review-deep.png",
+      "findings": []
+    },
+    {
+      "artifact": "code-review-mobile-deep.png",
+      "findings": []
+    },
+    {
+      "artifact": "code-review-desktop.png",
+      "findings": []
+    },
+    {
+      "artifact": "code-review-mobile.png",
+      "findings": []
+    },
+    {
+      "artifact": "implementation-plan-deep.png",
+      "findings": []
+    },
+    {
+      "artifact": "implementation-plan-mobile-deep.png",
+      "findings": []
+    },
+    {
+      "artifact": "implementation-plan-desktop.png",
+      "findings": []
+    },
+    {
+      "artifact": "implementation-plan-mobile.png",
+      "findings": []
+    },
+    {
+      "artifact": "module-explainer-deep.png",
+      "findings": [
+        {
+          "level": "fail",
+          "name": "vision_unstyled_render",
+          "evidence": "The page appears to be rendered with default browser styling (Times-like text, no Birch card/layout styling, plain white page), indicating the intended stylesheet/layout did not apply.",
+          "confidence": 0.96,
+          "bbox_px": {
+            "x": 0,
+            "y": 0,
+            "width": 1366,
+            "height": 2912
+          }
+        },
+        {
+          "level": "fail",
+          "name": "vision_other",
+          "evidence": "The runtime path diagram area renders as a large solid black rectangle instead of a readable pipeline/flow diagram.",
+          "confidence": 0.98,
+          "bbox_px": {
+            "x": 8,
+            "y": 646,
+            "width": 640,
+            "height": 380
+          }
+        }
+      ]
+    },
+    {
+      "artifact": "module-explainer-mobile-deep.png",
+      "findings": [
+        {
+          "level": "fail",
+          "name": "vision_unstyled_render",
+          "evidence": "The mobile page is also rendered with default browser styling rather than the intended Birch styled layout.",
+          "confidence": 0.95,
+          "bbox_px": {
+            "x": 0,
+            "y": 0,
+            "width": 390,
+            "height": 3024
+          }
+        },
+        {
+          "level": "fail",
+          "name": "vision_other",
+          "evidence": "The runtime path diagram area appears as a solid black block, with no readable nodes or connectors.",
+          "confidence": 0.98,
+          "bbox_px": {
+            "x": 8,
+            "y": 1034,
+            "width": 358,
+            "height": 212
+          }
+        }
+      ]
+    },
+    {
+      "artifact": "module-explainer-desktop.png",
+      "findings": [
+        {
+          "level": "fail",
+          "name": "vision_unstyled_render",
+          "evidence": "The visible desktop render is plain default HTML styling, not the intended Birch styled artifact.",
+          "confidence": 0.96,
+          "bbox_px": {
+            "x": 0,
+            "y": 0,
+            "width": 1366,
+            "height": 900
+          }
+        },
+        {
+          "level": "fail",
+          "name": "vision_other",
+          "evidence": "The visible diagram area is a large solid black rectangle, suggesting a malformed or missing SVG/flow visualization.",
+          "confidence": 0.98,
+          "bbox_px": {
+            "x": 8,
+            "y": 646,
+            "width": 640,
+            "height": 254
+          }
+        }
+      ]
+    },
+    {
+      "artifact": "module-explainer-mobile.png",
+      "findings": [
+        {
+          "level": "fail",
+          "name": "vision_unstyled_render",
+          "evidence": "The mobile viewport shows default browser styling with no visible Birch layout/theme applied.",
+          "confidence": 0.95,
+          "bbox_px": {
+            "x": 0,
+            "y": 0,
+            "width": 390,
+            "height": 900
+          }
+        }
+      ]
+    },
+    {
+      "artifact": "numeric-data-deep.png",
+      "findings": []
+    },
+    {
+      "artifact": "numeric-data-mobile-deep.png",
+      "findings": []
+    },
+    {
+      "artifact": "numeric-data-desktop.png",
+      "findings": []
+    },
+    {
+      "artifact": "numeric-data-mobile.png",
+      "findings": []
+    }
+  ]
+}

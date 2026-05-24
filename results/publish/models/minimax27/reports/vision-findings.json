@@ -1,0 +1,188 @@
+{
+  "artifacts": [
+    {
+      "artifact": "benchmark-comparison-deep.png",
+      "findings": [
+        {
+          "level": "warn",
+          "name": "vision_clipped_content",
+          "evidence": "Both chart panel titles in the quality/cost section appear clipped at the left edge: the titles render as \u201cuality Compliance Metrics\u201d and \u201cuality vs. Cost Tradeoff,\u201d missing the leading \u201cQ\u201d.",
+          "confidence": 0.92,
+          "bbox_px": {
+            "x": 75,
+            "y": 385,
+            "width": 860,
+            "height": 30
+          }
+        }
+      ]
+    },
+    {
+      "artifact": "benchmark-comparison-mobile-deep.png",
+      "findings": [
+        {
+          "level": "warn",
+          "name": "vision_clipped_content",
+          "evidence": "The two chart titles are visibly clipped in the mobile rendering, with the leading \u201cQ\u201d missing from each title.",
+          "confidence": 0.88,
+          "bbox_px": {
+            "x": 33,
+            "y": 488,
+            "width": 333,
+            "height": 18
+          }
+        }
+      ]
+    },
+    {
+      "artifact": "benchmark-comparison-desktop.png",
+      "findings": [
+        {
+          "level": "warn",
+          "name": "vision_clipped_content",
+          "evidence": "Both chart panel titles in the quality/cost section appear clipped at the left edge, showing \u201cuality...\u201d instead of \u201cQuality...\u201d.",
+          "confidence": 0.92,
+          "bbox_px": {
+            "x": 75,
+            "y": 385,
+            "width": 860,
+            "height": 30
+          }
+        }
+      ]
+    },
+    {
+      "artifact": "benchmark-comparison-mobile.png",
+      "findings": [
+        {
+          "level": "warn",
+          "name": "vision_clipped_content",
+          "evidence": "The chart titles are clipped in the mobile viewport; the leading \u201cQ\u201d is missing from each chart title.",
+          "confidence": 0.88,
+          "bbox_px": {
+            "x": 33,
+            "y": 488,
+            "width": 333,
+            "height": 18
+          }
+        }
+      ]
+    },
+    {
+      "artifact": "code-review-deep.png",
+      "findings": []
+    },
+    {
+      "artifact": "code-review-mobile-deep.png",
+      "findings": []
+    },
+    {
+      "artifact": "code-review-desktop.png",
+      "findings": []
+    },
+    {
+      "artifact": "code-review-mobile.png",
+      "findings": []
+    },
+    {
+      "artifact": "implementation-plan-deep.png",
+      "findings": []
+    },
+    {
+      "artifact": "implementation-plan-mobile-deep.png",
+      "findings": []
+    },
+    {
+      "artifact": "implementation-plan-desktop.png",
+      "findings": []
+    },
+    {
+      "artifact": "implementation-plan-mobile.png",
+      "findings": []
+    },
+    {
+      "artifact": "module-explainer-deep.png",
+      "findings": [
+        {
+          "level": "fail",
+          "name": "vision_unstyled_render",
+          "evidence": "The artifact appears to be rendered with browser-default styling: Times-like text, white background, plain list/heading layout, and no visible Birch card/grid/module styling across the full deep page.",
+          "confidence": 0.97,
+          "bbox_px": {
+            "x": 0,
+            "y": 0,
+            "width": 1365,
+            "height": 3000
+          }
+        }
+      ]
+    },
+    {
+      "artifact": "module-explainer-mobile-deep.png",
+      "findings": [
+        {
+          "level": "fail",
+          "name": "vision_unstyled_render",
+          "evidence": "The mobile deep render is also browser-default styled, with plain headings/text and no visible Birch layout or component styling. The horizontal scrollbar reinforces that the intended responsive styling is not applied.",
+          "confidence": 0.97,
+          "bbox_px": {
+            "x": 0,
+            "y": 0,
+            "width": 390,
+            "height": 3000
+          }
+        }
+      ]
+    },
+    {
+      "artifact": "module-explainer-desktop.png",
+      "findings": [
+        {
+          "level": "fail",
+          "name": "vision_unstyled_render",
+          "evidence": "The desktop viewport shows an unstyled default HTML render rather than the intended Birch artifact styling: plain white background, default fonts, and no cards/rails/component styling.",
+          "confidence": 0.97,
+          "bbox_px": {
+            "x": 0,
+            "y": 0,
+            "width": 1365,
+            "height": 900
+          }
+        }
+      ]
+    },
+    {
+      "artifact": "module-explainer-mobile.png",
+      "findings": [
+        {
+          "level": "fail",
+          "name": "vision_unstyled_render",
+          "evidence": "The mobile viewport is visibly unstyled with default browser typography and layout, and it shows horizontal overflow instead of a usable responsive Birch layout.",
+          "confidence": 0.97,
+          "bbox_px": {
+            "x": 0,
+            "y": 0,
+            "width": 390,
+            "height": 900
+          }
+        }
+      ]
+    },
+    {
+      "artifact": "numeric-data-deep.png",
+      "findings": []
+    },
+    {
+      "artifact": "numeric-data-mobile-deep.png",
+      "findings": []
+    },
+    {
+      "artifact": "numeric-data-desktop.png",
+      "findings": []
+    },
+    {
+      "artifact": "numeric-data-mobile.png",
+      "findings": []
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "label": "skill-with-shell-gemini35flash-publication-final",
+  "purpose": "With-shell Birch HTML skill benchmark for gemini35flash",
+  "mode": "skill-eval",
+  "output_mode": "file",
+  "cwd": "/home/shaun/source/birch-html",
+  "skills_dir": "/home/shaun/source/birch-html",
+  "model": "gemini35flash",
+  "jobs": 2,
+  "generation_timeout_s": 1200,
+  "default_shell_access": true,
+  "shell_evals": [],
+  "source_preview": "auto"
+}

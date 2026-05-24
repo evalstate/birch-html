@@ -1,0 +1,1100 @@
+{
+  "mode": "artifact",
+  "artifacts": [
+    {
+      "artifact": "eval-runs/skill-with-shell-sonnet46-publication-final/numeric-data.html",
+      "stats": {
+        "path": "eval-runs/skill-with-shell-sonnet46-publication-final/numeric-data.html",
+        "bytes": 52394,
+        "title": "Rendering Checker Stability \u2014 5-Week Eval",
+        "doctype": true,
+        "viewport": true,
+        "stylesheet_links": [],
+        "birch_css_embedded": true,
+        "style_blocks": 2,
+        "style_bytes": 155,
+        "script_blocks": 0,
+        "tag_counts": {
+          "html": 1,
+          "head": 1,
+          "meta": 2,
+          "title": 1,
+          "style": 3,
+          "body": 1,
+          "main": 1,
+          "header": 1,
+          "div": 48,
+          "h1": 1,
+          "p": 2,
+          "strong": 1,
+          "code": 13,
+          "section": 5,
+          "span": 19,
+          "h2": 5,
+          "svg": 1,
+          "defs": 5,
+          "g": 54,
+          "path": 18,
+          "text": 14,
+          "use": 18,
+          "clippath": 1,
+          "rect": 1,
+          "aside": 1,
+          "h3": 1,
+          "table": 2,
+          "thead": 2,
+          "tr": 22,
+          "th": 10,
+          "tbody": 2,
+          "td": 110,
+          "caption": 1,
+          "ul": 2,
+          "li": 9
+        },
+        "class_counts": {
+          "page": 1,
+          "stack": 10,
+          "eyebrow": 8,
+          "lede": 1,
+          "section": 5,
+          "section-head": 5,
+          "auto-grid": 1,
+          "stat-card": 4,
+          "stat-value": 4,
+          "kpi-label": 4,
+          "caption": 10,
+          "section-rail": 1,
+          "panel": 1,
+          "chart-panel": 1,
+          "chart-svg": 1,
+          "chart-caption": 1,
+          "reference-panel": 1,
+          "metric-list": 2,
+          "metric-row": 6,
+          "meter": 6,
+          "numeric-table-wrap": 2,
+          "numeric-table": 2,
+          "metric": 66,
+          "insight-list": 1,
+          "plain-list": 1
+        },
+        "data_attrs": {
+          "data-birch-system": 1,
+          "data-gap": 9
+        },
+        "text_words": 394,
+        "unique_words": 178,
+        "css_vars_used": [
+          "--space-3"
+        ],
+        "css_vars_defined": [
+          "--grid-min",
+          "--value"
+        ],
+        "hex_colors": [],
+        "birch_css_bytes": 31709,
+        "birch_css_valid": true
+      },
+      "screenshot": {
+        "png": "eval-runs/reports/skill-with-shell-sonnet46-publication-final/screenshots/numeric-data-mobile-deep.png",
+        "size": [
+          390,
+          6000
+        ],
+        "mean_rgb": [
+          245.49,
+          244.27,
+          242.52
+        ],
+        "palette": {
+          "palette_close_fraction": 0.9484,
+          "ivory_fraction": 0.35,
+          "blackish_fraction": 0.0
+        },
+        "background_fraction": 0.8734,
+        "non_background_fraction": 0.1266,
+        "blackish_fraction": 0.0,
+        "file_bytes": 282368
+      },
+      "geometry": {
+        "overflow": [],
+        "containerOverflow": [],
+        "statCardSqueeze": [],
+        "sectionRailOrder": [],
+        "pageOverflowX": 0,
+        "timelineProblems": [],
+        "metricGroups": [
+          {
+            "owner": "html > body > main.page.stack > section.section.stack",
+            "meterXs": [
+              0,
+              0,
+              0
+            ],
+            "spread": 0
+          },
+          {
+            "owner": "html > body > main.page.stack > section.section.stack",
+            "meterXs": [
+              0,
+              0,
+              0
+            ],
+            "spread": 0
+          }
+        ],
+        "metricRowSqueeze": [],
+        "splitRailGroups": [],
+        "numericHeaderGroups": [],
+        "codeWrapProblems": [],
+        "textWrapProblems": []
+      },
+      "findings": [
+        {
+          "level": "pass",
+          "name": "doctype",
+          "evidence": "doctype present"
+        },
+        {
+          "level": "pass",
+          "name": "viewport",
+          "evidence": "viewport meta present"
+        },
+        {
+          "level": "pass",
+          "name": "uses_birch_system_css",
+          "evidence": "embeds or links Birch system CSS"
+        },
+        {
+          "level": "pass",
+          "name": "has_page_shell",
+          "evidence": ".page found"
+        },
+        {
+          "level": "pass",
+          "name": "uses_layout_primitives",
+          "evidence": "layout primitive count is healthy"
+        },
+        {
+          "level": "pass",
+          "name": "uses_semantic_components",
+          "evidence": "semantic component count is healthy"
+        },
+        {
+          "level": "pass",
+          "name": "no_unknown_css_vars",
+          "evidence": "all CSS variables are defined in Birch system or local CSS"
+        },
+        {
+          "level": "pass",
+          "name": "no_patch_markers",
+          "evidence": "no accidental patch marker lines"
+        },
+        {
+          "level": "note",
+          "name": "screenshot_capture",
+          "evidence": "captured eval-runs/reports/skill-with-shell-sonnet46-publication-final/screenshots/numeric-data-mobile-deep.png at [390, 6000]"
+        },
+        {
+          "level": "pass",
+          "name": "layout_overflow",
+          "evidence": "no visible text/content overflow detected"
+        },
+        {
+          "level": "pass",
+          "name": "container_text_overflow",
+          "evidence": "text stays within its card/panel containers"
+        },
+        {
+          "level": "pass",
+          "name": "stat_card_squeeze",
+          "evidence": "KPI/stat cards have enough horizontal space"
+        },
+        {
+          "level": "pass",
+          "name": "timeline_geometry",
+          "evidence": "timeline markers/content stay within expected geometry"
+        },
+        {
+          "level": "pass",
+          "name": "metric_alignment",
+          "evidence": "metric meters align within each metric-list"
+        },
+        {
+          "level": "pass",
+          "name": "numeric_header_alignment",
+          "evidence": "numeric table headers align with right-aligned numeric columns"
+        },
+        {
+          "level": "pass",
+          "name": "code_wrap_underfill",
+          "evidence": "wrapped code/diff blocks use available container width"
+        },
+        {
+          "level": "pass",
+          "name": "pathological_text_wrapping",
+          "evidence": "prose/list text uses available container width"
+        }
+      ]
+    },
+    {
+      "artifact": "eval-runs/skill-with-shell-sonnet46-publication-final/code-review.html",
+      "stats": {
+        "path": "eval-runs/skill-with-shell-sonnet46-publication-final/code-review.html",
+        "bytes": 57805,
+        "title": "Code review \u2014 check_candle_renderings.py + chart-brief eval",
+        "doctype": true,
+        "viewport": true,
+        "stylesheet_links": [],
+        "birch_css_embedded": true,
+        "style_blocks": 1,
+        "style_bytes": 699,
+        "script_blocks": 0,
+        "tag_counts": {
+          "html": 1,
+          "head": 1,
+          "meta": 2,
+          "title": 1,
+          "style": 2,
+          "body": 1,
+          "main": 1,
+          "header": 1,
+          "div": 68,
+          "h1": 1,
+          "p": 13,
+          "code": 104,
+          "span": 107,
+          "section": 9,
+          "strong": 12,
+          "h2": 8,
+          "article": 8,
+          "h3": 4,
+          "em": 2,
+          "ul": 8,
+          "li": 30,
+          "table": 1,
+          "thead": 1,
+          "tr": 4,
+          "th": 3,
+          "tbody": 1,
+          "td": 9
+        },
+        "class_counts": {
+          "page": 1,
+          "stack": 33,
+          "eyebrow": 9,
+          "lede": 1,
+          "cluster": 5,
+          "chip": 5,
+          "section": 9,
+          "callout": 1,
+          "section-head": 8,
+          "badge": 12,
+          "finding-list": 3,
+          "card": 8,
+          "finding": 4,
+          "finding-label": 19,
+          "caption": 6,
+          "loc": 6,
+          "diff": 6,
+          "diff-row": 21,
+          "del": 3,
+          "ln": 21,
+          "mark": 21,
+          "code": 21,
+          "add": 18,
+          "plain-list": 7,
+          "checklist": 1,
+          "numeric-table-wrap": 1,
+          "numeric-table": 1,
+          "label-cell": 1,
+          "metric": 4,
+          "entity": 3
+        },
+        "data_attrs": {
+          "data-birch-system": 1,
+          "data-gap": 33,
+          "data-tone": 16,
+          "data-severity": 4,
+          "data-wrap": 6
+        },
+        "text_words": 1268,
+        "unique_words": 552,
+        "css_vars_used": [
+          "--accent",
+          "--border-color",
+          "--danger",
+          "--font-mono",
+          "--info",
+          "--space-4",
+          "--success",
+          "--text-muted",
+          "--text-sm",
+          "--text-xs",
+          "--warning"
+        ],
+        "css_vars_defined": [],
+        "hex_colors": [],
+        "birch_css_bytes": 31709,
+        "birch_css_valid": true
+      },
+      "screenshot": {
+        "png": "eval-runs/reports/skill-with-shell-sonnet46-publication-final/screenshots/code-review-mobile-deep.png",
+        "size": [
+          390,
+          6000
+        ],
+        "mean_rgb": [
+          215.62,
+          214.49,
+          211.6
+        ],
+        "palette": {
+          "palette_close_fraction": 0.7941,
+          "ivory_fraction": 0.2682,
+          "blackish_fraction": 0.0
+        },
+        "background_fraction": 0.6167,
+        "non_background_fraction": 0.3833,
+        "blackish_fraction": 0.0,
+        "file_bytes": 550062
+      },
+      "geometry": {
+        "overflow": [],
+        "containerOverflow": [],
+        "statCardSqueeze": [],
+        "sectionRailOrder": [],
+        "pageOverflowX": 0,
+        "timelineProblems": [],
+        "metricGroups": [],
+        "metricRowSqueeze": [],
+        "splitRailGroups": [],
+        "numericHeaderGroups": [],
+        "codeWrapProblems": [],
+        "textWrapProblems": []
+      },
+      "findings": [
+        {
+          "level": "pass",
+          "name": "doctype",
+          "evidence": "doctype present"
+        },
+        {
+          "level": "pass",
+          "name": "viewport",
+          "evidence": "viewport meta present"
+        },
+        {
+          "level": "pass",
+          "name": "uses_birch_system_css",
+          "evidence": "embeds or links Birch system CSS"
+        },
+        {
+          "level": "pass",
+          "name": "has_page_shell",
+          "evidence": ".page found"
+        },
+        {
+          "level": "pass",
+          "name": "uses_layout_primitives",
+          "evidence": "layout primitive count is healthy"
+        },
+        {
+          "level": "pass",
+          "name": "uses_semantic_components",
+          "evidence": "semantic component count is healthy"
+        },
+        {
+          "level": "pass",
+          "name": "no_unknown_css_vars",
+          "evidence": "all CSS variables are defined in Birch system or local CSS"
+        },
+        {
+          "level": "pass",
+          "name": "no_patch_markers",
+          "evidence": "no accidental patch marker lines"
+        },
+        {
+          "level": "note",
+          "name": "screenshot_capture",
+          "evidence": "captured eval-runs/reports/skill-with-shell-sonnet46-publication-final/screenshots/code-review-mobile-deep.png at [390, 6000]"
+        },
+        {
+          "level": "pass",
+          "name": "layout_overflow",
+          "evidence": "no visible text/content overflow detected"
+        },
+        {
+          "level": "pass",
+          "name": "container_text_overflow",
+          "evidence": "text stays within its card/panel containers"
+        },
+        {
+          "level": "pass",
+          "name": "stat_card_squeeze",
+          "evidence": "KPI/stat cards have enough horizontal space"
+        },
+        {
+          "level": "pass",
+          "name": "timeline_geometry",
+          "evidence": "timeline markers/content stay within expected geometry"
+        },
+        {
+          "level": "pass",
+          "name": "numeric_header_alignment",
+          "evidence": "numeric table headers align with right-aligned numeric columns"
+        },
+        {
+          "level": "pass",
+          "name": "code_wrap_underfill",
+          "evidence": "wrapped code/diff blocks use available container width"
+        },
+        {
+          "level": "pass",
+          "name": "pathological_text_wrapping",
+          "evidence": "prose/list text uses available container width"
+        }
+      ]
+    },
+    {
+      "artifact": "eval-runs/skill-with-shell-sonnet46-publication-final/module-explainer.html",
+      "stats": {
+        "path": "eval-runs/skill-with-shell-sonnet46-publication-final/module-explainer.html",
+        "bytes": 66525,
+        "title": "Rendering Checker Pipeline \u2014 Module Explainer",
+        "doctype": true,
+        "viewport": true,
+        "stylesheet_links": [],
+        "birch_css_embedded": true,
+        "style_blocks": 1,
+        "style_bytes": 200,
+        "script_blocks": 0,
+        "tag_counts": {
+          "html": 1,
+          "head": 1,
+          "meta": 2,
+          "title": 1,
+          "style": 2,
+          "body": 1,
+          "main": 1,
+          "header": 1,
+          "div": 63,
+          "h1": 1,
+          "p": 37,
+          "code": 230,
+          "span": 20,
+          "section": 6,
+          "h2": 6,
+          "strong": 13,
+          "h3": 39,
+          "svg": 1,
+          "defs": 1,
+          "marker": 1,
+          "path": 1,
+          "rect": 6,
+          "text": 12,
+          "line": 5,
+          "ol": 2,
+          "li": 43,
+          "ul": 10,
+          "em": 1,
+          "aside": 1,
+          "table": 1,
+          "thead": 1,
+          "tr": 6,
+          "th": 2,
+          "tbody": 1,
+          "td": 10
+        },
+        "class_counts": {
+          "page": 1,
+          "stack": 47,
+          "eyebrow": 7,
+          "lede": 1,
+          "cluster": 1,
+          "chip": 3,
+          "section": 6,
+          "section-head": 6,
+          "card": 25,
+          "auto-grid": 3,
+          "caption": 11,
+          "panel": 1,
+          "chart-panel": 1,
+          "pipeline-svg": 1,
+          "chart-caption": 1,
+          "flow-list": 2,
+          "flow-step": 11,
+          "flow-num": 11,
+          "flow-title": 11,
+          "flow-detail": 11,
+          "plain-list": 10,
+          "section-rail": 1,
+          "reference-panel": 1,
+          "code-block": 6,
+          "numeric-table-wrap": 1,
+          "numeric-table": 1
+        },
+        "data_attrs": {
+          "data-birch-system": 1,
+          "data-gap": 22,
+          "data-tone": 1,
+          "data-variant": 25,
+          "data-wrap": 6
+        },
+        "text_words": 1947,
+        "unique_words": 752,
+        "css_vars_used": [],
+        "css_vars_defined": [
+          "--grid-min"
+        ],
+        "hex_colors": [],
+        "birch_css_bytes": 31709,
+        "birch_css_valid": true
+      },
+      "screenshot": {
+        "png": "eval-runs/reports/skill-with-shell-sonnet46-publication-final/screenshots/module-explainer-mobile-deep.png",
+        "size": [
+          390,
+          6000
+        ],
+        "mean_rgb": [
+          239.58,
+          239.12,
+          237.42
+        ],
+        "palette": {
+          "palette_close_fraction": 0.9024,
+          "ivory_fraction": 0.3748,
+          "blackish_fraction": 0.0
+        },
+        "background_fraction": 0.7711,
+        "non_background_fraction": 0.2289,
+        "blackish_fraction": 0.0,
+        "file_bytes": 550709
+      },
+      "geometry": {
+        "overflow": [],
+        "containerOverflow": [],
+        "statCardSqueeze": [],
+        "sectionRailOrder": [],
+        "pageOverflowX": 0,
+        "timelineProblems": [],
+        "metricGroups": [],
+        "metricRowSqueeze": [],
+        "splitRailGroups": [],
+        "numericHeaderGroups": [],
+        "codeWrapProblems": [],
+        "textWrapProblems": []
+      },
+      "findings": [
+        {
+          "level": "pass",
+          "name": "doctype",
+          "evidence": "doctype present"
+        },
+        {
+          "level": "pass",
+          "name": "viewport",
+          "evidence": "viewport meta present"
+        },
+        {
+          "level": "pass",
+          "name": "uses_birch_system_css",
+          "evidence": "embeds or links Birch system CSS"
+        },
+        {
+          "level": "pass",
+          "name": "has_page_shell",
+          "evidence": ".page found"
+        },
+        {
+          "level": "pass",
+          "name": "uses_layout_primitives",
+          "evidence": "layout primitive count is healthy"
+        },
+        {
+          "level": "pass",
+          "name": "uses_semantic_components",
+          "evidence": "semantic component count is healthy"
+        },
+        {
+          "level": "pass",
+          "name": "no_unknown_css_vars",
+          "evidence": "all CSS variables are defined in Birch system or local CSS"
+        },
+        {
+          "level": "pass",
+          "name": "no_patch_markers",
+          "evidence": "no accidental patch marker lines"
+        },
+        {
+          "level": "note",
+          "name": "screenshot_capture",
+          "evidence": "captured eval-runs/reports/skill-with-shell-sonnet46-publication-final/screenshots/module-explainer-mobile-deep.png at [390, 6000]"
+        },
+        {
+          "level": "pass",
+          "name": "layout_overflow",
+          "evidence": "no visible text/content overflow detected"
+        },
+        {
+          "level": "pass",
+          "name": "container_text_overflow",
+          "evidence": "text stays within its card/panel containers"
+        },
+        {
+          "level": "pass",
+          "name": "stat_card_squeeze",
+          "evidence": "KPI/stat cards have enough horizontal space"
+        },
+        {
+          "level": "pass",
+          "name": "timeline_geometry",
+          "evidence": "timeline markers/content stay within expected geometry"
+        },
+        {
+          "level": "pass",
+          "name": "numeric_header_alignment",
+          "evidence": "numeric table headers align with right-aligned numeric columns"
+        },
+        {
+          "level": "pass",
+          "name": "code_wrap_underfill",
+          "evidence": "wrapped code/diff blocks use available container width"
+        },
+        {
+          "level": "pass",
+          "name": "pathological_text_wrapping",
+          "evidence": "prose/list text uses available container width"
+        }
+      ]
+    },
+    {
+      "artifact": "eval-runs/skill-with-shell-sonnet46-publication-final/implementation-plan.html",
+      "stats": {
+        "path": "eval-runs/skill-with-shell-sonnet46-publication-final/implementation-plan.html",
+        "bytes": 49926,
+        "title": "Birchline \u2192 Birch Recipe Migration Plan",
+        "doctype": true,
+        "viewport": true,
+        "stylesheet_links": [],
+        "birch_css_embedded": true,
+        "style_blocks": 1,
+        "style_bytes": 101,
+        "script_blocks": 0,
+        "tag_counts": {
+          "html": 1,
+          "head": 1,
+          "meta": 2,
+          "title": 1,
+          "style": 2,
+          "body": 1,
+          "main": 1,
+          "header": 1,
+          "div": 50,
+          "h1": 1,
+          "p": 29,
+          "code": 44,
+          "section": 6,
+          "span": 18,
+          "h2": 6,
+          "strong": 22,
+          "article": 5,
+          "h3": 15,
+          "ul": 14,
+          "li": 62,
+          "aside": 1,
+          "ol": 2,
+          "em": 2,
+          "table": 1,
+          "thead": 1,
+          "tr": 7,
+          "th": 2,
+          "tbody": 1,
+          "td": 12
+        },
+        "class_counts": {
+          "page": 1,
+          "stack": 27,
+          "eyebrow": 10,
+          "lede": 1,
+          "section": 6,
+          "section-head": 6,
+          "callout": 2,
+          "auto-grid": 2,
+          "card": 8,
+          "caption": 3,
+          "section-rail": 1,
+          "checklist": 5,
+          "plain-list": 9,
+          "reference-panel": 1,
+          "flow-list": 2,
+          "flow-step": 9,
+          "flow-num": 9,
+          "flow-title": 9,
+          "flow-detail": 23,
+          "numeric-table-wrap": 1,
+          "numeric-table": 1
+        },
+        "data_attrs": {
+          "data-birch-system": 1,
+          "data-gap": 27,
+          "data-kind": 2
+        },
+        "text_words": 1104,
+        "unique_words": 407,
+        "css_vars_used": [],
+        "css_vars_defined": [
+          "--grid-min"
+        ],
+        "hex_colors": [],
+        "birch_css_bytes": 31709,
+        "birch_css_valid": true
+      },
+      "screenshot": {
+        "png": "eval-runs/reports/skill-with-shell-sonnet46-publication-final/screenshots/implementation-plan-mobile-deep.png",
+        "size": [
+          390,
+          6000
+        ],
+        "mean_rgb": [
+          240.24,
+          239.76,
+          238.21
+        ],
+        "palette": {
+          "palette_close_fraction": 0.9086,
+          "ivory_fraction": 0.2953,
+          "blackish_fraction": 0.0
+        },
+        "background_fraction": 0.7676,
+        "non_background_fraction": 0.2324,
+        "blackish_fraction": 0.0,
+        "file_bytes": 503594
+      },
+      "geometry": {
+        "overflow": [],
+        "containerOverflow": [],
+        "statCardSqueeze": [],
+        "sectionRailOrder": [],
+        "pageOverflowX": 0,
+        "timelineProblems": [],
+        "metricGroups": [],
+        "metricRowSqueeze": [],
+        "splitRailGroups": [],
+        "numericHeaderGroups": [],
+        "codeWrapProblems": [],
+        "textWrapProblems": []
+      },
+      "findings": [
+        {
+          "level": "pass",
+          "name": "doctype",
+          "evidence": "doctype present"
+        },
+        {
+          "level": "pass",
+          "name": "viewport",
+          "evidence": "viewport meta present"
+        },
+        {
+          "level": "pass",
+          "name": "uses_birch_system_css",
+          "evidence": "embeds or links Birch system CSS"
+        },
+        {
+          "level": "pass",
+          "name": "has_page_shell",
+          "evidence": ".page found"
+        },
+        {
+          "level": "pass",
+          "name": "uses_layout_primitives",
+          "evidence": "layout primitive count is healthy"
+        },
+        {
+          "level": "pass",
+          "name": "uses_semantic_components",
+          "evidence": "semantic component count is healthy"
+        },
+        {
+          "level": "pass",
+          "name": "no_unknown_css_vars",
+          "evidence": "all CSS variables are defined in Birch system or local CSS"
+        },
+        {
+          "level": "pass",
+          "name": "no_patch_markers",
+          "evidence": "no accidental patch marker lines"
+        },
+        {
+          "level": "note",
+          "name": "screenshot_capture",
+          "evidence": "captured eval-runs/reports/skill-with-shell-sonnet46-publication-final/screenshots/implementation-plan-mobile-deep.png at [390, 6000]"
+        },
+        {
+          "level": "pass",
+          "name": "layout_overflow",
+          "evidence": "no visible text/content overflow detected"
+        },
+        {
+          "level": "pass",
+          "name": "container_text_overflow",
+          "evidence": "text stays within its card/panel containers"
+        },
+        {
+          "level": "pass",
+          "name": "stat_card_squeeze",
+          "evidence": "KPI/stat cards have enough horizontal space"
+        },
+        {
+          "level": "pass",
+          "name": "timeline_geometry",
+          "evidence": "timeline markers/content stay within expected geometry"
+        },
+        {
+          "level": "pass",
+          "name": "numeric_header_alignment",
+          "evidence": "numeric table headers align with right-aligned numeric columns"
+        },
+        {
+          "level": "pass",
+          "name": "code_wrap_underfill",
+          "evidence": "wrapped code/diff blocks use available container width"
+        },
+        {
+          "level": "pass",
+          "name": "pathological_text_wrapping",
+          "evidence": "prose/list text uses available container width"
+        }
+      ]
+    },
+    {
+      "artifact": "eval-runs/skill-with-shell-sonnet46-publication-final/benchmark-comparison.html",
+      "stats": {
+        "path": "eval-runs/skill-with-shell-sonnet46-publication-final/benchmark-comparison.html",
+        "bytes": 122208,
+        "title": "Promote Candidate B \u2014 GEPA Seed Decision Report",
+        "doctype": true,
+        "viewport": true,
+        "stylesheet_links": [],
+        "birch_css_embedded": true,
+        "style_blocks": 3,
+        "style_bytes": 395,
+        "script_blocks": 0,
+        "tag_counts": {
+          "html": 1,
+          "head": 1,
+          "meta": 2,
+          "title": 1,
+          "style": 4,
+          "body": 1,
+          "main": 1,
+          "header": 1,
+          "div": 83,
+          "h1": 1,
+          "p": 13,
+          "strong": 19,
+          "code": 10,
+          "section": 7,
+          "span": 15,
+          "h2": 7,
+          "svg": 2,
+          "defs": 36,
+          "g": 201,
+          "path": 123,
+          "use": 326,
+          "clippath": 2,
+          "rect": 2,
+          "table": 3,
+          "caption": 2,
+          "thead": 3,
+          "tr": 22,
+          "th": 14,
+          "tbody": 3,
+          "td": 84,
+          "aside": 2,
+          "ul": 6,
+          "li": 31,
+          "h3": 8,
+          "ol": 1
+        },
+        "class_counts": {
+          "page": 1,
+          "stack": 27,
+          "eyebrow": 12,
+          "lede": 1,
+          "section": 7,
+          "section-head": 7,
+          "auto-grid": 3,
+          "stat-card": 8,
+          "caption": 18,
+          "stat-value": 8,
+          "delta-good": 2,
+          "delta-bad": 3,
+          "section-rail": 2,
+          "panel": 4,
+          "chart-panel": 2,
+          "chart-svg": 2,
+          "chart-caption": 2,
+          "numeric-table-wrap": 3,
+          "numeric-table": 3,
+          "metric": 76,
+          "reference-panel": 2,
+          "plain-list": 4,
+          "card": 4,
+          "code-block": 1,
+          "insight-list": 1,
+          "takeaway-list": 1,
+          "flow-list": 1,
+          "flow-step": 4,
+          "flow-num": 4,
+          "flow-title": 4,
+          "flow-detail": 4
+        },
+        "data_attrs": {
+          "data-birch-system": 1,
+          "data-gap": 27,
+          "data-wrap": 1
+        },
+        "text_words": 688,
+        "unique_words": 318,
+        "css_vars_used": [
+          "--danger",
+          "--success"
+        ],
+        "css_vars_defined": [
+          "--grid-min"
+        ],
+        "hex_colors": [],
+        "birch_css_bytes": 31711,
+        "birch_css_valid": true
+      },
+      "screenshot": {
+        "png": "eval-runs/reports/skill-with-shell-sonnet46-publication-final/screenshots/benchmark-comparison-mobile-deep.png",
+        "size": [
+          390,
+          6000
+        ],
+        "mean_rgb": [
+          241.05,
+          240.06,
+          238.0
+        ],
+        "palette": {
+          "palette_close_fraction": 0.9388,
+          "ivory_fraction": 0.4516,
+          "blackish_fraction": 0.0005
+        },
+        "background_fraction": 0.8467,
+        "non_background_fraction": 0.1533,
+        "blackish_fraction": 0.0005,
+        "file_bytes": 362284
+      },
+      "geometry": {
+        "overflow": [],
+        "containerOverflow": [],
+        "statCardSqueeze": [],
+        "sectionRailOrder": [],
+        "pageOverflowX": 0,
+        "timelineProblems": [],
+        "metricGroups": [],
+        "metricRowSqueeze": [],
+        "splitRailGroups": [],
+        "numericHeaderGroups": [],
+        "codeWrapProblems": [],
+        "textWrapProblems": []
+      },
+      "findings": [
+        {
+          "level": "pass",
+          "name": "doctype",
+          "evidence": "doctype present"
+        },
+        {
+          "level": "pass",
+          "name": "viewport",
+          "evidence": "viewport meta present"
+        },
+        {
+          "level": "pass",
+          "name": "uses_birch_system_css",
+          "evidence": "embeds or links Birch system CSS"
+        },
+        {
+          "level": "pass",
+          "name": "has_page_shell",
+          "evidence": ".page found"
+        },
+        {
+          "level": "pass",
+          "name": "uses_layout_primitives",
+          "evidence": "layout primitive count is healthy"
+        },
+        {
+          "level": "pass",
+          "name": "uses_semantic_components",
+          "evidence": "semantic component count is healthy"
+        },
+        {
+          "level": "pass",
+          "name": "no_unknown_css_vars",
+          "evidence": "all CSS variables are defined in Birch system or local CSS"
+        },
+        {
+          "level": "pass",
+          "name": "no_patch_markers",
+          "evidence": "no accidental patch marker lines"
+        },
+        {
+          "level": "note",
+          "name": "screenshot_capture",
+          "evidence": "captured eval-runs/reports/skill-with-shell-sonnet46-publication-final/screenshots/benchmark-comparison-mobile-deep.png at [390, 6000]"
+        },
+        {
+          "level": "pass",
+          "name": "layout_overflow",
+          "evidence": "no visible text/content overflow detected"
+        },
+        {
+          "level": "pass",
+          "name": "container_text_overflow",
+          "evidence": "text stays within its card/panel containers"
+        },
+        {
+          "level": "pass",
+          "name": "stat_card_squeeze",
+          "evidence": "KPI/stat cards have enough horizontal space"
+        },
+        {
+          "level": "pass",
+          "name": "timeline_geometry",
+          "evidence": "timeline markers/content stay within expected geometry"
+        },
+        {
+          "level": "pass",
+          "name": "numeric_header_alignment",
+          "evidence": "numeric table headers align with right-aligned numeric columns"
+        },
+        {
+          "level": "pass",
+          "name": "code_wrap_underfill",
+          "evidence": "wrapped code/diff blocks use available container width"
+        },
+        {
+          "level": "pass",
+          "name": "pathological_text_wrapping",
+          "evidence": "prose/list text uses available container width"
+        }
+      ]
+    }
+  ],
+  "pairs": [],
+  "summary": {
+    "artifacts": 5,
+    "pairs": 5,
+    "failures": 0,
+    "warnings": 0,
+    "notes": 5
+  }
+}

@@ -1,0 +1,239 @@
+{
+  "artifacts": [
+    {
+      "artifact": "benchmark-comparison-deep.png",
+      "findings": [
+        {
+          "level": "fail",
+          "name": "vision_alignment_issue",
+          "evidence": "In the 'Warnings per eval' chart, the x-axis category labels are rendered on top of each other as one unreadable string, making the chart misleading/hard to interpret.",
+          "confidence": 0.95,
+          "bbox_px": {
+            "x": 360,
+            "y": 728,
+            "width": 310,
+            "height": 20
+          }
+        }
+      ]
+    },
+    {
+      "artifact": "benchmark-comparison-mobile-deep.png",
+      "findings": [
+        {
+          "level": "fail",
+          "name": "vision_alignment_issue",
+          "evidence": "The 'Warnings per eval' chart x-axis labels overlap into an unreadable run of text in the mobile layout.",
+          "confidence": 0.95,
+          "bbox_px": {
+            "x": 205,
+            "y": 731,
+            "width": 165,
+            "height": 14
+          }
+        },
+        {
+          "level": "warn",
+          "name": "vision_clipped_content",
+          "evidence": "The per-eval table is wider than the mobile viewport and visible columns are cut off at the right edge, requiring horizontal scrolling to read the row values.",
+          "confidence": 0.75,
+          "bbox_px": {
+            "x": 8,
+            "y": 946,
+            "width": 377,
+            "height": 193
+          }
+        }
+      ]
+    },
+    {
+      "artifact": "benchmark-comparison-desktop.png",
+      "findings": [
+        {
+          "level": "fail",
+          "name": "vision_alignment_issue",
+          "evidence": "In the 'Warnings per eval' chart, the category labels overlap heavily and are not individually readable.",
+          "confidence": 0.95,
+          "bbox_px": {
+            "x": 360,
+            "y": 728,
+            "width": 310,
+            "height": 20
+          }
+        }
+      ]
+    },
+    {
+      "artifact": "benchmark-comparison-mobile.png",
+      "findings": [
+        {
+          "level": "fail",
+          "name": "vision_alignment_issue",
+          "evidence": "The 'Warnings per eval' chart x-axis labels overlap into an unreadable string in the mobile viewport.",
+          "confidence": 0.95,
+          "bbox_px": {
+            "x": 205,
+            "y": 731,
+            "width": 165,
+            "height": 14
+          }
+        }
+      ]
+    },
+    {
+      "artifact": "code-review-deep.png",
+      "findings": []
+    },
+    {
+      "artifact": "code-review-mobile-deep.png",
+      "findings": []
+    },
+    {
+      "artifact": "code-review-desktop.png",
+      "findings": []
+    },
+    {
+      "artifact": "code-review-mobile.png",
+      "findings": []
+    },
+    {
+      "artifact": "implementation-plan-deep.png",
+      "findings": [
+        {
+          "level": "fail",
+          "name": "vision_unstyled_render",
+          "evidence": "The page appears to be rendered with default browser styling only: serif text, default bullets/numbering, no card/panel styling, spacing system, or Birch visual treatment despite the artifact claiming embedded Birch styling.",
+          "confidence": 0.93,
+          "bbox_px": {
+            "x": 0,
+            "y": 0,
+            "width": 1366,
+            "height": 2487
+          }
+        }
+      ]
+    },
+    {
+      "artifact": "implementation-plan-mobile-deep.png",
+      "findings": [
+        {
+          "level": "fail",
+          "name": "vision_unstyled_render",
+          "evidence": "Mobile render also appears as default unstyled HTML with browser-default typography and lists, lacking the expected Birch layout/styling. Content is readable, but the visual system appears missing.",
+          "confidence": 0.93,
+          "bbox_px": {
+            "x": 0,
+            "y": 0,
+            "width": 390,
+            "height": 2504
+          }
+        }
+      ]
+    },
+    {
+      "artifact": "implementation-plan-desktop.png",
+      "findings": [
+        {
+          "level": "fail",
+          "name": "vision_unstyled_render",
+          "evidence": "Desktop viewport shows default browser rendering rather than a styled Birch artifact: plain serif headings/body, default list indentation, and no visible embedded design system styling.",
+          "confidence": 0.93,
+          "bbox_px": {
+            "x": 0,
+            "y": 0,
+            "width": 1366,
+            "height": 900
+          }
+        }
+      ]
+    },
+    {
+      "artifact": "implementation-plan-mobile.png",
+      "findings": [
+        {
+          "level": "fail",
+          "name": "vision_unstyled_render",
+          "evidence": "Mobile viewport is rendered as plain default HTML with no visible Birch styling, cards, spacing primitives, or styled components.",
+          "confidence": 0.93,
+          "bbox_px": {
+            "x": 0,
+            "y": 0,
+            "width": 390,
+            "height": 900
+          }
+        }
+      ]
+    },
+    {
+      "artifact": "module-explainer-deep.png",
+      "findings": [
+        {
+          "level": "fail",
+          "name": "vision_flow_disconnected",
+          "evidence": "The 'Runtime Path \u2014 Input Pairs to Reports' diagram is arranged as isolated columns with only small downward arrows under each step. There is no continuous connector from steps 1 through 5 to the output step, so the implied pipeline path is visually disconnected and ambiguous.",
+          "confidence": 0.9,
+          "bbox_px": {
+            "x": 20,
+            "y": 420,
+            "width": 1220,
+            "height": 260
+          }
+        }
+      ]
+    },
+    {
+      "artifact": "module-explainer-mobile-deep.png",
+      "findings": [
+        {
+          "level": "fail",
+          "name": "vision_clipped_content",
+          "evidence": "In the mobile deep view, the 'Extension Points & Where to Change Behavior' table extends beyond the viewport with the Notes column cut off, leaving important content offscreen and requiring horizontal scrolling.",
+          "confidence": 0.86,
+          "bbox_px": {
+            "x": 0,
+            "y": 2290,
+            "width": 390,
+            "height": 700
+          }
+        }
+      ]
+    },
+    {
+      "artifact": "module-explainer-desktop.png",
+      "findings": [
+        {
+          "level": "fail",
+          "name": "vision_flow_disconnected",
+          "evidence": "The runtime pipeline appears as separate step columns with downward arrows but no visible links between adjacent steps, and the output step is detached below the first column rather than connected from the visual metrics step.",
+          "confidence": 0.9,
+          "bbox_px": {
+            "x": 20,
+            "y": 420,
+            "width": 1220,
+            "height": 260
+          }
+        }
+      ]
+    },
+    {
+      "artifact": "module-explainer-mobile.png",
+      "findings": []
+    },
+    {
+      "artifact": "numeric-data-deep.png",
+      "findings": []
+    },
+    {
+      "artifact": "numeric-data-mobile-deep.png",
+      "findings": []
+    },
+    {
+      "artifact": "numeric-data-desktop.png",
+      "findings": []
+    },
+    {
+      "artifact": "numeric-data-mobile.png",
+      "findings": []
+    }
+  ]
+}

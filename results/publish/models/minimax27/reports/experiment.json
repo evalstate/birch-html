@@ -1,0 +1,14 @@
+{
+  "label": "skill-with-shell-minimax27-publication-final",
+  "purpose": "Targeted retry for minimax27 benchmark-comparison in publication-final",
+  "mode": "skill-eval",
+  "output_mode": "file",
+  "cwd": "/home/shaun/source/birch-html",
+  "skills_dir": "/home/shaun/source/birch-html",
+  "model": "minimax27",
+  "jobs": 1,
+  "generation_timeout_s": 1200,
+  "default_shell_access": true,
+  "shell_evals": [],
+  "source_preview": "auto"
+}

@@ -1,0 +1,14 @@
+{
+  "label": "skill-with-shell-glm51-publication-final",
+  "purpose": "Targeted retry for glm51 module-explainer in publication-final",
+  "mode": "skill-eval",
+  "output_mode": "file",
+  "cwd": "/home/shaun/source/birch-html",
+  "skills_dir": "/home/shaun/source/birch-html",
+  "model": "glm51",
+  "jobs": 1,
+  "generation_timeout_s": 1200,
+  "default_shell_access": true,
+  "shell_evals": [],
+  "source_preview": "auto"
+}

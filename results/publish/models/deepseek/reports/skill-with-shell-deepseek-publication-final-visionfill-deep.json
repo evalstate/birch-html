@@ -1,0 +1,1077 @@
+{
+  "mode": "artifact",
+  "artifacts": [
+    {
+      "artifact": "eval-runs/skill-with-shell-deepseek-publication-final/numeric-data.html",
+      "stats": {
+        "path": "eval-runs/skill-with-shell-deepseek-publication-final/numeric-data.html",
+        "bytes": 62489,
+        "title": "Render checker \u2014 numeric health report",
+        "doctype": true,
+        "viewport": true,
+        "stylesheet_links": [],
+        "birch_css_embedded": true,
+        "style_blocks": 2,
+        "style_bytes": 156,
+        "script_blocks": 0,
+        "tag_counts": {
+          "html": 1,
+          "head": 1,
+          "meta": 2,
+          "title": 1,
+          "style": 3,
+          "body": 1,
+          "main": 1,
+          "header": 1,
+          "div": 39,
+          "h1": 1,
+          "p": 5,
+          "section": 4,
+          "br": 4,
+          "span": 10,
+          "h2": 3,
+          "code": 7,
+          "aside": 2,
+          "h3": 3,
+          "table": 3,
+          "thead": 3,
+          "tr": 14,
+          "th": 11,
+          "tbody": 3,
+          "td": 41,
+          "svg": 1,
+          "defs": 6,
+          "g": 128,
+          "path": 37,
+          "text": 30,
+          "use": 48,
+          "clippath": 2,
+          "rect": 2,
+          "ul": 1,
+          "li": 4
+        },
+        "class_counts": {
+          "page": 1,
+          "stack": 12,
+          "eyebrow": 3,
+          "lede": 1,
+          "section": 4,
+          "auto-grid": 1,
+          "panel": 7,
+          "stat-card": 4,
+          "stat-value": 4,
+          "caption": 10,
+          "section-rail": 2,
+          "section-head": 6,
+          "metric-list": 1,
+          "metric-row": 3,
+          "meter": 3,
+          "reference-panel": 2,
+          "numeric-table-wrap": 3,
+          "numeric-table": 3,
+          "metric": 38,
+          "chart-panel": 1,
+          "chart-svg": 1,
+          "chart-caption": 1,
+          "plain-list": 1
+        },
+        "data_attrs": {
+          "data-birch-system": 1,
+          "data-gap": 11
+        },
+        "text_words": 261,
+        "unique_words": 129,
+        "css_vars_used": [
+          "--success"
+        ],
+        "css_vars_defined": [
+          "--grid-min",
+          "--value"
+        ],
+        "hex_colors": [],
+        "birch_css_bytes": 31709,
+        "birch_css_valid": true
+      },
+      "screenshot": {
+        "png": "eval-runs/reports/skill-with-shell-deepseek-publication-final/screenshots/numeric-data-deep.png",
+        "size": [
+          1365,
+          2705
+        ],
+        "mean_rgb": [
+          247.11,
+          246.19,
+          244.05
+        ],
+        "palette": {
+          "palette_close_fraction": 0.9628,
+          "ivory_fraction": 0.4406,
+          "blackish_fraction": 0.0001
+        },
+        "background_fraction": 0.8933,
+        "non_background_fraction": 0.1067,
+        "blackish_fraction": 0.0001,
+        "file_bytes": 335993
+      },
+      "geometry": {
+        "overflow": [],
+        "containerOverflow": [],
+        "statCardSqueeze": [],
+        "sectionRailOrder": [],
+        "pageOverflowX": 0,
+        "timelineProblems": [],
+        "metricGroups": [
+          {
+            "owner": "body > main.page.stack > section.section.section-rail.stack > div.stack > div.panel",
+            "meterXs": [
+              169,
+              169,
+              169
+            ],
+            "spread": 0
+          }
+        ],
+        "metricRowSqueeze": [],
+        "splitRailGroups": [],
+        "numericHeaderGroups": [],
+        "codeWrapProblems": [],
+        "textWrapProblems": []
+      },
+      "findings": [
+        {
+          "level": "pass",
+          "name": "doctype",
+          "evidence": "doctype present"
+        },
+        {
+          "level": "pass",
+          "name": "viewport",
+          "evidence": "viewport meta present"
+        },
+        {
+          "level": "pass",
+          "name": "uses_birch_system_css",
+          "evidence": "embeds or links Birch system CSS"
+        },
+        {
+          "level": "pass",
+          "name": "has_page_shell",
+          "evidence": ".page found"
+        },
+        {
+          "level": "pass",
+          "name": "uses_layout_primitives",
+          "evidence": "layout primitive count is healthy"
+        },
+        {
+          "level": "pass",
+          "name": "uses_semantic_components",
+          "evidence": "semantic component count is healthy"
+        },
+        {
+          "level": "pass",
+          "name": "no_unknown_css_vars",
+          "evidence": "all CSS variables are defined in Birch system or local CSS"
+        },
+        {
+          "level": "pass",
+          "name": "no_patch_markers",
+          "evidence": "no accidental patch marker lines"
+        },
+        {
+          "level": "note",
+          "name": "screenshot_capture",
+          "evidence": "captured eval-runs/reports/skill-with-shell-deepseek-publication-final/screenshots/numeric-data-deep.png at [1365, 2705]"
+        },
+        {
+          "level": "pass",
+          "name": "layout_overflow",
+          "evidence": "no visible text/content overflow detected"
+        },
+        {
+          "level": "pass",
+          "name": "container_text_overflow",
+          "evidence": "text stays within its card/panel containers"
+        },
+        {
+          "level": "pass",
+          "name": "stat_card_squeeze",
+          "evidence": "KPI/stat cards have enough horizontal space"
+        },
+        {
+          "level": "pass",
+          "name": "timeline_geometry",
+          "evidence": "timeline markers/content stay within expected geometry"
+        },
+        {
+          "level": "pass",
+          "name": "metric_alignment",
+          "evidence": "metric meters align within each metric-list"
+        },
+        {
+          "level": "pass",
+          "name": "numeric_header_alignment",
+          "evidence": "numeric table headers align with right-aligned numeric columns"
+        },
+        {
+          "level": "pass",
+          "name": "code_wrap_underfill",
+          "evidence": "wrapped code/diff blocks use available container width"
+        },
+        {
+          "level": "pass",
+          "name": "pathological_text_wrapping",
+          "evidence": "prose/list text uses available container width"
+        }
+      ]
+    },
+    {
+      "artifact": "eval-runs/skill-with-shell-deepseek-publication-final/code-review.html",
+      "stats": {
+        "path": "eval-runs/skill-with-shell-deepseek-publication-final/code-review.html",
+        "bytes": 62789,
+        "title": "Candle code review \u2014 evals/code-review/source.diff",
+        "doctype": true,
+        "viewport": true,
+        "stylesheet_links": [],
+        "birch_css_embedded": true,
+        "style_blocks": 1,
+        "style_bytes": 58,
+        "script_blocks": 0,
+        "tag_counts": {
+          "html": 1,
+          "head": 1,
+          "meta": 2,
+          "title": 1,
+          "style": 2,
+          "body": 1,
+          "main": 1,
+          "header": 1,
+          "div": 95,
+          "h1": 1,
+          "p": 40,
+          "code": 129,
+          "span": 170,
+          "section": 8,
+          "h2": 8,
+          "article": 13,
+          "h3": 13,
+          "strong": 41,
+          "em": 3,
+          "ul": 2,
+          "li": 11,
+          "table": 1,
+          "thead": 1,
+          "tr": 4,
+          "th": 5,
+          "tbody": 1,
+          "td": 15
+        },
+        "class_counts": {
+          "page": 1,
+          "stack": 31,
+          "eyebrow": 9,
+          "lede": 1,
+          "cluster": 1,
+          "chip": 4,
+          "section": 8,
+          "section-head": 8,
+          "badge": 17,
+          "card": 15,
+          "diff": 11,
+          "diff-row": 47,
+          "del": 5,
+          "ln": 47,
+          "mark": 47,
+          "code": 47,
+          "add": 42,
+          "caption": 6,
+          "checklist": 1,
+          "plain-list": 1,
+          "numeric-table-wrap": 1,
+          "numeric-table": 1,
+          "metric": 12
+        },
+        "data_attrs": {
+          "data-birch-system": 1,
+          "data-gap": 31,
+          "data-tone": 8,
+          "data-variant": 15,
+          "data-wrap": 11
+        },
+        "text_words": 1526,
+        "unique_words": 616,
+        "css_vars_used": [],
+        "css_vars_defined": [],
+        "hex_colors": [],
+        "birch_css_bytes": 31715,
+        "birch_css_valid": true
+      },
+      "screenshot": {
+        "png": "eval-runs/reports/skill-with-shell-deepseek-publication-final/screenshots/code-review-deep.png",
+        "size": [
+          1365,
+          6000
+        ],
+        "mean_rgb": [
+          221.69,
+          221.34,
+          218.44
+        ],
+        "palette": {
+          "palette_close_fraction": 0.8405,
+          "ivory_fraction": 0.3886,
+          "blackish_fraction": 0.0
+        },
+        "background_fraction": 0.7628,
+        "non_background_fraction": 0.2372,
+        "blackish_fraction": 0.0,
+        "file_bytes": 1017388
+      },
+      "geometry": {
+        "overflow": [],
+        "containerOverflow": [],
+        "statCardSqueeze": [],
+        "sectionRailOrder": [],
+        "pageOverflowX": 0,
+        "timelineProblems": [],
+        "metricGroups": [],
+        "metricRowSqueeze": [],
+        "splitRailGroups": [],
+        "numericHeaderGroups": [],
+        "codeWrapProblems": [],
+        "textWrapProblems": []
+      },
+      "findings": [
+        {
+          "level": "pass",
+          "name": "doctype",
+          "evidence": "doctype present"
+        },
+        {
+          "level": "pass",
+          "name": "viewport",
+          "evidence": "viewport meta present"
+        },
+        {
+          "level": "pass",
+          "name": "uses_birch_system_css",
+          "evidence": "embeds or links Birch system CSS"
+        },
+        {
+          "level": "pass",
+          "name": "has_page_shell",
+          "evidence": ".page found"
+        },
+        {
+          "level": "pass",
+          "name": "uses_layout_primitives",
+          "evidence": "layout primitive count is healthy"
+        },
+        {
+          "level": "pass",
+          "name": "uses_semantic_components",
+          "evidence": "semantic component count is healthy"
+        },
+        {
+          "level": "pass",
+          "name": "no_unknown_css_vars",
+          "evidence": "all CSS variables are defined in Birch system or local CSS"
+        },
+        {
+          "level": "pass",
+          "name": "no_patch_markers",
+          "evidence": "no accidental patch marker lines"
+        },
+        {
+          "level": "note",
+          "name": "screenshot_capture",
+          "evidence": "captured eval-runs/reports/skill-with-shell-deepseek-publication-final/screenshots/code-review-deep.png at [1365, 6000]"
+        },
+        {
+          "level": "pass",
+          "name": "layout_overflow",
+          "evidence": "no visible text/content overflow detected"
+        },
+        {
+          "level": "pass",
+          "name": "container_text_overflow",
+          "evidence": "text stays within its card/panel containers"
+        },
+        {
+          "level": "pass",
+          "name": "stat_card_squeeze",
+          "evidence": "KPI/stat cards have enough horizontal space"
+        },
+        {
+          "level": "pass",
+          "name": "timeline_geometry",
+          "evidence": "timeline markers/content stay within expected geometry"
+        },
+        {
+          "level": "pass",
+          "name": "numeric_header_alignment",
+          "evidence": "numeric table headers align with right-aligned numeric columns"
+        },
+        {
+          "level": "pass",
+          "name": "code_wrap_underfill",
+          "evidence": "wrapped code/diff blocks use available container width"
+        },
+        {
+          "level": "pass",
+          "name": "pathological_text_wrapping",
+          "evidence": "prose/list text uses available container width"
+        }
+      ]
+    },
+    {
+      "artifact": "eval-runs/skill-with-shell-deepseek-publication-final/module-explainer.html",
+      "stats": {
+        "path": "eval-runs/skill-with-shell-deepseek-publication-final/module-explainer.html",
+        "bytes": 31473,
+        "title": "Birch rendering checker \u2014 module explainer",
+        "doctype": true,
+        "viewport": true,
+        "stylesheet_links": [],
+        "birch_css_embedded": true,
+        "style_blocks": 1,
+        "style_bytes": 57,
+        "script_blocks": 0,
+        "tag_counts": {
+          "html": 1,
+          "head": 1,
+          "meta": 2,
+          "title": 1,
+          "style": 2,
+          "body": 1,
+          "main": 1,
+          "header": 1,
+          "div": 41,
+          "h1": 1,
+          "p": 45,
+          "span": 30,
+          "section": 10,
+          "h2": 9,
+          "strong": 5,
+          "article": 19,
+          "h3": 32,
+          "code": 146,
+          "em": 3,
+          "svg": 1,
+          "rect": 6,
+          "g": 5,
+          "text": 12,
+          "path": 4,
+          "ol": 2,
+          "li": 26,
+          "ul": 2,
+          "pre": 3,
+          "table": 1,
+          "thead": 1,
+          "tr": 10,
+          "th": 3,
+          "tbody": 1,
+          "td": 27
+        },
+        "class_counts": {
+          "page": 1,
+          "stack": 31,
+          "eyebrow": 7,
+          "lede": 1,
+          "cluster": 1,
+          "chip": 4,
+          "section": 10,
+          "grid": 4,
+          "card": 21,
+          "muted": 20,
+          "section-head": 8,
+          "panel": 1,
+          "chart-panel": 1,
+          "chart-svg": 1,
+          "audit-svg": 1,
+          "flow-node": 5,
+          "flow-edge": 4,
+          "sub": 4,
+          "chart-caption": 1,
+          "flow-list": 2,
+          "flow-step": 15,
+          "flow-num": 15,
+          "flow-title": 15,
+          "flow-detail": 20,
+          "plain-list": 2,
+          "code-block": 3,
+          "auto-grid": 1,
+          "stat-card": 4,
+          "caption": 4,
+          "stat-value": 4,
+          "numeric-table-wrap": 1,
+          "numeric-table": 1,
+          "label-cell": 1,
+          "note": 10,
+          "entity": 9,
+          "metric": 9,
+          "callout": 1,
+          "callout-label": 1
+        },
+        "data_attrs": {
+          "data-birch-system": 1,
+          "data-gap": 14,
+          "data-tone": 10,
+          "data-cols": 4,
+          "data-variant": 21,
+          "data-accent": 3,
+          "data-shape": 1,
+          "data-wrap": 3
+        },
+        "text_words": 1939,
+        "unique_words": 745,
+        "css_vars_used": [
+          "--bg",
+          "--text-muted"
+        ],
+        "css_vars_defined": [
+          "--chart-width",
+          "--grid-min"
+        ],
+        "hex_colors": [],
+        "birch_css_bytes": 22,
+        "birch_css_valid": false
+      },
+      "screenshot": {
+        "png": "eval-runs/reports/skill-with-shell-deepseek-publication-final/screenshots/module-explainer-deep.png",
+        "size": [
+          1365,
+          6000
+        ],
+        "mean_rgb": [
+          236.94,
+          236.96,
+          236.95
+        ],
+        "palette": {
+          "palette_close_fraction": 0.8907,
+          "ivory_fraction": 0.0381,
+          "blackish_fraction": 0.029
+        },
+        "background_fraction": 0.8187,
+        "non_background_fraction": 0.1813,
+        "blackish_fraction": 0.029,
+        "file_bytes": 959696
+      },
+      "geometry": {
+        "overflow": [],
+        "containerOverflow": [],
+        "statCardSqueeze": [],
+        "sectionRailOrder": [],
+        "pageOverflowX": 0,
+        "timelineProblems": [],
+        "metricGroups": [],
+        "metricRowSqueeze": [],
+        "splitRailGroups": [],
+        "numericHeaderGroups": [],
+        "codeWrapProblems": [],
+        "textWrapProblems": []
+      },
+      "findings": [
+        {
+          "level": "pass",
+          "name": "doctype",
+          "evidence": "doctype present"
+        },
+        {
+          "level": "pass",
+          "name": "viewport",
+          "evidence": "viewport meta present"
+        },
+        {
+          "level": "fail",
+          "name": "uses_birch_system_css",
+          "evidence": "stylesheet links: []; embedded=True; embedded_bytes=22"
+        },
+        {
+          "level": "pass",
+          "name": "has_page_shell",
+          "evidence": ".page found"
+        },
+        {
+          "level": "pass",
+          "name": "uses_layout_primitives",
+          "evidence": "layout primitive count is healthy"
+        },
+        {
+          "level": "pass",
+          "name": "uses_semantic_components",
+          "evidence": "semantic component count is healthy"
+        },
+        {
+          "level": "pass",
+          "name": "no_unknown_css_vars",
+          "evidence": "all CSS variables are defined in Birch system or local CSS"
+        },
+        {
+          "level": "pass",
+          "name": "no_patch_markers",
+          "evidence": "no accidental patch marker lines"
+        },
+        {
+          "level": "note",
+          "name": "screenshot_capture",
+          "evidence": "captured eval-runs/reports/skill-with-shell-deepseek-publication-final/screenshots/module-explainer-deep.png at [1365, 6000]"
+        },
+        {
+          "level": "pass",
+          "name": "layout_overflow",
+          "evidence": "no visible text/content overflow detected"
+        },
+        {
+          "level": "pass",
+          "name": "container_text_overflow",
+          "evidence": "text stays within its card/panel containers"
+        },
+        {
+          "level": "pass",
+          "name": "stat_card_squeeze",
+          "evidence": "KPI/stat cards have enough horizontal space"
+        },
+        {
+          "level": "pass",
+          "name": "timeline_geometry",
+          "evidence": "timeline markers/content stay within expected geometry"
+        },
+        {
+          "level": "pass",
+          "name": "numeric_header_alignment",
+          "evidence": "numeric table headers align with right-aligned numeric columns"
+        },
+        {
+          "level": "pass",
+          "name": "code_wrap_underfill",
+          "evidence": "wrapped code/diff blocks use available container width"
+        },
+        {
+          "level": "pass",
+          "name": "pathological_text_wrapping",
+          "evidence": "prose/list text uses available container width"
+        }
+      ]
+    },
+    {
+      "artifact": "eval-runs/skill-with-shell-deepseek-publication-final/implementation-plan.html",
+      "stats": {
+        "path": "eval-runs/skill-with-shell-deepseek-publication-final/implementation-plan.html",
+        "bytes": 52099,
+        "title": "Birchline \u2192 Birch recipe migration \u2014 Implementation Plan",
+        "doctype": true,
+        "viewport": true,
+        "stylesheet_links": [],
+        "birch_css_embedded": true,
+        "style_blocks": 1,
+        "style_bytes": 72,
+        "script_blocks": 0,
+        "tag_counts": {
+          "html": 1,
+          "head": 1,
+          "meta": 2,
+          "title": 1,
+          "style": 2,
+          "body": 1,
+          "main": 1,
+          "header": 1,
+          "div": 45,
+          "h1": 1,
+          "p": 34,
+          "code": 59,
+          "section": 10,
+          "span": 20,
+          "h2": 10,
+          "strong": 23,
+          "ul": 13,
+          "li": 61,
+          "article": 9,
+          "h3": 17,
+          "table": 1,
+          "thead": 1,
+          "tr": 9,
+          "th": 2,
+          "tbody": 1,
+          "td": 16,
+          "aside": 1,
+          "ol": 3
+        },
+        "class_counts": {
+          "page": 1,
+          "stack": 17,
+          "eyebrow": 11,
+          "lede": 1,
+          "section": 10,
+          "section-head": 10,
+          "card": 13,
+          "callout": 3,
+          "plain-list": 10,
+          "auto-grid": 2,
+          "numeric-table-wrap": 1,
+          "numeric-table": 1,
+          "section-rail": 1,
+          "reference-panel": 1,
+          "flow-list": 1,
+          "flow-step": 4,
+          "flow-num": 4,
+          "flow-title": 4,
+          "flow-detail": 4,
+          "checklist": 5,
+          "badge": 6
+        },
+        "data_attrs": {
+          "data-birch-system": 1,
+          "data-gap": 18
+        },
+        "text_words": 1236,
+        "unique_words": 506,
+        "css_vars_used": [],
+        "css_vars_defined": [
+          "--grid-min"
+        ],
+        "hex_colors": [],
+        "birch_css_bytes": 31715,
+        "birch_css_valid": true
+      },
+      "screenshot": {
+        "png": "eval-runs/reports/skill-with-shell-deepseek-publication-final/screenshots/implementation-plan-deep.png",
+        "size": [
+          1365,
+          5961
+        ],
+        "mean_rgb": [
+          244.53,
+          243.81,
+          241.16
+        ],
+        "palette": {
+          "palette_close_fraction": 0.9451,
+          "ivory_fraction": 0.4724,
+          "blackish_fraction": 0.0
+        },
+        "background_fraction": 0.8192,
+        "non_background_fraction": 0.1808,
+        "blackish_fraction": 0.0,
+        "file_bytes": 957659
+      },
+      "geometry": {
+        "overflow": [],
+        "containerOverflow": [],
+        "statCardSqueeze": [],
+        "sectionRailOrder": [],
+        "pageOverflowX": 0,
+        "timelineProblems": [],
+        "metricGroups": [],
+        "metricRowSqueeze": [],
+        "splitRailGroups": [],
+        "numericHeaderGroups": [],
+        "codeWrapProblems": [],
+        "textWrapProblems": []
+      },
+      "findings": [
+        {
+          "level": "pass",
+          "name": "doctype",
+          "evidence": "doctype present"
+        },
+        {
+          "level": "pass",
+          "name": "viewport",
+          "evidence": "viewport meta present"
+        },
+        {
+          "level": "pass",
+          "name": "uses_birch_system_css",
+          "evidence": "embeds or links Birch system CSS"
+        },
+        {
+          "level": "pass",
+          "name": "has_page_shell",
+          "evidence": ".page found"
+        },
+        {
+          "level": "pass",
+          "name": "uses_layout_primitives",
+          "evidence": "layout primitive count is healthy"
+        },
+        {
+          "level": "pass",
+          "name": "uses_semantic_components",
+          "evidence": "semantic component count is healthy"
+        },
+        {
+          "level": "pass",
+          "name": "no_unknown_css_vars",
+          "evidence": "all CSS variables are defined in Birch system or local CSS"
+        },
+        {
+          "level": "pass",
+          "name": "no_patch_markers",
+          "evidence": "no accidental patch marker lines"
+        },
+        {
+          "level": "note",
+          "name": "screenshot_capture",
+          "evidence": "captured eval-runs/reports/skill-with-shell-deepseek-publication-final/screenshots/implementation-plan-deep.png at [1365, 5961]"
+        },
+        {
+          "level": "pass",
+          "name": "layout_overflow",
+          "evidence": "no visible text/content overflow detected"
+        },
+        {
+          "level": "pass",
+          "name": "container_text_overflow",
+          "evidence": "text stays within its card/panel containers"
+        },
+        {
+          "level": "pass",
+          "name": "stat_card_squeeze",
+          "evidence": "KPI/stat cards have enough horizontal space"
+        },
+        {
+          "level": "pass",
+          "name": "timeline_geometry",
+          "evidence": "timeline markers/content stay within expected geometry"
+        },
+        {
+          "level": "pass",
+          "name": "numeric_header_alignment",
+          "evidence": "numeric table headers align with right-aligned numeric columns"
+        },
+        {
+          "level": "pass",
+          "name": "code_wrap_underfill",
+          "evidence": "wrapped code/diff blocks use available container width"
+        },
+        {
+          "level": "pass",
+          "name": "pathological_text_wrapping",
+          "evidence": "prose/list text uses available container width"
+        }
+      ]
+    },
+    {
+      "artifact": "eval-runs/skill-with-shell-deepseek-publication-final/benchmark-comparison.html",
+      "stats": {
+        "path": "eval-runs/skill-with-shell-deepseek-publication-final/benchmark-comparison.html",
+        "bytes": 78962,
+        "title": "Candidate B Seed Promotion \u00b7 Birch Benchmark",
+        "doctype": true,
+        "viewport": true,
+        "stylesheet_links": [],
+        "birch_css_embedded": true,
+        "style_blocks": 5,
+        "style_bytes": 283,
+        "script_blocks": 0,
+        "tag_counts": {
+          "html": 1,
+          "head": 1,
+          "meta": 2,
+          "title": 1,
+          "style": 6,
+          "body": 1,
+          "main": 1,
+          "header": 1,
+          "div": 50,
+          "h1": 1,
+          "p": 6,
+          "code": 14,
+          "section": 7,
+          "span": 22,
+          "h2": 7,
+          "svg": 4,
+          "defs": 9,
+          "g": 307,
+          "path": 98,
+          "text": 84,
+          "clippath": 5,
+          "rect": 5,
+          "table": 2,
+          "thead": 2,
+          "tr": 10,
+          "th": 9,
+          "tbody": 2,
+          "td": 36,
+          "strong": 14,
+          "aside": 2,
+          "ul": 5,
+          "li": 27,
+          "use": 2,
+          "h3": 6,
+          "ol": 1
+        },
+        "class_counts": {
+          "page": 1,
+          "stack": 21,
+          "eyebrow": 11,
+          "lede": 1,
+          "section": 5,
+          "section-head": 7,
+          "auto-grid": 1,
+          "kpi-strip": 1,
+          "stat-card": 6,
+          "stat-value": 6,
+          "caption": 6,
+          "panel": 4,
+          "chart-panel": 4,
+          "chart-svg": 4,
+          "chart-caption": 4,
+          "numeric-table-wrap": 2,
+          "numeric-table": 2,
+          "metric": 35,
+          "section-rail": 2,
+          "reference-panel": 2,
+          "plain-list": 5,
+          "card": 3,
+          "flow-list": 1,
+          "flow-step": 3,
+          "flow-num": 3,
+          "flow-title": 3,
+          "flow-detail": 3
+        },
+        "data_attrs": {
+          "data-birch-system": 1,
+          "data-gap": 19
+        },
+        "text_words": 542,
+        "unique_words": 250,
+        "css_vars_used": [],
+        "css_vars_defined": [
+          "--grid-min"
+        ],
+        "hex_colors": [],
+        "birch_css_bytes": 31709,
+        "birch_css_valid": true
+      },
+      "screenshot": {
+        "png": "eval-runs/reports/skill-with-shell-deepseek-publication-final/screenshots/benchmark-comparison-deep.png",
+        "size": [
+          1365,
+          5354
+        ],
+        "mean_rgb": [
+          242.07,
+          239.14,
+          234.73
+        ],
+        "palette": {
+          "palette_close_fraction": 0.9656,
+          "ivory_fraction": 0.4682,
+          "blackish_fraction": 0.0
+        },
+        "background_fraction": 0.8423,
+        "non_background_fraction": 0.1577,
+        "blackish_fraction": 0.0,
+        "file_bytes": 663576
+      },
+      "geometry": {
+        "overflow": [],
+        "containerOverflow": [],
+        "statCardSqueeze": [],
+        "sectionRailOrder": [],
+        "pageOverflowX": 0,
+        "timelineProblems": [],
+        "metricGroups": [],
+        "metricRowSqueeze": [],
+        "splitRailGroups": [],
+        "numericHeaderGroups": [],
+        "codeWrapProblems": [],
+        "textWrapProblems": []
+      },
+      "findings": [
+        {
+          "level": "pass",
+          "name": "doctype",
+          "evidence": "doctype present"
+        },
+        {
+          "level": "pass",
+          "name": "viewport",
+          "evidence": "viewport meta present"
+        },
+        {
+          "level": "pass",
+          "name": "uses_birch_system_css",
+          "evidence": "embeds or links Birch system CSS"
+        },
+        {
+          "level": "pass",
+          "name": "has_page_shell",
+          "evidence": ".page found"
+        },
+        {
+          "level": "pass",
+          "name": "uses_layout_primitives",
+          "evidence": "layout primitive count is healthy"
+        },
+        {
+          "level": "pass",
+          "name": "uses_semantic_components",
+          "evidence": "semantic component count is healthy"
+        },
+        {
+          "level": "pass",
+          "name": "no_unknown_css_vars",
+          "evidence": "all CSS variables are defined in Birch system or local CSS"
+        },
+        {
+          "level": "pass",
+          "name": "no_patch_markers",
+          "evidence": "no accidental patch marker lines"
+        },
+        {
+          "level": "note",
+          "name": "screenshot_capture",
+          "evidence": "captured eval-runs/reports/skill-with-shell-deepseek-publication-final/screenshots/benchmark-comparison-deep.png at [1365, 5354]"
+        },
+        {
+          "level": "pass",
+          "name": "layout_overflow",
+          "evidence": "no visible text/content overflow detected"
+        },
+        {
+          "level": "pass",
+          "name": "container_text_overflow",
+          "evidence": "text stays within its card/panel containers"
+        },
+        {
+          "level": "pass",
+          "name": "stat_card_squeeze",
+          "evidence": "KPI/stat cards have enough horizontal space"
+        },
+        {
+          "level": "pass",
+          "name": "timeline_geometry",
+          "evidence": "timeline markers/content stay within expected geometry"
+        },
+        {
+          "level": "pass",
+          "name": "numeric_header_alignment",
+          "evidence": "numeric table headers align with right-aligned numeric columns"
+        },
+        {
+          "level": "pass",
+          "name": "code_wrap_underfill",
+          "evidence": "wrapped code/diff blocks use available container width"
+        },
+        {
+          "level": "pass",
+          "name": "pathological_text_wrapping",
+          "evidence": "prose/list text uses available container width"
+        }
+      ]
+    }
+  ],
+  "pairs": [],
+  "summary": {
+    "artifacts": 5,
+    "pairs": 5,
+    "failures": 1,
+    "warnings": 0,
+    "notes": 5
+  }
+}

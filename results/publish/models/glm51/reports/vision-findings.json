@@ -1,0 +1,161 @@
+{
+  "artifacts": [
+    {
+      "artifact": "benchmark-comparison-deep.png",
+      "findings": []
+    },
+    {
+      "artifact": "benchmark-comparison-mobile-deep.png",
+      "findings": []
+    },
+    {
+      "artifact": "benchmark-comparison-desktop.png",
+      "findings": []
+    },
+    {
+      "artifact": "benchmark-comparison-mobile.png",
+      "findings": []
+    },
+    {
+      "artifact": "code-review-deep.png",
+      "findings": []
+    },
+    {
+      "artifact": "code-review-mobile-deep.png",
+      "findings": [
+        {
+          "level": "fail",
+          "name": "vision_clipped_content",
+          "evidence": "Mobile render has horizontal page overflow with visible horizontal scrollbar; several long pill labels run past the right edge of their cards/viewport and are clipped, making mobile content partially offscreen.",
+          "confidence": 0.92,
+          "bbox_px": {
+            "x": 0,
+            "y": 560,
+            "width": 400,
+            "height": 6784
+          }
+        }
+      ]
+    },
+    {
+      "artifact": "code-review-desktop.png",
+      "findings": []
+    },
+    {
+      "artifact": "code-review-mobile.png",
+      "findings": [
+        {
+          "level": "fail",
+          "name": "vision_clipped_content",
+          "evidence": "Mobile viewport shows horizontal overflow/scrollbar and the first finding card's long label extends past the right edge, leaving content offscreen.",
+          "confidence": 0.88,
+          "bbox_px": {
+            "x": 0,
+            "y": 560,
+            "width": 390,
+            "height": 340
+          }
+        }
+      ]
+    },
+    {
+      "artifact": "implementation-plan-deep.png",
+      "findings": []
+    },
+    {
+      "artifact": "implementation-plan-mobile-deep.png",
+      "findings": [
+        {
+          "level": "warn",
+          "name": "vision_clipped_content",
+          "evidence": "In the mobile deep view, the milestone criterion tables render as horizontally scrollable boxes with most table columns/content offscreen and large blank table areas visible. The surrounding prose remains readable, but the table content is effectively clipped in the mobile layout.",
+          "confidence": 0.78,
+          "bbox_px": {
+            "x": 90,
+            "y": 3190,
+            "width": 248,
+            "height": 220
+          }
+        },
+        {
+          "level": "warn",
+          "name": "vision_clipped_content",
+          "evidence": "A second milestone criterion table has the same mobile rendering issue: the table is too wide for the card, leaving most columns offscreen behind a horizontal scrollbar and only a clipped fragment of the row visible.",
+          "confidence": 0.78,
+          "bbox_px": {
+            "x": 90,
+            "y": 4140,
+            "width": 248,
+            "height": 220
+          }
+        }
+      ]
+    },
+    {
+      "artifact": "implementation-plan-desktop.png",
+      "findings": []
+    },
+    {
+      "artifact": "implementation-plan-mobile.png",
+      "findings": []
+    },
+    {
+      "artifact": "module-explainer-deep.png",
+      "findings": []
+    },
+    {
+      "artifact": "module-explainer-mobile-deep.png",
+      "findings": []
+    },
+    {
+      "artifact": "module-explainer-desktop.png",
+      "findings": []
+    },
+    {
+      "artifact": "module-explainer-mobile.png",
+      "findings": []
+    },
+    {
+      "artifact": "numeric-data-deep.png",
+      "findings": [
+        {
+          "level": "warn",
+          "name": "vision_chart_malformed",
+          "evidence": "The weekly trend chart contains stray disconnected colored point/line fragments near the lower middle of the plot area, separate from the intended rising line series and bars. This could be mistaken for extra low data points.",
+          "confidence": 0.72,
+          "bbox_px": {
+            "x": 653,
+            "y": 1263,
+            "width": 235,
+            "height": 62
+          }
+        }
+      ]
+    },
+    {
+      "artifact": "numeric-data-mobile-deep.png",
+      "findings": [
+        {
+          "level": "warn",
+          "name": "vision_chart_malformed",
+          "evidence": "The small trend chart includes disconnected colored marker fragments near the lower portion of the plot, visually separate from the main line trajectories and bars.",
+          "confidence": 0.68,
+          "bbox_px": {
+            "x": 176,
+            "y": 1383,
+            "width": 80,
+            "height": 32
+          }
+        }
+      ]
+    },
+    {
+      "artifact": "numeric-data-desktop.png",
+      "findings": []
+    },
+    {
+      "artifact": "numeric-data-mobile.png",
+      "findings": []
+    }
+  ]
+}

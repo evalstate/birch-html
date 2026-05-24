@@ -1,0 +1,1099 @@
+{
+  "mode": "artifact",
+  "artifacts": [
+    {
+      "artifact": "eval-runs/skill-with-shell-codexresponses-gpt-5-5-opus-gpt55-deepseek-experiment-20260524-164522/numeric-data.html",
+      "stats": {
+        "path": "eval-runs/skill-with-shell-codexresponses-gpt-5-5-opus-gpt55-deepseek-experiment-20260524-164522/numeric-data.html",
+        "bytes": 42203,
+        "title": "Rendering checker weekly stabilityWeekly average pass rate and overflow trend",
+        "doctype": true,
+        "viewport": true,
+        "stylesheet_links": [],
+        "birch_css_embedded": true,
+        "style_blocks": 1,
+        "style_bytes": 201,
+        "script_blocks": 0,
+        "tag_counts": {
+          "html": 1,
+          "head": 1,
+          "meta": 2,
+          "title": 2,
+          "style": 2,
+          "body": 1,
+          "main": 1,
+          "header": 1,
+          "div": 29,
+          "h1": 1,
+          "p": 11,
+          "section": 3,
+          "span": 15,
+          "h2": 5,
+          "code": 12,
+          "article": 7,
+          "svg": 1,
+          "desc": 1,
+          "line": 6,
+          "rect": 6,
+          "polyline": 1,
+          "circle": 5,
+          "text": 11,
+          "aside": 1,
+          "ul": 1,
+          "li": 2,
+          "strong": 2,
+          "table": 1,
+          "thead": 1,
+          "tr": 6,
+          "th": 5,
+          "tbody": 1,
+          "td": 25,
+          "h3": 3
+        },
+        "class_counts": {
+          "page": 1,
+          "stack": 10,
+          "eyebrow": 6,
+          "lede": 1,
+          "section": 3,
+          "section-head": 4,
+          "caption": 13,
+          "auto-grid": 2,
+          "stat-card": 4,
+          "stat-value": 4,
+          "section-rail": 1,
+          "panel": 1,
+          "chart-panel": 1,
+          "chart-svg": 1,
+          "trend-svg": 1,
+          "chart-caption": 1,
+          "reference-panel": 1,
+          "metric-list": 1,
+          "metric-row": 3,
+          "meter": 3,
+          "takeaway-list": 1,
+          "numeric-table-wrap": 1,
+          "numeric-table": 1,
+          "metric": 24,
+          "card": 3
+        },
+        "data_attrs": {
+          "data-birch-system": 1,
+          "data-gap": 10
+        },
+        "text_words": 267,
+        "unique_words": 130,
+        "css_vars_used": [
+          "--accent",
+          "--border-color",
+          "--info",
+          "--surface",
+          "--text"
+        ],
+        "css_vars_defined": [
+          "--grid-min",
+          "--value"
+        ],
+        "hex_colors": [],
+        "birch_css_bytes": 31709,
+        "birch_css_valid": true
+      },
+      "screenshot": {
+        "png": "eval-runs/reports/skill-with-shell-codexresponses-gpt-5-5-opus-gpt55-deepseek-experiment-20260524-164522/screenshots/numeric-data-deep.png",
+        "size": [
+          1365,
+          1990
+        ],
+        "mean_rgb": [
+          246.48,
+          245.47,
+          242.57
+        ],
+        "palette": {
+          "palette_close_fraction": 0.9629,
+          "ivory_fraction": 0.6299,
+          "blackish_fraction": 0.0
+        },
+        "background_fraction": 0.8961,
+        "non_background_fraction": 0.1039,
+        "blackish_fraction": 0.0,
+        "file_bytes": 257996
+      },
+      "geometry": {
+        "overflow": [],
+        "containerOverflow": [],
+        "statCardSqueeze": [],
+        "sectionRailOrder": [],
+        "pageOverflowX": 0,
+        "timelineProblems": [],
+        "metricGroups": [
+          {
+            "owner": "html > body > main.page.stack > section.section.stack",
+            "meterXs": [
+              884,
+              884,
+              884
+            ],
+            "spread": 0
+          }
+        ],
+        "metricRowSqueeze": [],
+        "splitRailGroups": [],
+        "numericHeaderGroups": [],
+        "codeWrapProblems": [],
+        "textWrapProblems": []
+      },
+      "findings": [
+        {
+          "level": "pass",
+          "name": "doctype",
+          "evidence": "doctype present"
+        },
+        {
+          "level": "pass",
+          "name": "viewport",
+          "evidence": "viewport meta present"
+        },
+        {
+          "level": "pass",
+          "name": "uses_birch_system_css",
+          "evidence": "embeds or links Birch system CSS"
+        },
+        {
+          "level": "pass",
+          "name": "has_page_shell",
+          "evidence": ".page found"
+        },
+        {
+          "level": "pass",
+          "name": "uses_layout_primitives",
+          "evidence": "layout primitive count is healthy"
+        },
+        {
+          "level": "pass",
+          "name": "uses_semantic_components",
+          "evidence": "semantic component count is healthy"
+        },
+        {
+          "level": "pass",
+          "name": "no_unknown_css_vars",
+          "evidence": "all CSS variables are defined in Birch system or local CSS"
+        },
+        {
+          "level": "pass",
+          "name": "no_patch_markers",
+          "evidence": "no accidental patch marker lines"
+        },
+        {
+          "level": "note",
+          "name": "screenshot_capture",
+          "evidence": "captured eval-runs/reports/skill-with-shell-codexresponses-gpt-5-5-opus-gpt55-deepseek-experiment-20260524-164522/screenshots/numeric-data-deep.png at [1365, 1990]"
+        },
+        {
+          "level": "pass",
+          "name": "layout_overflow",
+          "evidence": "no visible text/content overflow detected"
+        },
+        {
+          "level": "pass",
+          "name": "container_text_overflow",
+          "evidence": "text stays within its card/panel containers"
+        },
+        {
+          "level": "pass",
+          "name": "stat_card_squeeze",
+          "evidence": "KPI/stat cards have enough horizontal space"
+        },
+        {
+          "level": "pass",
+          "name": "timeline_geometry",
+          "evidence": "timeline markers/content stay within expected geometry"
+        },
+        {
+          "level": "pass",
+          "name": "metric_alignment",
+          "evidence": "metric meters align within each metric-list"
+        },
+        {
+          "level": "pass",
+          "name": "numeric_header_alignment",
+          "evidence": "numeric table headers align with right-aligned numeric columns"
+        },
+        {
+          "level": "pass",
+          "name": "code_wrap_underfill",
+          "evidence": "wrapped code/diff blocks use available container width"
+        },
+        {
+          "level": "pass",
+          "name": "pathological_text_wrapping",
+          "evidence": "prose/list text uses available container width"
+        }
+      ]
+    },
+    {
+      "artifact": "eval-runs/skill-with-shell-codexresponses-gpt-5-5-opus-gpt55-deepseek-experiment-20260524-164522/code-review.html",
+      "stats": {
+        "path": "eval-runs/skill-with-shell-codexresponses-gpt-5-5-opus-gpt55-deepseek-experiment-20260524-164522/code-review.html",
+        "bytes": 42437,
+        "title": "Candle patch review \u2014 chart eval and rendering checker",
+        "doctype": true,
+        "viewport": true,
+        "stylesheet_links": [],
+        "birch_css_embedded": true,
+        "style_blocks": 1,
+        "style_bytes": 123,
+        "script_blocks": 0,
+        "tag_counts": {
+          "html": 1,
+          "head": 1,
+          "meta": 2,
+          "title": 1,
+          "style": 2,
+          "body": 1,
+          "main": 1,
+          "header": 1,
+          "div": 29,
+          "h1": 1,
+          "p": 10,
+          "code": 34,
+          "span": 20,
+          "section": 4,
+          "h2": 4,
+          "article": 8,
+          "h3": 8,
+          "h4": 3,
+          "strong": 9,
+          "table": 1,
+          "thead": 1,
+          "tr": 4,
+          "th": 3,
+          "tbody": 1,
+          "td": 9,
+          "ul": 5,
+          "li": 14,
+          "aside": 1
+        },
+        "class_counts": {
+          "page": 1,
+          "stack": 16,
+          "eyebrow": 5,
+          "lede": 1,
+          "cluster": 2,
+          "chip": 4,
+          "badge": 3,
+          "section": 4,
+          "section-head": 4,
+          "card": 5,
+          "auto-grid": 3,
+          "panel": 3,
+          "diff": 1,
+          "diff-row": 2,
+          "add": 2,
+          "ln": 2,
+          "mark": 2,
+          "code": 2,
+          "caption": 4,
+          "callout": 1,
+          "section-rail": 1,
+          "stat-card": 3,
+          "stat-value": 3,
+          "numeric-table-wrap": 1,
+          "numeric-table": 1,
+          "metric": 4,
+          "note": 3,
+          "insight-list": 1,
+          "reference-panel": 1,
+          "plain-list": 1,
+          "checklist": 2,
+          "takeaway-list": 1
+        },
+        "data_attrs": {
+          "data-birch-system": 1,
+          "data-gap": 17,
+          "data-tone": 3,
+          "data-wrap": 1,
+          "data-kind": 2
+        },
+        "text_words": 598,
+        "unique_words": 317,
+        "css_vars_used": [],
+        "css_vars_defined": [
+          "--grid-min"
+        ],
+        "hex_colors": [],
+        "birch_css_bytes": 31709,
+        "birch_css_valid": true
+      },
+      "screenshot": {
+        "png": "eval-runs/reports/skill-with-shell-codexresponses-gpt-5-5-opus-gpt55-deepseek-experiment-20260524-164522/screenshots/code-review-deep.png",
+        "size": [
+          1365,
+          3066
+        ],
+        "mean_rgb": [
+          242.76,
+          241.97,
+          238.9
+        ],
+        "palette": {
+          "palette_close_fraction": 0.9418,
+          "ivory_fraction": 0.6069,
+          "blackish_fraction": 0.0
+        },
+        "background_fraction": 0.8398,
+        "non_background_fraction": 0.1602,
+        "blackish_fraction": 0.0,
+        "file_bytes": 476036
+      },
+      "geometry": {
+        "overflow": [],
+        "containerOverflow": [],
+        "statCardSqueeze": [],
+        "sectionRailOrder": [],
+        "pageOverflowX": 0,
+        "timelineProblems": [],
+        "metricGroups": [],
+        "metricRowSqueeze": [],
+        "splitRailGroups": [],
+        "numericHeaderGroups": [],
+        "codeWrapProblems": [],
+        "textWrapProblems": []
+      },
+      "findings": [
+        {
+          "level": "pass",
+          "name": "doctype",
+          "evidence": "doctype present"
+        },
+        {
+          "level": "pass",
+          "name": "viewport",
+          "evidence": "viewport meta present"
+        },
+        {
+          "level": "pass",
+          "name": "uses_birch_system_css",
+          "evidence": "embeds or links Birch system CSS"
+        },
+        {
+          "level": "pass",
+          "name": "has_page_shell",
+          "evidence": ".page found"
+        },
+        {
+          "level": "pass",
+          "name": "uses_layout_primitives",
+          "evidence": "layout primitive count is healthy"
+        },
+        {
+          "level": "pass",
+          "name": "uses_semantic_components",
+          "evidence": "semantic component count is healthy"
+        },
+        {
+          "level": "pass",
+          "name": "no_unknown_css_vars",
+          "evidence": "all CSS variables are defined in Birch system or local CSS"
+        },
+        {
+          "level": "pass",
+          "name": "no_patch_markers",
+          "evidence": "no accidental patch marker lines"
+        },
+        {
+          "level": "note",
+          "name": "screenshot_capture",
+          "evidence": "captured eval-runs/reports/skill-with-shell-codexresponses-gpt-5-5-opus-gpt55-deepseek-experiment-20260524-164522/screenshots/code-review-deep.png at [1365, 3066]"
+        },
+        {
+          "level": "pass",
+          "name": "layout_overflow",
+          "evidence": "no visible text/content overflow detected"
+        },
+        {
+          "level": "pass",
+          "name": "container_text_overflow",
+          "evidence": "text stays within its card/panel containers"
+        },
+        {
+          "level": "pass",
+          "name": "stat_card_squeeze",
+          "evidence": "KPI/stat cards have enough horizontal space"
+        },
+        {
+          "level": "pass",
+          "name": "timeline_geometry",
+          "evidence": "timeline markers/content stay within expected geometry"
+        },
+        {
+          "level": "pass",
+          "name": "numeric_header_alignment",
+          "evidence": "numeric table headers align with right-aligned numeric columns"
+        },
+        {
+          "level": "pass",
+          "name": "code_wrap_underfill",
+          "evidence": "wrapped code/diff blocks use available container width"
+        },
+        {
+          "level": "pass",
+          "name": "pathological_text_wrapping",
+          "evidence": "prose/list text uses available container width"
+        }
+      ]
+    },
+    {
+      "artifact": "eval-runs/skill-with-shell-codexresponses-gpt-5-5-opus-gpt55-deepseek-experiment-20260524-164522/module-explainer.html",
+      "stats": {
+        "path": "eval-runs/skill-with-shell-codexresponses-gpt-5-5-opus-gpt55-deepseek-experiment-20260524-164522/module-explainer.html",
+        "bytes": 55010,
+        "title": "Rendering checker pipeline explainerRendering checker runtime flow",
+        "doctype": true,
+        "viewport": true,
+        "stylesheet_links": [],
+        "birch_css_embedded": true,
+        "style_blocks": 0,
+        "style_bytes": 0,
+        "script_blocks": 0,
+        "tag_counts": {
+          "html": 1,
+          "head": 1,
+          "meta": 2,
+          "title": 2,
+          "style": 1,
+          "body": 1,
+          "main": 1,
+          "header": 1,
+          "div": 35,
+          "h1": 1,
+          "p": 26,
+          "code": 133,
+          "span": 28,
+          "section": 7,
+          "h2": 7,
+          "article": 13,
+          "h3": 23,
+          "ul": 8,
+          "li": 34,
+          "strong": 6,
+          "aside": 4,
+          "svg": 1,
+          "desc": 1,
+          "path": 6,
+          "g": 7,
+          "rect": 7,
+          "text": 12,
+          "ol": 2,
+          "table": 1,
+          "thead": 1,
+          "tr": 5,
+          "th": 3,
+          "tbody": 1,
+          "td": 12,
+          "pre": 3
+        },
+        "class_counts": {
+          "page": 1,
+          "stack": 38,
+          "eyebrow": 8,
+          "lede": 1,
+          "cluster": 1,
+          "chip": 4,
+          "section": 7,
+          "section-rail": 3,
+          "section-head": 7,
+          "card": 12,
+          "insight-list": 1,
+          "callout": 1,
+          "callout-label": 1,
+          "reference-panel": 4,
+          "panel": 5,
+          "plain-list": 6,
+          "chart-panel": 1,
+          "flowchart": 1,
+          "flow-edge": 6,
+          "flow-node": 7,
+          "sub": 5,
+          "chart-caption": 1,
+          "flow-list": 2,
+          "flow-step": 10,
+          "flow-num": 10,
+          "flow-title": 10,
+          "flow-detail": 10,
+          "auto-grid": 2,
+          "stat-card": 3,
+          "caption": 3,
+          "stat-value": 3,
+          "muted": 12,
+          "numeric-table-wrap": 1,
+          "numeric-table": 1,
+          "label-cell": 1,
+          "entity": 4,
+          "note": 8,
+          "code-block": 3,
+          "checklist": 1,
+          "split": 1
+        },
+        "data_attrs": {
+          "data-birch-system": 1,
+          "data-gap": 29,
+          "data-tone": 9,
+          "data-variant": 12,
+          "data-accent": 1,
+          "data-kind": 4,
+          "data-shape": 1,
+          "data-wrap": 1
+        },
+        "text_words": 1167,
+        "unique_words": 515,
+        "css_vars_used": [],
+        "css_vars_defined": [
+          "--grid-min"
+        ],
+        "hex_colors": [],
+        "birch_css_bytes": 31709,
+        "birch_css_valid": true
+      },
+      "screenshot": {
+        "png": "eval-runs/reports/skill-with-shell-codexresponses-gpt-5-5-opus-gpt55-deepseek-experiment-20260524-164522/screenshots/module-explainer-deep.png",
+        "size": [
+          1365,
+          6000
+        ],
+        "mean_rgb": [
+          238.68,
+          238.16,
+          235.92
+        ],
+        "palette": {
+          "palette_close_fraction": 0.9582,
+          "ivory_fraction": 0.4755,
+          "blackish_fraction": 0.0011
+        },
+        "background_fraction": 0.8284,
+        "non_background_fraction": 0.1716,
+        "blackish_fraction": 0.0011,
+        "file_bytes": 1010186
+      },
+      "geometry": {
+        "overflow": [],
+        "containerOverflow": [],
+        "statCardSqueeze": [],
+        "sectionRailOrder": [],
+        "pageOverflowX": 0,
+        "timelineProblems": [],
+        "metricGroups": [],
+        "metricRowSqueeze": [],
+        "splitRailGroups": [],
+        "numericHeaderGroups": [],
+        "codeWrapProblems": [],
+        "textWrapProblems": []
+      },
+      "findings": [
+        {
+          "level": "pass",
+          "name": "doctype",
+          "evidence": "doctype present"
+        },
+        {
+          "level": "pass",
+          "name": "viewport",
+          "evidence": "viewport meta present"
+        },
+        {
+          "level": "pass",
+          "name": "uses_birch_system_css",
+          "evidence": "embeds or links Birch system CSS"
+        },
+        {
+          "level": "pass",
+          "name": "has_page_shell",
+          "evidence": ".page found"
+        },
+        {
+          "level": "pass",
+          "name": "uses_layout_primitives",
+          "evidence": "layout primitive count is healthy"
+        },
+        {
+          "level": "pass",
+          "name": "uses_semantic_components",
+          "evidence": "semantic component count is healthy"
+        },
+        {
+          "level": "pass",
+          "name": "no_unknown_css_vars",
+          "evidence": "all CSS variables are defined in Birch system or local CSS"
+        },
+        {
+          "level": "pass",
+          "name": "no_patch_markers",
+          "evidence": "no accidental patch marker lines"
+        },
+        {
+          "level": "note",
+          "name": "screenshot_capture",
+          "evidence": "captured eval-runs/reports/skill-with-shell-codexresponses-gpt-5-5-opus-gpt55-deepseek-experiment-20260524-164522/screenshots/module-explainer-deep.png at [1365, 6000]"
+        },
+        {
+          "level": "pass",
+          "name": "layout_overflow",
+          "evidence": "no visible text/content overflow detected"
+        },
+        {
+          "level": "pass",
+          "name": "container_text_overflow",
+          "evidence": "text stays within its card/panel containers"
+        },
+        {
+          "level": "pass",
+          "name": "stat_card_squeeze",
+          "evidence": "KPI/stat cards have enough horizontal space"
+        },
+        {
+          "level": "pass",
+          "name": "timeline_geometry",
+          "evidence": "timeline markers/content stay within expected geometry"
+        },
+        {
+          "level": "pass",
+          "name": "numeric_header_alignment",
+          "evidence": "numeric table headers align with right-aligned numeric columns"
+        },
+        {
+          "level": "pass",
+          "name": "code_wrap_underfill",
+          "evidence": "wrapped code/diff blocks use available container width"
+        },
+        {
+          "level": "pass",
+          "name": "pathological_text_wrapping",
+          "evidence": "prose/list text uses available container width"
+        }
+      ]
+    },
+    {
+      "artifact": "eval-runs/skill-with-shell-codexresponses-gpt-5-5-opus-gpt55-deepseek-experiment-20260524-164522/implementation-plan.html",
+      "stats": {
+        "path": "eval-runs/skill-with-shell-codexresponses-gpt-5-5-opus-gpt55-deepseek-experiment-20260524-164522/implementation-plan.html",
+        "bytes": 48834,
+        "title": "Birch recipe migration plan",
+        "doctype": true,
+        "viewport": true,
+        "stylesheet_links": [],
+        "birch_css_embedded": true,
+        "style_blocks": 1,
+        "style_bytes": 127,
+        "script_blocks": 0,
+        "tag_counts": {
+          "html": 1,
+          "head": 1,
+          "meta": 2,
+          "title": 1,
+          "style": 2,
+          "body": 1,
+          "main": 1,
+          "header": 1,
+          "div": 28,
+          "h1": 1,
+          "p": 10,
+          "span": 16,
+          "section": 6,
+          "h2": 6,
+          "article": 12,
+          "h3": 16,
+          "strong": 20,
+          "aside": 2,
+          "ul": 13,
+          "li": 55,
+          "code": 24,
+          "ol": 2,
+          "table": 1,
+          "thead": 1,
+          "tr": 7,
+          "th": 3,
+          "tbody": 1,
+          "td": 18
+        },
+        "class_counts": {
+          "page": 1,
+          "stack": 26,
+          "eyebrow": 7,
+          "lede": 1,
+          "cluster": 1,
+          "chip": 3,
+          "section": 6,
+          "section-head": 6,
+          "section-rail": 2,
+          "callout": 1,
+          "auto-grid": 4,
+          "stat-card": 3,
+          "caption": 3,
+          "stat-value": 3,
+          "reference-panel": 2,
+          "plain-list": 13,
+          "card": 8,
+          "checklist": 1,
+          "flow-list": 1,
+          "flow-step": 4,
+          "flow-num": 4,
+          "flow-title": 4,
+          "flow-detail": 4,
+          "numeric-table-wrap": 1,
+          "numeric-table": 1,
+          "metric": 7,
+          "panel": 1
+        },
+        "data_attrs": {
+          "data-birch-system": 1,
+          "data-gap": 26
+        },
+        "text_words": 1027,
+        "unique_words": 415,
+        "css_vars_used": [],
+        "css_vars_defined": [
+          "--grid-min"
+        ],
+        "hex_colors": [],
+        "birch_css_bytes": 31715,
+        "birch_css_valid": true
+      },
+      "screenshot": {
+        "png": "eval-runs/reports/skill-with-shell-codexresponses-gpt-5-5-opus-gpt55-deepseek-experiment-20260524-164522/screenshots/implementation-plan-deep.png",
+        "size": [
+          1365,
+          4436
+        ],
+        "mean_rgb": [
+          244.55,
+          243.92,
+          241.5
+        ],
+        "palette": {
+          "palette_close_fraction": 0.9423,
+          "ivory_fraction": 0.5127,
+          "blackish_fraction": 0.0
+        },
+        "background_fraction": 0.8492,
+        "non_background_fraction": 0.1508,
+        "blackish_fraction": 0.0,
+        "file_bytes": 805728
+      },
+      "geometry": {
+        "overflow": [],
+        "containerOverflow": [],
+        "statCardSqueeze": [],
+        "sectionRailOrder": [],
+        "pageOverflowX": 0,
+        "timelineProblems": [],
+        "metricGroups": [],
+        "metricRowSqueeze": [],
+        "splitRailGroups": [],
+        "numericHeaderGroups": [],
+        "codeWrapProblems": [],
+        "textWrapProblems": []
+      },
+      "findings": [
+        {
+          "level": "pass",
+          "name": "doctype",
+          "evidence": "doctype present"
+        },
+        {
+          "level": "pass",
+          "name": "viewport",
+          "evidence": "viewport meta present"
+        },
+        {
+          "level": "pass",
+          "name": "uses_birch_system_css",
+          "evidence": "embeds or links Birch system CSS"
+        },
+        {
+          "level": "pass",
+          "name": "has_page_shell",
+          "evidence": ".page found"
+        },
+        {
+          "level": "pass",
+          "name": "uses_layout_primitives",
+          "evidence": "layout primitive count is healthy"
+        },
+        {
+          "level": "pass",
+          "name": "uses_semantic_components",
+          "evidence": "semantic component count is healthy"
+        },
+        {
+          "level": "pass",
+          "name": "no_unknown_css_vars",
+          "evidence": "all CSS variables are defined in Birch system or local CSS"
+        },
+        {
+          "level": "pass",
+          "name": "no_patch_markers",
+          "evidence": "no accidental patch marker lines"
+        },
+        {
+          "level": "note",
+          "name": "screenshot_capture",
+          "evidence": "captured eval-runs/reports/skill-with-shell-codexresponses-gpt-5-5-opus-gpt55-deepseek-experiment-20260524-164522/screenshots/implementation-plan-deep.png at [1365, 4436]"
+        },
+        {
+          "level": "pass",
+          "name": "layout_overflow",
+          "evidence": "no visible text/content overflow detected"
+        },
+        {
+          "level": "pass",
+          "name": "container_text_overflow",
+          "evidence": "text stays within its card/panel containers"
+        },
+        {
+          "level": "pass",
+          "name": "stat_card_squeeze",
+          "evidence": "KPI/stat cards have enough horizontal space"
+        },
+        {
+          "level": "pass",
+          "name": "timeline_geometry",
+          "evidence": "timeline markers/content stay within expected geometry"
+        },
+        {
+          "level": "pass",
+          "name": "numeric_header_alignment",
+          "evidence": "numeric table headers align with right-aligned numeric columns"
+        },
+        {
+          "level": "pass",
+          "name": "code_wrap_underfill",
+          "evidence": "wrapped code/diff blocks use available container width"
+        },
+        {
+          "level": "pass",
+          "name": "pathological_text_wrapping",
+          "evidence": "prose/list text uses available container width"
+        }
+      ]
+    },
+    {
+      "artifact": "eval-runs/skill-with-shell-codexresponses-gpt-5-5-opus-gpt55-deepseek-experiment-20260524-164522/benchmark-comparison.html",
+      "stats": {
+        "path": "eval-runs/skill-with-shell-codexresponses-gpt-5-5-opus-gpt55-deepseek-experiment-20260524-164522/benchmark-comparison.html",
+        "bytes": 52072,
+        "title": "Candidate B GEPA Seed Decision",
+        "doctype": true,
+        "viewport": true,
+        "stylesheet_links": [],
+        "birch_css_embedded": true,
+        "style_blocks": 2,
+        "style_bytes": 236,
+        "script_blocks": 0,
+        "tag_counts": {
+          "html": 1,
+          "head": 1,
+          "meta": 2,
+          "title": 1,
+          "style": 3,
+          "body": 1,
+          "main": 1,
+          "header": 1,
+          "div": 41,
+          "h1": 1,
+          "p": 7,
+          "strong": 21,
+          "span": 20,
+          "code": 6,
+          "section": 5,
+          "h2": 5,
+          "svg": 1,
+          "defs": 4,
+          "g": 66,
+          "path": 13,
+          "text": 21,
+          "use": 4,
+          "clippath": 1,
+          "rect": 1,
+          "aside": 2,
+          "h3": 8,
+          "ul": 6,
+          "li": 19,
+          "table": 2,
+          "thead": 2,
+          "tr": 15,
+          "th": 23,
+          "tbody": 2,
+          "td": 47
+        },
+        "class_counts": {
+          "page": 1,
+          "stack": 16,
+          "eyebrow": 6,
+          "lede": 1,
+          "cluster": 1,
+          "chip": 3,
+          "section": 5,
+          "section-head": 5,
+          "auto-grid": 3,
+          "stat-card": 6,
+          "caption": 16,
+          "stat-value": 6,
+          "section-rail": 2,
+          "panel": 1,
+          "chart-panel": 1,
+          "chart-svg": 1,
+          "chart-caption": 1,
+          "reference-panel": 2,
+          "takeaway-list": 1,
+          "numeric-table-wrap": 2,
+          "numeric-table": 2,
+          "metric": 55,
+          "card": 6,
+          "plain-list": 4,
+          "insight-list": 1,
+          "code-block": 2
+        },
+        "data_attrs": {
+          "data-birch-system": 1,
+          "data-gap": 16,
+          "data-wrap": 2
+        },
+        "text_words": 450,
+        "unique_words": 240,
+        "css_vars_used": [],
+        "css_vars_defined": [
+          "--grid-min"
+        ],
+        "hex_colors": [],
+        "birch_css_bytes": 31709,
+        "birch_css_valid": true
+      },
+      "screenshot": {
+        "png": "eval-runs/reports/skill-with-shell-codexresponses-gpt-5-5-opus-gpt55-deepseek-experiment-20260524-164522/screenshots/benchmark-comparison-deep.png",
+        "size": [
+          1365,
+          3396
+        ],
+        "mean_rgb": [
+          242.95,
+          242.16,
+          239.22
+        ],
+        "palette": {
+          "palette_close_fraction": 0.9631,
+          "ivory_fraction": 0.5538,
+          "blackish_fraction": 0.0
+        },
+        "background_fraction": 0.8326,
+        "non_background_fraction": 0.1674,
+        "blackish_fraction": 0.0,
+        "file_bytes": 475651
+      },
+      "geometry": {
+        "overflow": [],
+        "containerOverflow": [],
+        "statCardSqueeze": [],
+        "sectionRailOrder": [],
+        "pageOverflowX": 0,
+        "timelineProblems": [],
+        "metricGroups": [],
+        "metricRowSqueeze": [],
+        "splitRailGroups": [],
+        "numericHeaderGroups": [],
+        "codeWrapProblems": [],
+        "textWrapProblems": []
+      },
+      "findings": [
+        {
+          "level": "pass",
+          "name": "doctype",
+          "evidence": "doctype present"
+        },
+        {
+          "level": "pass",
+          "name": "viewport",
+          "evidence": "viewport meta present"
+        },
+        {
+          "level": "pass",
+          "name": "uses_birch_system_css",
+          "evidence": "embeds or links Birch system CSS"
+        },
+        {
+          "level": "pass",
+          "name": "has_page_shell",
+          "evidence": ".page found"
+        },
+        {
+          "level": "pass",
+          "name": "uses_layout_primitives",
+          "evidence": "layout primitive count is healthy"
+        },
+        {
+          "level": "pass",
+          "name": "uses_semantic_components",
+          "evidence": "semantic component count is healthy"
+        },
+        {
+          "level": "pass",
+          "name": "no_unknown_css_vars",
+          "evidence": "all CSS variables are defined in Birch system or local CSS"
+        },
+        {
+          "level": "pass",
+          "name": "no_patch_markers",
+          "evidence": "no accidental patch marker lines"
+        },
+        {
+          "level": "note",
+          "name": "screenshot_capture",
+          "evidence": "captured eval-runs/reports/skill-with-shell-codexresponses-gpt-5-5-opus-gpt55-deepseek-experiment-20260524-164522/screenshots/benchmark-comparison-deep.png at [1365, 3396]"
+        },
+        {
+          "level": "pass",
+          "name": "layout_overflow",
+          "evidence": "no visible text/content overflow detected"
+        },
+        {
+          "level": "pass",
+          "name": "container_text_overflow",
+          "evidence": "text stays within its card/panel containers"
+        },
+        {
+          "level": "pass",
+          "name": "stat_card_squeeze",
+          "evidence": "KPI/stat cards have enough horizontal space"
+        },
+        {
+          "level": "pass",
+          "name": "timeline_geometry",
+          "evidence": "timeline markers/content stay within expected geometry"
+        },
+        {
+          "level": "pass",
+          "name": "numeric_header_alignment",
+          "evidence": "numeric table headers align with right-aligned numeric columns"
+        },
+        {
+          "level": "pass",
+          "name": "code_wrap_underfill",
+          "evidence": "wrapped code/diff blocks use available container width"
+        },
+        {
+          "level": "pass",
+          "name": "pathological_text_wrapping",
+          "evidence": "prose/list text uses available container width"
+        }
+      ]
+    }
+  ],
+  "pairs": [],
+  "summary": {
+    "artifacts": 5,
+    "pairs": 5,
+    "failures": 0,
+    "warnings": 0,
+    "notes": 5
+  }
+}

@@ -1,0 +1,197 @@
+{
+  "artifacts": [
+    {
+      "artifact": "benchmark-comparison-deep.png",
+      "findings": []
+    },
+    {
+      "artifact": "benchmark-comparison-mobile-deep.png",
+      "findings": [
+        {
+          "level": "warn",
+          "name": "vision_clipped_content",
+          "evidence": "The deep mobile screenshot ends immediately after the 'Recommended experiment' heading, while the corresponding desktop deep render shows a recommendation card below it. The section's body appears missing/clipped in the mobile deep capture.",
+          "confidence": 0.78,
+          "bbox_px": {
+            "x": 18,
+            "y": 5010,
+            "width": 340,
+            "height": 74
+          }
+        }
+      ]
+    },
+    {
+      "artifact": "benchmark-comparison-desktop.png",
+      "findings": []
+    },
+    {
+      "artifact": "benchmark-comparison-mobile.png",
+      "findings": []
+    },
+    {
+      "artifact": "code-review-deep.png",
+      "findings": []
+    },
+    {
+      "artifact": "code-review-mobile-deep.png",
+      "findings": []
+    },
+    {
+      "artifact": "code-review-desktop.png",
+      "findings": []
+    },
+    {
+      "artifact": "code-review-mobile.png",
+      "findings": []
+    },
+    {
+      "artifact": "implementation-plan-deep.png",
+      "findings": []
+    },
+    {
+      "artifact": "implementation-plan-mobile-deep.png",
+      "findings": []
+    },
+    {
+      "artifact": "implementation-plan-desktop.png",
+      "findings": []
+    },
+    {
+      "artifact": "implementation-plan-mobile.png",
+      "findings": []
+    },
+    {
+      "artifact": "module-explainer-deep.png",
+      "findings": [
+        {
+          "level": "fail",
+          "name": "vision_unstyled_render",
+          "evidence": "The page appears to be rendered with browser-default styling rather than the intended Birch styling: default serif type, unstyled sections/lists/table, and missing card/layout treatment throughout the document.",
+          "confidence": 0.93,
+          "bbox_px": {
+            "x": 0,
+            "y": 0,
+            "width": 1622,
+            "height": 2810
+          }
+        },
+        {
+          "level": "fail",
+          "name": "vision_flow_disconnected",
+          "evidence": "The runtime flow diagram is rendered as isolated black rounded rectangles with no visible connector path and mostly no readable node labels, so the implied pipeline from inputs to reports cannot be traced.",
+          "confidence": 0.96,
+          "bbox_px": {
+            "x": 373,
+            "y": 786,
+            "width": 589,
+            "height": 674
+          }
+        }
+      ]
+    },
+    {
+      "artifact": "module-explainer-mobile-deep.png",
+      "findings": [
+        {
+          "level": "fail",
+          "name": "vision_unstyled_render",
+          "evidence": "The mobile page appears largely unstyled with browser-default serif typography and missing Birch layout/card styling across the artifact.",
+          "confidence": 0.92,
+          "bbox_px": {
+            "x": 0,
+            "y": 0,
+            "width": 390,
+            "height": 3073
+          }
+        },
+        {
+          "level": "fail",
+          "name": "vision_flow_disconnected",
+          "evidence": "The flow diagram is reduced to disconnected black bars with no visible connecting lines and unreadable/missing node labels, making the process order ambiguous.",
+          "confidence": 0.96,
+          "bbox_px": {
+            "x": 108,
+            "y": 1132,
+            "width": 159,
+            "height": 188
+          }
+        },
+        {
+          "level": "fail",
+          "name": "vision_clipped_content",
+          "evidence": "The runtime-flow table overflows the mobile viewport; right-side columns and prose are visibly cut off, leaving only partial text at the edge.",
+          "confidence": 0.91,
+          "bbox_px": {
+            "x": 0,
+            "y": 1418,
+            "width": 390,
+            "height": 430
+          }
+        }
+      ]
+    },
+    {
+      "artifact": "module-explainer-desktop.png",
+      "findings": [
+        {
+          "level": "fail",
+          "name": "vision_unstyled_render",
+          "evidence": "The viewport is rendered with browser-default styling rather than the expected Birch visual system: default serif headings/body text and missing styled containers/layout.",
+          "confidence": 0.91,
+          "bbox_px": {
+            "x": 0,
+            "y": 0,
+            "width": 1366,
+            "height": 900
+          }
+        },
+        {
+          "level": "warn",
+          "name": "vision_flow_disconnected",
+          "evidence": "The first visible node of the flow diagram appears as a solid black unlabeled rounded bar; the rest of the diagram is below the fold, but this visible SVG/diagram mark already appears malformed/unreadable.",
+          "confidence": 0.76,
+          "bbox_px": {
+            "x": 527,
+            "y": 805,
+            "width": 296,
+            "height": 66
+          }
+        }
+      ]
+    },
+    {
+      "artifact": "module-explainer-mobile.png",
+      "findings": [
+        {
+          "level": "fail",
+          "name": "vision_unstyled_render",
+          "evidence": "The mobile viewport uses browser-default styling and lacks the expected Birch layout/typographic treatment, indicating the rendered artifact is mostly unstyled.",
+          "confidence": 0.91,
+          "bbox_px": {
+            "x": 0,
+            "y": 0,
+            "width": 390,
+            "height": 900
+          }
+        }
+      ]
+    },
+    {
+      "artifact": "numeric-data-deep.png",
+      "findings": []
+    },
+    {
+      "artifact": "numeric-data-mobile-deep.png",
+      "findings": []
+    },
+    {
+      "artifact": "numeric-data-desktop.png",
+      "findings": []
+    },
+    {
+      "artifact": "numeric-data-mobile.png",
+      "findings": []
+    }
+  ]
+}

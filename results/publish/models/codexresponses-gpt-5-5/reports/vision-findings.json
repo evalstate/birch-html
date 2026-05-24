@@ -1,0 +1,84 @@
+{
+  "artifacts": [
+    {
+      "artifact": "benchmark-comparison-deep.png",
+      "findings": []
+    },
+    {
+      "artifact": "benchmark-comparison-mobile-deep.png",
+      "findings": []
+    },
+    {
+      "artifact": "benchmark-comparison-desktop.png",
+      "findings": []
+    },
+    {
+      "artifact": "benchmark-comparison-mobile.png",
+      "findings": []
+    },
+    {
+      "artifact": "code-review-deep.png",
+      "findings": []
+    },
+    {
+      "artifact": "code-review-mobile-deep.png",
+      "findings": []
+    },
+    {
+      "artifact": "code-review-desktop.png",
+      "findings": []
+    },
+    {
+      "artifact": "code-review-mobile.png",
+      "findings": []
+    },
+    {
+      "artifact": "implementation-plan-deep.png",
+      "findings": []
+    },
+    {
+      "artifact": "implementation-plan-mobile-deep.png",
+      "findings": []
+    },
+    {
+      "artifact": "implementation-plan-desktop.png",
+      "findings": []
+    },
+    {
+      "artifact": "implementation-plan-mobile.png",
+      "findings": []
+    },
+    {
+      "artifact": "module-explainer-deep.png",
+      "findings": []
+    },
+    {
+      "artifact": "module-explainer-mobile-deep.png",
+      "findings": []
+    },
+    {
+      "artifact": "module-explainer-desktop.png",
+      "findings": []
+    },
+    {
+      "artifact": "module-explainer-mobile.png",
+      "findings": []
+    },
+    {
+      "artifact": "numeric-data-deep.png",
+      "findings": []
+    },
+    {
+      "artifact": "numeric-data-mobile-deep.png",
+      "findings": []
+    },
+    {
+      "artifact": "numeric-data-desktop.png",
+      "findings": []
+    },
+    {
+      "artifact": "numeric-data-mobile.png",
+      "findings": []
+    }
+  ]
+}

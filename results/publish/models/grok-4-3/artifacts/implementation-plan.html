@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Birchline → Birch migration sequence</title>
+    <style data-birch-system>
+__BIRCH_SYSTEM_CSS__
+    </style>
+    <style>
+      /* page-local: tighten flow-list spacing for compact risk rows */
+      .flow-list.compact { gap: var(--space-2); }
+    </style>
+  </head>
+  <body>
+    <main class="page stack" data-gap="lg">
+      <header class="stack" data-gap="sm">
+        <div class="eyebrow">Implementation plan</div>
+        <h1>Birchline → Birch recipe migration: recommended sequence</h1>
+        <p class="lede">Grounded in <code>evals/implementation-plan/migration-plan.md</code>. First action: run Phase 1 to make the five benchmark evals reproducible before touching recipes or packaging.</p>
+      </header>
+
+      <section class="section stack" data-gap="lg">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">What to do first</span>
+            <h2>Phase 1 — Clean benchmark inputs</h2>
+          </div>
+        </div>
+        <div class="card stack" data-gap="md">
+          <p><strong>Purpose.</strong> Make every eval source path exist, prompts list repository paths without duplicating large content, and no-shell prompts contain enough preview material to finish the task without filesystem access.</p>
+          <div class="section-rail">
+            <div>
+              <h3 class="flow-title">Work</h3>
+              <ul class="plain-list">
+                <li>Keep each eval’s <code>prompt.md</code>, <code>rubric.md</code>, and source material together under <code>evals/&lt;name&gt;/</code>.</li>
+                <li>Remove historical or archived data sources from active eval paths.</li>
+                <li>Ensure prompts do not mention stale package names or deleted files.</li>
+                <li>Decide which prompts expose source previews and which require shell reads.</li>
+              </ul>
+            </div>
+            <aside class="reference-panel stack" data-gap="sm">
+              <div><span class="eyebrow">Exit criteria</span></div>
+              <ul class="checklist">
+                <li>Every eval source path exists.</li>
+                <li>With-shell prompts list source paths without duplicating large source content.</li>
+                <li>No-shell prompts include enough source preview content to complete the task.</li>
+              </ul>
+              <div class="caption">Owner: maintainer running the benchmark harness.</div>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <section class="section stack" data-gap="lg">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Sequence</span>
+            <h2>Milestones and phases</h2>
+          </div>
+        </div>
+
+        <div class="auto-grid" style="--grid-min: 320px">
+          <article class="card stack" data-gap="sm">
+            <div class="cluster"><span class="badge">Phase 2</span><span class="eyebrow">Normalize task rubrics</span></div>
+            <p><strong>Purpose.</strong> Make success criteria explicit without turning prompts into hidden answer keys.</p>
+            <ul class="plain-list">
+              <li>Review each <code>rubric.md</code> on its own merits.</li>
+              <li>Keep rubrics focused on task quality, source fidelity, and Birch contract.</li>
+              <li>Document harness behaviour: rubric path only for with-shell; rubric content included for no-shell if needed.</li>
+            </ul>
+            <div class="caption">Exit: each eval has a clear rubric; exposure rules documented.</div>
+          </article>
+
+          <article class="card stack" data-gap="sm">
+            <div class="cluster"><span class="badge">Phase 3</span><span class="eyebrow">Verify skill packaging</span></div>
+            <p><strong>Purpose.</strong> Ensure the benchmark tests the published <code>birch-html</code> skill shape.</p>
+            <ul class="plain-list">
+              <li>Keep checker and finish scripts inside <code>skill/scripts/</code>.</li>
+              <li>Ensure <code>skill/SKILL.md</code> references in-package paths only.</li>
+              <li>Snapshot includes <code>skill/</code>, <code>evals/</code>, scripts, docs, and styles.</li>
+            </ul>
+            <div class="caption">Exit: fresh model can read <code>SKILL.md</code>, create artifact, finish it, and run checker without guessing paths.</div>
+          </article>
+
+          <article class="card stack" data-gap="sm">
+            <div class="cluster"><span class="badge">Phase 4</span><span class="eyebrow">Run final benchmark</span></div>
+            <p><strong>Purpose.</strong> Produce comparable model outputs across the five evals.</p>
+            <ul class="plain-list">
+              <li>Run <code>numeric-data</code>, <code>code-review</code>, <code>module-explainer</code>, <code>implementation-plan</code>, <code>benchmark-comparison</code>.</li>
+              <li>Capture generation traces, deterministic checker reports, screenshots, VLM findings.</li>
+              <li>Record self-check attempts from actual tool calls.</li>
+            </ul>
+            <div class="caption">Exit: each model has five artifacts or clear failure; reports separate rendering correctness from semantic quality.</div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section stack" data-gap="lg">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Grounding</span>
+            <h2>Confirmed facts vs. assumptions &amp; open questions</h2>
+          </div>
+        </div>
+        <div class="section-rail">
+          <div class="card stack" data-gap="sm">
+            <h3 class="flow-title">Confirmed facts (from migration-plan.md)</h3>
+            <ul class="plain-list">
+              <li>Package name is <code>birch-html</code>; skill entrypoint is <code>skill/SKILL.md</code>.</li>
+              <li>Preferred workflow: read sources → copy <code>skill/resources/template.html</code> → replace body → run <code>finish_birch_html.py</code> → validate with <code>check_birch_renderings.py</code>.</li>
+              <li>Artifact shell must be <code>&lt;main class="page stack" data-gap="lg"&gt;</code>.</li>
+              <li>Final artifact is standalone HTML with embedded Birch CSS in <code>style[data-birch-system]</code>.</li>
+              <li>Five benchmark evals listed; each has <code>prompt.md</code> + <code>rubric.md</code> under <code>evals/&lt;name&gt;/</code>.</li>
+              <li>Final benchmark must test the skill runner, not the older repo-mode path.</li>
+              <li>Keep <code>.auto-grid</code> + <code>.card</code> as the card-grid primitive; recipes remain structural, not decorative.</li>
+            </ul>
+          </div>
+          <aside class="reference-panel stack" data-gap="sm">
+            <div><span class="eyebrow">Assumptions</span></div>
+            <ul class="plain-list">
+              <li>Final benchmark evaluates the <code>birch-html</code> skill workflow.</li>
+              <li>Shell-enabled runs may inspect local repository files.</li>
+              <li>No-shell runs remain possible with source previews.</li>
+              <li>Semantic output scoring can be added after the generation/rendering pipeline is stable.</li>
+            </ul>
+            <div class="caption" style="margin-top:var(--space-3)">Open questions</div>
+            <ul class="plain-list">
+              <li>Should task rubrics be shown to models for every eval, or used only for human scoring?</li>
+              <li>Should the no-shell prompt set be part of the published benchmark or just a fallback/debug mode?</li>
+              <li>Which models should be included in the final published run?</li>
+              <li>Should semantic scoring be manual, model-judged, or hybrid?</li>
+            </ul>
+          </aside>
+        </div>
+      </section>
+
+      <section class="section stack" data-gap="lg">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Risk register</span>
+            <h2>Risks and mitigations</h2>
+          </div>
+        </div>
+        <div class="flow-list compact">
+          <div class="flow-step"><span class="flow-num">1</span><div class="stack" data-gap="xs"><div class="flow-title">Historical Birchline wording causes models to copy old classes</div><div class="flow-detail">Mitigation: keep source briefs current and include explicit unsupported-class list in every prompt.</div></div></div>
+          <div class="flow-step"><span class="flow-num">2</span><div class="stack" data-gap="xs"><div class="flow-title">Prompt includes both file content and file paths, causing conflicts</div><div class="flow-detail">Mitigation: maintain two prompt modes — with-shell paths only; no-shell source previews.</div></div></div>
+          <div class="flow-step"><span class="flow-num">3</span><div class="stack" data-gap="xs"><div class="flow-title">Models ignore skill workflow and hand-roll HTML</div><div class="flow-detail">Mitigation: keep normal fast-agent skill block, instruct models to read <code>SKILL.md</code>, validate final artifacts.</div></div></div>
+          <div class="flow-step"><span class="flow-num">4</span><div class="stack" data-gap="xs"><div class="flow-title">Checker availability differs across runs</div><div class="flow-detail">Mitigation: package checker under <code>skill/scripts/</code> and snapshot it with the run.</div></div></div>
+          <div class="flow-step"><span class="flow-num">5</span><div class="stack" data-gap="xs"><div class="flow-title">Deterministic checks miss semantic quality</div><div class="flow-detail">Mitigation: add later scoring pass using source, prompt, artifact, and task rubric.</div></div></div>
+          <div class="flow-step"><span class="flow-num">6</span><div class="stack" data-gap="xs"><div class="flow-title">Rubrics become inconsistent across evals</div><div class="flow-detail">Mitigation: review each rubric before final benchmark and document exposure rules.</div></div></div>
+        </div>
+      </section>
+
+      <section class="section stack" data-gap="lg">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Verification</span>
+            <h2>Verification plan (before/after evals)</h2>
+          </div>
+        </div>
+        <div class="card stack" data-gap="md">
+          <ol class="plain-list">
+            <li>Generate artifacts with current <code>birch-html</code> skill and with-shell prompts for all five evals.</li>
+            <li>Run deterministic checks at desktop, mobile, deep, and mobile-deep viewports.</li>
+            <li>Capture screenshots and VLM review for visible layout defects.</li>
+            <li>Compare generation success, deterministic failures/warnings, VLM findings, token usage, duration, and self-check evidence.</li>
+            <li>Optionally run later semantic scoring pass against each eval rubric.</li>
+          </ol>
+          <div class="section-rail">
+            <div>
+              <h3 class="flow-title">Key questions the first benchmark pass must answer</h3>
+              <ul class="checklist">
+                <li>Did the model produce complete standalone HTML for all five evals?</li>
+                <li>Did it follow the Birch skill workflow and finish the artifact correctly?</li>
+                <li>Did the artifact avoid unsupported Birchline classes?</li>
+                <li>Did deterministic and VLM checks find rendering problems?</li>
+                <li>Did the content remain source-grounded and useful for the target audience?</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section stack" data-gap="lg">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Scope</span>
+            <h2>Non-goals / deferred work</h2>
+          </div>
+        </div>
+        <div class="auto-grid" style="--grid-min: 260px">
+          <div class="card"><p>Do not port Birchline CSS wholesale.</p></div>
+          <div class="card"><p>Do not add compatibility aliases before eval evidence shows they are needed.</p></div>
+          <div class="card"><p>Do not build the future slot-based assembler before the skill benchmark is stable.</p></div>
+          <div class="card"><p>Do not treat VLM/rendering checks as full semantic content scoring.</p></div>
+        </div>
+      </section>
+
+      <footer class="caption">Source: <code>evals/implementation-plan/migration-plan.md</code> (read 24 May 2026). All claims, phases, risks, and verification steps are taken directly from that file. Artifact generated via <code>birch-html</code> skill workflow.</footer>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,3505 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Promote Candidate B — GEPA Seed Decision Report</title>
+  <style data-birch-system>
+/*
+  Birch HTML Design System
+  Opinionated single-option stylesheet for reliable LLM-generated artifacts.
+
+  Model:
+    1. Design tokens as CSS variables.
+    2. Layout primitives as classes.
+    3. Semantic components as classes with data-* variants.
+*/
+
+/* ==================== 1. TOKENS ==================== */
+
+:root {
+  color-scheme: light;
+
+  /* Palette */
+  --color-ivory: #FAF9F5;
+  --color-slate: #141413;
+  --color-clay: #D97757;
+  --color-clay-dark: #B85C3E;
+  --color-oat: #E3DACC;
+  --color-olive: #788C5D;
+  --color-rust: #B04A3F;
+  --color-sky: #6A8CAF;
+  --color-white: #FFFFFF;
+
+  --color-gray-50: #F7F5EE;
+  --color-gray-100: #F0EEE6;
+  --color-gray-150: #E8E4DA;
+  --color-gray-200: #DED9CD;
+  --color-gray-300: #D1CFC5;
+  --color-gray-500: #87867F;
+  --color-gray-700: #3D3D3A;
+  --color-gray-800: #242421;
+
+  /* Semantic colors */
+  --bg: var(--color-ivory);
+  --surface: var(--color-white);
+  --surface-tint: var(--color-gray-100);
+  --surface-warm: var(--color-oat);
+  --text: var(--color-slate);
+  --text-muted: var(--color-gray-500);
+  --text-soft: var(--color-gray-700);
+  --muted: var(--text-muted);
+  --border-color: var(--color-gray-300);
+  --accent: var(--color-clay);
+  --accent-strong: var(--color-clay-dark);
+  --success: var(--color-olive);
+  --warning: #C78E3F;
+  --danger: var(--color-rust);
+  --info: var(--color-sky);
+
+  /* Typography */
+  --font-serif: ui-serif, Georgia, "Times New Roman", serif;
+  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  --text-xs: 11px;
+  --text-sm: 12px;
+  --text-md: 14px;
+  --text-base: 15px;
+  --text-lg: 17px;
+  --text-xl: 21px;
+  --text-2xl: 26px;
+  --text-3xl: 36px;
+  --text-4xl: 44px;
+
+  --leading-tight: 1.15;
+  --leading-title: 1.25;
+  --leading-body: 1.55;
+  --leading-loose: 1.7;
+
+  /* Spacing */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 96px;
+
+  /* Shape */
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --radius-pill: 999px;
+
+  --border: 1.5px solid var(--border-color);
+  --border-thin: 1px solid var(--border-color);
+
+  --shadow-sm: 0 1px 2px rgba(20, 20, 19, 0.06);
+  --shadow-md: 0 4px 14px rgba(20, 20, 19, 0.08);
+  --shadow-lg: 0 12px 28px rgba(20, 20, 19, 0.12);
+
+  /* Motion */
+  --ease: cubic-bezier(0.2, 0, 0, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --dur-fast: 120ms;
+  --dur: 180ms;
+  --hover-y: -2px;
+
+  /* Page sizing */
+  --page-max: 1100px;
+  --page-pad: 28px;
+  --page-pad-block: 48px;
+
+  /* Legacy aliases used by source examples */
+  --ivory: var(--color-ivory);
+  --slate: var(--color-slate);
+  --clay: var(--color-clay);
+  --clay-d: var(--color-clay-dark);
+  --oat: var(--color-oat);
+  --olive: var(--color-olive);
+  --rust: var(--color-rust);
+  --sky: var(--color-sky);
+  --white: var(--color-white);
+  --gray-50: var(--color-gray-50);
+  --gray-100: var(--color-gray-100);
+  --gray-150: var(--color-gray-150);
+  --gray-200: var(--color-gray-200);
+  --gray-300: var(--color-gray-300);
+  --gray-500: var(--color-gray-500);
+  --gray-700: var(--color-gray-700);
+  --gray-800: var(--color-gray-800);
+  --serif: var(--font-serif);
+  --sans: var(--font-sans);
+  --mono: var(--font-mono);
+}
+
+/* ==================== BASE ==================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: var(--leading-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+img,
+svg {
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration-color: rgba(217, 119, 87, 0.45);
+  text-underline-offset: 3px;
+}
+
+a:hover {
+  color: var(--accent);
+}
+
+h1,
+h2,
+h3,
+p {
+  margin-block: 0;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: var(--leading-title);
+}
+
+h1 {
+  font-size: clamp(32px, 5vw, var(--text-4xl));
+}
+
+h2 {
+  font-size: var(--text-2xl);
+}
+
+h3 {
+  font-size: var(--text-xl);
+}
+
+code,
+kbd,
+pre {
+  font-family: var(--font-mono);
+}
+
+code {
+  font-size: 0.92em;
+  white-space: normal;
+  word-break: normal;
+}
+
+h1 code,
+h2 code,
+h3 code {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+::selection {
+  background: rgba(217, 119, 87, 0.24);
+}
+
+/* ==================== 2. LAYOUT PRIMITIVES ==================== */
+
+.page {
+  width: min(100% - (var(--page-pad) * 2), var(--page-max));
+  margin-inline: auto;
+  padding-block: var(--page-pad-block) var(--space-9);
+}
+
+.page[data-size="narrow"] {
+  --page-max: 820px;
+}
+
+.page[data-size="wide"] {
+  --page-max: 1280px;
+}
+
+.page[data-size="full"] {
+  --page-max: 1440px;
+}
+
+.section {
+  margin-block: var(--section-gap, var(--space-5));
+}
+
+.section[data-gap="lg"] {
+  --section-gap: var(--space-6);
+}
+
+.section[data-gap="xl"] {
+  --section-gap: var(--space-7);
+}
+
+.section:first-child {
+  margin-block-start: 0;
+}
+
+.stack > .section {
+  margin-block: 0;
+}
+
+.rule {
+  border: 0;
+  border-top: var(--border-thin);
+  margin: var(--space-3) 0 var(--space-5);
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--stack-gap, var(--space-4));
+}
+
+.stack[data-gap="xs"] { --stack-gap: var(--space-2); }
+.stack[data-gap="sm"] { --stack-gap: var(--space-3); }
+.stack[data-gap="md"] { --stack-gap: var(--space-4); }
+.stack[data-gap="lg"] { --stack-gap: var(--space-6); }
+.stack[data-gap="xl"] { --stack-gap: var(--space-8); }
+
+.stack > :is(.button, .btn, .chip, .badge) {
+  align-self: flex-start;
+}
+
+.cluster {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--cluster-gap, var(--space-3));
+}
+
+.cluster[data-align="start"] { align-items: flex-start; }
+.cluster[data-align="end"] { align-items: flex-end; }
+.cluster[data-justify="between"] { justify-content: space-between; }
+.cluster[data-justify="end"] { justify-content: flex-end; }
+
+.grid {
+  display: grid;
+  gap: var(--grid-gap, var(--space-5));
+}
+
+.grid[data-cols="2"] {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.grid[data-cols="3"] {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.grid[data-cols="4"] {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.auto-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--grid-min, 240px)), 1fr));
+  gap: var(--grid-gap, var(--space-5));
+}
+
+.auto-grid > * {
+  min-width: 0;
+}
+
+.split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, var(--split-side, 360px));
+  gap: var(--split-gap, var(--space-6));
+  align-items: start;
+}
+
+.split > * {
+  min-width: 0;
+}
+
+.section-head {
+  min-width: 0;
+}
+
+.section-rail {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, var(--rail-width, 360px));
+  column-gap: var(--rail-gap, var(--space-6));
+  row-gap: var(--space-5);
+  align-items: start;
+}
+
+.section-rail > .section-head {
+  grid-column: 1 / -1;
+}
+
+.section-rail > .reference-panel,
+.section-rail > aside {
+  align-self: start;
+}
+
+.sidebar-layout {
+  display: grid;
+  grid-template-columns: var(--sidebar-width, 240px) minmax(0, 1fr);
+  gap: var(--sidebar-gap, var(--space-7));
+  align-items: start;
+}
+
+.sidebar-layout > :first-child,
+.sticky {
+  position: sticky;
+  top: var(--sticky-top, var(--space-5));
+}
+
+.bleed {
+  margin-inline: calc(var(--page-pad) * -1);
+}
+
+.scroll-x {
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+}
+
+.center {
+  display: grid;
+  place-items: center;
+}
+
+.spacer {
+  flex: 1;
+}
+
+@media (max-width: 860px) {
+  :root {
+    --page-pad: 20px;
+    --page-pad-block: 40px;
+  }
+
+  .grid[data-cols],
+  .split,
+  .section-rail,
+  .sidebar-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar-layout > :first-child,
+  .sticky {
+    position: static;
+  }
+}
+
+/* ==================== TYPOGRAPHY UTILITIES ==================== */
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.eyebrow::before {
+  content: "";
+  width: 24px;
+  height: 1.5px;
+  background: currentColor;
+}
+
+.lede {
+  max-width: 720px;
+  color: var(--text-soft);
+  font-size: var(--text-lg);
+  line-height: 1.6;
+}
+
+.muted {
+  color: var(--text-muted);
+}
+
+.caption {
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+}
+
+.stat-value {
+  display: block;
+  color: var(--text);
+  font-family: var(--font-serif);
+  font-size: clamp(30px, 3.2vw, 42px);
+  font-variant-numeric: tabular-nums;
+  font-weight: 550;
+  letter-spacing: -0.025em;
+  line-height: 1;
+}
+
+.stat-card {
+  gap: var(--space-2);
+}
+
+.stat-card .caption {
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.stat-card .muted {
+  max-width: 34ch;
+  font-size: var(--text-sm);
+}
+
+.mono {
+  font-family: var(--font-mono);
+}
+
+/* ==================== 3. SEMANTIC COMPONENTS ==================== */
+
+.panel,
+.card {
+  background: var(--surface);
+  border: var(--border);
+  border-radius: var(--radius-md);
+}
+
+.panel {
+  padding: var(--panel-pad, var(--space-5));
+}
+
+.card {
+  padding: var(--card-pad, var(--space-5));
+  transition:
+    transform var(--dur-fast) var(--ease),
+    border-color var(--dur-fast) var(--ease),
+    box-shadow var(--dur-fast) var(--ease),
+    background-color var(--dur-fast) var(--ease);
+}
+
+.card[data-hover="lift"]:hover,
+.card[data-clickable]:hover {
+  transform: translateY(var(--hover-y));
+  border-color: rgba(217, 119, 87, 0.55);
+  box-shadow: var(--shadow-md);
+}
+
+.card[data-clickable] {
+  cursor: pointer;
+}
+
+.card[data-variant="flat"] {
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
+}
+
+.card[data-variant="outlined"] {
+  background: var(--surface);
+  border: var(--border);
+}
+
+.card[data-variant="elevated"] {
+  border-color: transparent;
+  box-shadow: var(--shadow-md);
+}
+
+.card[data-variant="filled"],
+.card[data-tone="oat"] {
+  background: var(--surface-warm);
+}
+
+.card[data-tone],
+.panel[data-tone],
+.callout[data-tone] {
+  background: var(--surface);
+}
+
+.card[data-tone="danger"],
+.panel[data-tone="danger"],
+.callout[data-tone="danger"] {
+  border-color: rgba(176, 74, 63, 0.36);
+}
+
+.card[data-tone="warning"],
+.panel[data-tone="warning"],
+.callout[data-tone="warning"] {
+  border-color: rgba(199, 142, 63, 0.38);
+}
+
+.card[data-tone="success"],
+.panel[data-tone="success"],
+.callout[data-tone="success"] {
+  border-color: rgba(120, 140, 93, 0.38);
+}
+
+.card[data-tone="info"],
+.panel[data-tone="info"],
+.callout[data-tone="info"] {
+  border-color: rgba(106, 140, 175, 0.36);
+}
+
+.card[data-accent] {
+  position: relative;
+  overflow: hidden;
+}
+
+.card[data-accent]::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 5px;
+  background: var(--accent);
+}
+
+.card-head {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-width: 0;
+  max-width: 100%;
+}
+
+.card-head > :first-child {
+  flex: 0 0 auto;
+}
+
+.card-titles {
+  flex: 1 1 0;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.card-title {
+  max-width: 100%;
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: var(--text-xl);
+  font-weight: 550;
+  line-height: var(--leading-title);
+  overflow-wrap: anywhere;
+}
+
+.card-sub {
+  margin: 2px 0 0;
+  color: var(--text-muted);
+  font-size: var(--text-sm);
+  overflow-wrap: anywhere;
+}
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-4) var(--space-5);
+  background: var(--surface);
+  border: var(--border);
+  border-radius: var(--radius-md);
+}
+
+.toolbar[data-sticky] {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.chip,
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border-radius: var(--radius-pill);
+  white-space: nowrap;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 650;
+  line-height: 1;
+}
+
+.chip {
+  min-height: 24px;
+  padding: 0 10px;
+  color: var(--text-soft);
+  background: var(--surface-tint);
+  border: 1px solid transparent;
+}
+
+.badge {
+  min-height: 22px;
+  padding: 0 9px;
+  color: var(--text-muted);
+  background: var(--surface);
+  border: var(--border-thin);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.chip[data-tone="clay"],
+.badge[data-tone="clay"] {
+  color: var(--accent);
+  background: rgba(217, 119, 87, 0.14);
+}
+
+.chip[data-tone="olive"],
+.badge[data-tone="olive"],
+.chip[data-tone="success"],
+.badge[data-tone="success"] {
+  color: var(--success);
+  background: rgba(120, 140, 93, 0.15);
+}
+
+.chip[data-tone="warning"],
+.badge[data-tone="warning"] {
+  color: var(--warning);
+  background: rgba(199, 142, 63, 0.16);
+}
+
+.chip[data-tone="rust"],
+.badge[data-tone="rust"],
+.chip[data-tone="danger"],
+.badge[data-tone="danger"] {
+  color: var(--danger);
+  background: rgba(176, 74, 63, 0.13);
+}
+
+.chip[data-tone="sky"],
+.badge[data-tone="sky"],
+.chip[data-tone="info"],
+.badge[data-tone="info"] {
+  color: var(--info);
+  background: rgba(106, 140, 175, 0.14);
+}
+
+.finding {
+  border-left: 6px solid var(--border-color);
+}
+
+.finding[data-severity="blocker"],
+.finding[data-severity="critical"],
+.finding[data-severity="danger"],
+.finding[data-tone="danger"] {
+  border-left-color: var(--danger);
+}
+
+.finding[data-severity="high"],
+.finding[data-severity="warning"],
+.finding[data-tone="warning"] {
+  border-left-color: var(--warning);
+}
+
+.finding[data-severity="medium"],
+.finding[data-severity="info"],
+.finding[data-tone="info"] {
+  border-left-color: var(--info);
+}
+
+.finding[data-severity="low"],
+.finding[data-severity="success"],
+.finding[data-tone="success"] {
+  border-left-color: var(--success);
+}
+
+.button,
+.btn {
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 36px;
+  padding: 0 14px;
+  border: 1.5px solid transparent;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-sans);
+  font-size: var(--text-md);
+  font-weight: 650;
+  line-height: 1;
+  text-decoration: none;
+  transition:
+    transform var(--dur-fast) var(--ease),
+    background-color var(--dur-fast) var(--ease),
+    border-color var(--dur-fast) var(--ease),
+    box-shadow var(--dur-fast) var(--ease);
+}
+
+.button:hover,
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.button[data-variant="primary"],
+.btn-primary {
+  color: var(--color-white);
+  background: var(--color-slate);
+}
+
+.button[data-variant="primary"]:hover,
+.btn-primary:hover {
+  background: var(--color-gray-700);
+}
+
+.button[data-variant="secondary"],
+.btn-secondary {
+  color: var(--text);
+  background: var(--surface-tint);
+  border-color: var(--border-color);
+}
+
+.button[data-variant="ghost"],
+.btn-ghost {
+  color: var(--text-soft);
+  background: transparent;
+}
+
+.button[data-variant="ghost"]:hover,
+.btn-ghost:hover {
+  color: var(--text);
+  background: var(--surface-tint);
+}
+
+.button[data-variant="danger"],
+.btn-danger {
+  color: var(--color-white);
+  background: var(--danger);
+}
+
+.input {
+  width: 100%;
+  min-height: 38px;
+  padding: 0 12px;
+  color: var(--text);
+  background: var(--surface);
+  border: var(--border);
+  border-radius: var(--radius-sm);
+  outline: none;
+}
+
+.input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(217, 119, 87, 0.16);
+}
+
+.avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--avatar-size, 38px);
+  height: var(--avatar-size, 38px);
+  border-radius: 50%;
+  color: var(--text-soft);
+  background: var(--surface-warm);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  flex: 0 0 auto;
+}
+
+.code-block {
+  margin: 0;
+  padding: var(--space-4) var(--space-5);
+  overflow-x: auto;
+  color: #E8E6DC;
+  background: var(--color-slate);
+  border-radius: var(--radius-md);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  line-height: var(--leading-loose);
+}
+
+.code-block[data-kind="command"],
+.code-block[data-wrap="true"],
+.command-block {
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  overflow-x: hidden;
+}
+
+.code-block[data-wrap="true"] code,
+.code-block[data-kind="command"] code {
+  display: block;
+  max-width: 100%;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.copyable {
+  position: relative;
+}
+
+.copyable > .code-block {
+  padding-inline-end: 88px;
+}
+
+.copy-button {
+  appearance: none;
+  position: absolute;
+  inset-block-start: var(--space-2);
+  inset-inline-end: var(--space-2);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 26px;
+  padding: 0 9px;
+  border: 1px solid rgba(250, 249, 245, 0.18);
+  border-radius: var(--radius-sm);
+  color: var(--color-gray-100);
+  background: rgba(255, 255, 255, 0.08);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  transition:
+    background-color var(--dur-fast) var(--ease),
+    border-color var(--dur-fast) var(--ease),
+    transform var(--dur-fast) var(--ease);
+}
+
+.copy-button:hover {
+  transform: translateY(-1px);
+  border-color: rgba(250, 249, 245, 0.35);
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.copy-button[data-copied="true"] {
+  color: var(--color-white);
+  background: rgba(120, 140, 93, 0.55);
+  border-color: rgba(120, 140, 93, 0.75);
+}
+
+.reference-panel {
+  --panel-pad: var(--space-5);
+}
+
+.callout {
+  padding: var(--space-5);
+  color: var(--text-soft);
+  background: var(--surface-tint);
+  border: var(--border);
+  border-inline-start: 4px solid var(--accent);
+  border-radius: var(--radius-md);
+}
+
+.callout[data-tone="success"] {
+  border-inline-start-color: var(--success);
+  background: rgba(120, 140, 93, 0.10);
+}
+
+.callout[data-tone="warning"] {
+  border-inline-start-color: var(--warning);
+  background: rgba(199, 142, 63, 0.11);
+}
+
+.callout[data-tone="danger"] {
+  border-inline-start-color: var(--danger);
+  background: rgba(176, 74, 63, 0.10);
+}
+
+.callout[data-tone="info"] {
+  border-inline-start-color: var(--info);
+  background: rgba(106, 140, 175, 0.11);
+}
+
+.callout-label {
+  display: block;
+  margin-bottom: var(--space-2);
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.callout > :last-child {
+  margin-bottom: 0;
+}
+
+.checklist {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-3);
+}
+
+.checklist li {
+  display: block !important;
+  position: relative !important;
+  min-width: 0;
+  padding-inline-start: calc(18px + var(--space-3));
+  overflow-wrap: anywhere;
+}
+
+.checklist li::before {
+  content: "✓";
+  position: absolute !important;
+  inset-block-start: 2px;
+  inset-inline-start: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  color: var(--success);
+  background: rgba(120, 140, 93, 0.12);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.checklist code {
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.plain-list {
+  margin: 0;
+  padding-inline-start: 1.15em;
+  color: var(--text-soft);
+}
+
+.plain-list li {
+  overflow-wrap: anywhere;
+}
+
+.plain-list li + li {
+  margin-top: var(--space-2);
+}
+
+.plain-list li::marker {
+  color: var(--text-muted);
+}
+
+.insight-list,
+.takeaway-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-3);
+}
+
+.insight-list li,
+.takeaway-list li {
+  position: relative;
+  display: block;
+  padding-inline-start: calc(10px + var(--space-3));
+  color: var(--text-soft);
+}
+
+.insight-list li::before,
+.takeaway-list li::before {
+  content: "";
+  position: absolute;
+  inset-block-start: 0.65em;
+  inset-inline-start: 0;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.insight-list li > *,
+.takeaway-list li > * {
+  min-width: 0;
+}
+
+.insight-list[data-tone="success"] li::before,
+.takeaway-list[data-tone="success"] li::before {
+  background: var(--success);
+}
+
+.insight-list[data-tone="info"] li::before,
+.takeaway-list[data-tone="info"] li::before {
+  background: var(--info);
+}
+
+.metric-list {
+  --metric-label: 132px;
+  --metric-value: 64px;
+  display: grid;
+  gap: var(--space-3);
+}
+
+.metric-row {
+  display: grid;
+  grid-template-columns: var(--metric-label) minmax(120px, 1fr) var(--metric-value);
+  gap: var(--space-3);
+  align-items: center;
+}
+
+.metric-row > :first-child {
+  min-width: 0;
+}
+
+.metric-row > :last-child {
+  justify-self: end;
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+}
+
+.meter {
+  height: 9px;
+  overflow: hidden;
+  border-radius: var(--radius-pill);
+  background: var(--surface-tint);
+}
+
+.meter span {
+  display: block;
+  width: var(--value);
+  height: 100%;
+  background: var(--tone, var(--accent));
+}
+
+.flow-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-3);
+}
+
+.flow-step {
+  position: relative;
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr);
+  gap: var(--space-3);
+  align-items: start;
+  padding: var(--space-4);
+  background: var(--surface);
+  border: var(--border);
+  border-radius: var(--radius-md);
+}
+
+.flow-step > .flow-num {
+  grid-column: 1;
+}
+
+.flow-step > :not(.flow-num) {
+  grid-column: 2;
+  min-width: 0;
+}
+
+.flow-step::after {
+  content: "";
+  position: absolute;
+  inset-block-start: calc(100% + 1px);
+  inset-inline-start: 36px;
+  width: 1.5px;
+  height: var(--space-3);
+  background: var(--border-color);
+}
+
+.flow-step:last-child::after {
+  display: none;
+}
+
+.flow-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-pill);
+  color: var(--text);
+  background: var(--surface-warm);
+  box-shadow: inset 0 0 0 1px rgba(20, 20, 19, 0.10);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  font-weight: 700;
+}
+
+.flow-title {
+  margin: 0 0 var(--space-1);
+  font-family: var(--font-serif);
+  font-size: var(--text-xl);
+  font-weight: 550;
+  line-height: var(--leading-title);
+}
+
+.flow-detail {
+  margin: 0;
+  color: var(--text-soft);
+}
+
+.flow-branch {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-3);
+}
+
+.flow-branch .flow-step::after {
+  display: none;
+}
+
+.flow-step[data-tone="success"] {
+  border-color: rgba(120, 140, 93, 0.38);
+  background: rgba(120, 140, 93, 0.08);
+}
+
+.flow-step[data-tone="warning"] {
+  border-color: rgba(199, 142, 63, 0.42);
+  background: rgba(199, 142, 63, 0.09);
+}
+
+@media (max-width: 620px) {
+  .metric-row {
+    grid-template-columns: 1fr max-content;
+  }
+
+  .metric-row .meter {
+    grid-column: 1 / -1;
+    order: 3;
+  }
+
+  .flow-branch {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- Charts and numeric data ---------- */
+
+.chart-panel {
+  max-width: 100%;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.chart-panel > * {
+  min-width: 0;
+}
+
+.chart-panel svg,
+svg.chart-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.chart-caption {
+  color: var(--text-muted);
+  font-size: var(--text-sm);
+}
+
+.numeric-table-wrap {
+  overflow-x: auto;
+  background: var(--surface);
+  border: var(--border);
+  border-radius: var(--radius-md);
+}
+
+.numeric-table {
+  width: 100%;
+  min-width: 720px;
+  border-collapse: collapse;
+}
+
+.numeric-table th,
+.numeric-table td {
+  padding: var(--space-3) var(--space-4);
+  border-bottom: 1px solid var(--color-gray-200);
+  vertical-align: middle;
+}
+
+.numeric-table th {
+  color: var(--text-muted);
+  background: var(--surface-tint);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-align: left;
+  text-transform: uppercase;
+}
+
+.numeric-table tr:last-child td {
+  border-bottom: 0;
+}
+
+.numeric-table .metric,
+.numeric-table .num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.numeric-table .entity,
+.numeric-table .label-cell {
+  font-weight: 650;
+}
+
+.numeric-table .note {
+  color: var(--text-soft);
+}
+
+.numeric-table code {
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.numeric-table .subtle {
+  display: block;
+  margin-top: 2px;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 400;
+}
+
+@media (max-width: 620px) {
+  .numeric-table {
+    min-width: 0;
+  }
+
+  .numeric-table thead {
+    display: none;
+  }
+
+  .numeric-table tbody,
+  .numeric-table tr,
+  .numeric-table td {
+    display: block;
+  }
+
+  .numeric-table tr {
+    padding: var(--space-3) var(--space-4);
+    border-bottom: 1px solid var(--color-gray-200);
+  }
+
+  .numeric-table tr:last-child {
+    border-bottom: 0;
+  }
+
+  .numeric-table td {
+    padding: var(--space-1) 0;
+    border-bottom: 0;
+  }
+
+  .numeric-table td[data-label] {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-4);
+  }
+
+  .numeric-table td[data-label]::before {
+    content: attr(data-label);
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    text-transform: uppercase;
+  }
+}
+
+/* ---------- Diff ---------- */
+
+.diff {
+  overflow-x: auto;
+  color: #E8E6DC;
+  background: var(--color-slate);
+  border-radius: var(--radius-md);
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  line-height: var(--leading-loose);
+}
+
+.diff-row {
+  display: grid;
+  grid-template-columns: 48px 18px minmax(max-content, 1fr);
+  align-items: baseline;
+  min-width: max-content;
+  padding-inline-end: var(--space-4);
+  white-space: pre;
+}
+
+.diff-row .ln {
+  padding-inline-end: 14px;
+  color: var(--color-gray-500);
+  text-align: right;
+  user-select: none;
+}
+
+.diff-row .mark {
+  color: var(--color-gray-500);
+  text-align: center;
+}
+
+.diff-row .code {
+  color: #E8E6DC;
+}
+
+.diff-row.ctx .code,
+.diff-row[data-kind="ctx"] .code {
+  color: #B8B6AC;
+}
+
+.diff-row.add,
+.diff-row[data-kind="add"] {
+  background: rgba(120, 140, 93, 0.24);
+  box-shadow: inset 3px 0 0 rgba(120, 140, 93, 0.78);
+}
+
+.diff-row.add .mark,
+.diff-row[data-kind="add"] .mark {
+  color: #B9D394;
+  font-weight: 800;
+}
+
+.diff-row.del,
+.diff-row[data-kind="del"] {
+  background: rgba(176, 74, 63, 0.24);
+  box-shadow: inset 3px 0 0 rgba(176, 74, 63, 0.82);
+}
+
+.diff-row.del .mark,
+.diff-row[data-kind="del"] .mark {
+  color: #F19A8D;
+  font-weight: 800;
+}
+
+.diff-row.hunk,
+.diff-row[data-kind="hunk"] {
+  background: rgba(255, 255, 255, 0.045);
+}
+
+.diff-row.hunk .code,
+.diff-row[data-kind="hunk"] .code {
+  color: var(--color-gray-500);
+}
+
+.diff[data-wrap="true"] {
+  overflow-x: hidden;
+}
+
+.diff[data-wrap="true"] .diff-row {
+  grid-template-columns: 42px 18px minmax(0, 1fr);
+  min-width: 0;
+  white-space: normal;
+}
+
+.diff[data-wrap="true"] .code {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+/* ---------- Timeline ---------- */
+
+.timeline {
+  position: relative;
+  display: grid;
+  gap: 0;
+  padding-inline-start: var(--space-6);
+}
+
+.timeline:is(ol, ul) {
+  margin: 0;
+  list-style: none;
+}
+
+.timeline::before {
+  content: "";
+  position: absolute;
+  inset-block: 4px 4px;
+  inset-inline-start: 9px;
+  width: 1.5px;
+  background: var(--border-color);
+}
+
+.timeline-item,
+.tl-entry {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(84px, max-content) minmax(0, 1fr);
+  gap: var(--space-4);
+  padding-block: 0 var(--space-5);
+}
+
+.timeline-item:last-child,
+.tl-entry:last-child {
+  padding-block-end: 0;
+}
+
+.timeline-item::before,
+.tl-entry::before {
+  content: "";
+  position: absolute;
+  inset-block-start: 4px;
+  inset-inline-start: calc(4.25px - var(--space-6));
+  width: 11px;
+  height: 11px;
+  border: 2px solid var(--surface);
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 1.5px var(--accent);
+}
+
+.timeline-item:not(:has(> .timeline-time, > .tl-time)),
+.tl-entry:not(:has(> .timeline-time, > .tl-time)) {
+  display: block;
+}
+
+.timeline-time,
+.tl-time {
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  white-space: nowrap;
+}
+
+.timeline-body,
+.tl-body {
+  min-width: 0;
+  color: var(--text-soft);
+}
+
+.timeline-body strong,
+.tl-body strong {
+  color: var(--text);
+}
+
+@media (max-width: 620px) {
+  .timeline-item,
+  .tl-entry {
+    grid-template-columns: 1fr;
+    gap: var(--space-1);
+  }
+}
+
+/* ---------- Flowchart ---------- */
+
+.flowchart {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+svg.flow,
+svg.flowchart {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.flow text,
+.flowchart text {
+  fill: var(--text);
+  font-family: var(--font-sans);
+  font-size: 12px;
+}
+
+.flow .sub,
+.flowchart .sub {
+  fill: var(--text-muted);
+  font-size: 10px;
+}
+
+.flow-edge,
+.edge {
+  fill: none;
+  stroke: var(--text-muted);
+  stroke-width: 1.5;
+}
+
+.flow-edge[data-kind="yes"],
+.edge.yes {
+  stroke: var(--success);
+}
+
+.flow-edge[data-kind="no"],
+.edge.no {
+  stroke: var(--danger);
+  stroke-dasharray: 4 4;
+}
+
+/* SVG flow nodes */
+.flow-node,
+.flow .node {
+  cursor: pointer;
+  transition: transform var(--dur-fast) var(--ease);
+}
+
+.flow-node:hover,
+.flow .node:hover {
+  transform: translateY(-1px);
+}
+
+.flow-node rect,
+.flow .node rect {
+  fill: var(--surface);
+  stroke: var(--border-color);
+  stroke-width: 1.5;
+  rx: 8;
+}
+
+.flow-node path,
+.flow .node.gate path {
+  fill: var(--surface);
+  stroke: var(--border-color);
+  stroke-width: 1.5;
+}
+
+.flow-node[data-shape="term"] rect,
+.flow .node.term rect {
+  fill: var(--surface-tint);
+  rx: 22;
+}
+
+.flow-node[data-kind="ok"] rect,
+.flow .node.ok rect {
+  fill: rgba(120, 140, 93, 0.12);
+  stroke: var(--success);
+}
+
+.flow-node[data-kind="bad"] rect,
+.flow .node.bad rect {
+  fill: rgba(176, 74, 63, 0.10);
+  stroke: var(--danger);
+}
+
+.flow-node.active rect,
+.flow-node.active path,
+.flow .node.active rect,
+.flow .node.active path {
+  stroke: var(--accent);
+  stroke-width: 2;
+}
+
+/* HTML flow nodes, for non-SVG diagrams */
+div.flow-node {
+  padding: var(--space-3) var(--space-4);
+  background: var(--surface);
+  border: var(--border);
+  border-radius: var(--radius-sm);
+  transition:
+    transform var(--dur-fast) var(--ease),
+    border-color var(--dur-fast) var(--ease),
+    box-shadow var(--dur-fast) var(--ease);
+}
+
+div.flow-node:hover {
+  transform: translateY(var(--hover-y));
+  border-color: rgba(217, 119, 87, 0.55);
+  box-shadow: var(--shadow-sm);
+}
+
+div.flow-node[data-shape="term"] {
+  border-radius: var(--radius-pill);
+  background: var(--surface-tint);
+}
+
+div.flow-node[data-kind="ok"] {
+  border-color: var(--success);
+  background: rgba(120, 140, 93, 0.12);
+}
+
+div.flow-node[data-kind="bad"] {
+  border-color: var(--danger);
+  background: rgba(176, 74, 63, 0.10);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+/* Responsive safety net for generated artifacts. */
+p,
+li {
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 860px) {
+  .split,
+  .section-rail,
+  .sidebar-layout {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  .split > *,
+  .section-rail > *,
+  .sidebar-layout > *,
+  .chart-panel {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+}
+</style>
+  <style>
+    .chart-svg svg { width: 100%; height: auto; max-width: 100%; display: block; }
+    .delta-good { color: var(--success); }
+    .delta-bad  { color: var(--danger); }
+    .numeric-table code, .numeric-table .note {
+      white-space: normal; overflow-wrap: anywhere; word-break: break-word;
+    }
+  </style>
+</head>
+<body>
+  <main class="page stack" data-gap="lg">
+
+    <!-- ── Hero ─────────────────────────────────────────────────────── -->
+    <header class="stack" data-gap="sm">
+      <div class="eyebrow">GEPA Seed Decision · 2026-05-20</div>
+      <h1>Promote Candidate B as the next GEPA seed</h1>
+      <p class="lede">
+        Candidate B raises the weighted final score from <strong>0.9175 → 0.9655 (+0.048)</strong>
+        and cuts checker warnings from 5 to 2, with no new failures across all four evals.
+        Cost increases 11.5 % and wall time 18.7 %, which are judged acceptable for seed quality gains.
+        Source: <code>evals/benchmark-comparison/source.json</code>.
+      </p>
+    </header>
+
+    <!-- ── KPI strip ─────────────────────────────────────────────────── -->
+    <section class="section stack" data-gap="md">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">Headline metrics</span>
+          <h2>KPI Summary</h2>
+        </div>
+      </div>
+
+      <div class="auto-grid" style="--grid-min: 160px">
+
+        <div class="stat-card">
+          <div class="caption">Final Score — Seed A</div>
+          <div class="stat-value">0.9175</div>
+          <div class="caption">baseline</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="caption">Final Score — Candidate B</div>
+          <div class="stat-value delta-good">0.9655</div>
+          <div class="caption">+0.048 (+5.2 %)</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="caption">Checker Warnings</div>
+          <div class="stat-value delta-good">5 → 2</div>
+          <div class="caption">−3 (−60 %)</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="caption">Checker Failures</div>
+          <div class="stat-value">0 → 0</div>
+          <div class="caption">no regression</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="caption">Pass Rate</div>
+          <div class="stat-value">4/4 → 4/4</div>
+          <div class="caption">100 % both runs</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="caption">Wall Time</div>
+          <div class="stat-value delta-bad">412 → 489 s</div>
+          <div class="caption">+77 s (+18.7 %)</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="caption">Total Tokens</div>
+          <div class="stat-value delta-bad">116 K → 124.7 K</div>
+          <div class="caption">+8.7 K (+7.5 %)</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="caption">Estimated Cost (USD)</div>
+          <div class="stat-value delta-bad">$1.92 → $2.14</div>
+          <div class="caption">+$0.22 (+11.5 %)</div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── Primary tradeoff visual ────────────────────────────────────── -->
+    <section class="section stack" data-gap="lg">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">Primary tradeoff</span>
+          <h2>Quality vs Cost &amp; Relative Deltas</h2>
+        </div>
+      </div>
+
+      <div class="section-rail">
+        <div class="stack" data-gap="lg">
+
+          <!-- Chart 1: scatter tradeoff -->
+          <div class="panel chart-panel stack" data-gap="sm">
+            <div class="chart-svg">
+              <svg xmlns:xlink="http://www.w3.org/1999/xlink" width="417.35952pt" height="244.55952pt" viewBox="0 0 417.35952 244.55952" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 244.55952 
+L 417.35952 244.55952 
+L 417.35952 0 
+L 0 0 
+L 0 244.55952 
+z
+" style="fill: none"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 45.597188 210.291082 
+L 414.47952 210.291082 
+L 414.47952 22.757969 
+L 45.597188 22.757969 
+L 45.597188 210.291082 
+z
+" style="fill: none"/>
+   </g>
+   <g id="matplotlib.axis_1">
+    <g id="xtick_1">
+     <g id="line2d_1">
+      <path d="M 76.337382 210.291082 
+L 76.337382 22.757969 
+" clip-path="url(#p45ef897ef6)" style="fill: none; stroke: #ded9cd; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_2"/>
+     <g id="text_1">
+      <!-- 1.8 -->
+      <g style="fill: #87867f" transform="translate(69.180976 224.129676) scale(0.09 -0.09)">
+       <defs>
+        <path id="DejaVuSans-31" d="M 794 531 
+L 1825 531 
+L 1825 4091 
+L 703 3866 
+L 703 4441 
+L 1819 4666 
+L 2450 4666 
+L 2450 531 
+L 3481 531 
+L 3481 0 
+L 794 0 
+L 794 531 
+z
+" transform="scale(0.015625)"/>
+        <path id="DejaVuSans-2e" d="M 684 794 
+L 1344 794 
+L 1344 0 
+L 684 0 
+L 684 794 
+z
+" transform="scale(0.015625)"/>
+        <path id="DejaVuSans-38" d="M 2034 2216 
+Q 1584 2216 1326 1975 
+Q 1069 1734 1069 1313 
+Q 1069 891 1326 650 
+Q 1584 409 2034 409 
+Q 2484 409 2743 651 
+Q 3003 894 3003 1313 
+Q 3003 1734 2745 1975 
+Q 2488 2216 2034 2216 
+z
+M 1403 2484 
+Q 997 2584 770 2862 
+Q 544 3141 544 3541 
+Q 544 4100 942 4425 
+Q 1341 4750 2034 4750 
+Q 2731 4750 3128 4425 
+Q 3525 4100 3525 3541 
+Q 3525 3141 3298 2862 
+Q 3072 2584 2669 2484 
+Q 3125 2378 3379 2068 
+Q 3634 1759 3634 1313 
+Q 3634 634 3220 271 
+Q 2806 -91 2034 -91 
+Q 1263 -91 848 271 
+Q 434 634 434 1313 
+Q 434 1759 690 2068 
+Q 947 2378 1403 2484 
+z
+M 1172 3481 
+Q 1172 3119 1398 2916 
+Q 1625 2713 2034 2713 
+Q 2441 2713 2670 2916 
+Q 2900 3119 2900 3481 
+Q 2900 3844 2670 4047 
+Q 2441 4250 2034 4250 
+Q 1625 4250 1398 4047 
+Q 1172 3844 1172 3481 
+z
+" transform="scale(0.015625)"/>
+       </defs>
+       <use xlink:href="#DejaVuSans-31"/>
+       <use xlink:href="#DejaVuSans-2e" transform="translate(63.623047 0)"/>
+       <use xlink:href="#DejaVuSans-38" transform="translate(95.410156 0)"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_2">
+     <g id="line2d_3">
+      <path d="M 137.817771 210.291082 
+L 137.817771 22.757969 
+" clip-path="url(#p45ef897ef6)" style="fill: none; stroke: #ded9cd; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_4"/>
+     <g id="text_2">
+      <!-- 1.9 -->
+      <g style="fill: #87867f" transform="translate(130.661364 224.129676) scale(0.09 -0.09)">
+       <defs>
+        <path id="DejaVuSans-39" d="M 703 97 
+L 703 672 
+Q 941 559 1184 500 
+Q 1428 441 1663 441 
+Q 2288 441 2617 861 
+Q 2947 1281 2994 2138 
+Q 2813 1869 2534 1725 
+Q 2256 1581 1919 1581 
+Q 1219 1581 811 2004 
+Q 403 2428 403 3163 
+Q 403 3881 828 4315 
+Q 1253 4750 1959 4750 
+Q 2769 4750 3195 4129 
+Q 3622 3509 3622 2328 
+Q 3622 1225 3098 567 
+Q 2575 -91 1691 -91 
+Q 1453 -91 1209 -44 
+Q 966 3 703 97 
+z
+M 1959 2075 
+Q 2384 2075 2632 2365 
+Q 2881 2656 2881 3163 
+Q 2881 3666 2632 3958 
+Q 2384 4250 1959 4250 
+Q 1534 4250 1286 3958 
+Q 1038 3666 1038 3163 
+Q 1038 2656 1286 2365 
+Q 1534 2075 1959 2075 
+z
+" transform="scale(0.015625)"/>
+       </defs>
+       <use xlink:href="#DejaVuSans-31"/>
+       <use xlink:href="#DejaVuSans-2e" transform="translate(63.623047 0)"/>
+       <use xlink:href="#DejaVuSans-39" transform="translate(95.410156 0)"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_3">
+     <g id="line2d_5">
+      <path d="M 199.298159 210.291082 
+L 199.298159 22.757969 
+" clip-path="url(#p45ef897ef6)" style="fill: none; stroke: #ded9cd; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_6"/>
+     <g id="text_3">
+      <!-- 2.0 -->
+      <g style="fill: #87867f" transform="translate(192.141753 224.129676) scale(0.09 -0.09)">
+       <defs>
+        <path id="DejaVuSans-32" d="M 1228 531 
+L 3431 531 
+L 3431 0 
+L 469 0 
+L 469 531 
+Q 828 903 1448 1529 
+Q 2069 2156 2228 2338 
+Q 2531 2678 2651 2914 
+Q 2772 3150 2772 3378 
+Q 2772 3750 2511 3984 
+Q 2250 4219 1831 4219 
+Q 1534 4219 1204 4116 
+Q 875 4013 500 3803 
+L 500 4441 
+Q 881 4594 1212 4672 
+Q 1544 4750 1819 4750 
+Q 2544 4750 2975 4387 
+Q 3406 4025 3406 3419 
+Q 3406 3131 3298 2873 
+Q 3191 2616 2906 2266 
+Q 2828 2175 2409 1742 
+Q 1991 1309 1228 531 
+z
+" transform="scale(0.015625)"/>
+        <path id="DejaVuSans-30" d="M 2034 4250 
+Q 1547 4250 1301 3770 
+Q 1056 3291 1056 2328 
+Q 1056 1369 1301 889 
+Q 1547 409 2034 409 
+Q 2525 409 2770 889 
+Q 3016 1369 3016 2328 
+Q 3016 3291 2770 3770 
+Q 2525 4250 2034 4250 
+z
+M 2034 4750 
+Q 2819 4750 3233 4129 
+Q 3647 3509 3647 2328 
+Q 3647 1150 3233 529 
+Q 2819 -91 2034 -91 
+Q 1250 -91 836 529 
+Q 422 1150 422 2328 
+Q 422 3509 836 4129 
+Q 1250 4750 2034 4750 
+z
+" transform="scale(0.015625)"/>
+       </defs>
+       <use xlink:href="#DejaVuSans-32"/>
+       <use xlink:href="#DejaVuSans-2e" transform="translate(63.623047 0)"/>
+       <use xlink:href="#DejaVuSans-30" transform="translate(95.410156 0)"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_4">
+     <g id="line2d_7">
+      <path d="M 260.778548 210.291082 
+L 260.778548 22.757969 
+" clip-path="url(#p45ef897ef6)" style="fill: none; stroke: #ded9cd; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_8"/>
+     <g id="text_4">
+      <!-- 2.1 -->
+      <g style="fill: #87867f" transform="translate(253.622142 224.129676) scale(0.09 -0.09)">
+       <use xlink:href="#DejaVuSans-32"/>
+       <use xlink:href="#DejaVuSans-2e" transform="translate(63.623047 0)"/>
+       <use xlink:href="#DejaVuSans-31" transform="translate(95.410156 0)"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_5">
+     <g id="line2d_9">
+      <path d="M 322.258937 210.291082 
+L 322.258937 22.757969 
+" clip-path="url(#p45ef897ef6)" style="fill: none; stroke: #ded9cd; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_10"/>
+     <g id="text_5">
+      <!-- 2.2 -->
+      <g style="fill: #87867f" transform="translate(315.102531 224.129676) scale(0.09 -0.09)">
+       <use xlink:href="#DejaVuSans-32"/>
+       <use xlink:href="#DejaVuSans-2e" transform="translate(63.623047 0)"/>
+       <use xlink:href="#DejaVuSans-32" transform="translate(95.410156 0)"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_6">
+     <g id="line2d_11">
+      <path d="M 383.739326 210.291082 
+L 383.739326 22.757969 
+" clip-path="url(#p45ef897ef6)" style="fill: none; stroke: #ded9cd; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_12"/>
+     <g id="text_6">
+      <!-- 2.3 -->
+      <g style="fill: #87867f" transform="translate(376.582919 224.129676) scale(0.09 -0.09)">
+       <defs>
+        <path id="DejaVuSans-33" d="M 2597 2516 
+Q 3050 2419 3304 2112 
+Q 3559 1806 3559 1356 
+Q 3559 666 3084 287 
+Q 2609 -91 1734 -91 
+Q 1441 -91 1130 -33 
+Q 819 25 488 141 
+L 488 750 
+Q 750 597 1062 519 
+Q 1375 441 1716 441 
+Q 2309 441 2620 675 
+Q 2931 909 2931 1356 
+Q 2931 1769 2642 2001 
+Q 2353 2234 1838 2234 
+L 1294 2234 
+L 1294 2753 
+L 1863 2753 
+Q 2328 2753 2575 2939 
+Q 2822 3125 2822 3475 
+Q 2822 3834 2567 4026 
+Q 2313 4219 1838 4219 
+Q 1578 4219 1281 4162 
+Q 984 4106 628 3988 
+L 628 4550 
+Q 988 4650 1302 4700 
+Q 1616 4750 1894 4750 
+Q 2613 4750 3031 4423 
+Q 3450 4097 3450 3541 
+Q 3450 3153 3228 2886 
+Q 3006 2619 2597 2516 
+z
+" transform="scale(0.015625)"/>
+       </defs>
+       <use xlink:href="#DejaVuSans-32"/>
+       <use xlink:href="#DejaVuSans-2e" transform="translate(63.623047 0)"/>
+       <use xlink:href="#DejaVuSans-33" transform="translate(95.410156 0)"/>
+      </g>
+     </g>
+    </g>
+    <g id="text_7">
+     <!-- Estimated Cost (USD) -->
+     <g style="fill: #3d3d3a" transform="translate(175.900854 239.599832) scale(0.1 -0.1)">
+      <defs>
+       <path id="DejaVuSans-45" d="M 628 4666 
+L 3578 4666 
+L 3578 4134 
+L 1259 4134 
+L 1259 2753 
+L 3481 2753 
+L 3481 2222 
+L 1259 2222 
+L 1259 531 
+L 3634 531 
+L 3634 0 
+L 628 0 
+L 628 4666 
+z
+" transform="scale(0.015625)"/>
+       <path id="DejaVuSans-73" d="M 2834 3397 
+L 2834 2853 
+Q 2591 2978 2328 3040 
+Q 2066 3103 1784 3103 
+Q 1356 3103 1142 2972 
+Q 928 2841 928 2578 
+Q 928 2378 1081 2264 
+Q 1234 2150 1697 2047 
+L 1894 2003 
+Q 2506 1872 2764 1633 
+Q 3022 1394 3022 966 
+Q 3022 478 2636 193 
+Q 2250 -91 1575 -91 
+Q 1294 -91 989 -36 
+Q 684 19 347 128 
+L 347 722 
+Q 666 556 975 473 
+Q 1284 391 1588 391 
+Q 1994 391 2212 530 
+Q 2431 669 2431 922 
+Q 2431 1156 2273 1281 
+Q 2116 1406 1581 1522 
+L 1381 1569 
+Q 847 1681 609 1914 
+Q 372 2147 372 2553 
+Q 372 3047 722 3315 
+Q 1072 3584 1716 3584 
+Q 2034 3584 2315 3537 
+Q 2597 3491 2834 3397 
+z
+" transform="scale(0.015625)"/>
+       <path id="DejaVuSans-74" d="M 1172 4494 
+L 1172 3500 
+L 2356 3500 
+L 2356 3053 
+L 1172 3053 
+L 1172 1153 
+Q 1172 725 1289 603 
+Q 1406 481 1766 481 
+L 2356 481 
+L 2356 0 
+L 1766 0 
+Q 1100 0 847 248 
+Q 594 497 594 1153 
+L 594 3053 
+L 172 3053 
+L 172 3500 
+L 594 3500 
+L 594 4494 
+L 1172 4494 
+z
+" transform="scale(0.015625)"/>
+       <path id="DejaVuSans-69" d="M 603 3500 
+L 1178 3500 
+L 1178 0 
+L 603 0 
+L 603 3500 
+z
+M 603 4863 
+L 1178 4863 
+L 1178 4134 
+L 603 4134 
+L 603 4863 
+z
+" transform="scale(0.015625)"/>
+       <path id="DejaVuSans-6d" d="M 3328 2828 
+Q 3544 3216 3844 3400 
+Q 4144 3584 4550 3584 
+Q 5097 3584 5394 3201 
+Q 5691 2819 5691 2113 
+L 5691 0 
+L 5113 0 
+L 5113 2094 
+Q 5113 2597 4934 2840 
+Q 4756 3084 4391 3084 
+Q 3944 3084 3684 2787 
+Q 3425 2491 3425 1978 
+L 3425 0 
+L 2847 0 
+L 2847 2094 
+Q 2847 2600 2669 2842 
+Q 2491 3084 2119 3084 
+Q 1678 3084 1418 2786 
+Q 1159 2488 1159 1978 
+L 1159 0 
+L 581 0 
+L 581 3500 
+L 1159 3500 
+L 1159 2956 
+Q 1356 3278 1631 3431 
+Q 1906 3584 2284 3584 
+Q 2666 3584 2933 3390 
+Q 3200 3197 3328 2828 
+z
+" transform="scale(0.015625)"/>
+       <path id="DejaVuSans-61" d="M 2194 1759 
+Q 1497 1759 1228 1600 
+Q 959 1441 959 1056 
+Q 959 750 1161 570 
+Q 1363 391 1709 391 
+Q 2188 391 2477 730 
+Q 2766 1069 2766 1631 
+L 2766 1759 
+L 2194 1759 
+z
+M 3341 1997 
+L 3341 0 
+L 2766 0 
+L 2766 531 
+Q 2569 213 2275 61 
+Q 1981 -91 1556 -91 
+Q 1019 -91 701 211 
+Q 384 513 384 1019 
+Q 384 1609 779 1909 
+Q 1175 2209 1959 2209 
+L 2766 2209 
+L 2766 2266 
+Q 2766 2663 2505 2880 
+Q 2244 3097 1772 3097 
+Q 1472 3097 1187 3025 
+Q 903 2953 641 2809 
+L 641 3341 
+Q 956 3463 1253 3523 
+Q 1550 3584 1831 3584 
+Q 2591 3584 2966 3190 
+Q 3341 2797 3341 1997 
+z
+" transform="scale(0.015625)"/>
+       <path id="DejaVuSans-65" d="M 3597 1894 
+L 3597 1613 
+L 953 1613 
+Q 991 1019 1311 708 
+Q 1631 397 2203 397 
+Q 2534 397 2845 478 
+Q 3156 559 3463 722 
+L 3463 178 
+Q 3153 47 2828 -22 
+Q 2503 -91 2169 -91 
+Q 1331 -91 842 396 
+Q 353 884 353 1716 
+Q 353 2575 817 3079 
+Q 1281 3584 2069 3584 
+Q 2775 3584 3186 3129 
+Q 3597 2675 3597 1894 
+z
+M 3022 2063 
+Q 3016 2534 2758 2815 
+Q 2500 3097 2075 3097 
+Q 1594 3097 1305 2825 
+Q 1016 2553 972 2059 
+L 3022 2063 
+z
+" transform="scale(0.015625)"/>
+       <path id="DejaVuSans-64" d="M 2906 2969 
+L 2906 4863 
+L 3481 4863 
+L 3481 0 
+L 2906 0 
+L 2906 525 
+Q 2725 213 2448 61 
+Q 2172 -91 1784 -91 
+Q 1150 -91 751 415 
+Q 353 922 353 1747 
+Q 353 2572 751 3078 
+Q 1150 3584 1784 3584 
+Q 2172 3584 2448 3432 
+Q 2725 3281 2906 2969 
+z
+M 947 1747 
+Q 947 1113 1208 752 
+Q 1469 391 1925 391 
+Q 2381 391 2643 752 
+Q 2906 1113 2906 1747 
+Q 2906 2381 2643 2742 
+Q 2381 3103 1925 3103 
+Q 1469 3103 1208 2742 
+Q 947 2381 947 1747 
+z
+" transform="scale(0.015625)"/>
+       <path id="DejaVuSans-20" transform="scale(0.015625)"/>
+       <path id="DejaVuSans-43" d="M 4122 4306 
+L 4122 3641 
+Q 3803 3938 3442 4084 
+Q 3081 4231 2675 4231 
+Q 1875 4231 1450 3742 
+Q 1025 3253 1025 2328 
+Q 1025 1406 1450 917 
+Q 1875 428 2675 428 
+Q 3081 428 3442 575 
+Q 3803 722 4122 1019 
+L 4122 359 
+Q 3791 134 3420 21 
+Q 3050 -91 2638 -91 
+Q 1578 -91 968 557 
+Q 359 1206 359 2328 
+Q 359 3453 968 4101 
+Q 1578 4750 2638 4750 
+Q 3056 4750 3426 4639 
+Q 3797 4528 4122 4306 
+z
+" transform="scale(0.015625)"/>
+       <path id="DejaVuSans-6f" d="M 1959 3097 
+Q 1497 3097 1228 2736 
+Q 959 2375 959 1747 
+Q 959 1119 1226 758 
+Q 1494 397 1959 397 
+Q 2419 397 2687 759 
+Q 2956 1122 2956 1747 
+Q 2956 2369 2687 2733 
+Q 2419 3097 1959 3097 
+z
+M 1959 3584 
+Q 2709 3584 3137 3096 
+Q 3566 2609 3566 1747 
+Q 3566 888 3137 398 
+Q 2709 -91 1959 -91 
+Q 1206 -91 779 398 
+Q 353 888 353 1747 
+Q 353 2609 779 3096 
+Q 1206 3584 1959 3584 
+z
+" transform="scale(0.015625)"/>
+       <path id="DejaVuSans-28" d="M 1984 4856 
+Q 1566 4138 1362 3434 
+Q 1159 2731 1159 2009 
+Q 1159 1288 1364 580 
+Q 1569 -128 1984 -844 
+L 1484 -844 
+Q 1016 -109 783 600 
+Q 550 1309 550 2009 
+Q 550 2706 781 3412 
+Q 1013 4119 1484 4856 
+L 1984 4856 
+z
+" transform="scale(0.015625)"/>
+       <path id="DejaVuSans-55" d="M 556 4666 
+L 1191 4666 
+L 1191 1831 
+Q 1191 1081 1462 751 
+Q 1734 422 2344 422 
+Q 2950 422 3222 751 
+Q 3494 1081 3494 1831 
+L 3494 4666 
+L 4128 4666 
+L 4128 1753 
+Q 4128 841 3676 375 
+Q 3225 -91 2344 -91 
+Q 1459 -91 1007 375 
+Q 556 841 556 1753 
+L 556 4666 
+z
+" transform="scale(0.015625)"/>
+       <path id="DejaVuSans-53" d="M 3425 4513 
+L 3425 3897 
+Q 3066 4069 2747 4153 
+Q 2428 4238 2131 4238 
+Q 1616 4238 1336 4038 
+Q 1056 3838 1056 3469 
+Q 1056 3159 1242 3001 
+Q 1428 2844 1947 2747 
+L 2328 2669 
+Q 3034 2534 3370 2195 
+Q 3706 1856 3706 1288 
+Q 3706 609 3251 259 
+Q 2797 -91 1919 -91 
+Q 1588 -91 1214 -16 
+Q 841 59 441 206 
+L 441 856 
+Q 825 641 1194 531 
+Q 1563 422 1919 422 
+Q 2459 422 2753 634 
+Q 3047 847 3047 1241 
+Q 3047 1584 2836 1778 
+Q 2625 1972 2144 2069 
+L 1759 2144 
+Q 1053 2284 737 2584 
+Q 422 2884 422 3419 
+Q 422 4038 858 4394 
+Q 1294 4750 2059 4750 
+Q 2388 4750 2728 4690 
+Q 3069 4631 3425 4513 
+z
+" transform="scale(0.015625)"/>
+       <path id="DejaVuSans-44" d="M 1259 4147 
+L 1259 519 
+L 2022 519 
+Q 2988 519 3436 956 
+Q 3884 1394 3884 2338 
+Q 3884 3275 3436 3711 
+Q 2988 4147 2022 4147 
+L 1259 4147 
+z
+M 628 4666 
+L 1925 4666 
+Q 3281 4666 3915 4102 
+Q 4550 3538 4550 2338 
+Q 4550 1131 3912 565 
+Q 3275 0 1925 0 
+L 628 0 
+L 628 4666 
+z
+" transform="scale(0.015625)"/>
+       <path id="DejaVuSans-29" d="M 513 4856 
+L 1013 4856 
+Q 1481 4119 1714 3412 
+Q 1947 2706 1947 2009 
+Q 1947 1309 1714 600 
+Q 1481 -109 1013 -844 
+L 513 -844 
+Q 928 -128 1133 580 
+Q 1338 1288 1338 2009 
+Q 1338 2731 1133 3434 
+Q 928 4138 513 4856 
+z
+" transform="scale(0.015625)"/>
+      </defs>
+      <use xlink:href="#DejaVuSans-45"/>
+      <use xlink:href="#DejaVuSans-73" transform="translate(63.183594 0)"/>
+      <use xlink:href="#DejaVuSans-74" transform="translate(115.283203 0)"/>
+      <use xlink:href="#DejaVuSans-69" transform="translate(154.492188 0)"/>
+      <use xlink:href="#DejaVuSans-6d" transform="translate(182.275391 0)"/>
+      <use xlink:href="#DejaVuSans-61" transform="translate(279.6875 0)"/>
+      <use xlink:href="#DejaVuSans-74" transform="translate(340.966797 0)"/>
+      <use xlink:href="#DejaVuSans-65" transform="translate(380.175781 0)"/>
+      <use xlink:href="#DejaVuSans-64" transform="translate(441.699219 0)"/>
+      <use xlink:href="#DejaVuSans-20" transform="translate(505.175781 0)"/>
+      <use xlink:href="#DejaVuSans-43" transform="translate(536.962891 0)"/>
+      <use xlink:href="#DejaVuSans-6f" transform="translate(606.787109 0)"/>
+      <use xlink:href="#DejaVuSans-73" transform="translate(667.96875 0)"/>
+      <use xlink:href="#DejaVuSans-74" transform="translate(720.068359 0)"/>
+      <use xlink:href="#DejaVuSans-20" transform="translate(759.277344 0)"/>
+      <use xlink:href="#DejaVuSans-28" transform="translate(791.064453 0)"/>
+      <use xlink:href="#DejaVuSans-55" transform="translate(830.078125 0)"/>
+      <use xlink:href="#DejaVuSans-53" transform="translate(903.271484 0)"/>
+      <use xlink:href="#DejaVuSans-44" transform="translate(966.748047 0)"/>
+      <use xlink:href="#DejaVuSans-29" transform="translate(1043.75 0)"/>
+     </g>
+    </g>
+   </g>
+   <g id="matplotlib.axis_2">
+    <g id="ytick_1">
+     <g id="line2d_13">
+      <path d="M 45.597188 199.872576 
+L 414.47952 199.872576 
+" clip-path="url(#p45ef897ef6)" style="fill: none; stroke: #ded9cd; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_14"/>
+     <g id="text_8">
+      <!-- 0.90 -->
+      <g style="fill: #87867f" transform="translate(18.558125 203.291873) scale(0.09 -0.09)">
+       <use xlink:href="#DejaVuSans-30"/>
+       <use xlink:href="#DejaVuSans-2e" transform="translate(63.623047 0)"/>
+       <use xlink:href="#DejaVuSans-39" transform="translate(95.410156 0)"/>
+       <use xlink:href="#DejaVuSans-30" transform="translate(159.033203 0)"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_2">
+     <g id="line2d_15">
+      <path d="M 45.597188 179.035564 
+L 414.47952 179.035564 
+" clip-path="url(#p45ef897ef6)" style="fill: none; stroke: #ded9cd; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_16"/>
+     <g id="text_9">
+      <!-- 0.91 -->
+      <g style="fill: #87867f" transform="translate(18.558125 182.45486) scale(0.09 -0.09)">
+       <use xlink:href="#DejaVuSans-30"/>
+       <use xlink:href="#DejaVuSans-2e" transform="translate(63.623047 0)"/>
+       <use xlink:href="#DejaVuSans-39" transform="translate(95.410156 0)"/>
+       <use xlink:href="#DejaVuSans-31" transform="translate(159.033203 0)"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_3">
+     <g id="line2d_17">
+      <path d="M 45.597188 158.198551 
+L 414.47952 158.198551 
+" clip-path="url(#p45ef897ef6)" style="fill: none; stroke: #ded9cd; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_18"/>
+     <g id="text_10">
+      <!-- 0.92 -->
+      <g style="fill: #87867f" transform="translate(18.558125 161.617848) scale(0.09 -0.09)">
+       <use xlink:href="#DejaVuSans-30"/>
+       <use xlink:href="#DejaVuSans-2e" transform="translate(63.623047 0)"/>
+       <use xlink:href="#DejaVuSans-39" transform="translate(95.410156 0)"/>
+       <use xlink:href="#DejaVuSans-32" transform="translate(159.033203 0)"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_4">
+     <g id="line2d_19">
+      <path d="M 45.597188 137.361538 
+L 414.47952 137.361538 
+" clip-path="url(#p45ef897ef6)" style="fill: none; stroke: #ded9cd; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_20"/>
+     <g id="text_11">
+      <!-- 0.93 -->
+      <g style="fill: #87867f" transform="translate(18.558125 140.780835) scale(0.09 -0.09)">
+       <use xlink:href="#DejaVuSans-30"/>
+       <use xlink:href="#DejaVuSans-2e" transform="translate(63.623047 0)"/>
+       <use xlink:href="#DejaVuSans-39" transform="translate(95.410156 0)"/>
+       <use xlink:href="#DejaVuSans-33" transform="translate(159.033203 0)"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_5">
+     <g id="line2d_21">
+      <path d="M 45.597188 116.524526 
+L 414.47952 116.524526 
+" clip-path="url(#p45ef897ef6)" style="fill: none; stroke: #ded9cd; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_22"/>
+     <g id="text_12">
+      <!-- 0.94 -->
+      <g style="fill: #87867f" transform="translate(18.558125 119.943822) scale(0.09 -0.09)">
+       <defs>
+        <path id="DejaVuSans-34" d="M 2419 4116 
+L 825 1625 
+L 2419 1625 
+L 2419 4116 
+z
+M 2253 4666 
+L 3047 4666 
+L 3047 1625 
+L 3713 1625 
+L 3713 1100 
+L 3047 1100 
+L 3047 0 
+L 2419 0 
+L 2419 1100 
+L 313 1100 
+L 313 1709 
+L 2253 4666 
+z
+" transform="scale(0.015625)"/>
+       </defs>
+       <use xlink:href="#DejaVuSans-30"/>
+       <use xlink:href="#DejaVuSans-2e" transform="translate(63.623047 0)"/>
+       <use xlink:href="#DejaVuSans-39" transform="translate(95.410156 0)"/>
+       <use xlink:href="#DejaVuSans-34" transform="translate(159.033203 0)"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_6">
+     <g id="line2d_23">
+      <path d="M 45.597188 95.687513 
+L 414.47952 95.687513 
+" clip-path="url(#p45ef897ef6)" style="fill: none; stroke: #ded9cd; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_24"/>
+     <g id="text_13">
+      <!-- 0.95 -->
+      <g style="fill: #87867f" transform="translate(18.558125 99.10681) scale(0.09 -0.09)">
+       <defs>
+        <path id="DejaVuSans-35" d="M 691 4666 
+L 3169 4666 
+L 3169 4134 
+L 1269 4134 
+L 1269 2991 
+Q 1406 3038 1543 3061 
+Q 1681 3084 1819 3084 
+Q 2600 3084 3056 2656 
+Q 3513 2228 3513 1497 
+Q 3513 744 3044 326 
+Q 2575 -91 1722 -91 
+Q 1428 -91 1123 -41 
+Q 819 9 494 109 
+L 494 744 
+Q 775 591 1075 516 
+Q 1375 441 1709 441 
+Q 2250 441 2565 725 
+Q 2881 1009 2881 1497 
+Q 2881 1984 2565 2268 
+Q 2250 2553 1709 2553 
+Q 1456 2553 1204 2497 
+Q 953 2441 691 2322 
+L 691 4666 
+z
+" transform="scale(0.015625)"/>
+       </defs>
+       <use xlink:href="#DejaVuSans-30"/>
+       <use xlink:href="#DejaVuSans-2e" transform="translate(63.623047 0)"/>
+       <use xlink:href="#DejaVuSans-39" transform="translate(95.410156 0)"/>
+       <use xlink:href="#DejaVuSans-35" transform="translate(159.033203 0)"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_7">
+     <g id="line2d_25">
+      <path d="M 45.597188 74.8505 
+L 414.47952 74.8505 
+" clip-path="url(#p45ef897ef6)" style="fill: none; stroke: #ded9cd; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_26"/>
+     <g id="text_14">
+      <!-- 0.96 -->
+      <g style="fill: #87867f" transform="translate(18.558125 78.269797) scale(0.09 -0.09)">
+       <defs>
+        <path id="DejaVuSans-36" d="M 2113 2584 
+Q 1688 2584 1439 2293 
+Q 1191 2003 1191 1497 
+Q 1191 994 1439 701 
+Q 1688 409 2113 409 
+Q 2538 409 2786 701 
+Q 3034 994 3034 1497 
+Q 3034 2003 2786 2293 
+Q 2538 2584 2113 2584 
+z
+M 3366 4563 
+L 3366 3988 
+Q 3128 4100 2886 4159 
+Q 2644 4219 2406 4219 
+Q 1781 4219 1451 3797 
+Q 1122 3375 1075 2522 
+Q 1259 2794 1537 2939 
+Q 1816 3084 2150 3084 
+Q 2853 3084 3261 2657 
+Q 3669 2231 3669 1497 
+Q 3669 778 3244 343 
+Q 2819 -91 2113 -91 
+Q 1303 -91 875 529 
+Q 447 1150 447 2328 
+Q 447 3434 972 4092 
+Q 1497 4750 2381 4750 
+Q 2619 4750 2861 4703 
+Q 3103 4656 3366 4563 
+z
+" transform="scale(0.015625)"/>
+       </defs>
+       <use xlink:href="#DejaVuSans-30"/>
+       <use xlink:href="#DejaVuSans-2e" transform="translate(63.623047 0)"/>
+       <use xlink:href="#DejaVuSans-39" transform="translate(95.410156 0)"/>
+       <use xlink:href="#DejaVuSans-36" transform="translate(159.033203 0)"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_8">
+     <g id="line2d_27">
+      <path d="M 45.597188 54.013488 
+L 414.47952 54.013488 
+" clip-path="url(#p45ef897ef6)" style="fill: none; stroke: #ded9cd; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_28"/>
+     <g id="text_15">
+      <!-- 0.97 -->
+      <g style="fill: #87867f" transform="translate(18.558125 57.432785) scale(0.09 -0.09)">
+       <defs>
+        <path id="DejaVuSans-37" d="M 525 4666 
+L 3525 4666 
+L 3525 4397 
+L 1831 0 
+L 1172 0 
+L 2766 4134 
+L 525 4134 
+L 525 4666 
+z
+" transform="scale(0.015625)"/>
+       </defs>
+       <use xlink:href="#DejaVuSans-30"/>
+       <use xlink:href="#DejaVuSans-2e" transform="translate(63.623047 0)"/>
+       <use xlink:href="#DejaVuSans-39" transform="translate(95.410156 0)"/>
+       <use xlink:href="#DejaVuSans-37" transform="translate(159.033203 0)"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_9">
+     <g id="line2d_29">
+      <path d="M 45.597188 33.176475 
+L 414.47952 33.176475 
+" clip-path="url(#p45ef897ef6)" style="fill: none; stroke: #ded9cd; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_30"/>
+     <g id="text_16">
+      <!-- 0.98 -->
+      <g style="fill: #87867f" transform="translate(18.558125 36.595772) scale(0.09 -0.09)">
+       <use xlink:href="#DejaVuSans-30"/>
+       <use xlink:href="#DejaVuSans-2e" transform="translate(63.623047 0)"/>
+       <use xlink:href="#DejaVuSans-39" transform="translate(95.410156 0)"/>
+       <use xlink:href="#DejaVuSans-38" transform="translate(159.033203 0)"/>
+      </g>
+     </g>
+    </g>
+    <g id="text_17">
+     <!-- Final Score (weighted) -->
+     <g style="fill: #3d3d3a" transform="translate(10.478438 172.239369) rotate(-90) scale(0.1 -0.1)">
+      <defs>
+       <path id="DejaVuSans-46" d="M 628 4666 
+L 3309 4666 
+L 3309 4134 
+L 1259 4134 
+L 1259 2759 
+L 3109 2759 
+L 3109 2228 
+L 1259 2228 
+L 1259 0 
+L 628 0 
+L 628 4666 
+z
+" transform="scale(0.015625)"/>
+       <path id="DejaVuSans-6e" d="M 3513 2113 
+L 3513 0 
+L 2938 0 
+L 2938 2094 
+Q 2938 2591 2744 2837 
+Q 2550 3084 2163 3084 
+Q 1697 3084 1428 2787 
+Q 1159 2491 1159 1978 
+L 1159 0 
+L 581 0 
+L 581 3500 
+L 1159 3500 
+L 1159 2956 
+Q 1366 3272 1645 3428 
+Q 1925 3584 2291 3584 
+Q 2894 3584 3203 3211 
+Q 3513 2838 3513 2113 
+z
+" transform="scale(0.015625)"/>
+       <path id="DejaVuSans-6c" d="M 603 4863 
+L 1178 4863 
+L 1178 0 
+L 603 0 
+L 603 4863 
+z
+" transform="scale(0.015625)"/>
+       <path id="DejaVuSans-63" d="M 3122 3366 
+L 3122 2828 
+Q 2878 2963 2633 3030 
+Q 2388 3097 2138 3097 
+Q 1578 3097 1268 2742 
+Q 959 2388 959 1747 
+Q 959 1106 1268 751 
+Q 1578 397 2138 397 
+Q 2388 397 2633 464 
+Q 2878 531 3122 666 
+L 3122 134 
+Q 2881 22 2623 -34 
+Q 2366 -91 2075 -91 
+Q 1284 -91 818 406 
+Q 353 903 353 1747 
+Q 353 2603 823 3093 
+Q 1294 3584 2113 3584 
+Q 2378 3584 2631 3529 
+Q 2884 3475 3122 3366 
+z
+" transform="scale(0.015625)"/>
+       <path id="DejaVuSans-72" d="M 2631 2963 
+Q 2534 3019 2420 3045 
+Q 2306 3072 2169 3072 
+Q 1681 3072 1420 2755 
+Q 1159 2438 1159 1844 
+L 1159 0 
+L 581 0 
+L 581 3500 
+L 1159 3500 
+L 1159 2956 
+Q 1341 3275 1631 3429 
+Q 1922 3584 2338 3584 
+Q 2397 3584 2469 3576 
+Q 2541 3569 2628 3553 
+L 2631 2963 
+z
+" transform="scale(0.015625)"/>
+       <path id="DejaVuSans-77" d="M 269 3500 
+L 844 3500 
+L 1563 769 
+L 2278 3500 
+L 2956 3500 
+L 3675 769 
+L 4391 3500 
+L 4966 3500 
+L 4050 0 
+L 3372 0 
+L 2619 2869 
+L 1863 0 
+L 1184 0 
+L 269 3500 
+z
+" transform="scale(0.015625)"/>
+       <path id="DejaVuSans-67" d="M 2906 1791 
+Q 2906 2416 2648 2759 
+Q 2391 3103 1925 3103 
+Q 1463 3103 1205 2759 
+Q 947 2416 947 1791 
+Q 947 1169 1205 825 
+Q 1463 481 1925 481 
+Q 2391 481 2648 825 
+Q 2906 1169 2906 1791 
+z
+M 3481 434 
+Q 3481 -459 3084 -895 
+Q 2688 -1331 1869 -1331 
+Q 1566 -1331 1297 -1286 
+Q 1028 -1241 775 -1147 
+L 775 -588 
+Q 1028 -725 1275 -790 
+Q 1522 -856 1778 -856 
+Q 2344 -856 2625 -561 
+Q 2906 -266 2906 331 
+L 2906 616 
+Q 2728 306 2450 153 
+Q 2172 0 1784 0 
+Q 1141 0 747 490 
+Q 353 981 353 1791 
+Q 353 2603 747 3093 
+Q 1141 3584 1784 3584 
+Q 2172 3584 2450 3431 
+Q 2728 3278 2906 2969 
+L 2906 3500 
+L 3481 3500 
+L 3481 434 
+z
+" transform="scale(0.015625)"/>
+       <path id="DejaVuSans-68" d="M 3513 2113 
+L 3513 0 
+L 2938 0 
+L 2938 2094 
+Q 2938 2591 2744 2837 
+Q 2550 3084 2163 3084 
+Q 1697 3084 1428 2787 
+Q 1159 2491 1159 1978 
+L 1159 0 
+L 581 0 
+L 581 4863 
+L 1159 4863 
+L 1159 2956 
+Q 1366 3272 1645 3428 
+Q 1925 3584 2291 3584 
+Q 2894 3584 3203 3211 
+Q 3513 2838 3513 2113 
+z
+" transform="scale(0.015625)"/>
+      </defs>
+      <use xlink:href="#DejaVuSans-46"/>
+      <use xlink:href="#DejaVuSans-69" transform="translate(50.269531 0)"/>
+      <use xlink:href="#DejaVuSans-6e" transform="translate(78.052734 0)"/>
+      <use xlink:href="#DejaVuSans-61" transform="translate(141.431641 0)"/>
+      <use xlink:href="#DejaVuSans-6c" transform="translate(202.710938 0)"/>
+      <use xlink:href="#DejaVuSans-20" transform="translate(230.494141 0)"/>
+      <use xlink:href="#DejaVuSans-53" transform="translate(262.28125 0)"/>
+      <use xlink:href="#DejaVuSans-63" transform="translate(325.757812 0)"/>
+      <use xlink:href="#DejaVuSans-6f" transform="translate(380.738281 0)"/>
+      <use xlink:href="#DejaVuSans-72" transform="translate(441.919922 0)"/>
+      <use xlink:href="#DejaVuSans-65" transform="translate(480.783203 0)"/>
+      <use xlink:href="#DejaVuSans-20" transform="translate(542.306641 0)"/>
+      <use xlink:href="#DejaVuSans-28" transform="translate(574.09375 0)"/>
+      <use xlink:href="#DejaVuSans-77" transform="translate(613.107422 0)"/>
+      <use xlink:href="#DejaVuSans-65" transform="translate(694.894531 0)"/>
+      <use xlink:href="#DejaVuSans-69" transform="translate(756.417969 0)"/>
+      <use xlink:href="#DejaVuSans-67" transform="translate(784.201172 0)"/>
+      <use xlink:href="#DejaVuSans-68" transform="translate(847.677734 0)"/>
+      <use xlink:href="#DejaVuSans-74" transform="translate(911.056641 0)"/>
+      <use xlink:href="#DejaVuSans-65" transform="translate(950.265625 0)"/>
+      <use xlink:href="#DejaVuSans-64" transform="translate(1011.789062 0)"/>
+      <use xlink:href="#DejaVuSans-29" transform="translate(1075.265625 0)"/>
+     </g>
+    </g>
+   </g>
+   <g id="patch_3">
+    <path d="M 45.597188 210.291082 
+L 45.597188 22.757969 
+" style="fill: none; stroke: #d1cfc5; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 45.597187 210.291082 
+L 414.47952 210.291082 
+" style="fill: none; stroke: #d1cfc5; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="text_18">
+    <!-- Seed A -->
+    <g style="fill: #3d3d3a" transform="translate(158.113848 165.891242) scale(0.09 -0.09)">
+     <defs>
+      <path id="DejaVuSans-41" d="M 2188 4044 
+L 1331 1722 
+L 3047 1722 
+L 2188 4044 
+z
+M 1831 4666 
+L 2547 4666 
+L 4325 0 
+L 3669 0 
+L 3244 1197 
+L 1141 1197 
+L 716 0 
+L 50 0 
+L 1831 4666 
+z
+" transform="scale(0.015625)"/>
+     </defs>
+     <use xlink:href="#DejaVuSans-53"/>
+     <use xlink:href="#DejaVuSans-65" transform="translate(63.476562 0)"/>
+     <use xlink:href="#DejaVuSans-65" transform="translate(125 0)"/>
+     <use xlink:href="#DejaVuSans-64" transform="translate(186.523438 0)"/>
+     <use xlink:href="#DejaVuSans-20" transform="translate(250 0)"/>
+     <use xlink:href="#DejaVuSans-41" transform="translate(281.787109 0)"/>
+    </g>
+   </g>
+   <g id="text_19">
+    <!-- Candidate B -->
+    <g style="fill: #3d3d3a" transform="translate(293.370704 65.873581) scale(0.09 -0.09)">
+     <defs>
+      <path id="DejaVuSans-42" d="M 1259 2228 
+L 1259 519 
+L 2272 519 
+Q 2781 519 3026 730 
+Q 3272 941 3272 1375 
+Q 3272 1813 3026 2020 
+Q 2781 2228 2272 2228 
+L 1259 2228 
+z
+M 1259 4147 
+L 1259 2741 
+L 2194 2741 
+Q 2656 2741 2882 2914 
+Q 3109 3088 3109 3444 
+Q 3109 3797 2882 3972 
+Q 2656 4147 2194 4147 
+L 1259 4147 
+z
+M 628 4666 
+L 2241 4666 
+Q 2963 4666 3353 4366 
+Q 3744 4066 3744 3513 
+Q 3744 3084 3544 2831 
+Q 3344 2578 2956 2516 
+Q 3422 2416 3680 2098 
+Q 3938 1781 3938 1306 
+Q 3938 681 3513 340 
+Q 3088 0 2303 0 
+L 628 0 
+L 628 4666 
+z
+" transform="scale(0.015625)"/>
+     </defs>
+     <use xlink:href="#DejaVuSans-43"/>
+     <use xlink:href="#DejaVuSans-61" transform="translate(69.824219 0)"/>
+     <use xlink:href="#DejaVuSans-6e" transform="translate(131.103516 0)"/>
+     <use xlink:href="#DejaVuSans-64" transform="translate(194.482422 0)"/>
+     <use xlink:href="#DejaVuSans-69" transform="translate(257.958984 0)"/>
+     <use xlink:href="#DejaVuSans-64" transform="translate(285.742188 0)"/>
+     <use xlink:href="#DejaVuSans-61" transform="translate(349.21875 0)"/>
+     <use xlink:href="#DejaVuSans-74" transform="translate(410.498047 0)"/>
+     <use xlink:href="#DejaVuSans-65" transform="translate(449.707031 0)"/>
+     <use xlink:href="#DejaVuSans-20" transform="translate(511.230469 0)"/>
+     <use xlink:href="#DejaVuSans-42" transform="translate(543.017578 0)"/>
+    </g>
+   </g>
+   <g id="patch_5">
+    <path d="M 151.923473 162.552385 
+Q 227.514475 126.612001 283.118631 65.857463 
+" style="fill: none; stroke: #87867f; stroke-width: 1.2; stroke-linecap: round"/>
+    <path d="M 278.733879 67.537923 
+L 283.118631 65.857463 
+L 281.832148 70.373541 
+" style="fill: none; stroke: #87867f; stroke-width: 1.2; stroke-linecap: round"/>
+   </g>
+   <g id="text_20">
+    <!-- Quality vs Cost Tradeoff -->
+    <g style="fill: #141413" transform="translate(152.58476 12.757969) scale(0.13 -0.13)">
+     <defs>
+      <path id="DejaVuSans-51" d="M 2522 4238 
+Q 1834 4238 1429 3725 
+Q 1025 3213 1025 2328 
+Q 1025 1447 1429 934 
+Q 1834 422 2522 422 
+Q 3209 422 3611 934 
+Q 4013 1447 4013 2328 
+Q 4013 3213 3611 3725 
+Q 3209 4238 2522 4238 
+z
+M 3406 84 
+L 4238 -825 
+L 3475 -825 
+L 2784 -78 
+Q 2681 -84 2626 -87 
+Q 2572 -91 2522 -91 
+Q 1538 -91 948 567 
+Q 359 1225 359 2328 
+Q 359 3434 948 4092 
+Q 1538 4750 2522 4750 
+Q 3503 4750 4090 4092 
+Q 4678 3434 4678 2328 
+Q 4678 1516 4351 937 
+Q 4025 359 3406 84 
+z
+" transform="scale(0.015625)"/>
+      <path id="DejaVuSans-75" d="M 544 1381 
+L 544 3500 
+L 1119 3500 
+L 1119 1403 
+Q 1119 906 1312 657 
+Q 1506 409 1894 409 
+Q 2359 409 2629 706 
+Q 2900 1003 2900 1516 
+L 2900 3500 
+L 3475 3500 
+L 3475 0 
+L 2900 0 
+L 2900 538 
+Q 2691 219 2414 64 
+Q 2138 -91 1772 -91 
+Q 1169 -91 856 284 
+Q 544 659 544 1381 
+z
+M 1991 3584 
+L 1991 3584 
+z
+" transform="scale(0.015625)"/>
+      <path id="DejaVuSans-79" d="M 2059 -325 
+Q 1816 -950 1584 -1140 
+Q 1353 -1331 966 -1331 
+L 506 -1331 
+L 506 -850 
+L 844 -850 
+Q 1081 -850 1212 -737 
+Q 1344 -625 1503 -206 
+L 1606 56 
+L 191 3500 
+L 800 3500 
+L 1894 763 
+L 2988 3500 
+L 3597 3500 
+L 2059 -325 
+z
+" transform="scale(0.015625)"/>
+      <path id="DejaVuSans-76" d="M 191 3500 
+L 800 3500 
+L 1894 563 
+L 2988 3500 
+L 3597 3500 
+L 2284 0 
+L 1503 0 
+L 191 3500 
+z
+" transform="scale(0.015625)"/>
+      <path id="DejaVuSans-54" d="M -19 4666 
+L 3928 4666 
+L 3928 4134 
+L 2272 4134 
+L 2272 0 
+L 1638 0 
+L 1638 4134 
+L -19 4134 
+L -19 4666 
+z
+" transform="scale(0.015625)"/>
+      <path id="DejaVuSans-66" d="M 2375 4863 
+L 2375 4384 
+L 1825 4384 
+Q 1516 4384 1395 4259 
+Q 1275 4134 1275 3809 
+L 1275 3500 
+L 2222 3500 
+L 2222 3053 
+L 1275 3053 
+L 1275 0 
+L 697 0 
+L 697 3053 
+L 147 3053 
+L 147 3500 
+L 697 3500 
+L 697 3744 
+Q 697 4328 969 4595 
+Q 1241 4863 1831 4863 
+L 2375 4863 
+z
+" transform="scale(0.015625)"/>
+     </defs>
+     <use xlink:href="#DejaVuSans-51"/>
+     <use xlink:href="#DejaVuSans-75" transform="translate(78.710938 0)"/>
+     <use xlink:href="#DejaVuSans-61" transform="translate(142.089844 0)"/>
+     <use xlink:href="#DejaVuSans-6c" transform="translate(203.369141 0)"/>
+     <use xlink:href="#DejaVuSans-69" transform="translate(231.152344 0)"/>
+     <use xlink:href="#DejaVuSans-74" transform="translate(258.935547 0)"/>
+     <use xlink:href="#DejaVuSans-79" transform="translate(298.144531 0)"/>
+     <use xlink:href="#DejaVuSans-20" transform="translate(357.324219 0)"/>
+     <use xlink:href="#DejaVuSans-76" transform="translate(389.111328 0)"/>
+     <use xlink:href="#DejaVuSans-73" transform="translate(448.291016 0)"/>
+     <use xlink:href="#DejaVuSans-20" transform="translate(500.390625 0)"/>
+     <use xlink:href="#DejaVuSans-43" transform="translate(532.177734 0)"/>
+     <use xlink:href="#DejaVuSans-6f" transform="translate(602.001953 0)"/>
+     <use xlink:href="#DejaVuSans-73" transform="translate(663.183594 0)"/>
+     <use xlink:href="#DejaVuSans-74" transform="translate(715.283203 0)"/>
+     <use xlink:href="#DejaVuSans-20" transform="translate(754.492188 0)"/>
+     <use xlink:href="#DejaVuSans-54" transform="translate(786.279297 0)"/>
+     <use xlink:href="#DejaVuSans-72" transform="translate(832.613281 0)"/>
+     <use xlink:href="#DejaVuSans-61" transform="translate(873.726562 0)"/>
+     <use xlink:href="#DejaVuSans-64" transform="translate(935.005859 0)"/>
+     <use xlink:href="#DejaVuSans-65" transform="translate(998.482422 0)"/>
+     <use xlink:href="#DejaVuSans-6f" transform="translate(1060.005859 0)"/>
+     <use xlink:href="#DejaVuSans-66" transform="translate(1121.1875 0)"/>
+     <use xlink:href="#DejaVuSans-66" transform="translate(1156.392578 0)"/>
+    </g>
+   </g>
+   <g id="PathCollection_1">
+    <defs>
+     <path id="m8e71ffd022" d="M 0 6.708204 
+C 1.779036 6.708204 3.485448 6.001385 4.743416 4.743416 
+C 6.001385 3.485448 6.708204 1.779036 6.708204 0 
+C 6.708204 -1.779036 6.001385 -3.485448 4.743416 -4.743416 
+C 3.485448 -6.001385 1.779036 -6.708204 0 -6.708204 
+C -1.779036 -6.708204 -3.485448 -6.001385 -4.743416 -4.743416 
+C -6.001385 -3.485448 -6.708204 -1.779036 -6.708204 0 
+C -6.708204 1.779036 -6.001385 3.485448 -4.743416 4.743416 
+C -3.485448 6.001385 -1.779036 6.708204 0 6.708204 
+z
+" style="stroke: #6a8caf"/>
+    </defs>
+    <g clip-path="url(#p45ef897ef6)">
+     <use xlink:href="#m8e71ffd022" x="150.113848" y="163.407804" style="fill: #6a8caf; stroke: #6a8caf"/>
+    </g>
+   </g>
+   <g id="PathCollection_2">
+    <defs>
+     <path id="m5ea3f6c7e8" d="M -0 9.486833 
+L 9.486833 0 
+L 0 -9.486833 
+L -9.486833 -0 
+z
+" style="stroke: #d97757"/>
+    </defs>
+    <g clip-path="url(#p45ef897ef6)">
+     <use xlink:href="#m5ea3f6c7e8" x="285.370704" y="63.390143" style="fill: #d97757; stroke: #d97757"/>
+    </g>
+   </g>
+   <g id="legend_1">
+    <g id="PathCollection_3">
+     <g>
+      <use xlink:href="#m8e71ffd022" x="340.981864" y="184.746551" style="fill: #6a8caf; stroke: #6a8caf"/>
+     </g>
+    </g>
+    <g id="text_21">
+     <!-- Seed A -->
+     <g style="fill: #141413" transform="translate(351.331864 187.109051) scale(0.09 -0.09)">
+      <use xlink:href="#DejaVuSans-53"/>
+      <use xlink:href="#DejaVuSans-65" transform="translate(63.476562 0)"/>
+      <use xlink:href="#DejaVuSans-65" transform="translate(125 0)"/>
+      <use xlink:href="#DejaVuSans-64" transform="translate(186.523438 0)"/>
+      <use xlink:href="#DejaVuSans-20" transform="translate(250 0)"/>
+      <use xlink:href="#DejaVuSans-41" transform="translate(281.787109 0)"/>
+     </g>
+    </g>
+    <g id="PathCollection_4">
+     <g>
+      <use xlink:href="#m5ea3f6c7e8" x="340.981864" y="197.956864" style="fill: #d97757; stroke: #d97757"/>
+     </g>
+    </g>
+    <g id="text_22">
+     <!-- Candidate B -->
+     <g style="fill: #141413" transform="translate(351.331864 200.319364) scale(0.09 -0.09)">
+      <use xlink:href="#DejaVuSans-43"/>
+      <use xlink:href="#DejaVuSans-61" transform="translate(69.824219 0)"/>
+      <use xlink:href="#DejaVuSans-6e" transform="translate(131.103516 0)"/>
+      <use xlink:href="#DejaVuSans-64" transform="translate(194.482422 0)"/>
+      <use xlink:href="#DejaVuSans-69" transform="translate(257.958984 0)"/>
+      <use xlink:href="#DejaVuSans-64" transform="translate(285.742188 0)"/>
+      <use xlink:href="#DejaVuSans-61" transform="translate(349.21875 0)"/>
+      <use xlink:href="#DejaVuSans-74" transform="translate(410.498047 0)"/>
+      <use xlink:href="#DejaVuSans-65" transform="translate(449.707031 0)"/>
+      <use xlink:href="#DejaVuSans-20" transform="translate(511.230469 0)"/>
+      <use xlink:href="#DejaVuSans-42" transform="translate(543.017578 0)"/>
+     </g>
+    </g>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p45ef897ef6">
+   <rect x="45.597188" y="22.757969" width="368.882332" height="187.533114"/>
+  </clipPath>
+ </defs>
+</svg>
+            </div>
+            <p class="chart-caption">
+              Quality (final score, y) vs estimated cost (x). Arrow shows direction of change.
+              Source: <code>evals/benchmark-comparison/source.json</code> runs[].
+            </p>
+          </div>
+
+          <!-- Exact values table -->
+          <div class="numeric-table-wrap">
+            <table class="numeric-table">
+              <caption>Aggregate run comparison</caption>
+              <thead>
+                <tr>
+                  <th>Metric</th>
+                  <th class="metric">Seed A</th>
+                  <th class="metric">Candidate B</th>
+                  <th class="metric">Delta</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>Final score</td><td class="metric">0.9175</td><td class="metric">0.9655</td><td class="metric">+0.048</td></tr>
+                <tr><td>Generation score</td><td class="metric">1.000</td><td class="metric">1.000</td><td class="metric">0</td></tr>
+                <tr><td>Checker score</td><td class="metric">0.850</td><td class="metric">0.940</td><td class="metric">+0.090</td></tr>
+                <tr><td>Hygiene score</td><td class="metric">1.000</td><td class="metric">0.990</td><td class="metric">−0.010</td></tr>
+                <tr><td>Checker failures</td><td class="metric">0</td><td class="metric">0</td><td class="metric">0</td></tr>
+                <tr><td>Checker warnings</td><td class="metric">5</td><td class="metric">2</td><td class="metric">−3</td></tr>
+                <tr><td>Wall time (s)</td><td class="metric">412</td><td class="metric">489</td><td class="metric">+77</td></tr>
+                <tr><td>Input tokens</td><td class="metric">84,200</td><td class="metric">90,100</td><td class="metric">+5,900</td></tr>
+                <tr><td>Output tokens</td><td class="metric">31,800</td><td class="metric">34,600</td><td class="metric">+2,800</td></tr>
+                <tr><td>Total tokens</td><td class="metric">116,000</td><td class="metric">124,700</td><td class="metric">+8,700</td></tr>
+                <tr><td>Est. cost (USD)</td><td class="metric">$1.92</td><td class="metric">$2.14</td><td class="metric">+$0.22</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+
+        <!-- Reference panel -->
+        <aside class="reference-panel stack" data-gap="md">
+          <div class="stack" data-gap="xs">
+            <span class="eyebrow">Decision</span>
+            <p><strong>Promote Candidate B.</strong> Score gain of +0.048 and warning reduction of 3 outweigh an 11.5 % cost increase.</p>
+          </div>
+          <div class="stack" data-gap="xs">
+            <span class="eyebrow">Run provenance</span>
+            <ul class="plain-list">
+              <li>Model: <code>codexresponses.gpt-5.5</code></li>
+              <li>Eval set: numeric-data, code-review, module-explainer, implementation-plan</li>
+              <li>Timestamp: 2026-05-20T18:40:00Z</li>
+              <li>Candidate dir: <code>skill-candidate-b-gpt55</code></li>
+              <li>Seed dir: <code>skill-seed-gpt55</code></li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ── Per-eval section ──────────────────────────────────────────── -->
+    <section class="section stack" data-gap="lg">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">Per-eval breakdown</span>
+          <h2>Score &amp; Warning Changes by Eval</h2>
+        </div>
+      </div>
+
+      <div class="section-rail">
+        <div class="stack" data-gap="lg">
+
+          <!-- Chart 2: per-eval grouped bars -->
+          <div class="panel chart-panel stack" data-gap="sm">
+            <div class="chart-svg">
+              <svg xmlns:xlink="http://www.w3.org/1999/xlink" width="446.15952pt" height="244.55952pt" viewBox="0 0 446.15952 244.55952" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1b">
+  <g id="patch_1b">
+   <path d="M 0 244.55952 L 446.15952 244.55952 L 446.15952 0 L 0 0 L 0 244.55952 z" style="fill: none"/>
+  </g>
+  <g id="axes_1b">
+   <g id="patch_2b"><path d="M 45.597188 226.453114 L 443.27952 226.453114 L 443.27952 22.757969 L 45.597188 22.757969 L 45.597188 226.453114 z" style="fill: none"/></g>
+   <g id="matplotlib.axis_1b">
+    <g id="xtick_1b"><g id="line2d_1b"/><g id="text_1b"><g style="fill: #87867f" transform="translate(69.359532 239.911786) scale(0.085 -0.085)"><defs><path id="b_DejaVuSans-6e" d="M 3513 2113 L 3513 0 L 2938 0 L 2938 2094 Q 2938 2591 2744 2837 Q 2550 3084 2163 3084 Q 1697 3084 1428 2787 Q 1159 2491 1159 1978 L 1159 0 L 581 0 L 581 3500 L 1159 3500 L 1159 2956 Q 1366 3272 1645 3428 Q 1925 3584 2291 3584 Q 2894 3584 3203 3211 Q 3513 2838 3513 2113 z" transform="scale(0.015625)"/><path id="b_DejaVuSans-75" d="M 544 1381 L 544 3500 L 1119 3500 L 1119 1403 Q 1119 906 1312 657 Q 1506 409 1894 409 Q 2359 409 2629 706 Q 2900 1003 2900 1516 L 2900 3500 L 3475 3500 L 3475 0 L 2900 0 L 2900 538 Q 2691 219 2414 64 Q 2138 -91 1772 -91 Q 1169 -91 856 284 Q 544 659 544 1381 z M 1991 3584 L 1991 3584 z" transform="scale(0.015625)"/><path id="b_DejaVuSans-6d" d="M 3328 2828 Q 3544 3216 3844 3400 Q 4144 3584 4550 3584 Q 5097 3584 5394 3201 Q 5691 2819 5691 2113 L 5691 0 L 5113 0 L 5113 2094 Q 5113 2597 4934 2840 Q 4756 3084 4391 3084 Q 3944 3084 3684 2787 Q 3425 2491 3425 1978 L 3425 0 L 2847 0 L 2847 2094 Q 2847 2600 2669 2842 Q 2491 3084 2119 3084 Q 1678 3084 1418 2786 Q 1159 2488 1159 1978 L 1159 0 L 581 0 L 581 3500 L 1159 3500 L 1159 2956 Q 1356 3278 1631 3431 Q 1906 3584 2284 3584 Q 2666 3584 2933 3390 Q 3200 3197 3328 2828 z" transform="scale(0.015625)"/><path id="b_DejaVuSans-65" d="M 3597 1894 L 3597 1613 L 953 1613 Q 991 1019 1311 708 Q 1631 397 2203 397 Q 2534 397 2845 478 Q 3156 559 3463 722 L 3463 178 Q 3153 47 2828 -22 Q 2503 -91 2169 -91 Q 1331 -91 842 396 Q 353 884 353 1716 Q 353 2575 817 3079 Q 1281 3584 2069 3584 Q 2775 3584 3186 3129 Q 3597 2675 3597 1894 z M 3022 2063 Q 3016 2534 2758 2815 Q 2500 3097 2075 3097 Q 1594 3097 1305 2825 Q 1016 2553 972 2059 L 3022 2063 z" transform="scale(0.015625)"/><path id="b_DejaVuSans-72" d="M 2631 2963 Q 2534 3019 2420 3045 Q 2306 3072 2169 3072 Q 1681 3072 1420 2755 Q 1159 2438 1159 1844 L 1159 0 L 581 0 L 581 3500 L 1159 3500 L 1159 2956 Q 1341 3275 1631 3429 Q 1922 3584 2338 3584 Q 2397 3584 2469 3576 Q 2541 3569 2628 3553 L 2631 2963 z" transform="scale(0.015625)"/><path id="b_DejaVuSans-69" d="M 603 3500 L 1178 3500 L 1178 0 L 603 0 L 603 3500 z M 603 4863 L 1178 4863 L 1178 4134 L 603 4134 L 603 4863 z" transform="scale(0.015625)"/><path id="b_DejaVuSans-63" d="M 3122 3366 L 3122 2828 Q 2878 2963 2633 3030 Q 2388 3097 2138 3097 Q 1578 3097 1268 2742 Q 959 2388 959 1747 Q 959 1106 1268 751 Q 1578 397 2138 397 Q 2388 397 2633 464 Q 2878 531 3122 666 L 3122 134 Q 2881 22 2623 -34 Q 2366 -91 2075 -91 Q 1284 -91 818 406 Q 353 903 353 1747 Q 353 2603 823 3093 Q 1294 3584 2113 3584 Q 2378 3584 2631 3529 Q 2884 3475 3122 3366 z" transform="scale(0.015625)"/><path id="b_DejaVuSans-2d" d="M 313 2009 L 1997 2009 L 1997 1497 L 313 1497 L 313 2009 z" transform="scale(0.015625)"/><path id="b_DejaVuSans-64" d="M 2906 2969 L 2906 4863 L 3481 4863 L 3481 0 L 2906 0 L 2906 525 Q 2725 213 2448 61 Q 2172 -91 1784 -91 Q 1150 -91 751 415 Q 353 922 353 1747 Q 353 2572 751 3078 Q 1150 3584 1784 3584 Q 2172 3584 2448 3432 Q 2725 3281 2906 2969 z M 947 1747 Q 947 1113 1208 752 Q 1469 391 1925 391 Q 2381 391 2643 752 Q 2906 1113 2906 1747 Q 2906 2381 2643 2742 Q 2381 3103 1925 3103 Q 1469 3103 1208 2742 Q 947 2381 947 1747 z" transform="scale(0.015625)"/><path id="b_DejaVuSans-61" d="M 2194 1759 Q 1497 1759 1228 1600 Q 959 1441 959 1056 Q 959 750 1161 570 Q 1363 391 1709 391 Q 2188 391 2477 730 Q 2766 1069 2766 1631 L 2766 1759 L 2194 1759 z M 3341 1997 L 3341 0 L 2766 0 L 2766 531 Q 2569 213 2275 61 Q 1981 -91 1556 -91 Q 1019 -91 701 211 Q 384 513 384 1019 Q 384 1609 779 1909 Q 1175 2209 1959 2209 L 2766 2209 L 2766 2266 Q 2766 2663 2505 2880 Q 2244 3097 1772 3097 Q 1472 3097 1187 3025 Q 903 2953 641 2809 L 641 3341 Q 956 3463 1253 3523 Q 1550 3584 1831 3584 Q 2591 3584 2966 3190 Q 3341 2797 3341 1997 z" transform="scale(0.015625)"/><path id="b_DejaVuSans-74" d="M 1172 4494 L 1172 3500 L 2356 3500 L 2356 3053 L 1172 3053 L 1172 1153 Q 1172 725 1289 603 Q 1406 481 1766 481 L 2356 481 L 2356 0 L 1766 0 Q 1100 0 847 248 Q 594 497 594 1153 L 594 3053 L 172 3053 L 172 3500 L 594 3500 L 594 4494 L 1172 4494 z" transform="scale(0.015625)"/></defs><use xlink:href="#b_DejaVuSans-6e"/><use xlink:href="#b_DejaVuSans-75" transform="translate(63.378906 0)"/><use xlink:href="#b_DejaVuSans-6d" transform="translate(126.757812 0)"/><use xlink:href="#b_DejaVuSans-65" transform="translate(224.169922 0)"/><use xlink:href="#b_DejaVuSans-72" transform="translate(285.693359 0)"/><use xlink:href="#b_DejaVuSans-69" transform="translate(326.806641 0)"/><use xlink:href="#b_DejaVuSans-63" transform="translate(354.589844 0)"/><use xlink:href="#b_DejaVuSans-2d" transform="translate(409.570312 0)"/><use xlink:href="#b_DejaVuSans-64" transform="translate(445.654297 0)"/><use xlink:href="#b_DejaVuSans-61" transform="translate(509.130859 0)"/><use xlink:href="#b_DejaVuSans-74" transform="translate(570.410156 0)"/><use xlink:href="#b_DejaVuSans-61" transform="translate(609.619141 0)"/></g></g></g>
+    <g id="xtick_2b"><g id="line2d_2b"/><g id="text_2b"><g style="fill: #87867f" transform="translate(169.745687 239.911786) scale(0.085 -0.085)"><defs><path id="b_DejaVuSans-6f" d="M 1959 3097 Q 1497 3097 1228 2736 Q 959 2375 959 1747 Q 959 1119 1226 758 Q 1494 397 1959 397 Q 2419 397 2687 759 Q 2956 1122 2956 1747 Q 2956 2369 2687 2733 Q 2419 3097 1959 3097 z M 1959 3584 Q 2709 3584 3137 3096 Q 3566 2609 3566 1747 Q 3566 888 3137 398 Q 2709 -91 1959 -91 Q 1206 -91 779 398 Q 353 888 353 1747 Q 353 2609 779 3096 Q 1206 3584 1959 3584 z" transform="scale(0.015625)"/><path id="b_DejaVuSans-76" d="M 191 3500 L 800 3500 L 1894 563 L 2988 3500 L 3597 3500 L 2284 0 L 1503 0 L 191 3500 z" transform="scale(0.015625)"/><path id="b_DejaVuSans-77" d="M 269 3500 L 844 3500 L 1563 769 L 2278 3500 L 2956 3500 L 3675 769 L 4391 3500 L 4966 3500 L 4050 0 L 3372 0 L 2619 2869 L 1863 0 L 1184 0 L 269 3500 z" transform="scale(0.015625)"/></defs><use xlink:href="#b_DejaVuSans-63"/><use xlink:href="#b_DejaVuSans-6f" transform="translate(54.980469 0)"/><use xlink:href="#b_DejaVuSans-64" transform="translate(116.162109 0)"/><use xlink:href="#b_DejaVuSans-65" transform="translate(179.638672 0)"/><use xlink:href="#b_DejaVuSans-2d" transform="translate(241.162109 0)"/><use xlink:href="#b_DejaVuSans-72" transform="translate(277.246094 0)"/><use xlink:href="#b_DejaVuSans-65" transform="translate(316.109375 0)"/><use xlink:href="#b_DejaVuSans-76" transform="translate(377.632812 0)"/><use xlink:href="#b_DejaVuSans-69" transform="translate(436.8125 0)"/><use xlink:href="#b_DejaVuSans-65" transform="translate(464.595703 0)"/><use xlink:href="#b_DejaVuSans-77" transform="translate(526.119141 0)"/></g></g></g>
+    <g id="xtick_3b"><g id="line2d_3b"/><g id="text_3b"><g style="fill: #87867f" transform="translate(256.057037 239.911786) scale(0.085 -0.085)"><defs><path id="b_DejaVuSans-6c" d="M 603 4863 L 1178 4863 L 1178 0 L 603 0 L 603 4863 z" transform="scale(0.015625)"/><path id="b_DejaVuSans-78" d="M 3513 3500 L 2247 1797 L 3578 0 L 2900 0 L 1881 1375 L 863 0 L 184 0 L 1544 1831 L 300 3500 L 978 3500 L 1906 2253 L 2834 3500 L 3513 3500 z" transform="scale(0.015625)"/><path id="b_DejaVuSans-70" d="M 1159 525 L 1159 -1331 L 581 -1331 L 581 3500 L 1159 3500 L 1159 2969 Q 1341 3281 1617 3432 Q 1894 3584 2278 3584 Q 2916 3584 3314 3078 Q 3713 2572 3713 1747 Q 3713 922 3314 415 Q 2916 -91 2278 -91 Q 1894 -91 1617 61 Q 1341 213 1159 525 z M 3116 1747 Q 3116 2381 2855 2742 Q 2594 3103 2138 3103 Q 1681 3103 1420 2742 Q 1159 2381 1159 1747 Q 1159 1113 1420 752 Q 1681 391 2138 391 Q 2594 391 2855 752 Q 3116 1113 3116 1747 z" transform="scale(0.015625)"/></defs><use xlink:href="#b_DejaVuSans-6d"/><use xlink:href="#b_DejaVuSans-6f" transform="translate(97.412109 0)"/><use xlink:href="#b_DejaVuSans-64" transform="translate(158.59375 0)"/><use xlink:href="#b_DejaVuSans-75" transform="translate(222.070312 0)"/><use xlink:href="#b_DejaVuSans-6c" transform="translate(285.449219 0)"/><use xlink:href="#b_DejaVuSans-65" transform="translate(313.232422 0)"/><use xlink:href="#b_DejaVuSans-2d" transform="translate(374.755859 0)"/><use xlink:href="#b_DejaVuSans-65" transform="translate(410.839844 0)"/><use xlink:href="#b_DejaVuSans-78" transform="translate(470.613281 0)"/><use xlink:href="#b_DejaVuSans-70" transform="translate(529.792969 0)"/><use xlink:href="#b_DejaVuSans-6c" transform="translate(593.269531 0)"/><use xlink:href="#b_DejaVuSans-61" transform="translate(621.052734 0)"/><use xlink:href="#b_DejaVuSans-69" transform="translate(682.332031 0)"/><use xlink:href="#b_DejaVuSans-6e" transform="translate(710.115234 0)"/><use xlink:href="#b_DejaVuSans-65" transform="translate(773.494141 0)"/><use xlink:href="#b_DejaVuSans-72" transform="translate(835.017578 0)"/></g></g></g>
+    <g id="xtick_4b"><g id="line2d_4b"/><g id="text_4b"><g style="fill: #87867f" transform="translate(371.095066 239.911786) scale(0.085 -0.085)"><defs><path id="b_DejaVuSans-70x" d="M 1159 525 L 1159 -1331 L 581 -1331 L 581 3500 L 1159 3500 L 1159 2969 Q 1341 3281 1617 3432 Q 1894 3584 2278 3584 Q 2916 3584 3314 3078 Q 3713 2572 3713 1747 Q 3713 922 3314 415 Q 2916 -91 2278 -91 Q 1894 -91 1617 61 Q 1341 213 1159 525 z" transform="scale(0.015625)"/></defs><use xlink:href="#b_DejaVuSans-69"/><use xlink:href="#b_DejaVuSans-6d" transform="translate(27.783203 0)"/><use xlink:href="#b_DejaVuSans-70" transform="translate(125.195312 0)"/><use xlink:href="#b_DejaVuSans-6c" transform="translate(188.671875 0)"/><use xlink:href="#b_DejaVuSans-2d" transform="translate(216.455078 0)"/><use xlink:href="#b_DejaVuSans-70" transform="translate(252.539062 0)"/><use xlink:href="#b_DejaVuSans-6c" transform="translate(316.015625 0)"/><use xlink:href="#b_DejaVuSans-61" transform="translate(343.798828 0)"/><use xlink:href="#b_DejaVuSans-6e" transform="translate(405.078125 0)"/></g></g></g>
+   </g>
+   <g id="matplotlib.axis_2b">
+    <g id="ytick_1b"><g id="line2d_5b"><path d="M 45.597188 211.903461 L 443.27952 211.903461" clip-path="url(#p641fb7a662b)" style="fill: none; stroke: #ded9cd; stroke-width: 0.8; stroke-linecap: square"/></g><g id="line2d_6b"/><g id="text_5b"><g style="fill: #87867f" transform="translate(18.558125 215.322757) scale(0.09 -0.09)"><defs><path id="b_DejaVuSans-30" d="M 2034 4250 Q 1547 4250 1301 3770 Q 1056 3291 1056 2328 Q 1056 1369 1301 889 Q 1547 409 2034 409 Q 2525 409 2770 889 Q 3016 1369 3016 2328 Q 3016 3291 2770 3770 Q 2525 4250 2034 4250 z M 2034 4750 Q 2819 4750 3233 4129 Q 3647 3509 3647 2328 Q 3647 1150 3233 529 Q 2819 -91 2034 -91 Q 1250 -91 836 529 Q 422 1150 422 2328 Q 422 3509 836 4129 Q 1250 4750 2034 4750 z" transform="scale(0.015625)"/><path id="b_DejaVuSans-2e" d="M 684 794 L 1344 794 L 1344 0 L 684 0 L 684 794 z" transform="scale(0.015625)"/><path id="b_DejaVuSans-38" d="M 2034 2216 Q 1584 2216 1326 1975 Q 1069 1734 1069 1313 Q 1069 891 1326 650 Q 1584 409 2034 409 Q 2484 409 2743 651 Q 3003 894 3003 1313 Q 3003 1734 2745 1975 Q 2488 2216 2034 2216 z M 1403 2484 Q 997 2584 770 2862 Q 544 3141 544 3541 Q 544 4100 942 4425 Q 1341 4750 2034 4750 Q 2731 4750 3128 4425 Q 3525 4100 3525 3541 Q 3525 3141 3298 2862 Q 3072 2584 2669 2484 Q 3125 2378 3379 2068 Q 3634 1759 3634 1313 Q 3634 634 3220 271 Q 2806 -91 2034 -91 Q 1263 -91 848 271 Q 434 634 434 1313 Q 434 1759 690 2068 Q 947 2378 1403 2484 z M 1172 3481 Q 1172 3119 1398 2916 Q 1625 2713 2034 2713 Q 2441 2713 2670 2916 Q 2900 3119 2900 3481 Q 2900 3844 2670 4047 Q 2441 4250 2034 4250 Q 1625 4250 1398 4047 Q 1172 3844 1172 3481 z" transform="scale(0.015625)"/></defs><use xlink:href="#b_DejaVuSans-30"/><use xlink:href="#b_DejaVuSans-2e" transform="translate(63.623047 0)"/><use xlink:href="#b_DejaVuSans-38" transform="translate(95.410156 0)"/><use xlink:href="#b_DejaVuSans-38" transform="translate(159.033203 0)"/></g></g></g>
+    <g id="ytick_2b"><g id="line2d_7b"><path d="M 45.597188 182.804154 L 443.27952 182.804154" clip-path="url(#p641fb7a662b)" style="fill: none; stroke: #ded9cd; stroke-width: 0.8; stroke-linecap: square"/></g><g id="line2d_8b"/><g id="text_6b"><g style="fill: #87867f" transform="translate(18.558125 186.223451) scale(0.09 -0.09)"><defs><path id="b_DejaVuSans-39" d="M 703 97 L 703 672 Q 941 559 1184 500 Q 1428 441 1663 441 Q 2288 441 2617 861 Q 2947 1281 2994 2138 Q 2813 1869 2534 1725 Q 2256 1581 1919 1581 Q 1219 1581 811 2004 Q 403 2428 403 3163 Q 403 3881 828 4315 Q 1253 4750 1959 4750 Q 2769 4750 3195 4129 Q 3622 3509 3622 2328 Q 3622 1225 3098 567 Q 2575 -91 1691 -91 Q 1453 -91 1209 -44 Q 966 3 703 97 z M 1959 2075 Q 2384 2075 2632 2365 Q 2881 2656 2881 3163 Q 2881 3666 2632 3958 Q 2384 4250 1959 4250 Q 1534 4250 1286 3958 Q 1038 3666 1038 3163 Q 1038 2656 1286 2365 Q 1534 2075 1959 2075 z" transform="scale(0.015625)"/></defs><use xlink:href="#b_DejaVuSans-30"/><use xlink:href="#b_DejaVuSans-2e" transform="translate(63.623047 0)"/><use xlink:href="#b_DejaVuSans-39" transform="translate(95.410156 0)"/><use xlink:href="#b_DejaVuSans-30" transform="translate(159.033203 0)"/></g></g></g>
+    <g id="ytick_3b"><g id="line2d_9b"><path d="M 45.597188 153.704848 L 443.27952 153.704848" clip-path="url(#p641fb7a662b)" style="fill: none; stroke: #ded9cd; stroke-width: 0.8; stroke-linecap: square"/></g><g id="line2d_10b"/><g id="text_7b"><g style="fill: #87867f" transform="translate(18.558125 157.124145) scale(0.09 -0.09)"><defs><path id="b_DejaVuSans-32" d="M 1228 531 L 3431 531 L 3431 0 L 469 0 L 469 531 Q 828 903 1448 1529 Q 2069 2156 2228 2338 Q 2531 2678 2651 2914 Q 2772 3150 2772 3378 Q 2772 3750 2511 3984 Q 2250 4219 1831 4219 Q 1534 4219 1204 4116 Q 875 4013 500 3803 L 500 4441 Q 881 4594 1212 4672 Q 1544 4750 1819 4750 Q 2544 4750 2975 4387 Q 3406 4025 3406 3419 Q 3406 3131 3298 2873 Q 3191 2616 2906 2266 Q 2828 2175 2409 1742 Q 1991 1309 1228 531 z" transform="scale(0.015625)"/></defs><use xlink:href="#b_DejaVuSans-30"/><use xlink:href="#b_DejaVuSans-2e" transform="translate(63.623047 0)"/><use xlink:href="#b_DejaVuSans-39" transform="translate(95.410156 0)"/><use xlink:href="#b_DejaVuSans-32" transform="translate(159.033203 0)"/></g></g></g>
+    <g id="ytick_4b"><g id="line2d_11b"><path d="M 45.597188 124.605541 L 443.27952 124.605541" clip-path="url(#p641fb7a662b)" style="fill: none; stroke: #ded9cd; stroke-width: 0.8; stroke-linecap: square"/></g><g id="line2d_12b"/><g id="text_8b"><g style="fill: #87867f" transform="translate(18.558125 128.024838) scale(0.09 -0.09)"><defs><path id="b_DejaVuSans-34" d="M 2419 4116 L 825 1625 L 2419 1625 L 2419 4116 z M 2253 4666 L 3047 4666 L 3047 1625 L 3713 1625 L 3713 1100 L 3047 1100 L 3047 0 L 2419 0 L 2419 1100 L 313 1100 L 313 1709 L 2253 4666 z" transform="scale(0.015625)"/></defs><use xlink:href="#b_DejaVuSans-30"/><use xlink:href="#b_DejaVuSans-2e" transform="translate(63.623047 0)"/><use xlink:href="#b_DejaVuSans-39" transform="translate(95.410156 0)"/><use xlink:href="#b_DejaVuSans-34" transform="translate(159.033203 0)"/></g></g></g>
+    <g id="ytick_5b"><g id="line2d_13b"><path d="M 45.597188 95.506235 L 443.27952 95.506235" clip-path="url(#p641fb7a662b)" style="fill: none; stroke: #ded9cd; stroke-width: 0.8; stroke-linecap: square"/></g><g id="line2d_14b"/><g id="text_9b"><g style="fill: #87867f" transform="translate(18.558125 98.925532) scale(0.09 -0.09)"><defs><path id="b_DejaVuSans-36" d="M 2113 2584 Q 1688 2584 1439 2293 Q 1191 2003 1191 1497 Q 1191 994 1439 701 Q 1688 409 2113 409 Q 2538 409 2786 701 Q 3034 994 3034 1497 Q 3034 2003 2786 2293 Q 2538 2584 2113 2584 z M 3366 4563 L 3366 3988 Q 3128 4100 2886 4159 Q 2644 4219 2406 4219 Q 1781 4219 1451 3797 Q 1122 3375 1075 2522 Q 1259 2794 1537 2939 Q 1816 3084 2150 3084 Q 2853 3084 3261 2657 Q 3669 2231 3669 1497 Q 3669 778 3244 343 Q 2819 -91 2113 -91 Q 1303 -91 875 529 Q 447 1150 447 2328 Q 447 3434 972 4092 Q 1497 4750 2381 4750 Q 2619 4750 2861 4703 Q 3103 4656 3366 4563 z" transform="scale(0.015625)"/></defs><use xlink:href="#b_DejaVuSans-30"/><use xlink:href="#b_DejaVuSans-2e" transform="translate(63.623047 0)"/><use xlink:href="#b_DejaVuSans-39" transform="translate(95.410156 0)"/><use xlink:href="#b_DejaVuSans-36" transform="translate(159.033203 0)"/></g></g></g>
+    <g id="ytick_6b"><g id="line2d_15b"><path d="M 45.597188 66.406928 L 443.27952 66.406928" clip-path="url(#p641fb7a662b)" style="fill: none; stroke: #ded9cd; stroke-width: 0.8; stroke-linecap: square"/></g><g id="line2d_16b"/><g id="text_10b"><g style="fill: #87867f" transform="translate(18.558125 69.826225) scale(0.09 -0.09)"><use xlink:href="#b_DejaVuSans-30"/><use xlink:href="#b_DejaVuSans-2e" transform="translate(63.623047 0)"/><use xlink:href="#b_DejaVuSans-39" transform="translate(95.410156 0)"/><use xlink:href="#b_DejaVuSans-38" transform="translate(159.033203 0)"/></g></g></g>
+    <g id="ytick_7b"><g id="line2d_17b"><path d="M 45.597188 37.307622 L 443.27952 37.307622" clip-path="url(#p641fb7a662b)" style="fill: none; stroke: #ded9cd; stroke-width: 0.8; stroke-linecap: square"/></g><g id="line2d_18b"/><g id="text_11b"><g style="fill: #87867f" transform="translate(18.558125 40.726919) scale(0.09 -0.09)"><defs><path id="b_DejaVuSans-31" d="M 794 531 L 1825 531 L 1825 4091 L 703 3866 L 703 4441 L 1819 4666 L 2450 4666 L 2450 531 L 3481 531 L 3481 0 L 794 0 L 794 531 z" transform="scale(0.015625)"/></defs><use xlink:href="#b_DejaVuSans-31"/><use xlink:href="#b_DejaVuSans-2e" transform="translate(63.623047 0)"/><use xlink:href="#b_DejaVuSans-30" transform="translate(95.410156 0)"/><use xlink:href="#b_DejaVuSans-30" transform="translate(159.033203 0)"/></g></g></g>
+    <g id="text_12b"><g style="fill: #3d3d3a" transform="translate(10.478438 150.768822) rotate(-90) scale(0.1 -0.1)"><defs><path id="b_DejaVuSans-45" d="M 628 4666 L 3578 4666 L 3578 4134 L 1259 4134 L 1259 2753 L 3481 2753 L 3481 2222 L 1259 2222 L 1259 531 L 3634 531 L 3634 0 L 628 0 L 628 4666 z" transform="scale(0.015625)"/><path id="b_DejaVuSans-20" transform="scale(0.015625)"/><path id="b_DejaVuSans-53" d="M 3425 4513 L 3425 3897 Q 3066 4069 2747 4153 Q 2428 4238 2131 4238 Q 1616 4238 1336 4038 Q 1056 3838 1056 3469 Q 1056 3159 1242 3001 Q 1428 2844 1947 2747 L 2328 2669 Q 3034 2534 3370 2195 Q 3706 1856 3706 1288 Q 3706 609 3251 259 Q 2797 -91 1919 -91 Q 1588 -91 1214 -16 Q 841 59 441 206 L 441 856 Q 825 641 1194 531 Q 1563 422 1919 422 Q 2459 422 2753 634 Q 3047 847 3047 1241 Q 3047 1584 2836 1778 Q 2625 1972 2144 2069 L 1759 2144 Q 1053 2284 737 2584 Q 422 2884 422 3419 Q 422 4038 858 4394 Q 1294 4750 2059 4750 Q 2388 4750 2728 4690 Q 3069 4631 3425 4513 z" transform="scale(0.015625)"/></defs><use xlink:href="#b_DejaVuSans-45"/><use xlink:href="#b_DejaVuSans-76" transform="translate(63.183594 0)"/><use xlink:href="#b_DejaVuSans-61" transform="translate(122.363281 0)"/><use xlink:href="#b_DejaVuSans-6c" transform="translate(183.642578 0)"/><use xlink:href="#b_DejaVuSans-20" transform="translate(211.425781 0)"/><use xlink:href="#b_DejaVuSans-53" transform="translate(243.212891 0)"/><use xlink:href="#b_DejaVuSans-63" transform="translate(306.689453 0)"/><use xlink:href="#b_DejaVuSans-6f" transform="translate(361.669922 0)"/><use xlink:href="#b_DejaVuSans-72" transform="translate(422.851562 0)"/><use xlink:href="#b_DejaVuSans-65" transform="translate(461.714844 0)"/></g></g>
+   </g>
+   <g id="patch_3b"><path d="M 45.597188 226.453114 L 45.597188 22.757969" style="fill: none; stroke: #d1cfc5; stroke-linejoin: miter; stroke-linecap: square"/></g>
+   <g id="patch_4b"><path d="M 45.597188 226.453114 L 443.27952 226.453114" style="fill: none; stroke: #d1cfc5; stroke-linejoin: miter; stroke-linecap: square"/></g>
+   <g id="patch_5b"><path d="M 63.673657 226.453114 L 97.872384 226.453114 L 97.872384 139.155194 L 63.673657 139.155194 z" clip-path="url(#p641fb7a662b)" style="fill: #6a8caf; opacity: 0.85"/></g>
+   <g id="patch_6b"><path d="M 161.384304 226.453114 L 195.58303 226.453114 L 195.58303 168.254501 L 161.384304 168.254501 z" clip-path="url(#p641fb7a662b)" style="fill: #6a8caf; opacity: 0.85"/></g>
+   <g id="patch_7b"><path d="M 259.094951 226.453114 L 293.293677 226.453114 L 293.293677 146.430021 L 259.094951 146.430021 z" clip-path="url(#p641fb7a662b)" style="fill: #6a8caf; opacity: 0.85"/></g>
+   <g id="patch_8b"><path d="M 356.805598 226.453114 L 391.004324 226.453114 L 391.004324 175.529327 L 356.805598 175.529327 z" clip-path="url(#p641fb7a662b)" style="fill: #6a8caf; opacity: 0.85"/></g>
+   <g id="patch_9b"><path d="M 97.872384 226.453114 L 132.07111 226.453114 L 132.07111 80.956582 L 97.872384 80.956582 z" clip-path="url(#p641fb7a662b)" style="fill: #d97757; opacity: 0.85"/></g>
+   <g id="patch_10b"><path d="M 195.58303 226.453114 L 229.781757 226.453114 L 229.781757 102.781061 L 195.58303 102.781061 z" clip-path="url(#p641fb7a662b)" style="fill: #d97757; opacity: 0.85"/></g>
+   <g id="patch_11b"><path d="M 293.293677 226.453114 L 327.492404 226.453114 L 327.492404 118.78568 L 293.293677 118.78568 z" clip-path="url(#p641fb7a662b)" style="fill: #d97757; opacity: 0.85"/></g>
+   <g id="patch_12b"><path d="M 391.004324 226.453114 L 425.20305 226.453114 L 425.20305 47.492379 L 391.004324 47.492379 z" clip-path="url(#p641fb7a662b)" style="fill: #d97757; opacity: 0.85"/></g>
+   <g id="text_13b"><g style="fill: #3d3d3a" transform="translate(70.037473 134.685498) scale(0.075 -0.075)"><defs><path id="b_DejaVuSans-33" d="M 2597 2516 Q 3050 2419 3304 2112 Q 3559 1806 3559 1356 Q 3559 666 3084 287 Q 2609 -91 1734 -91 Q 1441 -91 1130 -33 Q 819 25 488 141 L 488 750 Q 750 597 1062 519 Q 1375 441 1716 441 Q 2309 441 2620 675 Q 2931 909 2931 1356 Q 2931 1769 2642 2001 Q 2353 2234 1838 2234 L 1294 2234 L 1294 2753 L 1863 2753 Q 2328 2753 2575 2939 Q 2822 3125 2822 3475 Q 2822 3834 2567 4026 Q 2313 4219 1838 4219 Q 1578 4219 1281 4162 Q 984 4106 628 3988 L 628 4550 Q 988 4650 1302 4700 Q 1616 4750 1894 4750 Q 2613 4750 3031 4423 Q 3450 4097 3450 3541 Q 3450 3153 3228 2886 Q 3006 2619 2597 2516 z" transform="scale(0.015625)"/></defs><use xlink:href="#b_DejaVuSans-30"/><use xlink:href="#b_DejaVuSans-2e" transform="translate(63.623047 0)"/><use xlink:href="#b_DejaVuSans-39" transform="translate(95.410156 0)"/><use xlink:href="#b_DejaVuSans-33" transform="translate(159.033203 0)"/><use xlink:href="#b_DejaVuSans-30" transform="translate(222.65625 0)"/></g></g>
+   <g id="text_14b"><g style="fill: #3d3d3a" transform="translate(167.74812 163.784805) scale(0.075 -0.075)"><use xlink:href="#b_DejaVuSans-30"/><use xlink:href="#b_DejaVuSans-2e" transform="translate(63.623047 0)"/><use xlink:href="#b_DejaVuSans-39" transform="translate(95.410156 0)"/><use xlink:href="#b_DejaVuSans-31" transform="translate(159.033203 0)"/><use xlink:href="#b_DejaVuSans-30" transform="translate(222.65625 0)"/></g></g>
+   <g id="text_15b"><g style="fill: #3d3d3a" transform="translate(265.458767 141.960325) scale(0.075 -0.075)"><defs><path id="b_DejaVuSans-35" d="M 691 4666 L 3169 4666 L 3169 4134 L 1269 4134 L 1269 2991 Q 1406 3038 1543 3061 Q 1681 3084 1819 3084 Q 2600 3084 3056 2656 Q 3513 2228 3513 1497 Q 3513 744 3044 326 Q 2575 -91 1722 -91 Q 1428 -91 1123 -41 Q 819 9 494 109 L 494 744 Q 775 591 1075 516 Q 1375 441 1709 441 Q 2250 441 2565 725 Q 2881 1009 2881 1497 Q 2881 1984 2565 2268 Q 2250 2553 1709 2553 Q 1456 2553 1204 2497 Q 953 2441 691 2322 L 691 4666 z" transform="scale(0.015625)"/></defs><use xlink:href="#b_DejaVuSans-30"/><use xlink:href="#b_DejaVuSans-2e" transform="translate(63.623047 0)"/><use xlink:href="#b_DejaVuSans-39" transform="translate(95.410156 0)"/><use xlink:href="#b_DejaVuSans-32" transform="translate(159.033203 0)"/><use xlink:href="#b_DejaVuSans-35" transform="translate(222.65625 0)"/></g></g>
+   <g id="text_16b"><g style="fill: #3d3d3a" transform="translate(363.169414 171.059631) scale(0.075 -0.075)"><use xlink:href="#b_DejaVuSans-30"/><use xlink:href="#b_DejaVuSans-2e" transform="translate(63.623047 0)"/><use xlink:href="#b_DejaVuSans-39" transform="translate(95.410156 0)"/><use xlink:href="#b_DejaVuSans-30" transform="translate(159.033203 0)"/><use xlink:href="#b_DejaVuSans-35" transform="translate(222.65625 0)"/></g></g>
+   <g id="text_17b"><g style="fill: #3d3d3a" transform="translate(104.2362 76.486885) scale(0.075 -0.075)"><defs><path id="b_DejaVuSans-37" d="M 525 4666 L 3525 4666 L 3525 4397 L 1831 0 L 1172 0 L 2766 4134 L 525 4134 L 525 4666 z" transform="scale(0.015625)"/></defs><use xlink:href="#b_DejaVuSans-30"/><use xlink:href="#b_DejaVuSans-2e" transform="translate(63.623047 0)"/><use xlink:href="#b_DejaVuSans-39" transform="translate(95.410156 0)"/><use xlink:href="#b_DejaVuSans-37" transform="translate(159.033203 0)"/><use xlink:href="#b_DejaVuSans-30" transform="translate(222.65625 0)"/></g></g>
+   <g id="text_18b"><g style="fill: #3d3d3a" transform="translate(201.946847 98.311365) scale(0.075 -0.075)"><use xlink:href="#b_DejaVuSans-30"/><use xlink:href="#b_DejaVuSans-2e" transform="translate(63.623047 0)"/><use xlink:href="#b_DejaVuSans-39" transform="translate(95.410156 0)"/><use xlink:href="#b_DejaVuSans-35" transform="translate(159.033203 0)"/><use xlink:href="#b_DejaVuSans-35" transform="translate(222.65625 0)"/></g></g>
+   <g id="text_19b"><g style="fill: #3d3d3a" transform="translate(299.657493 114.315984) scale(0.075 -0.075)"><use xlink:href="#b_DejaVuSans-30"/><use xlink:href="#b_DejaVuSans-2e" transform="translate(63.623047 0)"/><use xlink:href="#b_DejaVuSans-39" transform="translate(95.410156 0)"/><use xlink:href="#b_DejaVuSans-34" transform="translate(159.033203 0)"/><use xlink:href="#b_DejaVuSans-34" transform="translate(222.65625 0)"/></g></g>
+   <g id="text_20b"><g style="fill: #3d3d3a" transform="translate(397.36814 43.022683) scale(0.075 -0.075)"><use xlink:href="#b_DejaVuSans-30"/><use xlink:href="#b_DejaVuSans-2e" transform="translate(63.623047 0)"/><use xlink:href="#b_DejaVuSans-39" transform="translate(95.410156 0)"/><use xlink:href="#b_DejaVuSans-39" transform="translate(159.033203 0)"/><use xlink:href="#b_DejaVuSans-33" transform="translate(222.65625 0)"/></g></g>
+   <g id="text_21b"><g style="fill: #141413" transform="translate(157.156557 12.757969) scale(0.13 -0.13)"><defs><path id="b_DejaVuSans-50" d="M 1259 4147 L 1259 2394 L 2053 2394 Q 2494 2394 2734 2622 Q 2975 2850 2975 3272 Q 2975 3691 2734 3919 Q 2494 4147 2053 4147 L 1259 4147 z M 628 4666 L 2053 4666 Q 2838 4666 3239 4311 Q 3641 3956 3641 3272 Q 3641 2581 3239 2228 Q 2838 1875 2053 1875 L 1259 1875 L 1259 0 L 628 0 L 628 4666 z" transform="scale(0.015625)"/><path id="b_DejaVuSans-43" d="M 4122 4306 L 4122 3641 Q 3803 3938 3442 4084 Q 3081 4231 2675 4231 Q 1875 4231 1450 3742 Q 1025 3253 1025 2328 Q 1025 1406 1450 917 Q 1875 428 2675 428 Q 3081 428 3442 575 Q 3803 722 4122 1019 L 4122 359 Q 3791 134 3420 21 Q 3050 -91 2638 -91 Q 1578 -91 968 557 Q 359 1206 359 2328 Q 359 3453 968 4101 Q 1578 4750 2638 4750 Q 3056 4750 3426 4639 Q 3797 4528 4122 4306 z" transform="scale(0.015625)"/></defs><use xlink:href="#b_DejaVuSans-50"/><use xlink:href="#b_DejaVuSans-65" transform="translate(56.677734 0)"/><use xlink:href="#b_DejaVuSans-72" transform="translate(118.201172 0)"/><use xlink:href="#b_DejaVuSans-2d" transform="translate(152.939453 0)"/><use xlink:href="#b_DejaVuSans-45" transform="translate(189.023438 0)"/><use xlink:href="#b_DejaVuSans-76" transform="translate(252.207031 0)"/><use xlink:href="#b_DejaVuSans-61" transform="translate(311.386719 0)"/><use xlink:href="#b_DejaVuSans-6c" transform="translate(372.666016 0)"/><use xlink:href="#b_DejaVuSans-20" transform="translate(400.449219 0)"/><use xlink:href="#b_DejaVuSans-53" transform="translate(432.236328 0)"/><use xlink:href="#b_DejaVuSans-63" transform="translate(495.712891 0)"/><use xlink:href="#b_DejaVuSans-6f" transform="translate(550.693359 0)"/><use xlink:href="#b_DejaVuSans-72" transform="translate(611.875 0)"/><use xlink:href="#b_DejaVuSans-65" transform="translate(650.738281 0)"/><use xlink:href="#b_DejaVuSans-20" transform="translate(712.261719 0)"/><use xlink:href="#b_DejaVuSans-43" transform="translate(744.048828 0)"/><use xlink:href="#b_DejaVuSans-6f" transform="translate(813.873047 0)"/><use xlink:href="#b_DejaVuSans-6d" transform="translate(875.054688 0)"/><use xlink:href="#b_DejaVuSans-70" transform="translate(972.466797 0)"/><use xlink:href="#b_DejaVuSans-61" transform="translate(1035.943359 0)"/><use xlink:href="#b_DejaVuSans-72" transform="translate(1097.222656 0)"/><use xlink:href="#b_DejaVuSans-69" transform="translate(1138.335938 0)"/><use xlink:href="#b_DejaVuSans-73" transform="translate(1166.119141 0)"/><use xlink:href="#b_DejaVuSans-6f" transform="translate(1218.21875 0)"/><use xlink:href="#b_DejaVuSans-6e" transform="translate(1279.400391 0)"/></g></g>
+   <g id="legend_1b">
+    <g id="patch_13b"><path d="M 363.481864 203.271083 L 376.081864 203.271083 L 376.081864 196.971083 L 363.481864 196.971083 z" style="fill: #6a8caf; opacity: 0.85"/></g>
+    <g id="text_22b"><g style="fill: #141413" transform="translate(380.131864 203.271083) scale(0.09 -0.09)"><defs><path id="b_DejaVuSans-41" d="M 2188 4044 L 1331 1722 L 3047 1722 L 2188 4044 z M 1831 4666 L 2547 4666 L 4325 0 L 3669 0 L 3244 1197 L 1141 1197 L 716 0 L 50 0 L 1831 4666 z" transform="scale(0.015625)"/></defs><use xlink:href="#b_DejaVuSans-53"/><use xlink:href="#b_DejaVuSans-65" transform="translate(63.476562 0)"/><use xlink:href="#b_DejaVuSans-65" transform="translate(125 0)"/><use xlink:href="#b_DejaVuSans-64" transform="translate(186.523438 0)"/><use xlink:href="#b_DejaVuSans-20" transform="translate(250 0)"/><use xlink:href="#b_DejaVuSans-41" transform="translate(281.787109 0)"/></g></g>
+    <g id="patch_14b"><path d="M 363.481864 216.481395 L 376.081864 216.481395 L 376.081864 210.181395 L 363.481864 210.181395 z" style="fill: #d97757; opacity: 0.85"/></g>
+    <g id="text_23b"><g style="fill: #141413" transform="translate(380.131864 216.481395) scale(0.09 -0.09)"><defs><path id="b_DejaVuSans-42" d="M 1259 2228 L 1259 519 L 2272 519 Q 2781 519 3026 730 Q 3272 941 3272 1375 Q 3272 1813 3026 2020 Q 2781 2228 2272 2228 L 1259 2228 z M 1259 4147 L 1259 2741 L 2194 2741 Q 2656 2741 2882 2914 Q 3109 3088 3109 3444 Q 3109 3797 2882 3972 Q 2656 4147 2194 4147 L 1259 4147 z M 628 4666 L 2241 4666 Q 2963 4666 3353 4366 Q 3744 4066 3744 3513 Q 3744 3084 3544 2831 Q 3344 2578 2956 2516 Q 3422 2416 3680 2098 Q 3938 1781 3938 1306 Q 3938 681 3513 340 Q 3088 0 2303 0 L 628 0 L 628 4666 z" transform="scale(0.015625)"/></defs><use xlink:href="#b_DejaVuSans-43"/><use xlink:href="#b_DejaVuSans-61" transform="translate(69.824219 0)"/><use xlink:href="#b_DejaVuSans-6e" transform="translate(131.103516 0)"/><use xlink:href="#b_DejaVuSans-64" transform="translate(194.482422 0)"/><use xlink:href="#b_DejaVuSans-69" transform="translate(257.958984 0)"/><use xlink:href="#b_DejaVuSans-64" transform="translate(285.742188 0)"/><use xlink:href="#b_DejaVuSans-61" transform="translate(349.21875 0)"/><use xlink:href="#b_DejaVuSans-74" transform="translate(410.498047 0)"/><use xlink:href="#b_DejaVuSans-65" transform="translate(449.707031 0)"/><use xlink:href="#b_DejaVuSans-20" transform="translate(511.230469 0)"/><use xlink:href="#b_DejaVuSans-42" transform="translate(543.017578 0)"/></g></g>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p641fb7a662b">
+   <rect x="45.597188" y="22.757969" width="397.682332" height="203.695145"/>
+  </clipPath>
+ </defs>
+</svg>
+            </div>
+            <p class="chart-caption">
+              Per-eval scores (blue = Seed A, clay = Candidate B). All four evals improved.
+              Source: <code>evals/benchmark-comparison/source.json</code> per_eval[].
+            </p>
+          </div>
+
+          <!-- Per-eval table -->
+          <div class="numeric-table-wrap">
+            <table class="numeric-table">
+              <caption>Per-eval detail</caption>
+              <thead>
+                <tr>
+                  <th>Eval</th>
+                  <th class="metric">Seed Score</th>
+                  <th class="metric">Cand Score</th>
+                  <th class="metric">Δ Score</th>
+                  <th class="metric">Seed Warns</th>
+                  <th class="metric">Cand Warns</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>numeric-data</td><td class="metric">0.930</td><td class="metric">0.970</td><td class="metric">+0.040</td><td class="metric">2</td><td class="metric">1</td></tr>
+                <tr><td>code-review</td><td class="metric">0.910</td><td class="metric">0.955</td><td class="metric">+0.045</td><td class="metric">1</td><td class="metric">0</td></tr>
+                <tr><td>module-explainer</td><td class="metric">0.925</td><td class="metric">0.944</td><td class="metric">+0.019</td><td class="metric">1</td><td class="metric">1</td></tr>
+                <tr><td>implementation-plan</td><td class="metric">0.905</td><td class="metric">0.993</td><td class="metric">+0.088</td><td class="metric">1</td><td class="metric">0</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+
+        <!-- Regression notes aside -->
+        <aside class="reference-panel stack" data-gap="md">
+          <span class="eyebrow">Regression notes</span>
+          <ul class="plain-list">
+            <li><strong>numeric-data:</strong> Candidate chart is clearer but uses more SVG text. Warning count reduced 2→1.</li>
+            <li><strong>code-review:</strong> No mechanical regression; inspect finding severity wording manually.</li>
+            <li><strong>module-explainer:</strong> Runtime path improved; mobile flow caption remains dense. Warning unchanged.</li>
+            <li><strong>impl-plan:</strong> Largest improvement (+0.088). No checker regression. Wall time +18 s.</li>
+          </ul>
+          <span class="eyebrow">Hygiene note</span>
+          <p>Hygiene score dipped 1.000 → 0.990 (−0.010). This is within normal tolerance and is offset by the larger checker score gain (+0.090).</p>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ── Scoring formula ────────────────────────────────────────────── -->
+    <section class="section stack" data-gap="md">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">Methodology</span>
+          <h2>Scoring Formula &amp; Run Provenance</h2>
+        </div>
+      </div>
+
+      <div class="auto-grid" style="--grid-min: 280px">
+
+        <div class="card stack" data-gap="sm">
+          <h3>Weighted Final Score</h3>
+          <p>Formula from <code>source.json</code> <code>scoring_formula</code>:</p>
+          <div class="code-block" data-wrap="true"><code>final_score =
+  0.30 × generation_score
+  0.55 × checker_score
+  0.15 × hygiene_score
+(weights sum to 1.0)</code></div>
+          <ul class="plain-list">
+            <li><strong>generation_score</strong> = generated_ok / total_evals</li>
+            <li><strong>checker_score</strong> = max(0, 1 − 0.20×failures − 0.03×warnings)</li>
+            <li><strong>hygiene_score</strong> = avg artifact compliance (unsupported classes, external assets, missing CSS penalties)</li>
+          </ul>
+          <p class="caption">Checker score carries 55 % of the total weight, making warning reduction highly impactful.</p>
+        </div>
+
+        <div class="card stack" data-gap="sm">
+          <h3>Score decomposition</h3>
+          <div class="numeric-table-wrap">
+            <table class="numeric-table">
+              <thead>
+                <tr><th>Component</th><th class="metric">Weight</th><th class="metric">Seed A</th><th class="metric">Cand B</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Generation (×0.30)</td><td class="metric">0.30</td><td class="metric">0.300</td><td class="metric">0.300</td></tr>
+                <tr><td>Checker (×0.55)</td><td class="metric">0.55</td><td class="metric">0.468</td><td class="metric">0.517</td></tr>
+                <tr><td>Hygiene (×0.15)</td><td class="metric">0.15</td><td class="metric">0.150</td><td class="metric">0.149</td></tr>
+                <tr><td><strong>Final</strong></td><td class="metric">—</td><td class="metric"><strong>0.918</strong></td><td class="metric"><strong>0.966</strong></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="caption">Rounding to 3 d.p. matches source values of 0.9175 / 0.9655.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── Regressions & improvements ────────────────────────────────── -->
+    <section class="section stack" data-gap="md">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">Analysis</span>
+          <h2>Regressions &amp; Improvements</h2>
+        </div>
+      </div>
+
+      <div class="auto-grid" style="--grid-min: 280px">
+
+        <div class="card stack" data-gap="sm">
+          <h3>Improvements</h3>
+          <ul class="insight-list">
+            <li><div>Score gains across all four evals (numeric-data +0.040, code-review +0.045, module-explainer +0.019, implementation-plan +0.088).</div></li>
+            <li><div>Checker warnings reduced 5→2 (−60 %), the dominant driver of the final score improvement.</div></li>
+            <li><div>code-review and implementation-plan evals now produce zero checker warnings.</div></li>
+            <li><div>No new checker failures introduced.</div></li>
+          </ul>
+        </div>
+
+        <div class="card stack" data-gap="sm">
+          <h3>Regressions</h3>
+          <ul class="takeaway-list">
+            <li><div>Wall time increased 18.7 % (412 → 489 s). Difference includes model latency and harness overhead; treat as noisy at this scale.</div></li>
+            <li><div>Estimated cost increased 11.5 % ($1.92 → $2.14), driven by +7.5 % token growth (larger outputs). Accepted given quality gain.</div></li>
+            <li><div>Hygiene score dropped 1.000 → 0.990 (−0.010). Marginal; does not materially affect promotion decision.</div></li>
+            <li><div>module-explainer warning count unchanged (1 → 1). Mobile flow caption remains dense — carry forward as open action.</div></li>
+            <li><div>code-review artifact still needs manual inspection for long diff wrapping (flagged in decision_notes).</div></li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── Caveats ────────────────────────────────────────────────────── -->
+    <section class="section stack" data-gap="md">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">Caveats</span>
+          <h2>Token Comparability &amp; Checker Limitations</h2>
+        </div>
+      </div>
+
+      <div class="panel stack" data-gap="sm">
+        <ul class="plain-list">
+          <li><strong>Token comparability:</strong> Provider token schemas differ. Cached, reasoning, and effective tokens are not apples-to-apples across runs or models. The +7.5 % token increase should be treated as directionally correct, not as a precise budget figure.</li>
+          <li><strong>Checker warnings are mechanical:</strong> They validate contract signals (unsupported classes, external assets, CSS compliance) — not a complete human quality score. A lower warning count does not guarantee better prose, layout aesthetics, or factual accuracy.</li>
+          <li><strong>Screenshot comparisons:</strong> Same:same screenshot pairs primarily validate geometry and rendering contracts, not aesthetic quality. Visual regressions that don't break contracts will not surface in checker warnings.</li>
+          <li><strong>Wall time is noisy:</strong> Wall time includes model latency and harness overhead. Small differences (especially ±20 %) should be treated as noisy. Do not use wall time alone to make latency-critical decisions.</li>
+          <li><strong>Single-model run:</strong> Results are from <code>codexresponses.gpt-5.5</code> only. Cross-model validation (Kimi, Gemini) has not been performed; Candidate B's improvements may not generalize uniformly.</li>
+          <li><strong>Eval coverage:</strong> Four artifact types (numeric-data, code-review, module-explainer, implementation-plan). Benchmark-comparison, design-directions, flow-diagram, and other types are not yet included in this eval set.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ── Next experiment ────────────────────────────────────────────── -->
+    <section class="section stack" data-gap="md">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">Recommended next step</span>
+          <h2>Next Experiment</h2>
+        </div>
+      </div>
+
+      <div class="panel stack" data-gap="md">
+        <p>
+          <strong>Promote Candidate B for a single-model GEPA run</strong>, then re-run on Kimi and Gemini before broad model-suite validation.
+          Inspect the code-review diff wrapping artifact manually before committing.
+        </p>
+        <ol class="flow-list">
+          <li class="flow-step">
+            <span class="flow-num">1</span>
+            <div class="stack" data-gap="xs">
+              <h3 class="flow-title">Promote Candidate B</h3>
+              <p class="flow-detail">Write Candidate B skill version as the new GEPA seed. Tag the commit and record final score 0.9655 as the new baseline.</p>
+            </div>
+          </li>
+          <li class="flow-step">
+            <span class="flow-num">2</span>
+            <div class="stack" data-gap="xs">
+              <h3 class="flow-title">Manual diff-wrap inspection</h3>
+              <p class="flow-detail">Open the code-review artifact from this run and verify long diff wrapping is correct before merging. Resolve the open module-explainer mobile caption density issue.</p>
+            </div>
+          </li>
+          <li class="flow-step">
+            <span class="flow-num">3</span>
+            <div class="stack" data-gap="xs">
+              <h3 class="flow-title">Cross-model validation</h3>
+              <p class="flow-detail">Re-run the same eval set against Kimi and Gemini with the new seed. Confirm score and warning improvements transfer, or iterate further before broad rollout.</p>
+            </div>
+          </li>
+          <li class="flow-step">
+            <span class="flow-num">4</span>
+            <div class="stack" data-gap="xs">
+              <h3 class="flow-title">Expand eval coverage</h3>
+              <p class="flow-detail">Add benchmark-comparison, design-directions, and flow-diagram to the eval set before the next GEPA round to increase coverage breadth.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+
+    </section>
+
+  </main>
+</body>
+</html>

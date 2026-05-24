@@ -2,3 +2,28 @@ __pycache__/
 *.pyc
 .DS_Store
 .fast-agent/
+
+# Raw/intermediate benchmark runs and deployment mirrors.
+eval-runs/
+archive/
+/.publish/
+
+# Local reports, superseded result bundles, and scratch logs.
+results/clean-final/
+/reports/
+skill/reports/
+skill/eval-runs/
+results/publish/models/*/reports/screenshots/
+results/publish/models/*/reports/fast-agent-results/
+results/publish/models/*/reports/fast-agent-vision-results/
+*.nohup.err
+*.nohup.out
+*.err
+*.out
+*.log
+
+# Local handover/scratch files.
+/docs/
+/*.png
+/-
+/skill/-

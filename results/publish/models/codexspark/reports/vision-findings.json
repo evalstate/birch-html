@@ -1,0 +1,149 @@
+{
+  "artifacts": [
+    {
+      "artifact": "benchmark-comparison-deep.png",
+      "findings": []
+    },
+    {
+      "artifact": "benchmark-comparison-mobile-deep.png",
+      "findings": []
+    },
+    {
+      "artifact": "benchmark-comparison-desktop.png",
+      "findings": []
+    },
+    {
+      "artifact": "benchmark-comparison-mobile.png",
+      "findings": []
+    },
+    {
+      "artifact": "code-review-deep.png",
+      "findings": []
+    },
+    {
+      "artifact": "code-review-mobile-deep.png",
+      "findings": []
+    },
+    {
+      "artifact": "code-review-desktop.png",
+      "findings": []
+    },
+    {
+      "artifact": "code-review-mobile.png",
+      "findings": []
+    },
+    {
+      "artifact": "implementation-plan-deep.png",
+      "findings": []
+    },
+    {
+      "artifact": "implementation-plan-mobile-deep.png",
+      "findings": []
+    },
+    {
+      "artifact": "implementation-plan-desktop.png",
+      "findings": []
+    },
+    {
+      "artifact": "implementation-plan-mobile.png",
+      "findings": []
+    },
+    {
+      "artifact": "module-explainer-deep.png",
+      "findings": [
+        {
+          "level": "fail",
+          "name": "vision_unstyled_render",
+          "evidence": "The entire page appears to be rendered with browser-default serif typography and unstyled HTML controls/layout rather than the Birch visual system; headings, lists, code blocks, and tables have no visible stylesheet treatment.",
+          "confidence": 0.95,
+          "bbox_px": {
+            "x": 0,
+            "y": 0,
+            "width": 1365,
+            "height": 4096
+          }
+        }
+      ]
+    },
+    {
+      "artifact": "module-explainer-mobile-deep.png",
+      "findings": [
+        {
+          "level": "fail",
+          "name": "vision_unstyled_render",
+          "evidence": "The mobile deep render appears globally unstyled with default browser serif text, raw list/table formatting, and no Birch layout treatment.",
+          "confidence": 0.95,
+          "bbox_px": {
+            "x": 0,
+            "y": 0,
+            "width": 390,
+            "height": 4096
+          }
+        }
+      ]
+    },
+    {
+      "artifact": "module-explainer-desktop.png",
+      "findings": [
+        {
+          "level": "fail",
+          "name": "vision_unstyled_render",
+          "evidence": "The desktop viewport appears globally unstyled, using default browser typography and raw document flow rather than the expected Birch-styled artifact layout.",
+          "confidence": 0.95,
+          "bbox_px": {
+            "x": 0,
+            "y": 0,
+            "width": 1365,
+            "height": 900
+          }
+        }
+      ]
+    },
+    {
+      "artifact": "module-explainer-mobile.png",
+      "findings": [
+        {
+          "level": "fail",
+          "name": "vision_unstyled_render",
+          "evidence": "The mobile viewport appears globally unstyled with default serif headings/body text and raw document layout.",
+          "confidence": 0.95,
+          "bbox_px": {
+            "x": 0,
+            "y": 0,
+            "width": 390,
+            "height": 900
+          }
+        }
+      ]
+    },
+    {
+      "artifact": "numeric-data-deep.png",
+      "findings": []
+    },
+    {
+      "artifact": "numeric-data-mobile-deep.png",
+      "findings": [
+        {
+          "level": "fail",
+          "name": "vision_clipped_content",
+          "evidence": "Mobile deep render has severe horizontal overflow: the chart, numeric table, ranking panel, and caveat area extend beyond the right edge, with content/labels cut off and a page-level horizontal scrollbar visible. The layout is not usable without sideways scrolling and several panels are visibly truncated.",
+          "confidence": 0.95,
+          "bbox_px": {
+            "x": 0,
+            "y": 1278,
+            "width": 395,
+            "height": 1414
+          }
+        }
+      ]
+    },
+    {
+      "artifact": "numeric-data-desktop.png",
+      "findings": []
+    },
+    {
+      "artifact": "numeric-data-mobile.png",
+      "findings": []
+    }
+  ]
+}

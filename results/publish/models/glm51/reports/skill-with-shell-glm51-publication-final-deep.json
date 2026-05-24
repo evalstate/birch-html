@@ -1,0 +1,1059 @@
+{
+  "mode": "artifact",
+  "artifacts": [
+    {
+      "artifact": "eval-runs/skill-with-shell-glm51-publication-final/numeric-data.html",
+      "stats": {
+        "path": "eval-runs/skill-with-shell-glm51-publication-final/numeric-data.html",
+        "bytes": 62971,
+        "title": "Rendering checker stability \u2014 5-week trend",
+        "doctype": true,
+        "viewport": true,
+        "stylesheet_links": [],
+        "birch_css_embedded": true,
+        "style_blocks": 2,
+        "style_bytes": 100,
+        "script_blocks": 0,
+        "tag_counts": {
+          "html": 1,
+          "head": 1,
+          "meta": 2,
+          "title": 1,
+          "style": 3,
+          "body": 1,
+          "main": 1,
+          "header": 1,
+          "div": 33,
+          "h1": 1,
+          "p": 11,
+          "section": 6,
+          "span": 11,
+          "h2": 5,
+          "code": 10,
+          "svg": 1,
+          "defs": 7,
+          "g": 122,
+          "path": 28,
+          "use": 202,
+          "clippath": 1,
+          "rect": 1,
+          "table": 1,
+          "thead": 1,
+          "tr": 6,
+          "th": 5,
+          "tbody": 1,
+          "td": 25,
+          "ul": 1,
+          "li": 3
+        },
+        "class_counts": {
+          "page": 1,
+          "stack": 12,
+          "eyebrow": 6,
+          "lede": 1,
+          "section": 6,
+          "section-head": 5,
+          "auto-grid": 1,
+          "stat-card": 4,
+          "stat-value": 4,
+          "caption": 9,
+          "metric-list": 1,
+          "metric-row": 3,
+          "meter": 3,
+          "panel": 1,
+          "chart-panel": 1,
+          "chart-svg": 1,
+          "chart-caption": 1,
+          "numeric-table-wrap": 1,
+          "numeric-table": 1,
+          "metric": 14,
+          "insight-list": 1
+        },
+        "data_attrs": {
+          "data-birch-system": 1,
+          "data-gap": 12
+        },
+        "text_words": 249,
+        "unique_words": 132,
+        "css_vars_used": [],
+        "css_vars_defined": [
+          "--grid-min",
+          "--value"
+        ],
+        "hex_colors": [],
+        "birch_css_bytes": 31713,
+        "birch_css_valid": true
+      },
+      "screenshot": {
+        "png": "eval-runs/reports/skill-with-shell-glm51-publication-final/screenshots/numeric-data-deep.png",
+        "size": [
+          1365,
+          2391
+        ],
+        "mean_rgb": [
+          246.66,
+          244.92,
+          241.57
+        ],
+        "palette": {
+          "palette_close_fraction": 0.9675,
+          "ivory_fraction": 0.6224,
+          "blackish_fraction": 0.0
+        },
+        "background_fraction": 0.884,
+        "non_background_fraction": 0.116,
+        "blackish_fraction": 0.0,
+        "file_bytes": 256776
+      },
+      "geometry": {
+        "overflow": [],
+        "containerOverflow": [],
+        "statCardSqueeze": [],
+        "sectionRailOrder": [],
+        "pageOverflowX": 0,
+        "timelineProblems": [],
+        "metricGroups": [
+          {
+            "owner": "html > body > main.page.stack > section.section.stack",
+            "meterXs": [
+              144,
+              144,
+              144
+            ],
+            "spread": 0
+          }
+        ],
+        "metricRowSqueeze": [],
+        "splitRailGroups": [],
+        "numericHeaderGroups": [],
+        "codeWrapProblems": [],
+        "textWrapProblems": []
+      },
+      "findings": [
+        {
+          "level": "pass",
+          "name": "doctype",
+          "evidence": "doctype present"
+        },
+        {
+          "level": "pass",
+          "name": "viewport",
+          "evidence": "viewport meta present"
+        },
+        {
+          "level": "pass",
+          "name": "uses_birch_system_css",
+          "evidence": "embeds or links Birch system CSS"
+        },
+        {
+          "level": "pass",
+          "name": "has_page_shell",
+          "evidence": ".page found"
+        },
+        {
+          "level": "pass",
+          "name": "uses_layout_primitives",
+          "evidence": "layout primitive count is healthy"
+        },
+        {
+          "level": "pass",
+          "name": "uses_semantic_components",
+          "evidence": "semantic component count is healthy"
+        },
+        {
+          "level": "pass",
+          "name": "no_unknown_css_vars",
+          "evidence": "all CSS variables are defined in Birch system or local CSS"
+        },
+        {
+          "level": "pass",
+          "name": "no_patch_markers",
+          "evidence": "no accidental patch marker lines"
+        },
+        {
+          "level": "note",
+          "name": "screenshot_capture",
+          "evidence": "captured eval-runs/reports/skill-with-shell-glm51-publication-final/screenshots/numeric-data-deep.png at [1365, 2391]"
+        },
+        {
+          "level": "pass",
+          "name": "layout_overflow",
+          "evidence": "no visible text/content overflow detected"
+        },
+        {
+          "level": "pass",
+          "name": "container_text_overflow",
+          "evidence": "text stays within its card/panel containers"
+        },
+        {
+          "level": "pass",
+          "name": "stat_card_squeeze",
+          "evidence": "KPI/stat cards have enough horizontal space"
+        },
+        {
+          "level": "pass",
+          "name": "timeline_geometry",
+          "evidence": "timeline markers/content stay within expected geometry"
+        },
+        {
+          "level": "pass",
+          "name": "metric_alignment",
+          "evidence": "metric meters align within each metric-list"
+        },
+        {
+          "level": "pass",
+          "name": "numeric_header_alignment",
+          "evidence": "numeric table headers align with right-aligned numeric columns"
+        },
+        {
+          "level": "pass",
+          "name": "code_wrap_underfill",
+          "evidence": "wrapped code/diff blocks use available container width"
+        },
+        {
+          "level": "pass",
+          "name": "pathological_text_wrapping",
+          "evidence": "prose/list text uses available container width"
+        }
+      ]
+    },
+    {
+      "artifact": "eval-runs/skill-with-shell-glm51-publication-final/code-review.html",
+      "stats": {
+        "path": "eval-runs/skill-with-shell-glm51-publication-final/code-review.html",
+        "bytes": 48933,
+        "title": "Code review \u2014 Candle rendering checker expansion",
+        "doctype": true,
+        "viewport": true,
+        "stylesheet_links": [],
+        "birch_css_embedded": true,
+        "style_blocks": 1,
+        "style_bytes": 105,
+        "script_blocks": 0,
+        "tag_counts": {
+          "html": 1,
+          "head": 1,
+          "meta": 2,
+          "title": 1,
+          "style": 2,
+          "body": 1,
+          "main": 1,
+          "header": 1,
+          "div": 44,
+          "h1": 1,
+          "p": 27,
+          "code": 86,
+          "span": 48,
+          "section": 7,
+          "h2": 7,
+          "article": 7,
+          "h3": 7,
+          "strong": 19,
+          "head(?:\\s[^": 1,
+          "table": 1,
+          "thead": 1,
+          "tr": 4,
+          "th": 4,
+          "tbody": 1,
+          "td": 12,
+          "ul": 3,
+          "li": 16
+        },
+        "class_counts": {
+          "page": 1,
+          "stack": 23,
+          "eyebrow": 8,
+          "lede": 1,
+          "cluster": 8,
+          "chip": 3,
+          "section": 7,
+          "section-head": 7,
+          "card": 7,
+          "badge": 14,
+          "diff": 5,
+          "diff-row": 8,
+          "add": 7,
+          "ln": 8,
+          "mark": 8,
+          "code": 8,
+          "del": 1,
+          "numeric-table-wrap": 1,
+          "numeric-table": 1,
+          "label-cell": 1,
+          "metric": 8,
+          "entity": 3,
+          "note": 3,
+          "insight-list": 1,
+          "checklist": 1,
+          "takeaway-list": 1
+        },
+        "data_attrs": {
+          "data-birch-system": 1,
+          "data-gap": 23,
+          "data-tone": 3,
+          "data-wrap": 5
+        },
+        "text_words": 931,
+        "unique_words": 479,
+        "css_vars_used": [],
+        "css_vars_defined": [],
+        "hex_colors": [],
+        "birch_css_bytes": 31715,
+        "birch_css_valid": true
+      },
+      "screenshot": {
+        "png": "eval-runs/reports/skill-with-shell-glm51-publication-final/screenshots/code-review-deep.png",
+        "size": [
+          1365,
+          4384
+        ],
+        "mean_rgb": [
+          238.88,
+          238.23,
+          235.4
+        ],
+        "palette": {
+          "palette_close_fraction": 0.9224,
+          "ivory_fraction": 0.5662,
+          "blackish_fraction": 0.0
+        },
+        "background_fraction": 0.8411,
+        "non_background_fraction": 0.1589,
+        "blackish_fraction": 0.0,
+        "file_bytes": 734627
+      },
+      "geometry": {
+        "overflow": [],
+        "containerOverflow": [],
+        "statCardSqueeze": [],
+        "sectionRailOrder": [],
+        "pageOverflowX": 0,
+        "timelineProblems": [],
+        "metricGroups": [],
+        "metricRowSqueeze": [],
+        "splitRailGroups": [],
+        "numericHeaderGroups": [],
+        "codeWrapProblems": [],
+        "textWrapProblems": []
+      },
+      "findings": [
+        {
+          "level": "pass",
+          "name": "doctype",
+          "evidence": "doctype present"
+        },
+        {
+          "level": "pass",
+          "name": "viewport",
+          "evidence": "viewport meta present"
+        },
+        {
+          "level": "pass",
+          "name": "uses_birch_system_css",
+          "evidence": "embeds or links Birch system CSS"
+        },
+        {
+          "level": "pass",
+          "name": "has_page_shell",
+          "evidence": ".page found"
+        },
+        {
+          "level": "pass",
+          "name": "uses_layout_primitives",
+          "evidence": "layout primitive count is healthy"
+        },
+        {
+          "level": "pass",
+          "name": "uses_semantic_components",
+          "evidence": "semantic component count is healthy"
+        },
+        {
+          "level": "pass",
+          "name": "no_unknown_css_vars",
+          "evidence": "all CSS variables are defined in Birch system or local CSS"
+        },
+        {
+          "level": "pass",
+          "name": "no_patch_markers",
+          "evidence": "no accidental patch marker lines"
+        },
+        {
+          "level": "note",
+          "name": "screenshot_capture",
+          "evidence": "captured eval-runs/reports/skill-with-shell-glm51-publication-final/screenshots/code-review-deep.png at [1365, 4384]"
+        },
+        {
+          "level": "pass",
+          "name": "layout_overflow",
+          "evidence": "no visible text/content overflow detected"
+        },
+        {
+          "level": "pass",
+          "name": "container_text_overflow",
+          "evidence": "text stays within its card/panel containers"
+        },
+        {
+          "level": "pass",
+          "name": "stat_card_squeeze",
+          "evidence": "KPI/stat cards have enough horizontal space"
+        },
+        {
+          "level": "pass",
+          "name": "timeline_geometry",
+          "evidence": "timeline markers/content stay within expected geometry"
+        },
+        {
+          "level": "pass",
+          "name": "numeric_header_alignment",
+          "evidence": "numeric table headers align with right-aligned numeric columns"
+        },
+        {
+          "level": "pass",
+          "name": "code_wrap_underfill",
+          "evidence": "wrapped code/diff blocks use available container width"
+        },
+        {
+          "level": "pass",
+          "name": "pathological_text_wrapping",
+          "evidence": "prose/list text uses available container width"
+        }
+      ]
+    },
+    {
+      "artifact": "eval-runs/skill-with-shell-glm51-publication-final/module-explainer.html",
+      "stats": {
+        "path": "eval-runs/skill-with-shell-glm51-publication-final/module-explainer.html",
+        "bytes": 54229,
+        "title": "Rendering checker pipeline \u2014 module explainer",
+        "doctype": true,
+        "viewport": true,
+        "stylesheet_links": [],
+        "birch_css_embedded": true,
+        "style_blocks": 1,
+        "style_bytes": 90,
+        "script_blocks": 0,
+        "tag_counts": {
+          "html": 1,
+          "head": 1,
+          "meta": 2,
+          "title": 1,
+          "style": 2,
+          "body": 1,
+          "main": 1,
+          "header": 1,
+          "div": 28,
+          "h1": 1,
+          "p": 26,
+          "section": 7,
+          "span": 36,
+          "h2": 6,
+          "strong": 12,
+          "em": 2,
+          "code": 140,
+          "svg": 1,
+          "path": 4,
+          "g": 5,
+          "rect": 5,
+          "text": 8,
+          "ol": 2,
+          "li": 28,
+          "h3": 17,
+          "ul": 3,
+          "aside": 2,
+          "pre": 2,
+          "table": 1,
+          "thead": 1,
+          "tr": 7,
+          "th": 4,
+          "tbody": 1,
+          "td": 24
+        },
+        "class_counts": {
+          "page": 1,
+          "stack": 29,
+          "eyebrow": 7,
+          "lede": 1,
+          "section": 7,
+          "section-head": 6,
+          "panel": 1,
+          "chart-panel": 1,
+          "flow": 1,
+          "flow-edge": 4,
+          "flow-node": 5,
+          "sub": 3,
+          "chart-caption": 1,
+          "flow-list": 2,
+          "flow-step": 11,
+          "flow-num": 11,
+          "flow-title": 11,
+          "flow-detail": 11,
+          "insight-list": 1,
+          "section-rail": 1,
+          "card": 5,
+          "reference-panel": 1,
+          "caption": 5,
+          "plain-list": 2,
+          "code-block": 2,
+          "cluster": 1,
+          "chip": 4,
+          "numeric-table-wrap": 1,
+          "numeric-table": 1,
+          "label-cell": 1,
+          "metric": 14,
+          "entity": 6,
+          "subtle": 6,
+          "note": 6,
+          "callout": 1,
+          "callout-label": 1
+        },
+        "data_attrs": {
+          "data-birch-system": 1,
+          "data-gap": 24,
+          "data-shape": 1,
+          "data-kind": 3,
+          "data-variant": 5,
+          "data-tone": 5,
+          "data-label": 12
+        },
+        "text_words": 1283,
+        "unique_words": 590,
+        "css_vars_used": [],
+        "css_vars_defined": [],
+        "hex_colors": [],
+        "birch_css_bytes": 31713,
+        "birch_css_valid": true
+      },
+      "screenshot": {
+        "png": "eval-runs/reports/skill-with-shell-glm51-publication-final/screenshots/module-explainer-deep.png",
+        "size": [
+          1365,
+          6000
+        ],
+        "mean_rgb": [
+          242.78,
+          242.26,
+          240.01
+        ],
+        "palette": {
+          "palette_close_fraction": 0.9441,
+          "ivory_fraction": 0.4692,
+          "blackish_fraction": 0.0004
+        },
+        "background_fraction": 0.8434,
+        "non_background_fraction": 0.1566,
+        "blackish_fraction": 0.0004,
+        "file_bytes": 1020476
+      },
+      "geometry": {
+        "overflow": [],
+        "containerOverflow": [],
+        "statCardSqueeze": [],
+        "sectionRailOrder": [],
+        "pageOverflowX": 0,
+        "timelineProblems": [],
+        "metricGroups": [],
+        "metricRowSqueeze": [],
+        "splitRailGroups": [],
+        "numericHeaderGroups": [],
+        "codeWrapProblems": [],
+        "textWrapProblems": []
+      },
+      "findings": [
+        {
+          "level": "pass",
+          "name": "doctype",
+          "evidence": "doctype present"
+        },
+        {
+          "level": "pass",
+          "name": "viewport",
+          "evidence": "viewport meta present"
+        },
+        {
+          "level": "pass",
+          "name": "uses_birch_system_css",
+          "evidence": "embeds or links Birch system CSS"
+        },
+        {
+          "level": "pass",
+          "name": "has_page_shell",
+          "evidence": ".page found"
+        },
+        {
+          "level": "pass",
+          "name": "uses_layout_primitives",
+          "evidence": "layout primitive count is healthy"
+        },
+        {
+          "level": "pass",
+          "name": "uses_semantic_components",
+          "evidence": "semantic component count is healthy"
+        },
+        {
+          "level": "pass",
+          "name": "no_unknown_css_vars",
+          "evidence": "all CSS variables are defined in Birch system or local CSS"
+        },
+        {
+          "level": "pass",
+          "name": "no_patch_markers",
+          "evidence": "no accidental patch marker lines"
+        },
+        {
+          "level": "note",
+          "name": "screenshot_capture",
+          "evidence": "captured eval-runs/reports/skill-with-shell-glm51-publication-final/screenshots/module-explainer-deep.png at [1365, 6000]"
+        },
+        {
+          "level": "pass",
+          "name": "layout_overflow",
+          "evidence": "no visible text/content overflow detected"
+        },
+        {
+          "level": "pass",
+          "name": "container_text_overflow",
+          "evidence": "text stays within its card/panel containers"
+        },
+        {
+          "level": "pass",
+          "name": "stat_card_squeeze",
+          "evidence": "KPI/stat cards have enough horizontal space"
+        },
+        {
+          "level": "pass",
+          "name": "timeline_geometry",
+          "evidence": "timeline markers/content stay within expected geometry"
+        },
+        {
+          "level": "pass",
+          "name": "numeric_header_alignment",
+          "evidence": "numeric table headers align with right-aligned numeric columns"
+        },
+        {
+          "level": "pass",
+          "name": "code_wrap_underfill",
+          "evidence": "wrapped code/diff blocks use available container width"
+        },
+        {
+          "level": "pass",
+          "name": "pathological_text_wrapping",
+          "evidence": "prose/list text uses available container width"
+        }
+      ]
+    },
+    {
+      "artifact": "eval-runs/skill-with-shell-glm51-publication-final/implementation-plan.html",
+      "stats": {
+        "path": "eval-runs/skill-with-shell-glm51-publication-final/implementation-plan.html",
+        "bytes": 60535,
+        "title": "Birchline \u2192 Birch Skill Migration Plan",
+        "doctype": true,
+        "viewport": true,
+        "stylesheet_links": [],
+        "birch_css_embedded": true,
+        "style_blocks": 1,
+        "style_bytes": 105,
+        "script_blocks": 0,
+        "tag_counts": {
+          "html": 1,
+          "head": 1,
+          "meta": 2,
+          "title": 1,
+          "style": 2,
+          "body": 1,
+          "main": 1,
+          "header": 1,
+          "div": 46,
+          "h1": 1,
+          "p": 27,
+          "code": 76,
+          "section": 8,
+          "span": 12,
+          "h2": 8,
+          "article": 8,
+          "h3": 13,
+          "ul": 15,
+          "li": 67,
+          "strong": 36,
+          "ol": 1,
+          "table": 7,
+          "thead": 7,
+          "tr": 34,
+          "th": 15,
+          "tbody": 7,
+          "td": 59,
+          "aside": 1
+        },
+        "class_counts": {
+          "page": 1,
+          "stack": 25,
+          "eyebrow": 9,
+          "lede": 1,
+          "section": 8,
+          "section-head": 8,
+          "auto-grid": 4,
+          "card": 8,
+          "flow-title": 13,
+          "checklist": 3,
+          "caption": 2,
+          "plain-list": 10,
+          "callout": 2,
+          "flow-list": 1,
+          "flow-step": 4,
+          "flow-num": 4,
+          "flow-detail": 21,
+          "numeric-table-wrap": 7,
+          "numeric-table": 7,
+          "metric": 74,
+          "insight-list": 1,
+          "takeaway-list": 1,
+          "reference-panel": 1,
+          "code-block": 1
+        },
+        "data_attrs": {
+          "data-birch-system": 1,
+          "data-gap": 25,
+          "data-wrap": 1
+        },
+        "text_words": 1410,
+        "unique_words": 520,
+        "css_vars_used": [],
+        "css_vars_defined": [
+          "--grid-min"
+        ],
+        "hex_colors": [],
+        "birch_css_bytes": 31715,
+        "birch_css_valid": true
+      },
+      "screenshot": {
+        "png": "eval-runs/reports/skill-with-shell-glm51-publication-final/screenshots/implementation-plan-deep.png",
+        "size": [
+          1365,
+          6000
+        ],
+        "mean_rgb": [
+          243.92,
+          243.29,
+          240.96
+        ],
+        "palette": {
+          "palette_close_fraction": 0.9445,
+          "ivory_fraction": 0.4128,
+          "blackish_fraction": 0.0
+        },
+        "background_fraction": 0.8017,
+        "non_background_fraction": 0.1983,
+        "blackish_fraction": 0.0,
+        "file_bytes": 967052
+      },
+      "geometry": {
+        "overflow": [],
+        "containerOverflow": [],
+        "statCardSqueeze": [],
+        "sectionRailOrder": [],
+        "pageOverflowX": 0,
+        "timelineProblems": [],
+        "metricGroups": [],
+        "metricRowSqueeze": [],
+        "splitRailGroups": [],
+        "numericHeaderGroups": [],
+        "codeWrapProblems": [],
+        "textWrapProblems": []
+      },
+      "findings": [
+        {
+          "level": "pass",
+          "name": "doctype",
+          "evidence": "doctype present"
+        },
+        {
+          "level": "pass",
+          "name": "viewport",
+          "evidence": "viewport meta present"
+        },
+        {
+          "level": "pass",
+          "name": "uses_birch_system_css",
+          "evidence": "embeds or links Birch system CSS"
+        },
+        {
+          "level": "pass",
+          "name": "has_page_shell",
+          "evidence": ".page found"
+        },
+        {
+          "level": "pass",
+          "name": "uses_layout_primitives",
+          "evidence": "layout primitive count is healthy"
+        },
+        {
+          "level": "pass",
+          "name": "uses_semantic_components",
+          "evidence": "semantic component count is healthy"
+        },
+        {
+          "level": "pass",
+          "name": "no_unknown_css_vars",
+          "evidence": "all CSS variables are defined in Birch system or local CSS"
+        },
+        {
+          "level": "pass",
+          "name": "no_patch_markers",
+          "evidence": "no accidental patch marker lines"
+        },
+        {
+          "level": "note",
+          "name": "screenshot_capture",
+          "evidence": "captured eval-runs/reports/skill-with-shell-glm51-publication-final/screenshots/implementation-plan-deep.png at [1365, 6000]"
+        },
+        {
+          "level": "pass",
+          "name": "layout_overflow",
+          "evidence": "no visible text/content overflow detected"
+        },
+        {
+          "level": "pass",
+          "name": "container_text_overflow",
+          "evidence": "text stays within its card/panel containers"
+        },
+        {
+          "level": "pass",
+          "name": "stat_card_squeeze",
+          "evidence": "KPI/stat cards have enough horizontal space"
+        },
+        {
+          "level": "pass",
+          "name": "timeline_geometry",
+          "evidence": "timeline markers/content stay within expected geometry"
+        },
+        {
+          "level": "pass",
+          "name": "numeric_header_alignment",
+          "evidence": "numeric table headers align with right-aligned numeric columns"
+        },
+        {
+          "level": "pass",
+          "name": "code_wrap_underfill",
+          "evidence": "wrapped code/diff blocks use available container width"
+        },
+        {
+          "level": "pass",
+          "name": "pathological_text_wrapping",
+          "evidence": "prose/list text uses available container width"
+        }
+      ]
+    },
+    {
+      "artifact": "eval-runs/skill-with-shell-glm51-publication-final/benchmark-comparison.html",
+      "stats": {
+        "path": "eval-runs/skill-with-shell-glm51-publication-final/benchmark-comparison.html",
+        "bytes": 64863,
+        "title": "Birch GEPA seed comparison \u2014 Candidate B promotion",
+        "doctype": true,
+        "viewport": true,
+        "stylesheet_links": [],
+        "birch_css_embedded": true,
+        "style_blocks": 4,
+        "style_bytes": 238,
+        "script_blocks": 0,
+        "tag_counts": {
+          "html": 1,
+          "head": 1,
+          "meta": 2,
+          "title": 1,
+          "style": 5,
+          "body": 1,
+          "main": 1,
+          "header": 1,
+          "div": 51,
+          "h1": 1,
+          "p": 19,
+          "code": 14,
+          "section": 10,
+          "span": 27,
+          "h2": 9,
+          "svg": 3,
+          "defs": 6,
+          "g": 135,
+          "path": 44,
+          "text": 48,
+          "clippath": 3,
+          "rect": 3,
+          "table": 2,
+          "thead": 2,
+          "tr": 17,
+          "th": 11,
+          "tbody": 2,
+          "td": 72,
+          "ul": 3,
+          "li": 13,
+          "strong": 17
+        },
+        "class_counts": {
+          "page": 1,
+          "stack": 23,
+          "eyebrow": 10,
+          "lede": 1,
+          "section": 10,
+          "auto-grid": 1,
+          "stat-card": 6,
+          "caption": 17,
+          "stat-value": 6,
+          "kpi-delta": 6,
+          "section-head": 9,
+          "panel": 3,
+          "chart-panel": 3,
+          "chart-svg": 3,
+          "chart-caption": 3,
+          "numeric-table-wrap": 2,
+          "numeric-table": 2,
+          "metric": 66,
+          "takeaway-list": 1,
+          "card": 3,
+          "plain-list": 1,
+          "code-block": 1,
+          "insight-list": 1
+        },
+        "data_attrs": {
+          "data-birch-system": 1,
+          "data-gap": 20,
+          "data-wrap": 1
+        },
+        "text_words": 531,
+        "unique_words": 250,
+        "css_vars_used": [],
+        "css_vars_defined": [
+          "--grid-min"
+        ],
+        "hex_colors": [],
+        "birch_css_bytes": 31709,
+        "birch_css_valid": true
+      },
+      "screenshot": {
+        "png": "eval-runs/reports/skill-with-shell-glm51-publication-final/screenshots/benchmark-comparison-deep.png",
+        "size": [
+          1365,
+          5581
+        ],
+        "mean_rgb": [
+          244.96,
+          243.1,
+          240.02
+        ],
+        "palette": {
+          "palette_close_fraction": 0.9716,
+          "ivory_fraction": 0.5051,
+          "blackish_fraction": 0.0006
+        },
+        "background_fraction": 0.8798,
+        "non_background_fraction": 0.1202,
+        "blackish_fraction": 0.0006,
+        "file_bytes": 613298
+      },
+      "geometry": {
+        "overflow": [],
+        "containerOverflow": [],
+        "statCardSqueeze": [],
+        "sectionRailOrder": [],
+        "pageOverflowX": 0,
+        "timelineProblems": [],
+        "metricGroups": [],
+        "metricRowSqueeze": [],
+        "splitRailGroups": [],
+        "numericHeaderGroups": [],
+        "codeWrapProblems": [],
+        "textWrapProblems": []
+      },
+      "findings": [
+        {
+          "level": "pass",
+          "name": "doctype",
+          "evidence": "doctype present"
+        },
+        {
+          "level": "pass",
+          "name": "viewport",
+          "evidence": "viewport meta present"
+        },
+        {
+          "level": "pass",
+          "name": "uses_birch_system_css",
+          "evidence": "embeds or links Birch system CSS"
+        },
+        {
+          "level": "pass",
+          "name": "has_page_shell",
+          "evidence": ".page found"
+        },
+        {
+          "level": "pass",
+          "name": "uses_layout_primitives",
+          "evidence": "layout primitive count is healthy"
+        },
+        {
+          "level": "pass",
+          "name": "uses_semantic_components",
+          "evidence": "semantic component count is healthy"
+        },
+        {
+          "level": "pass",
+          "name": "no_unknown_css_vars",
+          "evidence": "all CSS variables are defined in Birch system or local CSS"
+        },
+        {
+          "level": "pass",
+          "name": "no_patch_markers",
+          "evidence": "no accidental patch marker lines"
+        },
+        {
+          "level": "note",
+          "name": "screenshot_capture",
+          "evidence": "captured eval-runs/reports/skill-with-shell-glm51-publication-final/screenshots/benchmark-comparison-deep.png at [1365, 5581]"
+        },
+        {
+          "level": "pass",
+          "name": "layout_overflow",
+          "evidence": "no visible text/content overflow detected"
+        },
+        {
+          "level": "pass",
+          "name": "container_text_overflow",
+          "evidence": "text stays within its card/panel containers"
+        },
+        {
+          "level": "pass",
+          "name": "stat_card_squeeze",
+          "evidence": "KPI/stat cards have enough horizontal space"
+        },
+        {
+          "level": "pass",
+          "name": "timeline_geometry",
+          "evidence": "timeline markers/content stay within expected geometry"
+        },
+        {
+          "level": "pass",
+          "name": "numeric_header_alignment",
+          "evidence": "numeric table headers align with right-aligned numeric columns"
+        },
+        {
+          "level": "pass",
+          "name": "code_wrap_underfill",
+          "evidence": "wrapped code/diff blocks use available container width"
+        },
+        {
+          "level": "pass",
+          "name": "pathological_text_wrapping",
+          "evidence": "prose/list text uses available container width"
+        }
+      ]
+    }
+  ],
+  "pairs": [],
+  "summary": {
+    "artifacts": 5,
+    "pairs": 5,
+    "failures": 0,
+    "warnings": 0,
+    "notes": 5
+  }
+}

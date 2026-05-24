@@ -1,0 +1,14 @@
+{
+  "label": "skill-with-shell-sonnet46-publication-final",
+  "purpose": "With-shell Birch HTML skill benchmark for sonnet46",
+  "mode": "skill-eval",
+  "output_mode": "file",
+  "cwd": "/home/shaun/source/birch-html",
+  "skills_dir": "/home/shaun/source/birch-html",
+  "model": "sonnet46",
+  "jobs": 2,
+  "generation_timeout_s": 1200,
+  "default_shell_access": true,
+  "shell_evals": [],
+  "source_preview": "auto"
+}

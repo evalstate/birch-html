@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Code review — eval scripts and checker changes</title>
+  <style data-birch-system>__BIRCH_SYSTEM_CSS__</style>
+</head>
+<body>
+  <main class="page stack" data-gap="lg">
+    <header class="stack" data-gap="sm">
+      <div class="eyebrow">Code review · eval: code-review</div>
+      <h1>Candle-style eval patch review for maintainer merge decision</h1>
+      <p class="lede">
+        Source: <code>evals/code-review/source.diff</code> covering
+        <code>evals/charts/build_chart_brief.py</code>,
+        <code>evals/charts/run_eval.py</code>, and
+        <code>scripts/check_candle_renderings.py</code>.
+      </p>
+    </header>
+
+    <section class="section stack" data-gap="md">
+      <div class="callout" data-tone="warning">
+        <div class="section-head">
+          <div>
+            <span class="badge" data-tone="warning">Decision signal</span>
+            <h2>Findings-first review</h2>
+          </div>
+        </div>
+        <p class="lede">Blocking/high-risk findings exist; this patch is not yet safe to merge unchanged.</p>
+      </div>
+    </section>
+
+    <section class="section stack" data-gap="lg">
+      <div class="section-head">
+        <h2>Findings</h2>
+        <span class="badge" data-tone="danger">High/medium priorities first</span>
+      </div>
+
+      <article class="card stack finding" data-severity="high">
+        <div class="section-head">
+          <div>
+            <span class="badge" data-tone="danger">high</span>
+            <h3>Checker runner validates only self-pairs</h3>
+          </div>
+          <span class="caption">evals/charts/run_eval.py · main()</span>
+        </div>
+
+        <p><strong>Severity:</strong> High (merge safety risk).</p>
+        <p><strong>Evidence:</strong> The same artifact is passed as both sides of <code>--pair</code> for every viewport.</p>
+        <p><strong>Location:</strong> <code>--pair</code> uses <code>"24-candle-chart-brief.html:24-candle-chart-brief.html"</code> (pairing candidate and reference to the same file).</p>
+        <p><strong>Impact:</strong> Pair-mode contract/diff checks cannot detect any before-vs-after HTML regression in this run; this gives a false sense of checker coverage for changed outputs and can let content/layout regressions pass silently.</p>
+        <p><strong>Recommended fix:</strong> Add a dedicated artifact-only checker mode, or pass distinct baseline and generated artifacts (e.g., baseline vs timestamped output) when running this evaluator.</p>
+
+        <div class="code-block" data-wrap="true">
+          <div class="diff" data-wrap="true">
+            <div class="diff-row"><span class="ln">33</span><span class="mark"> </span><span class="code">run([</span></div>
+            <div class="diff-row"><span class="ln">35</span><span class="mark"> </span><span class="code">  "python", "scripts/check_candle_renderings.py", "--pair",</span></div>
+            <div class="diff-row"><span class="ln">36</span><span class="mark"> </span><span class="code">  "24-candle-chart-brief.html:24-candle-chart-brief.html",</span></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="card stack finding" data-severity="medium">
+        <div class="section-head">
+          <div>
+            <span class="badge" data-tone="warning">medium</span>
+            <h3>Chart builder crashes on sparse/initial fixture data</h3>
+          </div>
+          <span class="caption">evals/charts/build_chart_brief.py · previous_latest(), build_svg()</span>
+        </div>
+
+        <p><strong>Severity:</strong> Medium (CI/runtime reliability).</p>
+        <p><strong>Evidence:</strong> <code>previous_latest()</code> reads <code>weeks[-2]</code> and <code>weeks[-1]</code> without validating list length, and <code>build_svg()</code> indexes <code>by_artifact[artifact][week]</code> directly.</p>
+        <p><strong>Impact:</strong> A fixture with one week of data or missing artifact/week rows will raise <code>IndexError</code>/<code>KeyError</code> and abort the eval job before artifact output is complete.</p>
+        <p><strong>Recommended fix:</strong> guard for <code>len(weeks) &lt; 2</code>, and build SVG points with a missing-week safe path (skip with logged warning or fail with explicit validation).</p>
+
+        <div class="code-block" data-wrap="true">
+          <div class="diff" data-wrap="true">
+            <div class="diff-row"><span class="ln">70</span><span class="mark"> </span><span class="code">weeks = sorted({str(row["week"]) for row in rows})</span></div>
+            <div class="diff-row"><span class="ln">71</span><span class="mark"> </span><span class="code">prev, latest = weeks[-2], weeks[-1]</span></div>
+            <div class="diff-row"><span class="ln">47</span><span class="mark"> </span><span class="code">values = [by_artifact[artifact][week]["static_pass_rate"] for week in weeks]</span></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="card stack finding" data-severity="medium">
+        <div class="section-head">
+          <div>
+            <span class="badge" data-tone="warning">medium</span>
+            <h3>Numeric-only pages can trigger a hard fail on chart intent</h3>
+          </div>
+          <span class="caption">scripts/check_candle_renderings.py · contract_findings()</span>
+        </div>
+
+        <p><strong>Severity:</strong> Medium (pipeline stability risk).</p>
+        <p><strong>Evidence:</strong> <code>contract_findings()</code> marks <code>missing_data_visualization</code> as <code>fail</code> whenever numeric-table + metric density is present and chart markers are absent.</p>
+        <p><strong>Impact:</strong> Non-chart numerical pages (e.g., lookup/reference matrices) can be rejected even when they are intentional and correct within the current renderer contract.</p>
+        <p><strong>Recommended fix:</strong> Gate this check behind explicit chart intent (artifact path pattern, section marker, or opt-in contract flag) instead of inferring from class counts alone.</p>
+
+        <div class="code-block" data-wrap="true">
+          <div class="diff" data-wrap="true">
+            <div class="diff-row"><span class="ln">766</span><span class="mark"> </span><span class="code">numeric_rich = (stats.class_counts.get("numeric-table", 0) &gt; 0 and (...))</span></div>
+            <div class="diff-row"><span class="ln">773</span><span class="mark"> </span><span class="code">if numeric_rich and chart_count == 0:</span></div>
+            <div class="diff-row"><span class="ln">774</span><span class="mark"> </span><span class="code">  "missing_data_visualization" fail finding</span></div>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section class="section stack" data-gap="lg">
+      <div class="section-head">
+        <h2>Evidence summary</h2>
+      </div>
+      <div class="panel chart-panel stack" data-gap="sm">
+        <ul class="insight-list">
+          <li>Reviewed all hunks for changed/new files in <code>source.diff</code> and mapped each issue to concrete locations.</li>
+          <li>No use of raw unified diff output appears in this artifact; only short wrapped Birch <code>.diff</code> rows are used as evidence.</li>
+          <li>Findings are ordered severity-first and each includes explicit location, impact, and recommended fix.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section stack" data-gap="md">
+      <div class="section-head">
+        <h2>Reviewer checklist</h2>
+      </div>
+      <ul class="checklist">
+        <li>Re-run evaluator after applying non-self pair comparison and confirm regression deltas are produced for changed outputs.</li>
+        <li>Test <code>build_chart_brief.py</code> with one-week and partially missing fixtures to confirm it fails fast with clear diagnostics.</li>
+        <li>Decide whether <code>missing_data_visualization</code> should be a warning for non-chart numeric artifacts.</li>
+        <li>Validate checker contract checks still pass with existing Candle report fixtures and mobile-only pages.</li>
+      </ul>
+    </section>
+
+    <section class="section stack" data-gap="md">
+      <div class="section-head">
+        <h2>Residual risks</h2>
+      </div>
+      <ul class="plain-list">
+        <li>Geometry checks in the same patch now emit <code>fail</code> for overflow and timeline alignment conditions that were previously warnings; minor CSS drift in legacy pages may need tolerance tuning.</li>
+        <li>Strict parsing contracts for <code>.metric-row</code> and <code>.timeline-item</code> may generate noisy fails until all upstream templates are aligned.</li>
+      </ul>
+    </section>
+
+    <section class="section stack" data-gap="sm">
+      <div class="section-head">
+        <h2>Decision</h2>
+      </div>
+      <p class="lede">Do not merge as-is; the high-priority regression-detection gap should be fixed before shipping.</p>
+    </section>
+  </main>
+</body>
+</html>

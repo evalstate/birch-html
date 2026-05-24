@@ -1,0 +1,770 @@
+{
+  "created_at": "2026-05-24",
+  "description": "Publish bundle from publication-final with promoted clean GPT-5.5 experimental rerun, dynamic deep screenshots, strengthened VLM diagram review, bbox overlays, corrected VLM filename normalization, and self-check accounting.",
+  "label_suffix": "publication-final-plus-gpt55-promoted",
+  "records": [
+    {
+      "model": "codexresponses.gpt-5.4-mini",
+      "model_slug": "codexresponses-gpt-5-4-mini",
+      "label": "skill-with-shell-codexresponses-gpt-5-4-mini-publication-final",
+      "source_kind": "clean-final",
+      "artifact_count": 5,
+      "artifacts": {
+        "benchmark-comparison.html": "eval-runs/skill-with-shell-codexresponses-gpt-5-4-mini-publication-final/benchmark-comparison.html",
+        "code-review.html": "eval-runs/skill-with-shell-codexresponses-gpt-5-4-mini-publication-final/code-review.html",
+        "implementation-plan.html": "eval-runs/skill-with-shell-codexresponses-gpt-5-4-mini-publication-final/implementation-plan.html",
+        "module-explainer.html": "eval-runs/skill-with-shell-codexresponses-gpt-5-4-mini-publication-final/module-explainer.html",
+        "numeric-data.html": "eval-runs/skill-with-shell-codexresponses-gpt-5-4-mini-publication-final/numeric-data.html"
+      },
+      "generation_ok": 5,
+      "generation_total": 5,
+      "deterministic_failures": 0,
+      "deterministic_warnings": 2,
+      "viewport_summary": {
+        "desktop": {
+          "artifacts": 5,
+          "pairs": 5,
+          "failures": 0,
+          "warnings": 1,
+          "notes": 5
+        },
+        "mobile": {
+          "artifacts": 5,
+          "pairs": 5,
+          "failures": 0,
+          "warnings": 0,
+          "notes": 5
+        },
+        "deep": {
+          "artifacts": 5,
+          "pairs": 5,
+          "failures": 0,
+          "warnings": 1,
+          "notes": 5
+        },
+        "mobile-deep": {
+          "artifacts": 5,
+          "pairs": 5,
+          "failures": 0,
+          "warnings": 0,
+          "notes": 5
+        }
+      },
+      "vision_findings_present": true,
+      "vision_counts": {},
+      "publication_paths": {
+        "artifacts": "results/publish/models/codexresponses-gpt-5-4-mini/artifacts",
+        "reports": "results/publish/models/codexresponses-gpt-5-4-mini/reports",
+        "prompts": "results/publish/models/codexresponses-gpt-5-4-mini/prompts",
+        "logs": "results/publish/models/codexresponses-gpt-5-4-mini/logs"
+      }
+    },
+    {
+      "model": "codexresponses.gpt-5.5",
+      "model_slug": "codexresponses-gpt-5-5",
+      "label": "skill-with-shell-codexresponses-gpt-5-5-opus-gpt55-deepseek-experiment-20260524-164522",
+      "source_kind": "clean-final",
+      "artifact_count": 5,
+      "artifacts": {
+        "benchmark-comparison.html": "eval-runs/skill-with-shell-codexresponses-gpt-5-5-opus-gpt55-deepseek-experiment-20260524-164522/benchmark-comparison.html",
+        "code-review.html": "eval-runs/skill-with-shell-codexresponses-gpt-5-5-opus-gpt55-deepseek-experiment-20260524-164522/code-review.html",
+        "implementation-plan.html": "eval-runs/skill-with-shell-codexresponses-gpt-5-5-opus-gpt55-deepseek-experiment-20260524-164522/implementation-plan.html",
+        "module-explainer.html": "eval-runs/skill-with-shell-codexresponses-gpt-5-5-opus-gpt55-deepseek-experiment-20260524-164522/module-explainer.html",
+        "numeric-data.html": "eval-runs/skill-with-shell-codexresponses-gpt-5-5-opus-gpt55-deepseek-experiment-20260524-164522/numeric-data.html"
+      },
+      "generation_ok": 5,
+      "generation_total": 5,
+      "deterministic_failures": 0,
+      "deterministic_warnings": 0,
+      "viewport_summary": {
+        "desktop": {
+          "artifacts": 5,
+          "pairs": 5,
+          "failures": 0,
+          "warnings": 0,
+          "notes": 5
+        },
+        "mobile": {
+          "artifacts": 5,
+          "pairs": 5,
+          "failures": 0,
+          "warnings": 0,
+          "notes": 5
+        },
+        "deep": {
+          "artifacts": 5,
+          "pairs": 5,
+          "failures": 0,
+          "warnings": 0,
+          "notes": 5
+        },
+        "mobile-deep": {
+          "artifacts": 5,
+          "pairs": 5,
+          "failures": 0,
+          "warnings": 0,
+          "notes": 5
+        }
+      },
+      "vision_findings_present": true,
+      "vision_counts": {},
+      "publication_paths": {
+        "artifacts": "results/publish/models/codexresponses-gpt-5-5/artifacts",
+        "reports": "results/publish/models/codexresponses-gpt-5-5/reports",
+        "prompts": "results/publish/models/codexresponses-gpt-5-5/prompts",
+        "logs": "results/publish/models/codexresponses-gpt-5-5/logs"
+      },
+      "promoted_from_suite": "experiment-opus-gpt55-deepseek-experiment-20260524-164522",
+      "promoted_at": "2026-05-24T17:52:51+01:00",
+      "promotion_note": "Promoted clean GPT-5.5 experimental rerun; displayed as clean-final for report simplicity. Experimental opus47/deepseek records were not promoted."
+    },
+    {
+      "model": "codexspark",
+      "model_slug": "codexspark",
+      "label": "skill-with-shell-codexspark-publication-final",
+      "source_kind": "clean-final",
+      "artifact_count": 5,
+      "artifacts": {
+        "benchmark-comparison.html": "eval-runs/skill-with-shell-codexspark-publication-final/benchmark-comparison.html",
+        "code-review.html": "eval-runs/skill-with-shell-codexspark-publication-final/code-review.html",
+        "implementation-plan.html": "eval-runs/skill-with-shell-codexspark-publication-final/implementation-plan.html",
+        "module-explainer.html": "eval-runs/skill-with-shell-codexspark-publication-final/module-explainer.html",
+        "numeric-data.html": "eval-runs/skill-with-shell-codexspark-publication-final/numeric-data.html"
+      },
+      "generation_ok": 3,
+      "generation_total": 5,
+      "deterministic_failures": 14,
+      "deterministic_warnings": 6,
+      "viewport_summary": {
+        "desktop": {
+          "artifacts": 5,
+          "pairs": 5,
+          "failures": 3,
+          "warnings": 2,
+          "notes": 5
+        },
+        "mobile": {
+          "artifacts": 5,
+          "pairs": 5,
+          "failures": 4,
+          "warnings": 1,
+          "notes": 5
+        },
+        "deep": {
+          "artifacts": 5,
+          "pairs": 5,
+          "failures": 3,
+          "warnings": 2,
+          "notes": 5
+        },
+        "mobile-deep": {
+          "artifacts": 5,
+          "pairs": 5,
+          "failures": 4,
+          "warnings": 1,
+          "notes": 5
+        }
+      },
+      "vision_findings_present": true,
+      "vision_counts": {
+        "fail": 5
+      },
+      "publication_paths": {
+        "artifacts": "results/publish/models/codexspark/artifacts",
+        "reports": "results/publish/models/codexspark/reports",
+        "prompts": "results/publish/models/codexspark/prompts",
+        "logs": "results/publish/models/codexspark/logs"
+      }
+    },
+    {
+      "model": "deepseek",
+      "model_slug": "deepseek",
+      "label": "skill-with-shell-deepseek-publication-final",
+      "source_kind": "clean-final",
+      "artifact_count": 5,
+      "artifacts": {
+        "benchmark-comparison.html": "eval-runs/skill-with-shell-deepseek-publication-final/benchmark-comparison.html",
+        "code-review.html": "eval-runs/skill-with-shell-deepseek-publication-final/code-review.html",
+        "implementation-plan.html": "eval-runs/skill-with-shell-deepseek-publication-final/implementation-plan.html",
+        "module-explainer.html": "eval-runs/skill-with-shell-deepseek-publication-final/module-explainer.html",
+        "numeric-data.html": "eval-runs/skill-with-shell-deepseek-publication-final/numeric-data.html"
+      },
+      "generation_ok": 4,
+      "generation_total": 5,
+      "deterministic_failures": 8,
+      "deterministic_warnings": 1,
+      "viewport_summary": {
+        "desktop": {
+          "artifacts": 5,
+          "pairs": 5,
+          "failures": 1,
+          "warnings": 1,
+          "notes": 5
+        },
+        "mobile": {
+          "artifacts": 5,
+          "pairs": 5,
+          "failures": 3,
+          "warnings": 0,
+          "notes": 5
+        },
+        "deep": {
+          "artifacts": 5,
+          "pairs": 5,
+          "failures": 1,
+          "warnings": 0,
+          "notes": 5
+        },
+        "mobile-deep": {
+          "artifacts": 5,
+          "pairs": 5,
+          "failures": 3,
+          "warnings": 0,
+          "notes": 5
+        }
+      },
+      "vision_findings_present": true,
+      "vision_counts": {
+        "fail": 7
+      },
+      "publication_paths": {
+        "artifacts": "results/publish/models/deepseek/artifacts",
+        "reports": "results/publish/models/deepseek/reports",
+        "prompts": "results/publish/models/deepseek/prompts",
+        "logs": "results/publish/models/deepseek/logs"
+      }
+    },
+    {
+      "model": "gemini35flash",
+      "model_slug": "gemini35flash",
+      "label": "skill-with-shell-gemini35flash-publication-final",
+      "source_kind": "clean-final",
+      "artifact_count": 5,
+      "artifacts": {
+        "benchmark-comparison.html": "eval-runs/skill-with-shell-gemini35flash-publication-final/benchmark-comparison.html",
+        "code-review.html": "eval-runs/skill-with-shell-gemini35flash-publication-final/code-review.html",
+        "implementation-plan.html": "eval-runs/skill-with-shell-gemini35flash-publication-final/implementation-plan.html",
+        "module-explainer.html": "eval-runs/skill-with-shell-gemini35flash-publication-final/module-explainer.html",
+        "numeric-data.html": "eval-runs/skill-with-shell-gemini35flash-publication-final/numeric-data.html"
+      },
+      "generation_ok": 5,
+      "generation_total": 5,
+      "deterministic_failures": 0,
+      "deterministic_warnings": 0,
+      "viewport_summary": {
+        "desktop": {
+          "artifacts": 5,
+          "pairs": 5,
+          "failures": 0,
+          "warnings": 0,
+          "notes": 5
+        },
+        "mobile": {
+          "artifacts": 5,
+          "pairs": 5,
+          "failures": 0,
+          "warnings": 0,
+          "notes": 5
+        },
+        "deep": {
+          "artifacts": 5,
+          "pairs": 5,
+          "failures": 0,
+          "warnings": 0,
+          "notes": 5
+        },
+        "mobile-deep": {
+          "artifacts": 5,
+          "pairs": 5,
+          "failures": 0,
+          "warnings": 0,
+          "notes": 5
+        }
+      },
+      "vision_findings_present": true,
+      "vision_counts": {},
+      "publication_paths": {
+        "artifacts": "results/publish/models/gemini35flash/artifacts",
+        "reports": "results/publish/models/gemini35flash/reports",
+        "prompts": "results/publish/models/gemini35flash/prompts",
+        "logs": "results/publish/models/gemini35flash/logs"
+      }
+    },
+    {
+      "model": "glm51",
+      "model_slug": "glm51",
+      "label": "skill-with-shell-glm51-publication-final",
+      "source_kind": "clean-final",
+      "artifact_count": 5,
+      "artifacts": {
+        "benchmark-comparison.html": "eval-runs/skill-with-shell-glm51-publication-final/benchmark-comparison.html",
+        "code-review.html": "eval-runs/skill-with-shell-glm51-publication-final/code-review.html",
+        "implementation-plan.html": "eval-runs/skill-with-shell-glm51-publication-final/implementation-plan.html",
+        "module-explainer.html": "eval-runs/skill-with-shell-glm51-publication-final/module-explainer.html",
+        "numeric-data.html": "eval-runs/skill-with-shell-glm51-publication-final/numeric-data.html"
+      },
+      "generation_ok": 5,
+      "generation_total": 5,
+      "deterministic_failures": 2,
+      "deterministic_warnings": 0,
+      "viewport_summary": {
+        "desktop": {
+          "artifacts": 5,
+          "pairs": 5,
+          "failures": 0,
+          "warnings": 0,
+          "notes": 5
+        },
+        "mobile": {
+          "artifacts": 5,
+          "pairs": 5,
+          "failures": 1,
+          "warnings": 0,
+          "notes": 5
+        },
+        "deep": {
+          "artifacts": 5,
+          "pairs": 5,
+          "failures": 0,
+          "warnings": 0,
+          "notes": 5
+        },
+        "mobile-deep": {
+          "artifacts": 5,
+          "pairs": 5,
+          "failures": 1,
+          "warnings": 0,
+          "notes": 5
+        }
+      },
+      "vision_findings_present": true,
+      "vision_counts": {
+        "fail": 2,
+        "warn": 4
+      },
+      "publication_paths": {
+        "artifacts": "results/publish/models/glm51/artifacts",
+        "reports": "results/publish/models/glm51/reports",
+        "prompts": "results/publish/models/glm51/prompts",
+        "logs": "results/publish/models/glm51/logs"
+      }
+    },
+    {
+      "model": "gpt-5.3-codex",
+      "model_slug": "gpt-5-3-codex",
+      "label": "skill-with-shell-gpt-5-3-codex-publication-final",
+      "source_kind": "clean-final",
+      "artifact_count": 5,
+      "artifacts": {
+        "benchmark-comparison.html": "eval-runs/skill-with-shell-gpt-5-3-codex-publication-final/benchmark-comparison.html",
+        "code-review.html": "eval-runs/skill-with-shell-gpt-5-3-codex-publication-final/code-review.html",
+        "implementation-plan.html": "eval-runs/skill-with-shell-gpt-5-3-codex-publication-final/implementation-plan.html",
+        "module-explainer.html": "eval-runs/skill-with-shell-gpt-5-3-codex-publication-final/module-explainer.html",
+        "numeric-data.html": "eval-runs/skill-with-shell-gpt-5-3-codex-publication-final/numeric-data.html"
+      },
+      "generation_ok": 5,
+      "generation_total": 5,
+      "deterministic_failures": 6,
+      "deterministic_warnings": 2,
+      "viewport_summary": {
+        "desktop": {
+          "artifacts": 5,
+          "pairs": 5,
+          "failures": 2,
+          "warnings": 1,
+          "notes": 5
+        },
+        "mobile": {
+          "artifacts": 5,
+          "pairs": 5,
+          "failures": 1,
+          "warnings": 0,
+          "notes": 5
+        },
+        "deep": {
+          "artifacts": 5,
+          "pairs": 5,
+          "failures": 2,
+          "warnings": 1,
+          "notes": 5
+        },
+        "mobile-deep": {
+          "artifacts": 5,
+          "pairs": 5,
+          "failures": 1,
+          "warnings": 0,
+          "notes": 5
+        }
+      },
+      "vision_findings_present": true,
+      "vision_counts": {
+        "fail": 1,
+        "warn": 1
+      },
+      "publication_paths": {
+        "artifacts": "results/publish/models/gpt-5-3-codex/artifacts",
+        "reports": "results/publish/models/gpt-5-3-codex/reports",
+        "prompts": "results/publish/models/gpt-5-3-codex/prompts",
+        "logs": "results/publish/models/gpt-5-3-codex/logs"
+      }
+    },
+    {
+      "model": "grok-4.3",
+      "model_slug": "grok-4-3",
+      "label": "skill-with-shell-grok-4-3-publication-final",
+      "source_kind": "clean-final",
+      "artifact_count": 5,
+      "artifacts": {
+        "benchmark-comparison.html": "eval-runs/skill-with-shell-grok-4-3-publication-final/benchmark-comparison.html",
+        "code-review.html": "eval-runs/skill-with-shell-grok-4-3-publication-final/code-review.html",
+        "implementation-plan.html": "eval-runs/skill-with-shell-grok-4-3-publication-final/implementation-plan.html",
+        "module-explainer.html": "eval-runs/skill-with-shell-grok-4-3-publication-final/module-explainer.html",
+        "numeric-data.html": "eval-runs/skill-with-shell-grok-4-3-publication-final/numeric-data.html"
+      },
+      "generation_ok": 2,
+      "generation_total": 5,
+      "deterministic_failures": 16,
+      "deterministic_warnings": 0,
+      "viewport_summary": {
+        "desktop": {
+          "artifacts": 5,
+          "pairs": 5,
+          "failures": 4,
+          "warnings": 0,
+          "notes": 5
+        },
+        "mobile": {
+          "artifacts": 5,
+          "pairs": 5,
+          "failures": 4,
+          "warnings": 0,
+          "notes": 5
+        },
+        "deep": {
+          "artifacts": 5,
+          "pairs": 5,
+          "failures": 4,
+          "warnings": 0,
+          "notes": 5
+        },
+        "mobile-deep": {
+          "artifacts": 5,
+          "pairs": 5,
+          "failures": 4,
+          "warnings": 0,
+          "notes": 5
+        }
+      },
+      "vision_findings_present": true,
+      "vision_counts": {
+        "fail": 11,
+        "warn": 1
+      },
+      "publication_paths": {
+        "artifacts": "results/publish/models/grok-4-3/artifacts",
+        "reports": "results/publish/models/grok-4-3/reports",
+        "prompts": "results/publish/models/grok-4-3/prompts",
+        "logs": "results/publish/models/grok-4-3/logs"
+      }
+    },
+    {
+      "model": "haiku45",
+      "model_slug": "haiku45",
+      "label": "skill-with-shell-haiku45-publication-final",
+      "source_kind": "clean-final",
+      "artifact_count": 5,
+      "artifacts": {
+        "benchmark-comparison.html": "eval-runs/skill-with-shell-haiku45-publication-final/benchmark-comparison.html",
+        "code-review.html": "eval-runs/skill-with-shell-haiku45-publication-final/code-review.html",
+        "implementation-plan.html": "eval-runs/skill-with-shell-haiku45-publication-final/implementation-plan.html",
+        "module-explainer.html": "eval-runs/skill-with-shell-haiku45-publication-final/module-explainer.html",
+        "numeric-data.html": "eval-runs/skill-with-shell-haiku45-publication-final/numeric-data.html"
+      },
+      "generation_ok": 3,
+      "generation_total": 5,
+      "deterministic_failures": 26,
+      "deterministic_warnings": 12,
+      "viewport_summary": {
+        "desktop": {
+          "artifacts": 5,
+          "pairs": 5,
+          "failures": 6,
+          "warnings": 3,
+          "notes": 6
+        },
+        "mobile": {
+          "artifacts": 5,
+          "pairs": 5,
+          "failures": 7,
+          "warnings": 3,
+          "notes": 6
+        },
+        "deep": {
+          "artifacts": 5,
+          "pairs": 5,
+          "failures": 6,
+          "warnings": 3,
+          "notes": 6
+        },
+        "mobile-deep": {
+          "artifacts": 5,
+          "pairs": 5,
+          "failures": 7,
+          "warnings": 3,
+          "notes": 6
+        }
+      },
+      "vision_findings_present": true,
+      "vision_counts": {
+        "warn": 5,
+        "fail": 1
+      },
+      "publication_paths": {
+        "artifacts": "results/publish/models/haiku45/artifacts",
+        "reports": "results/publish/models/haiku45/reports",
+        "prompts": "results/publish/models/haiku45/prompts",
+        "logs": "results/publish/models/haiku45/logs"
+      }
+    },
+    {
+      "model": "kimi",
+      "model_slug": "kimi",
+      "label": "skill-with-shell-kimi-publication-final",
+      "source_kind": "clean-final",
+      "artifact_count": 5,
+      "artifacts": {
+        "benchmark-comparison.html": "eval-runs/skill-with-shell-kimi-publication-final/benchmark-comparison.html",
+        "code-review.html": "eval-runs/skill-with-shell-kimi-publication-final/code-review.html",
+        "implementation-plan.html": "eval-runs/skill-with-shell-kimi-publication-final/implementation-plan.html",
+        "module-explainer.html": "eval-runs/skill-with-shell-kimi-publication-final/module-explainer.html",
+        "numeric-data.html": "eval-runs/skill-with-shell-kimi-publication-final/numeric-data.html"
+      },
+      "generation_ok": 4,
+      "generation_total": 5,
+      "deterministic_failures": 6,
+      "deterministic_warnings": 0,
+      "viewport_summary": {
+        "desktop": {
+          "artifacts": 5,
+          "pairs": 5,
+          "failures": 1,
+          "warnings": 0,
+          "notes": 5
+        },
+        "mobile": {
+          "artifacts": 5,
+          "pairs": 5,
+          "failures": 2,
+          "warnings": 0,
+          "notes": 5
+        },
+        "deep": {
+          "artifacts": 5,
+          "pairs": 5,
+          "failures": 1,
+          "warnings": 0,
+          "notes": 5
+        },
+        "mobile-deep": {
+          "artifacts": 5,
+          "pairs": 5,
+          "failures": 2,
+          "warnings": 0,
+          "notes": 5
+        }
+      },
+      "vision_findings_present": true,
+      "vision_counts": {
+        "warn": 2,
+        "fail": 7
+      },
+      "publication_paths": {
+        "artifacts": "results/publish/models/kimi/artifacts",
+        "reports": "results/publish/models/kimi/reports",
+        "prompts": "results/publish/models/kimi/prompts",
+        "logs": "results/publish/models/kimi/logs"
+      }
+    },
+    {
+      "model": "minimax27",
+      "model_slug": "minimax27",
+      "label": "skill-with-shell-minimax27-publication-final",
+      "source_kind": "clean-final",
+      "artifact_count": 5,
+      "artifacts": {
+        "benchmark-comparison.html": "eval-runs/skill-with-shell-minimax27-publication-final/benchmark-comparison.html",
+        "code-review.html": "eval-runs/skill-with-shell-minimax27-publication-final/code-review.html",
+        "implementation-plan.html": "eval-runs/skill-with-shell-minimax27-publication-final/implementation-plan.html",
+        "module-explainer.html": "eval-runs/skill-with-shell-minimax27-publication-final/module-explainer.html",
+        "numeric-data.html": "eval-runs/skill-with-shell-minimax27-publication-final/numeric-data.html"
+      },
+      "generation_ok": 1,
+      "generation_total": 5,
+      "deterministic_failures": 26,
+      "deterministic_warnings": 4,
+      "viewport_summary": {
+        "desktop": {
+          "artifacts": 5,
+          "pairs": 5,
+          "failures": 6,
+          "warnings": 1,
+          "notes": 6
+        },
+        "mobile": {
+          "artifacts": 5,
+          "pairs": 5,
+          "failures": 7,
+          "warnings": 1,
+          "notes": 6
+        },
+        "deep": {
+          "artifacts": 5,
+          "pairs": 5,
+          "failures": 6,
+          "warnings": 1,
+          "notes": 6
+        },
+        "mobile-deep": {
+          "artifacts": 5,
+          "pairs": 5,
+          "failures": 7,
+          "warnings": 1,
+          "notes": 6
+        }
+      },
+      "vision_findings_present": true,
+      "vision_counts": {
+        "warn": 4,
+        "fail": 4
+      },
+      "publication_paths": {
+        "artifacts": "results/publish/models/minimax27/artifacts",
+        "reports": "results/publish/models/minimax27/reports",
+        "prompts": "results/publish/models/minimax27/prompts",
+        "logs": "results/publish/models/minimax27/logs"
+      }
+    },
+    {
+      "model": "opus47",
+      "model_slug": "opus47",
+      "label": "skill-with-shell-opus47-publication-final",
+      "source_kind": "clean-final",
+      "artifact_count": 5,
+      "artifacts": {
+        "benchmark-comparison.html": "eval-runs/skill-with-shell-opus47-publication-final/benchmark-comparison.html",
+        "code-review.html": "eval-runs/skill-with-shell-opus47-publication-final/code-review.html",
+        "implementation-plan.html": "eval-runs/skill-with-shell-opus47-publication-final/implementation-plan.html",
+        "module-explainer.html": "eval-runs/skill-with-shell-opus47-publication-final/module-explainer.html",
+        "numeric-data.html": "eval-runs/skill-with-shell-opus47-publication-final/numeric-data.html"
+      },
+      "generation_ok": 5,
+      "generation_total": 5,
+      "deterministic_failures": 0,
+      "deterministic_warnings": 0,
+      "viewport_summary": {
+        "desktop": {
+          "artifacts": 5,
+          "pairs": 5,
+          "failures": 0,
+          "warnings": 0,
+          "notes": 5
+        },
+        "mobile": {
+          "artifacts": 5,
+          "pairs": 5,
+          "failures": 0,
+          "warnings": 0,
+          "notes": 5
+        },
+        "deep": {
+          "artifacts": 5,
+          "pairs": 5,
+          "failures": 0,
+          "warnings": 0,
+          "notes": 5
+        },
+        "mobile-deep": {
+          "artifacts": 5,
+          "pairs": 5,
+          "failures": 0,
+          "warnings": 0,
+          "notes": 5
+        }
+      },
+      "vision_findings_present": true,
+      "vision_counts": {},
+      "publication_paths": {
+        "artifacts": "results/publish/models/opus47/artifacts",
+        "reports": "results/publish/models/opus47/reports",
+        "prompts": "results/publish/models/opus47/prompts",
+        "logs": "results/publish/models/opus47/logs"
+      }
+    },
+    {
+      "model": "sonnet46",
+      "model_slug": "sonnet46",
+      "label": "skill-with-shell-sonnet46-publication-final",
+      "source_kind": "clean-final",
+      "artifact_count": 5,
+      "artifacts": {
+        "benchmark-comparison.html": "eval-runs/skill-with-shell-sonnet46-publication-final/benchmark-comparison.html",
+        "code-review.html": "eval-runs/skill-with-shell-sonnet46-publication-final/code-review.html",
+        "implementation-plan.html": "eval-runs/skill-with-shell-sonnet46-publication-final/implementation-plan.html",
+        "module-explainer.html": "eval-runs/skill-with-shell-sonnet46-publication-final/module-explainer.html",
+        "numeric-data.html": "eval-runs/skill-with-shell-sonnet46-publication-final/numeric-data.html"
+      },
+      "generation_ok": 5,
+      "generation_total": 5,
+      "deterministic_failures": 0,
+      "deterministic_warnings": 0,
+      "viewport_summary": {
+        "desktop": {
+          "artifacts": 5,
+          "pairs": 5,
+          "failures": 0,
+          "warnings": 0,
+          "notes": 5
+        },
+        "mobile": {
+          "artifacts": 5,
+          "pairs": 5,
+          "failures": 0,
+          "warnings": 0,
+          "notes": 5
+        },
+        "deep": {
+          "artifacts": 5,
+          "pairs": 5,
+          "failures": 0,
+          "warnings": 0,
+          "notes": 5
+        },
+        "mobile-deep": {
+          "artifacts": 5,
+          "pairs": 5,
+          "failures": 0,
+          "warnings": 0,
+          "notes": 5
+        }
+      },
+      "vision_findings_present": true,
+      "vision_counts": {},
+      "publication_paths": {
+        "artifacts": "results/publish/models/sonnet46/artifacts",
+        "reports": "results/publish/models/sonnet46/reports",
+        "prompts": "results/publish/models/sonnet46/prompts",
+        "logs": "results/publish/models/sonnet46/logs"
+      }
+    }
+  ],
+  "updated_at": "2026-05-24T17:52:51+01:00",
+  "promotion": {
+    "model_slug": "codexresponses-gpt-5-5",
+    "model": "codexresponses.gpt-5.5",
+    "from_experiment": "opus-gpt55-deepseek-experiment-20260524-164522",
+    "discarded_experimental_models": [
+      "opus47",
+      "deepseek"
+    ]
+  }
+}

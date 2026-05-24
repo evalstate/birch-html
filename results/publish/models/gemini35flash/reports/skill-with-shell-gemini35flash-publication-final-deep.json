@@ -1,0 +1,1178 @@
+{
+  "mode": "artifact",
+  "artifacts": [
+    {
+      "artifact": "eval-runs/skill-with-shell-gemini35flash-publication-final/numeric-data.html",
+      "stats": {
+        "path": "eval-runs/skill-with-shell-gemini35flash-publication-final/numeric-data.html",
+        "bytes": 53215,
+        "title": "Rendering Checker Stability Assessment & Adoption Review",
+        "doctype": true,
+        "viewport": true,
+        "stylesheet_links": [],
+        "birch_css_embedded": true,
+        "style_blocks": 2,
+        "style_bytes": 340,
+        "script_blocks": 0,
+        "tag_counts": {
+          "html": 1,
+          "head": 1,
+          "meta": 2,
+          "title": 1,
+          "style": 3,
+          "body": 1,
+          "main": 1,
+          "header": 1,
+          "div": 25,
+          "h1": 1,
+          "p": 6,
+          "strong": 3,
+          "section": 1,
+          "span": 20,
+          "h3": 3,
+          "svg": 1,
+          "defs": 5,
+          "g": 61,
+          "path": 18,
+          "text": 15,
+          "use": 18,
+          "clippath": 1,
+          "rect": 1,
+          "table": 2,
+          "thead": 2,
+          "tr": 10,
+          "th": 9,
+          "tbody": 2,
+          "td": 37,
+          "aside": 1,
+          "code": 5
+        },
+        "class_counts": {
+          "page": 1,
+          "stack": 14,
+          "eyebrow": 1,
+          "lede": 1,
+          "section": 1,
+          "auto-grid": 1,
+          "card": 4,
+          "stat-card": 4,
+          "caption": 11,
+          "stat-value": 4,
+          "chip": 4,
+          "section-rail": 1,
+          "panel": 1,
+          "chart-panel": 1,
+          "chart-svg": 1,
+          "chart-caption": 1,
+          "numeric-table-wrap": 2,
+          "numeric-table": 2,
+          "metric": 36,
+          "entity": 8,
+          "reference-panel": 1,
+          "metric-list": 1,
+          "metric-row": 3,
+          "meter": 3,
+          "callout": 1,
+          "callout-label": 1
+        },
+        "data_attrs": {
+          "data-birch-system": 1,
+          "data-gap": 14,
+          "data-tone": 5
+        },
+        "text_words": 190,
+        "unique_words": 117,
+        "css_vars_used": [
+          "--border-thin",
+          "--font-serif",
+          "--radius-sm",
+          "--space-2",
+          "--space-3",
+          "--space-4",
+          "--success",
+          "--surface-tint",
+          "--text-lg",
+          "--text-md",
+          "--text-sm"
+        ],
+        "css_vars_defined": [
+          "--grid-min",
+          "--metric-label",
+          "--metric-value",
+          "--rail-width",
+          "--value"
+        ],
+        "hex_colors": [],
+        "birch_css_bytes": 31715,
+        "birch_css_valid": true
+      },
+      "screenshot": {
+        "png": "eval-runs/reports/skill-with-shell-gemini35flash-publication-final/screenshots/numeric-data-deep.png",
+        "size": [
+          1365,
+          1640
+        ],
+        "mean_rgb": [
+          244.35,
+          243.37,
+          239.71
+        ],
+        "palette": {
+          "palette_close_fraction": 0.9649,
+          "ivory_fraction": 0.5777,
+          "blackish_fraction": 0.0
+        },
+        "background_fraction": 0.7597,
+        "non_background_fraction": 0.2403,
+        "blackish_fraction": 0.0,
+        "file_bytes": 232263
+      },
+      "geometry": {
+        "overflow": [],
+        "containerOverflow": [],
+        "statCardSqueeze": [],
+        "sectionRailOrder": [],
+        "pageOverflowX": 0,
+        "timelineProblems": [],
+        "metricGroups": [
+          {
+            "owner": "html > body > main.page.stack > section.section.stack",
+            "meterXs": [
+              922,
+              922,
+              922
+            ],
+            "spread": 0
+          }
+        ],
+        "metricRowSqueeze": [],
+        "splitRailGroups": [],
+        "numericHeaderGroups": [],
+        "codeWrapProblems": [],
+        "textWrapProblems": []
+      },
+      "findings": [
+        {
+          "level": "pass",
+          "name": "doctype",
+          "evidence": "doctype present"
+        },
+        {
+          "level": "pass",
+          "name": "viewport",
+          "evidence": "viewport meta present"
+        },
+        {
+          "level": "pass",
+          "name": "uses_birch_system_css",
+          "evidence": "embeds or links Birch system CSS"
+        },
+        {
+          "level": "pass",
+          "name": "has_page_shell",
+          "evidence": ".page found"
+        },
+        {
+          "level": "pass",
+          "name": "uses_layout_primitives",
+          "evidence": "layout primitive count is healthy"
+        },
+        {
+          "level": "pass",
+          "name": "uses_semantic_components",
+          "evidence": "semantic component count is healthy"
+        },
+        {
+          "level": "pass",
+          "name": "no_unknown_css_vars",
+          "evidence": "all CSS variables are defined in Birch system or local CSS"
+        },
+        {
+          "level": "pass",
+          "name": "no_patch_markers",
+          "evidence": "no accidental patch marker lines"
+        },
+        {
+          "level": "note",
+          "name": "screenshot_capture",
+          "evidence": "captured eval-runs/reports/skill-with-shell-gemini35flash-publication-final/screenshots/numeric-data-deep.png at [1365, 1640]"
+        },
+        {
+          "level": "pass",
+          "name": "layout_overflow",
+          "evidence": "no visible text/content overflow detected"
+        },
+        {
+          "level": "pass",
+          "name": "container_text_overflow",
+          "evidence": "text stays within its card/panel containers"
+        },
+        {
+          "level": "pass",
+          "name": "stat_card_squeeze",
+          "evidence": "KPI/stat cards have enough horizontal space"
+        },
+        {
+          "level": "pass",
+          "name": "timeline_geometry",
+          "evidence": "timeline markers/content stay within expected geometry"
+        },
+        {
+          "level": "pass",
+          "name": "metric_alignment",
+          "evidence": "metric meters align within each metric-list"
+        },
+        {
+          "level": "pass",
+          "name": "numeric_header_alignment",
+          "evidence": "numeric table headers align with right-aligned numeric columns"
+        },
+        {
+          "level": "pass",
+          "name": "code_wrap_underfill",
+          "evidence": "wrapped code/diff blocks use available container width"
+        },
+        {
+          "level": "pass",
+          "name": "pathological_text_wrapping",
+          "evidence": "prose/list text uses available container width"
+        }
+      ]
+    },
+    {
+      "artifact": "eval-runs/skill-with-shell-gemini35flash-publication-final/code-review.html",
+      "stats": {
+        "path": "eval-runs/skill-with-shell-gemini35flash-publication-final/code-review.html",
+        "bytes": 53047,
+        "title": "Candle Style-System Integration Code Review",
+        "doctype": true,
+        "viewport": true,
+        "stylesheet_links": [],
+        "birch_css_embedded": true,
+        "style_blocks": 0,
+        "style_bytes": 0,
+        "script_blocks": 0,
+        "tag_counts": {
+          "html": 1,
+          "head": 1,
+          "meta": 2,
+          "title": 1,
+          "style": 1,
+          "body": 1,
+          "main": 1,
+          "header": 1,
+          "div": 62,
+          "h1": 1,
+          "p": 30,
+          "span": 68,
+          "section": 6,
+          "h2": 6,
+          "strong": 44,
+          "h3": 8,
+          "code": 63,
+          "ul": 3,
+          "li": 10,
+          "aside": 1,
+          "table": 1,
+          "thead": 1,
+          "tr": 4,
+          "th": 5,
+          "tbody": 1,
+          "td": 15
+        },
+        "class_counts": {
+          "page": 1,
+          "stack": 25,
+          "eyebrow": 5,
+          "lede": 1,
+          "cluster": 8,
+          "badge": 12,
+          "chip": 1,
+          "section": 6,
+          "auto-grid": 1,
+          "card": 13,
+          "caption": 8,
+          "stat-value": 3,
+          "muted": 14,
+          "section-head": 4,
+          "finding": 7,
+          "diff": 5,
+          "diff-row": 15,
+          "del": 14,
+          "ln": 15,
+          "mark": 15,
+          "code": 15,
+          "add": 1,
+          "code-block": 4,
+          "section-rail": 1,
+          "grid": 1,
+          "checklist": 1,
+          "plain-list": 1,
+          "reference-panel": 1,
+          "insight-list": 1,
+          "numeric-table-wrap": 1,
+          "numeric-table": 1,
+          "label-cell": 1,
+          "metric": 12,
+          "entity": 3,
+          "subtle": 3,
+          "note": 3
+        },
+        "data_attrs": {
+          "data-birch-system": 1,
+          "data-gap": 19,
+          "data-tone": 17,
+          "data-variant": 6,
+          "data-severity": 7,
+          "data-justify": 7,
+          "data-wrap": 9,
+          "data-cols": 1
+        },
+        "text_words": 1047,
+        "unique_words": 509,
+        "css_vars_used": [
+          "--danger",
+          "--font-serif",
+          "--space-2",
+          "--space-3",
+          "--space-4",
+          "--success",
+          "--text-sm",
+          "--text-xl",
+          "--warning"
+        ],
+        "css_vars_defined": [
+          "--grid-min"
+        ],
+        "hex_colors": [],
+        "birch_css_bytes": 31709,
+        "birch_css_valid": true
+      },
+      "screenshot": {
+        "png": "eval-runs/reports/skill-with-shell-gemini35flash-publication-final/screenshots/code-review-deep.png",
+        "size": [
+          1365,
+          5324
+        ],
+        "mean_rgb": [
+          223.75,
+          221.87,
+          219.3
+        ],
+        "palette": {
+          "palette_close_fraction": 0.9088,
+          "ivory_fraction": 0.4275,
+          "blackish_fraction": 0.0006
+        },
+        "background_fraction": 0.7547,
+        "non_background_fraction": 0.2453,
+        "blackish_fraction": 0.0006,
+        "file_bytes": 869381
+      },
+      "geometry": {
+        "overflow": [],
+        "containerOverflow": [],
+        "statCardSqueeze": [],
+        "sectionRailOrder": [],
+        "pageOverflowX": 0,
+        "timelineProblems": [],
+        "metricGroups": [],
+        "metricRowSqueeze": [],
+        "splitRailGroups": [],
+        "numericHeaderGroups": [],
+        "codeWrapProblems": [],
+        "textWrapProblems": []
+      },
+      "findings": [
+        {
+          "level": "pass",
+          "name": "doctype",
+          "evidence": "doctype present"
+        },
+        {
+          "level": "pass",
+          "name": "viewport",
+          "evidence": "viewport meta present"
+        },
+        {
+          "level": "pass",
+          "name": "uses_birch_system_css",
+          "evidence": "embeds or links Birch system CSS"
+        },
+        {
+          "level": "pass",
+          "name": "has_page_shell",
+          "evidence": ".page found"
+        },
+        {
+          "level": "pass",
+          "name": "uses_layout_primitives",
+          "evidence": "layout primitive count is healthy"
+        },
+        {
+          "level": "pass",
+          "name": "uses_semantic_components",
+          "evidence": "semantic component count is healthy"
+        },
+        {
+          "level": "pass",
+          "name": "no_unknown_css_vars",
+          "evidence": "all CSS variables are defined in Birch system or local CSS"
+        },
+        {
+          "level": "pass",
+          "name": "no_patch_markers",
+          "evidence": "no accidental patch marker lines"
+        },
+        {
+          "level": "note",
+          "name": "screenshot_capture",
+          "evidence": "captured eval-runs/reports/skill-with-shell-gemini35flash-publication-final/screenshots/code-review-deep.png at [1365, 5324]"
+        },
+        {
+          "level": "pass",
+          "name": "layout_overflow",
+          "evidence": "no visible text/content overflow detected"
+        },
+        {
+          "level": "pass",
+          "name": "container_text_overflow",
+          "evidence": "text stays within its card/panel containers"
+        },
+        {
+          "level": "pass",
+          "name": "stat_card_squeeze",
+          "evidence": "KPI/stat cards have enough horizontal space"
+        },
+        {
+          "level": "pass",
+          "name": "timeline_geometry",
+          "evidence": "timeline markers/content stay within expected geometry"
+        },
+        {
+          "level": "pass",
+          "name": "numeric_header_alignment",
+          "evidence": "numeric table headers align with right-aligned numeric columns"
+        },
+        {
+          "level": "pass",
+          "name": "code_wrap_underfill",
+          "evidence": "wrapped code/diff blocks use available container width"
+        },
+        {
+          "level": "pass",
+          "name": "pathological_text_wrapping",
+          "evidence": "prose/list text uses available container width"
+        }
+      ]
+    },
+    {
+      "artifact": "eval-runs/skill-with-shell-gemini35flash-publication-final/module-explainer.html",
+      "stats": {
+        "path": "eval-runs/skill-with-shell-gemini35flash-publication-final/module-explainer.html",
+        "bytes": 57420,
+        "title": "Birch HTML Rendering Checker Pipeline Explainer",
+        "doctype": true,
+        "viewport": true,
+        "stylesheet_links": [],
+        "birch_css_embedded": true,
+        "style_blocks": 1,
+        "style_bytes": 447,
+        "script_blocks": 0,
+        "tag_counts": {
+          "html": 1,
+          "head": 1,
+          "meta": 2,
+          "title": 1,
+          "style": 2,
+          "body": 1,
+          "main": 1,
+          "header": 1,
+          "div": 71,
+          "h1": 1,
+          "p": 31,
+          "span": 55,
+          "section": 5,
+          "h2": 5,
+          "strong": 13,
+          "article": 9,
+          "h3": 9,
+          "code": 65,
+          "aside": 2,
+          "pre": 4,
+          "svg": 1,
+          "path": 5,
+          "g": 6,
+          "rect": 6,
+          "text": 10,
+          "ol": 1,
+          "li": 6,
+          "h4": 12
+        },
+        "class_counts": {
+          "page": 1,
+          "stack": 29,
+          "eyebrow": 6,
+          "lede": 2,
+          "cluster": 1,
+          "chip": 4,
+          "section-rail": 1,
+          "section-head": 5,
+          "grid": 3,
+          "card": 9,
+          "muted": 19,
+          "callout": 1,
+          "callout-label": 1,
+          "reference-panel": 2,
+          "caption": 3,
+          "code-block": 4,
+          "section": 4,
+          "split": 1,
+          "panel": 1,
+          "chart-panel": 1,
+          "flowchart": 1,
+          "flow-edge": 5,
+          "flow-node": 6,
+          "sub": 4,
+          "chart-caption": 1,
+          "flow-list": 1,
+          "flow-step": 6,
+          "flow-num": 6,
+          "flow-title": 6,
+          "flow-detail": 6,
+          "timeline": 1,
+          "timeline-item": 6,
+          "timeline-time": 6,
+          "timeline-body": 6,
+          "card-head": 6,
+          "badge": 6,
+          "card-titles": 6,
+          "card-title": 6,
+          "diff": 1,
+          "diff-row": 10,
+          "hunk": 1,
+          "ln": 10,
+          "mark": 10,
+          "code": 10,
+          "ctx": 3,
+          "add": 6
+        },
+        "data_attrs": {
+          "data-birch-system": 1,
+          "data-gap": 21,
+          "data-tone": 12,
+          "data-cols": 3,
+          "data-variant": 9,
+          "data-accent": 9,
+          "data-kind": 5,
+          "data-copy": 3,
+          "data-shape": 2,
+          "data-wrap": 2
+        },
+        "text_words": 1228,
+        "unique_words": 632,
+        "css_vars_used": [],
+        "css_vars_defined": [],
+        "hex_colors": [],
+        "birch_css_bytes": 31709,
+        "birch_css_valid": true
+      },
+      "screenshot": {
+        "png": "eval-runs/reports/skill-with-shell-gemini35flash-publication-final/screenshots/module-explainer-deep.png",
+        "size": [
+          1365,
+          5781
+        ],
+        "mean_rgb": [
+          229.23,
+          228.42,
+          225.35
+        ],
+        "palette": {
+          "palette_close_fraction": 0.9519,
+          "ivory_fraction": 0.6181,
+          "blackish_fraction": 0.0011
+        },
+        "background_fraction": 0.7908,
+        "non_background_fraction": 0.2092,
+        "blackish_fraction": 0.0011,
+        "file_bytes": 1108736
+      },
+      "geometry": {
+        "overflow": [],
+        "containerOverflow": [],
+        "statCardSqueeze": [],
+        "sectionRailOrder": [],
+        "pageOverflowX": 0,
+        "timelineProblems": [],
+        "metricGroups": [],
+        "metricRowSqueeze": [],
+        "splitRailGroups": [],
+        "numericHeaderGroups": [],
+        "codeWrapProblems": [],
+        "textWrapProblems": []
+      },
+      "findings": [
+        {
+          "level": "pass",
+          "name": "doctype",
+          "evidence": "doctype present"
+        },
+        {
+          "level": "pass",
+          "name": "viewport",
+          "evidence": "viewport meta present"
+        },
+        {
+          "level": "pass",
+          "name": "uses_birch_system_css",
+          "evidence": "embeds or links Birch system CSS"
+        },
+        {
+          "level": "pass",
+          "name": "has_page_shell",
+          "evidence": ".page found"
+        },
+        {
+          "level": "pass",
+          "name": "uses_layout_primitives",
+          "evidence": "layout primitive count is healthy"
+        },
+        {
+          "level": "pass",
+          "name": "uses_semantic_components",
+          "evidence": "semantic component count is healthy"
+        },
+        {
+          "level": "pass",
+          "name": "no_unknown_css_vars",
+          "evidence": "all CSS variables are defined in Birch system or local CSS"
+        },
+        {
+          "level": "pass",
+          "name": "no_patch_markers",
+          "evidence": "no accidental patch marker lines"
+        },
+        {
+          "level": "note",
+          "name": "screenshot_capture",
+          "evidence": "captured eval-runs/reports/skill-with-shell-gemini35flash-publication-final/screenshots/module-explainer-deep.png at [1365, 5781]"
+        },
+        {
+          "level": "pass",
+          "name": "layout_overflow",
+          "evidence": "no visible text/content overflow detected"
+        },
+        {
+          "level": "pass",
+          "name": "container_text_overflow",
+          "evidence": "text stays within its card/panel containers"
+        },
+        {
+          "level": "pass",
+          "name": "stat_card_squeeze",
+          "evidence": "KPI/stat cards have enough horizontal space"
+        },
+        {
+          "level": "pass",
+          "name": "timeline_geometry",
+          "evidence": "timeline markers/content stay within expected geometry"
+        },
+        {
+          "level": "pass",
+          "name": "numeric_header_alignment",
+          "evidence": "numeric table headers align with right-aligned numeric columns"
+        },
+        {
+          "level": "pass",
+          "name": "code_wrap_underfill",
+          "evidence": "wrapped code/diff blocks use available container width"
+        },
+        {
+          "level": "pass",
+          "name": "pathological_text_wrapping",
+          "evidence": "prose/list text uses available container width"
+        }
+      ]
+    },
+    {
+      "artifact": "eval-runs/skill-with-shell-gemini35flash-publication-final/implementation-plan.html",
+      "stats": {
+        "path": "eval-runs/skill-with-shell-gemini35flash-publication-final/implementation-plan.html",
+        "bytes": 49628,
+        "title": "Birchline to Birch Recipe Migration Plan",
+        "doctype": true,
+        "viewport": true,
+        "stylesheet_links": [],
+        "birch_css_embedded": true,
+        "style_blocks": 1,
+        "style_bytes": 275,
+        "script_blocks": 0,
+        "tag_counts": {
+          "html": 1,
+          "head": 1,
+          "meta": 2,
+          "title": 1,
+          "style": 2,
+          "body": 1,
+          "main": 1,
+          "header": 1,
+          "div": 38,
+          "h1": 1,
+          "p": 32,
+          "span": 26,
+          "h2": 4,
+          "strong": 24,
+          "section": 10,
+          "ol": 2,
+          "li": 38,
+          "h3": 11,
+          "ul": 8,
+          "code": 45,
+          "table": 1,
+          "thead": 1,
+          "tr": 7,
+          "th": 3,
+          "tbody": 1,
+          "td": 18,
+          "article": 4,
+          "h4": 4,
+          "aside": 1
+        },
+        "class_counts": {
+          "page": 1,
+          "stack": 27,
+          "eyebrow": 5,
+          "lede": 1,
+          "section-rail": 1,
+          "section-head": 4,
+          "callout": 5,
+          "callout-label": 1,
+          "section": 3,
+          "flow-list": 2,
+          "flow-step": 8,
+          "flow-num": 8,
+          "flow-title": 4,
+          "flow-detail": 16,
+          "plain-list": 8,
+          "caption": 20,
+          "numeric-table-wrap": 1,
+          "numeric-table": 1,
+          "auto-grid": 1,
+          "card": 4,
+          "chip": 4,
+          "reference-panel": 1,
+          "panel": 7,
+          "metric-list": 1,
+          "metric-row": 3,
+          "meter": 3,
+          "checklist": 1
+        },
+        "data_attrs": {
+          "data-birch-system": 1,
+          "data-gap": 28,
+          "data-tone": 9
+        },
+        "text_words": 875,
+        "unique_words": 430,
+        "css_vars_used": [],
+        "css_vars_defined": [
+          "--grid-min",
+          "--metric-label",
+          "--metric-value",
+          "--value"
+        ],
+        "hex_colors": [],
+        "birch_css_bytes": 31709,
+        "birch_css_valid": true
+      },
+      "screenshot": {
+        "png": "eval-runs/reports/skill-with-shell-gemini35flash-publication-final/screenshots/implementation-plan-deep.png",
+        "size": [
+          1365,
+          4171
+        ],
+        "mean_rgb": [
+          244.99,
+          244.52,
+          242.35
+        ],
+        "palette": {
+          "palette_close_fraction": 0.9527,
+          "ivory_fraction": 0.4853,
+          "blackish_fraction": 0.0
+        },
+        "background_fraction": 0.8594,
+        "non_background_fraction": 0.1406,
+        "blackish_fraction": 0.0,
+        "file_bytes": 729497
+      },
+      "geometry": {
+        "overflow": [],
+        "containerOverflow": [],
+        "statCardSqueeze": [],
+        "sectionRailOrder": [],
+        "pageOverflowX": 0,
+        "timelineProblems": [],
+        "metricGroups": [
+          {
+            "owner": "body > main.page.stack > div.section-rail > aside.reference-panel.stack > section.panel.stack",
+            "meterXs": [
+              137,
+              137,
+              137
+            ],
+            "spread": 0
+          }
+        ],
+        "metricRowSqueeze": [],
+        "splitRailGroups": [],
+        "numericHeaderGroups": [],
+        "codeWrapProblems": [],
+        "textWrapProblems": []
+      },
+      "findings": [
+        {
+          "level": "pass",
+          "name": "doctype",
+          "evidence": "doctype present"
+        },
+        {
+          "level": "pass",
+          "name": "viewport",
+          "evidence": "viewport meta present"
+        },
+        {
+          "level": "pass",
+          "name": "uses_birch_system_css",
+          "evidence": "embeds or links Birch system CSS"
+        },
+        {
+          "level": "pass",
+          "name": "has_page_shell",
+          "evidence": ".page found"
+        },
+        {
+          "level": "pass",
+          "name": "uses_layout_primitives",
+          "evidence": "layout primitive count is healthy"
+        },
+        {
+          "level": "pass",
+          "name": "uses_semantic_components",
+          "evidence": "semantic component count is healthy"
+        },
+        {
+          "level": "pass",
+          "name": "no_unknown_css_vars",
+          "evidence": "all CSS variables are defined in Birch system or local CSS"
+        },
+        {
+          "level": "pass",
+          "name": "no_patch_markers",
+          "evidence": "no accidental patch marker lines"
+        },
+        {
+          "level": "note",
+          "name": "screenshot_capture",
+          "evidence": "captured eval-runs/reports/skill-with-shell-gemini35flash-publication-final/screenshots/implementation-plan-deep.png at [1365, 4171]"
+        },
+        {
+          "level": "pass",
+          "name": "layout_overflow",
+          "evidence": "no visible text/content overflow detected"
+        },
+        {
+          "level": "pass",
+          "name": "container_text_overflow",
+          "evidence": "text stays within its card/panel containers"
+        },
+        {
+          "level": "pass",
+          "name": "stat_card_squeeze",
+          "evidence": "KPI/stat cards have enough horizontal space"
+        },
+        {
+          "level": "pass",
+          "name": "timeline_geometry",
+          "evidence": "timeline markers/content stay within expected geometry"
+        },
+        {
+          "level": "pass",
+          "name": "metric_alignment",
+          "evidence": "metric meters align within each metric-list"
+        },
+        {
+          "level": "pass",
+          "name": "numeric_header_alignment",
+          "evidence": "numeric table headers align with right-aligned numeric columns"
+        },
+        {
+          "level": "pass",
+          "name": "code_wrap_underfill",
+          "evidence": "wrapped code/diff blocks use available container width"
+        },
+        {
+          "level": "pass",
+          "name": "pathological_text_wrapping",
+          "evidence": "prose/list text uses available container width"
+        }
+      ]
+    },
+    {
+      "artifact": "eval-runs/skill-with-shell-gemini35flash-publication-final/benchmark-comparison.html",
+      "stats": {
+        "path": "eval-runs/skill-with-shell-gemini35flash-publication-final/benchmark-comparison.html",
+        "bytes": 97390,
+        "title": "Promote Candidate B \u2014 Birch HTML skill seed comparison",
+        "doctype": true,
+        "viewport": true,
+        "stylesheet_links": [],
+        "birch_css_embedded": true,
+        "style_blocks": 3,
+        "style_bytes": 1285,
+        "script_blocks": 0,
+        "tag_counts": {
+          "html": 1,
+          "head": 1,
+          "meta": 2,
+          "title": 1,
+          "style": 4,
+          "body": 1,
+          "main": 1,
+          "header": 1,
+          "div": 95,
+          "h1": 1,
+          "p": 10,
+          "strong": 16,
+          "span": 57,
+          "em": 9,
+          "aside": 1,
+          "ul": 5,
+          "li": 25,
+          "section": 7,
+          "h2": 7,
+          "svg": 2,
+          "defs": 6,
+          "g": 323,
+          "path": 94,
+          "text": 86,
+          "use": 4,
+          "clippath": 5,
+          "rect": 5,
+          "code": 14,
+          "table": 2,
+          "caption": 2,
+          "thead": 2,
+          "tr": 18,
+          "th": 29,
+          "tbody": 2,
+          "td": 76,
+          "pre": 3,
+          "dl": 1,
+          "dt": 4,
+          "dd": 4,
+          "ol": 1,
+          "footer": 1
+        },
+        "class_counts": {
+          "page": 1,
+          "stack": 30,
+          "eyebrow": 20,
+          "lede": 1,
+          "hero-callout": 1,
+          "decision-pill": 1,
+          "cluster": 5,
+          "chip": 4,
+          "reference-panel": 1,
+          "insight-list": 1,
+          "section": 7,
+          "section-head": 7,
+          "auto-grid": 1,
+          "stat-card": 8,
+          "caption": 16,
+          "stat-value": 8,
+          "kpi-strong": 8,
+          "sub": 8,
+          "delta-up": 10,
+          "delta-down": 2,
+          "delta-warn": 8,
+          "panel": 7,
+          "chart-panel": 2,
+          "chart-svg": 2,
+          "chart-caption": 2,
+          "numeric-table-wrap": 2,
+          "numeric-table": 2,
+          "metric": 74,
+          "grid": 3,
+          "card": 4,
+          "card-head": 4,
+          "card-titles": 4,
+          "card-title": 4,
+          "badge": 4,
+          "checklist": 1,
+          "plain-list": 3,
+          "code-block": 3,
+          "formula": 1,
+          "copyable": 1,
+          "callout": 1,
+          "callout-label": 1,
+          "flow-list": 1,
+          "flow-step": 5,
+          "flow-num": 5,
+          "flow-title": 5,
+          "flow-detail": 5
+        },
+        "data_attrs": {
+          "data-birch-system": 1,
+          "data-gap": 35,
+          "data-wrap": 3
+        },
+        "text_words": 756,
+        "unique_words": 325,
+        "css_vars_used": [
+          "--accent",
+          "--border-color",
+          "--danger",
+          "--space-1",
+          "--space-3",
+          "--space-4",
+          "--success",
+          "--surface",
+          "--surface-warm"
+        ],
+        "css_vars_defined": [
+          "--grid-min"
+        ],
+        "hex_colors": [],
+        "birch_css_bytes": 31711,
+        "birch_css_valid": true
+      },
+      "screenshot": {
+        "png": "eval-runs/reports/skill-with-shell-gemini35flash-publication-final/screenshots/benchmark-comparison-deep.png",
+        "size": [
+          1365,
+          6000
+        ],
+        "mean_rgb": [
+          232.61,
+          230.97,
+          228.25
+        ],
+        "palette": {
+          "palette_close_fraction": 0.9582,
+          "ivory_fraction": 0.4004,
+          "blackish_fraction": 0.0012
+        },
+        "background_fraction": 0.7573,
+        "non_background_fraction": 0.2427,
+        "blackish_fraction": 0.0012,
+        "file_bytes": 800603
+      },
+      "geometry": {
+        "overflow": [],
+        "containerOverflow": [],
+        "statCardSqueeze": [],
+        "sectionRailOrder": [],
+        "pageOverflowX": 0,
+        "timelineProblems": [],
+        "metricGroups": [],
+        "metricRowSqueeze": [],
+        "splitRailGroups": [],
+        "numericHeaderGroups": [],
+        "codeWrapProblems": [],
+        "textWrapProblems": []
+      },
+      "findings": [
+        {
+          "level": "pass",
+          "name": "doctype",
+          "evidence": "doctype present"
+        },
+        {
+          "level": "pass",
+          "name": "viewport",
+          "evidence": "viewport meta present"
+        },
+        {
+          "level": "pass",
+          "name": "uses_birch_system_css",
+          "evidence": "embeds or links Birch system CSS"
+        },
+        {
+          "level": "pass",
+          "name": "has_page_shell",
+          "evidence": ".page found"
+        },
+        {
+          "level": "pass",
+          "name": "uses_layout_primitives",
+          "evidence": "layout primitive count is healthy"
+        },
+        {
+          "level": "pass",
+          "name": "uses_semantic_components",
+          "evidence": "semantic component count is healthy"
+        },
+        {
+          "level": "pass",
+          "name": "no_unknown_css_vars",
+          "evidence": "all CSS variables are defined in Birch system or local CSS"
+        },
+        {
+          "level": "pass",
+          "name": "no_patch_markers",
+          "evidence": "no accidental patch marker lines"
+        },
+        {
+          "level": "note",
+          "name": "screenshot_capture",
+          "evidence": "captured eval-runs/reports/skill-with-shell-gemini35flash-publication-final/screenshots/benchmark-comparison-deep.png at [1365, 6000]"
+        },
+        {
+          "level": "pass",
+          "name": "layout_overflow",
+          "evidence": "no visible text/content overflow detected"
+        },
+        {
+          "level": "pass",
+          "name": "container_text_overflow",
+          "evidence": "text stays within its card/panel containers"
+        },
+        {
+          "level": "pass",
+          "name": "stat_card_squeeze",
+          "evidence": "KPI/stat cards have enough horizontal space"
+        },
+        {
+          "level": "pass",
+          "name": "timeline_geometry",
+          "evidence": "timeline markers/content stay within expected geometry"
+        },
+        {
+          "level": "pass",
+          "name": "numeric_header_alignment",
+          "evidence": "numeric table headers align with right-aligned numeric columns"
+        },
+        {
+          "level": "pass",
+          "name": "code_wrap_underfill",
+          "evidence": "wrapped code/diff blocks use available container width"
+        },
+        {
+          "level": "pass",
+          "name": "pathological_text_wrapping",
+          "evidence": "prose/list text uses available container width"
+        }
+      ]
+    }
+  ],
+  "pairs": [],
+  "summary": {
+    "artifacts": 5,
+    "pairs": 5,
+    "failures": 0,
+    "warnings": 0,
+    "notes": 5
+  }
+}

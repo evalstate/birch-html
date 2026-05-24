@@ -1,0 +1,14 @@
+{
+  "label": "skill-with-shell-kimi-publication-final",
+  "purpose": "Targeted retry for kimi module-explainer in publication-final",
+  "mode": "skill-eval",
+  "output_mode": "file",
+  "cwd": "/home/shaun/source/birch-html",
+  "skills_dir": "/home/shaun/source/birch-html",
+  "model": "kimi",
+  "jobs": 1,
+  "generation_timeout_s": 1200,
+  "default_shell_access": true,
+  "shell_evals": [],
+  "source_preview": "auto"
+}

@@ -1,0 +1,2432 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Promote Candidate B — Birch skill seed comparison</title>
+  <style data-birch-system>/*
+  Birch HTML Design System
+  Opinionated single-option stylesheet for reliable LLM-generated artifacts.
+
+  Model:
+    1. Design tokens as CSS variables.
+    2. Layout primitives as classes.
+    3. Semantic components as classes with data-* variants.
+*/
+
+/* ==================== 1. TOKENS ==================== */
+
+:root {
+  color-scheme: light;
+
+  /* Palette */
+  --color-ivory: #FAF9F5;
+  --color-slate: #141413;
+  --color-clay: #D97757;
+  --color-clay-dark: #B85C3E;
+  --color-oat: #E3DACC;
+  --color-olive: #788C5D;
+  --color-rust: #B04A3F;
+  --color-sky: #6A8CAF;
+  --color-white: #FFFFFF;
+
+  --color-gray-50: #F7F5EE;
+  --color-gray-100: #F0EEE6;
+  --color-gray-150: #E8E4DA;
+  --color-gray-200: #DED9CD;
+  --color-gray-300: #D1CFC5;
+  --color-gray-500: #87867F;
+  --color-gray-700: #3D3D3A;
+  --color-gray-800: #242421;
+
+  /* Semantic colors */
+  --bg: var(--color-ivory);
+  --surface: var(--color-white);
+  --surface-tint: var(--color-gray-100);
+  --surface-warm: var(--color-oat);
+  --text: var(--color-slate);
+  --text-muted: var(--color-gray-500);
+  --text-soft: var(--color-gray-700);
+  --muted: var(--text-muted);
+  --border-color: var(--color-gray-300);
+  --accent: var(--color-clay);
+  --accent-strong: var(--color-clay-dark);
+  --success: var(--color-olive);
+  --warning: #C78E3F;
+  --danger: var(--color-rust);
+  --info: var(--color-sky);
+
+  /* Typography */
+  --font-serif: ui-serif, Georgia, "Times New Roman", serif;
+  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  --text-xs: 11px;
+  --text-sm: 12px;
+  --text-md: 14px;
+  --text-base: 15px;
+  --text-lg: 17px;
+  --text-xl: 21px;
+  --text-2xl: 26px;
+  --text-3xl: 36px;
+  --text-4xl: 44px;
+
+  --leading-tight: 1.15;
+  --leading-title: 1.25;
+  --leading-body: 1.55;
+  --leading-loose: 1.7;
+
+  /* Spacing */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 96px;
+
+  /* Shape */
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --radius-pill: 999px;
+
+  --border: 1.5px solid var(--border-color);
+  --border-thin: 1px solid var(--border-color);
+
+  --shadow-sm: 0 1px 2px rgba(20, 20, 19, 0.06);
+  --shadow-md: 0 4px 14px rgba(20, 20, 19, 0.08);
+  --shadow-lg: 0 12px 28px rgba(20, 20, 19, 0.12);
+
+  /* Motion */
+  --ease: cubic-bezier(0.2, 0, 0, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --dur-fast: 120ms;
+  --dur: 180ms;
+  --hover-y: -2px;
+
+  /* Page sizing */
+  --page-max: 1100px;
+  --page-pad: 28px;
+  --page-pad-block: 48px;
+
+  /* Legacy aliases used by source examples */
+  --ivory: var(--color-ivory);
+  --slate: var(--color-slate);
+  --clay: var(--color-clay);
+  --clay-d: var(--color-clay-dark);
+  --oat: var(--color-oat);
+  --olive: var(--color-olive);
+  --rust: var(--color-rust);
+  --sky: var(--color-sky);
+  --white: var(--color-white);
+  --gray-50: var(--color-gray-50);
+  --gray-100: var(--color-gray-100);
+  --gray-150: var(--color-gray-150);
+  --gray-200: var(--color-gray-200);
+  --gray-300: var(--color-gray-300);
+  --gray-500: var(--color-gray-500);
+  --gray-700: var(--color-gray-700);
+  --gray-800: var(--color-gray-800);
+  --serif: var(--font-serif);
+  --sans: var(--font-sans);
+  --mono: var(--font-mono);
+}
+
+/* ==================== BASE ==================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: var(--leading-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+img,
+svg {
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration-color: rgba(217, 119, 87, 0.45);
+  text-underline-offset: 3px;
+}
+
+a:hover {
+  color: var(--accent);
+}
+
+h1,
+h2,
+h3,
+p {
+  margin-block: 0;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: var(--leading-title);
+}
+
+h1 {
+  font-size: clamp(32px, 5vw, var(--text-4xl));
+}
+
+h2 {
+  font-size: var(--text-2xl);
+}
+
+h3 {
+  font-size: var(--text-xl);
+}
+
+code,
+kbd,
+pre {
+  font-family: var(--font-mono);
+}
+
+code {
+  font-size: 0.92em;
+  white-space: normal;
+  word-break: normal;
+}
+
+h1 code,
+h2 code,
+h3 code {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+::selection {
+  background: rgba(217, 119, 87, 0.24);
+}
+
+/* ==================== 2. LAYOUT PRIMITIVES ==================== */
+
+.page {
+  width: min(100% - (var(--page-pad) * 2), var(--page-max));
+  margin-inline: auto;
+  padding-block: var(--page-pad-block) var(--space-9);
+}
+
+.page[data-size="narrow"] {
+  --page-max: 820px;
+}
+
+.page[data-size="wide"] {
+  --page-max: 1280px;
+}
+
+.page[data-size="full"] {
+  --page-max: 1440px;
+}
+
+.section {
+  margin-block: var(--section-gap, var(--space-5));
+}
+
+.section[data-gap="lg"] {
+  --section-gap: var(--space-6);
+}
+
+.section[data-gap="xl"] {
+  --section-gap: var(--space-7);
+}
+
+.section:first-child {
+  margin-block-start: 0;
+}
+
+.stack > .section {
+  margin-block: 0;
+}
+
+.rule {
+  border: 0;
+  border-top: var(--border-thin);
+  margin: var(--space-3) 0 var(--space-5);
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--stack-gap, var(--space-4));
+}
+
+.stack[data-gap="xs"] { --stack-gap: var(--space-2); }
+.stack[data-gap="sm"] { --stack-gap: var(--space-3); }
+.stack[data-gap="md"] { --stack-gap: var(--space-4); }
+.stack[data-gap="lg"] { --stack-gap: var(--space-6); }
+.stack[data-gap="xl"] { --stack-gap: var(--space-8); }
+
+.stack > :is(.button, .btn, .chip, .badge) {
+  align-self: flex-start;
+}
+
+.cluster {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--cluster-gap, var(--space-3));
+}
+
+.cluster[data-align="start"] { align-items: flex-start; }
+.cluster[data-align="end"] { align-items: flex-end; }
+.cluster[data-justify="between"] { justify-content: space-between; }
+.cluster[data-justify="end"] { justify-content: flex-end; }
+
+.grid {
+  display: grid;
+  gap: var(--grid-gap, var(--space-5));
+}
+
+.grid[data-cols="2"] {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.grid[data-cols="3"] {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.grid[data-cols="4"] {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.auto-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--grid-min, 240px)), 1fr));
+  gap: var(--grid-gap, var(--space-5));
+}
+
+.auto-grid > * {
+  min-width: 0;
+}
+
+.split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, var(--split-side, 360px));
+  gap: var(--split-gap, var(--space-6));
+  align-items: start;
+}
+
+.split > * {
+  min-width: 0;
+}
+
+.section-head {
+  min-width: 0;
+}
+
+.section-rail {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, var(--rail-width, 360px));
+  column-gap: var(--rail-gap, var(--space-6));
+  row-gap: var(--space-5);
+  align-items: start;
+}
+
+.section-rail > .section-head {
+  grid-column: 1 / -1;
+}
+
+.section-rail > .reference-panel,
+.section-rail > aside {
+  align-self: start;
+}
+
+.sidebar-layout {
+  display: grid;
+  grid-template-columns: var(--sidebar-width, 240px) minmax(0, 1fr);
+  gap: var(--sidebar-gap, var(--space-7));
+  align-items: start;
+}
+
+.sidebar-layout > :first-child,
+.sticky {
+  position: sticky;
+  top: var(--sticky-top, var(--space-5));
+}
+
+.bleed {
+  margin-inline: calc(var(--page-pad) * -1);
+}
+
+.scroll-x {
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+}
+
+.center {
+  display: grid;
+  place-items: center;
+}
+
+.spacer {
+  flex: 1;
+}
+
+@media (max-width: 860px) {
+  :root {
+    --page-pad: 20px;
+    --page-pad-block: 40px;
+  }
+
+  .grid[data-cols],
+  .split,
+  .section-rail,
+  .sidebar-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar-layout > :first-child,
+  .sticky {
+    position: static;
+  }
+}
+
+/* ==================== TYPOGRAPHY UTILITIES ==================== */
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.eyebrow::before {
+  content: "";
+  width: 24px;
+  height: 1.5px;
+  background: currentColor;
+}
+
+.lede {
+  max-width: 720px;
+  color: var(--text-soft);
+  font-size: var(--text-lg);
+  line-height: 1.6;
+}
+
+.muted {
+  color: var(--text-muted);
+}
+
+.caption {
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+}
+
+.stat-value {
+  display: block;
+  color: var(--text);
+  font-family: var(--font-serif);
+  font-size: clamp(30px, 3.2vw, 42px);
+  font-variant-numeric: tabular-nums;
+  font-weight: 550;
+  letter-spacing: -0.025em;
+  line-height: 1;
+}
+
+.stat-card {
+  gap: var(--space-2);
+}
+
+.stat-card .caption {
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.stat-card .muted {
+  max-width: 34ch;
+  font-size: var(--text-sm);
+}
+
+.mono {
+  font-family: var(--font-mono);
+}
+
+/* ==================== 3. SEMANTIC COMPONENTS ==================== */
+
+.panel,
+.card {
+  background: var(--surface);
+  border: var(--border);
+  border-radius: var(--radius-md);
+}
+
+.panel {
+  padding: var(--panel-pad, var(--space-5));
+}
+
+.card {
+  padding: var(--card-pad, var(--space-5));
+  transition:
+    transform var(--dur-fast) var(--ease),
+    border-color var(--dur-fast) var(--ease),
+    box-shadow var(--dur-fast) var(--ease),
+    background-color var(--dur-fast) var(--ease);
+}
+
+.card[data-hover="lift"]:hover,
+.card[data-clickable]:hover {
+  transform: translateY(var(--hover-y));
+  border-color: rgba(217, 119, 87, 0.55);
+  box-shadow: var(--shadow-md);
+}
+
+.card[data-clickable] {
+  cursor: pointer;
+}
+
+.card[data-variant="flat"] {
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
+}
+
+.card[data-variant="outlined"] {
+  background: var(--surface);
+  border: var(--border);
+}
+
+.card[data-variant="elevated"] {
+  border-color: transparent;
+  box-shadow: var(--shadow-md);
+}
+
+.card[data-variant="filled"],
+.card[data-tone="oat"] {
+  background: var(--surface-warm);
+}
+
+.card[data-tone],
+.panel[data-tone],
+.callout[data-tone] {
+  background: var(--surface);
+}
+
+.card[data-tone="danger"],
+.panel[data-tone="danger"],
+.callout[data-tone="danger"] {
+  border-color: rgba(176, 74, 63, 0.36);
+}
+
+.card[data-tone="warning"],
+.panel[data-tone="warning"],
+.callout[data-tone="warning"] {
+  border-color: rgba(199, 142, 63, 0.38);
+}
+
+.card[data-tone="success"],
+.panel[data-tone="success"],
+.callout[data-tone="success"] {
+  border-color: rgba(120, 140, 93, 0.38);
+}
+
+.card[data-tone="info"],
+.panel[data-tone="info"],
+.callout[data-tone="info"] {
+  border-color: rgba(106, 140, 175, 0.36);
+}
+
+.card[data-accent] {
+  position: relative;
+  overflow: hidden;
+}
+
+.card[data-accent]::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 5px;
+  background: var(--accent);
+}
+
+.card-head {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-width: 0;
+  max-width: 100%;
+}
+
+.card-head > :first-child {
+  flex: 0 0 auto;
+}
+
+.card-titles {
+  flex: 1 1 0;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.card-title {
+  max-width: 100%;
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: var(--text-xl);
+  font-weight: 550;
+  line-height: var(--leading-title);
+  overflow-wrap: anywhere;
+}
+
+.card-sub {
+  margin: 2px 0 0;
+  color: var(--text-muted);
+  font-size: var(--text-sm);
+  overflow-wrap: anywhere;
+}
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-4) var(--space-5);
+  background: var(--surface);
+  border: var(--border);
+  border-radius: var(--radius-md);
+}
+
+.toolbar[data-sticky] {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.chip,
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border-radius: var(--radius-pill);
+  white-space: nowrap;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 650;
+  line-height: 1;
+}
+
+.chip {
+  min-height: 24px;
+  padding: 0 10px;
+  color: var(--text-soft);
+  background: var(--surface-tint);
+  border: 1px solid transparent;
+}
+
+.badge {
+  min-height: 22px;
+  padding: 0 9px;
+  color: var(--text-muted);
+  background: var(--surface);
+  border: var(--border-thin);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.chip[data-tone="clay"],
+.badge[data-tone="clay"] {
+  color: var(--accent);
+  background: rgba(217, 119, 87, 0.14);
+}
+
+.chip[data-tone="olive"],
+.badge[data-tone="olive"],
+.chip[data-tone="success"],
+.badge[data-tone="success"] {
+  color: var(--success);
+  background: rgba(120, 140, 93, 0.15);
+}
+
+.chip[data-tone="warning"],
+.badge[data-tone="warning"] {
+  color: var(--warning);
+  background: rgba(199, 142, 63, 0.16);
+}
+
+.chip[data-tone="rust"],
+.badge[data-tone="rust"],
+.chip[data-tone="danger"],
+.badge[data-tone="danger"] {
+  color: var(--danger);
+  background: rgba(176, 74, 63, 0.13);
+}
+
+.chip[data-tone="sky"],
+.badge[data-tone="sky"],
+.chip[data-tone="info"],
+.badge[data-tone="info"] {
+  color: var(--info);
+  background: rgba(106, 140, 175, 0.14);
+}
+
+.finding {
+  border-left: 6px solid var(--border-color);
+}
+
+.finding[data-severity="blocker"],
+.finding[data-severity="critical"],
+.finding[data-severity="danger"],
+.finding[data-tone="danger"] {
+  border-left-color: var(--danger);
+}
+
+.finding[data-severity="high"],
+.finding[data-severity="warning"],
+.finding[data-tone="warning"] {
+  border-left-color: var(--warning);
+}
+
+.finding[data-severity="medium"],
+.finding[data-severity="info"],
+.finding[data-tone="info"] {
+  border-left-color: var(--info);
+}
+
+.finding[data-severity="low"],
+.finding[data-severity="success"],
+.finding[data-tone="success"] {
+  border-left-color: var(--success);
+}
+
+.button,
+.btn {
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 36px;
+  padding: 0 14px;
+  border: 1.5px solid transparent;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-sans);
+  font-size: var(--text-md);
+  font-weight: 650;
+  line-height: 1;
+  text-decoration: none;
+  transition:
+    transform var(--dur-fast) var(--ease),
+    background-color var(--dur-fast) var(--ease),
+    border-color var(--dur-fast) var(--ease),
+    box-shadow var(--dur-fast) var(--ease);
+}
+
+.button:hover,
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.button[data-variant="primary"],
+.btn-primary {
+  color: var(--color-white);
+  background: var(--color-slate);
+}
+
+.button[data-variant="primary"]:hover,
+.btn-primary:hover {
+  background: var(--color-gray-700);
+}
+
+.button[data-variant="secondary"],
+.btn-secondary {
+  color: var(--text);
+  background: var(--surface-tint);
+  border-color: var(--border-color);
+}
+
+.button[data-variant="ghost"],
+.btn-ghost {
+  color: var(--text-soft);
+  background: transparent;
+}
+
+.button[data-variant="ghost"]:hover,
+.btn-ghost:hover {
+  color: var(--text);
+  background: var(--surface-tint);
+}
+
+.button[data-variant="danger"],
+.btn-danger {
+  color: var(--color-white);
+  background: var(--danger);
+}
+
+.input {
+  width: 100%;
+  min-height: 38px;
+  padding: 0 12px;
+  color: var(--text);
+  background: var(--surface);
+  border: var(--border);
+  border-radius: var(--radius-sm);
+  outline: none;
+}
+
+.input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(217, 119, 87, 0.16);
+}
+
+.avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--avatar-size, 38px);
+  height: var(--avatar-size, 38px);
+  border-radius: 50%;
+  color: var(--text-soft);
+  background: var(--surface-warm);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  flex: 0 0 auto;
+}
+
+.code-block {
+  margin: 0;
+  padding: var(--space-4) var(--space-5);
+  overflow-x: auto;
+  color: #E8E6DC;
+  background: var(--color-slate);
+  border-radius: var(--radius-md);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  line-height: var(--leading-loose);
+}
+
+.code-block[data-kind="command"],
+.code-block[data-wrap="true"],
+.command-block {
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  overflow-x: hidden;
+}
+
+.code-block[data-wrap="true"] code,
+.code-block[data-kind="command"] code {
+  display: block;
+  max-width: 100%;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.copyable {
+  position: relative;
+}
+
+.copyable > .code-block {
+  padding-inline-end: 88px;
+}
+
+.copy-button {
+  appearance: none;
+  position: absolute;
+  inset-block-start: var(--space-2);
+  inset-inline-end: var(--space-2);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 26px;
+  padding: 0 9px;
+  border: 1px solid rgba(250, 249, 245, 0.18);
+  border-radius: var(--radius-sm);
+  color: var(--color-gray-100);
+  background: rgba(255, 255, 255, 0.08);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  transition:
+    background-color var(--dur-fast) var(--ease),
+    border-color var(--dur-fast) var(--ease),
+    transform var(--dur-fast) var(--ease);
+}
+
+.copy-button:hover {
+  transform: translateY(-1px);
+  border-color: rgba(250, 249, 245, 0.35);
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.copy-button[data-copied="true"] {
+  color: var(--color-white);
+  background: rgba(120, 140, 93, 0.55);
+  border-color: rgba(120, 140, 93, 0.75);
+}
+
+.reference-panel {
+  --panel-pad: var(--space-5);
+}
+
+.callout {
+  padding: var(--space-5);
+  color: var(--text-soft);
+  background: var(--surface-tint);
+  border: var(--border);
+  border-inline-start: 4px solid var(--accent);
+  border-radius: var(--radius-md);
+}
+
+.callout[data-tone="success"] {
+  border-inline-start-color: var(--success);
+  background: rgba(120, 140, 93, 0.10);
+}
+
+.callout[data-tone="warning"] {
+  border-inline-start-color: var(--warning);
+  background: rgba(199, 142, 63, 0.11);
+}
+
+.callout[data-tone="danger"] {
+  border-inline-start-color: var(--danger);
+  background: rgba(176, 74, 63, 0.10);
+}
+
+.callout[data-tone="info"] {
+  border-inline-start-color: var(--info);
+  background: rgba(106, 140, 175, 0.11);
+}
+
+.callout-label {
+  display: block;
+  margin-bottom: var(--space-2);
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.callout > :last-child {
+  margin-bottom: 0;
+}
+
+.checklist {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-3);
+}
+
+.checklist li {
+  display: block !important;
+  position: relative !important;
+  min-width: 0;
+  padding-inline-start: calc(18px + var(--space-3));
+  overflow-wrap: anywhere;
+}
+
+.checklist li::before {
+  content: "✓";
+  position: absolute !important;
+  inset-block-start: 2px;
+  inset-inline-start: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  color: var(--success);
+  background: rgba(120, 140, 93, 0.12);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.checklist code {
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.plain-list {
+  margin: 0;
+  padding-inline-start: 1.15em;
+  color: var(--text-soft);
+}
+
+.plain-list li {
+  overflow-wrap: anywhere;
+}
+
+.plain-list li + li {
+  margin-top: var(--space-2);
+}
+
+.plain-list li::marker {
+  color: var(--text-muted);
+}
+
+.insight-list,
+.takeaway-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-3);
+}
+
+.insight-list li,
+.takeaway-list li {
+  position: relative;
+  display: block;
+  padding-inline-start: calc(10px + var(--space-3));
+  color: var(--text-soft);
+}
+
+.insight-list li::before,
+.takeaway-list li::before {
+  content: "";
+  position: absolute;
+  inset-block-start: 0.65em;
+  inset-inline-start: 0;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.insight-list li > *,
+.takeaway-list li > * {
+  min-width: 0;
+}
+
+.insight-list[data-tone="success"] li::before,
+.takeaway-list[data-tone="success"] li::before {
+  background: var(--success);
+}
+
+.insight-list[data-tone="info"] li::before,
+.takeaway-list[data-tone="info"] li::before {
+  background: var(--info);
+}
+
+.metric-list {
+  --metric-label: 132px;
+  --metric-value: 64px;
+  display: grid;
+  gap: var(--space-3);
+}
+
+.metric-row {
+  display: grid;
+  grid-template-columns: var(--metric-label) minmax(120px, 1fr) var(--metric-value);
+  gap: var(--space-3);
+  align-items: center;
+}
+
+.metric-row > :first-child {
+  min-width: 0;
+}
+
+.metric-row > :last-child {
+  justify-self: end;
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+}
+
+.meter {
+  height: 9px;
+  overflow: hidden;
+  border-radius: var(--radius-pill);
+  background: var(--surface-tint);
+}
+
+.meter span {
+  display: block;
+  width: var(--value);
+  height: 100%;
+  background: var(--tone, var(--accent));
+}
+
+.flow-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-3);
+}
+
+.flow-step {
+  position: relative;
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr);
+  gap: var(--space-3);
+  align-items: start;
+  padding: var(--space-4);
+  background: var(--surface);
+  border: var(--border);
+  border-radius: var(--radius-md);
+}
+
+.flow-step > .flow-num {
+  grid-column: 1;
+}
+
+.flow-step > :not(.flow-num) {
+  grid-column: 2;
+  min-width: 0;
+}
+
+.flow-step::after {
+  content: "";
+  position: absolute;
+  inset-block-start: calc(100% + 1px);
+  inset-inline-start: 36px;
+  width: 1.5px;
+  height: var(--space-3);
+  background: var(--border-color);
+}
+
+.flow-step:last-child::after {
+  display: none;
+}
+
+.flow-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-pill);
+  color: var(--text);
+  background: var(--surface-warm);
+  box-shadow: inset 0 0 0 1px rgba(20, 20, 19, 0.10);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  font-weight: 700;
+}
+
+.flow-title {
+  margin: 0 0 var(--space-1);
+  font-family: var(--font-serif);
+  font-size: var(--text-xl);
+  font-weight: 550;
+  line-height: var(--leading-title);
+}
+
+.flow-detail {
+  margin: 0;
+  color: var(--text-soft);
+}
+
+.flow-branch {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-3);
+}
+
+.flow-branch .flow-step::after {
+  display: none;
+}
+
+.flow-step[data-tone="success"] {
+  border-color: rgba(120, 140, 93, 0.38);
+  background: rgba(120, 140, 93, 0.08);
+}
+
+.flow-step[data-tone="warning"] {
+  border-color: rgba(199, 142, 63, 0.42);
+  background: rgba(199, 142, 63, 0.09);
+}
+
+@media (max-width: 620px) {
+  .metric-row {
+    grid-template-columns: 1fr max-content;
+  }
+
+  .metric-row .meter {
+    grid-column: 1 / -1;
+    order: 3;
+  }
+
+  .flow-branch {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- Charts and numeric data ---------- */
+
+.chart-panel {
+  max-width: 100%;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.chart-panel > * {
+  min-width: 0;
+}
+
+.chart-panel svg,
+svg.chart-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.chart-caption {
+  color: var(--text-muted);
+  font-size: var(--text-sm);
+}
+
+.numeric-table-wrap {
+  overflow-x: auto;
+  background: var(--surface);
+  border: var(--border);
+  border-radius: var(--radius-md);
+}
+
+.numeric-table {
+  width: 100%;
+  min-width: 720px;
+  border-collapse: collapse;
+}
+
+.numeric-table th,
+.numeric-table td {
+  padding: var(--space-3) var(--space-4);
+  border-bottom: 1px solid var(--color-gray-200);
+  vertical-align: middle;
+}
+
+.numeric-table th {
+  color: var(--text-muted);
+  background: var(--surface-tint);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-align: left;
+  text-transform: uppercase;
+}
+
+.numeric-table tr:last-child td {
+  border-bottom: 0;
+}
+
+.numeric-table .metric,
+.numeric-table .num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.numeric-table .entity,
+.numeric-table .label-cell {
+  font-weight: 650;
+}
+
+.numeric-table .note {
+  color: var(--text-soft);
+}
+
+.numeric-table code {
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.numeric-table .subtle {
+  display: block;
+  margin-top: 2px;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 400;
+}
+
+@media (max-width: 620px) {
+  .numeric-table {
+    min-width: 0;
+  }
+
+  .numeric-table thead {
+    display: none;
+  }
+
+  .numeric-table tbody,
+  .numeric-table tr,
+  .numeric-table td {
+    display: block;
+  }
+
+  .numeric-table tr {
+    padding: var(--space-3) var(--space-4);
+    border-bottom: 1px solid var(--color-gray-200);
+  }
+
+  .numeric-table tr:last-child {
+    border-bottom: 0;
+  }
+
+  .numeric-table td {
+    padding: var(--space-1) 0;
+    border-bottom: 0;
+  }
+
+  .numeric-table td[data-label] {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-4);
+  }
+
+  .numeric-table td[data-label]::before {
+    content: attr(data-label);
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    text-transform: uppercase;
+  }
+}
+
+/* ---------- Diff ---------- */
+
+.diff {
+  overflow-x: auto;
+  color: #E8E6DC;
+  background: var(--color-slate);
+  border-radius: var(--radius-md);
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  line-height: var(--leading-loose);
+}
+
+.diff-row {
+  display: grid;
+  grid-template-columns: 48px 18px minmax(max-content, 1fr);
+  align-items: baseline;
+  min-width: max-content;
+  padding-inline-end: var(--space-4);
+  white-space: pre;
+}
+
+.diff-row .ln {
+  padding-inline-end: 14px;
+  color: var(--color-gray-500);
+  text-align: right;
+  user-select: none;
+}
+
+.diff-row .mark {
+  color: var(--color-gray-500);
+  text-align: center;
+}
+
+.diff-row .code {
+  color: #E8E6DC;
+}
+
+.diff-row.ctx .code,
+.diff-row[data-kind="ctx"] .code {
+  color: #B8B6AC;
+}
+
+.diff-row.add,
+.diff-row[data-kind="add"] {
+  background: rgba(120, 140, 93, 0.24);
+  box-shadow: inset 3px 0 0 rgba(120, 140, 93, 0.78);
+}
+
+.diff-row.add .mark,
+.diff-row[data-kind="add"] .mark {
+  color: #B9D394;
+  font-weight: 800;
+}
+
+.diff-row.del,
+.diff-row[data-kind="del"] {
+  background: rgba(176, 74, 63, 0.24);
+  box-shadow: inset 3px 0 0 rgba(176, 74, 63, 0.82);
+}
+
+.diff-row.del .mark,
+.diff-row[data-kind="del"] .mark {
+  color: #F19A8D;
+  font-weight: 800;
+}
+
+.diff-row.hunk,
+.diff-row[data-kind="hunk"] {
+  background: rgba(255, 255, 255, 0.045);
+}
+
+.diff-row.hunk .code,
+.diff-row[data-kind="hunk"] .code {
+  color: var(--color-gray-500);
+}
+
+.diff[data-wrap="true"] {
+  overflow-x: hidden;
+}
+
+.diff[data-wrap="true"] .diff-row {
+  grid-template-columns: 42px 18px minmax(0, 1fr);
+  min-width: 0;
+  white-space: normal;
+}
+
+.diff[data-wrap="true"] .code {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+/* ---------- Timeline ---------- */
+
+.timeline {
+  position: relative;
+  display: grid;
+  gap: 0;
+  padding-inline-start: var(--space-6);
+}
+
+.timeline:is(ol, ul) {
+  margin: 0;
+  list-style: none;
+}
+
+.timeline::before {
+  content: "";
+  position: absolute;
+  inset-block: 4px 4px;
+  inset-inline-start: 9px;
+  width: 1.5px;
+  background: var(--border-color);
+}
+
+.timeline-item,
+.tl-entry {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(84px, max-content) minmax(0, 1fr);
+  gap: var(--space-4);
+  padding-block: 0 var(--space-5);
+}
+
+.timeline-item:last-child,
+.tl-entry:last-child {
+  padding-block-end: 0;
+}
+
+.timeline-item::before,
+.tl-entry::before {
+  content: "";
+  position: absolute;
+  inset-block-start: 4px;
+  inset-inline-start: calc(4.25px - var(--space-6));
+  width: 11px;
+  height: 11px;
+  border: 2px solid var(--surface);
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 1.5px var(--accent);
+}
+
+.timeline-item:not(:has(> .timeline-time, > .tl-time)),
+.tl-entry:not(:has(> .timeline-time, > .tl-time)) {
+  display: block;
+}
+
+.timeline-time,
+.tl-time {
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  white-space: nowrap;
+}
+
+.timeline-body,
+.tl-body {
+  min-width: 0;
+  color: var(--text-soft);
+}
+
+.timeline-body strong,
+.tl-body strong {
+  color: var(--text);
+}
+
+@media (max-width: 620px) {
+  .timeline-item,
+  .tl-entry {
+    grid-template-columns: 1fr;
+    gap: var(--space-1);
+  }
+}
+
+/* ---------- Flowchart ---------- */
+
+.flowchart {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+svg.flow,
+svg.flowchart {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.flow text,
+.flowchart text {
+  fill: var(--text);
+  font-family: var(--font-sans);
+  font-size: 12px;
+}
+
+.flow .sub,
+.flowchart .sub {
+  fill: var(--text-muted);
+  font-size: 10px;
+}
+
+.flow-edge,
+.edge {
+  fill: none;
+  stroke: var(--text-muted);
+  stroke-width: 1.5;
+}
+
+.flow-edge[data-kind="yes"],
+.edge.yes {
+  stroke: var(--success);
+}
+
+.flow-edge[data-kind="no"],
+.edge.no {
+  stroke: var(--danger);
+  stroke-dasharray: 4 4;
+}
+
+/* SVG flow nodes */
+.flow-node,
+.flow .node {
+  cursor: pointer;
+  transition: transform var(--dur-fast) var(--ease);
+}
+
+.flow-node:hover,
+.flow .node:hover {
+  transform: translateY(-1px);
+}
+
+.flow-node rect,
+.flow .node rect {
+  fill: var(--surface);
+  stroke: var(--border-color);
+  stroke-width: 1.5;
+  rx: 8;
+}
+
+.flow-node path,
+.flow .node.gate path {
+  fill: var(--surface);
+  stroke: var(--border-color);
+  stroke-width: 1.5;
+}
+
+.flow-node[data-shape="term"] rect,
+.flow .node.term rect {
+  fill: var(--surface-tint);
+  rx: 22;
+}
+
+.flow-node[data-kind="ok"] rect,
+.flow .node.ok rect {
+  fill: rgba(120, 140, 93, 0.12);
+  stroke: var(--success);
+}
+
+.flow-node[data-kind="bad"] rect,
+.flow .node.bad rect {
+  fill: rgba(176, 74, 63, 0.10);
+  stroke: var(--danger);
+}
+
+.flow-node.active rect,
+.flow-node.active path,
+.flow .node.active rect,
+.flow .node.active path {
+  stroke: var(--accent);
+  stroke-width: 2;
+}
+
+/* HTML flow nodes, for non-SVG diagrams */
+div.flow-node {
+  padding: var(--space-3) var(--space-4);
+  background: var(--surface);
+  border: var(--border);
+  border-radius: var(--radius-sm);
+  transition:
+    transform var(--dur-fast) var(--ease),
+    border-color var(--dur-fast) var(--ease),
+    box-shadow var(--dur-fast) var(--ease);
+}
+
+div.flow-node:hover {
+  transform: translateY(var(--hover-y));
+  border-color: rgba(217, 119, 87, 0.55);
+  box-shadow: var(--shadow-sm);
+}
+
+div.flow-node[data-shape="term"] {
+  border-radius: var(--radius-pill);
+  background: var(--surface-tint);
+}
+
+div.flow-node[data-kind="ok"] {
+  border-color: var(--success);
+  background: rgba(120, 140, 93, 0.12);
+}
+
+div.flow-node[data-kind="bad"] {
+  border-color: var(--danger);
+  background: rgba(176, 74, 63, 0.10);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+/* Responsive safety net for generated artifacts. */
+p,
+li {
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 860px) {
+  .split,
+  .section-rail,
+  .sidebar-layout {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  .split > *,
+  .section-rail > *,
+  .sidebar-layout > *,
+  .chart-panel {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+}</style>
+  <style>
+    .chart-svg svg { width: 100%; height: auto; display: block; }
+    .numeric-table code, .numeric-table .note { white-space: normal; overflow-wrap: anywhere; word-break: break-word; }
+  </style>
+</head>
+<body>
+  <main class="page stack" data-gap="lg">
+    <header class="stack" data-gap="sm">
+      <div class="eyebrow">Benchmark comparison · 2026-05-20</div>
+      <h1>Promote Candidate B as the next GEPA seed</h1>
+      <p class="lede">Across four Birch evals on <code>codexresponses.gpt-5.5</code>, Candidate B lifts the final score from <strong>0.9175 → 0.9655</strong> and cuts checker warnings from <strong>5 → 2</strong>, with no generation or checker failures. Wall time and cost rise materially (+18.7% / +11.5%) but are acceptable for seed quality.</p>
+      <div class="callout" data-tone="success">
+        <strong>Recommendation:</strong> promote Candidate B for a single-model GEPA run on gpt-5.5, then re-run on Kimi and Gemini before broad model-suite validation. Manually inspect <code>code-review</code> diff wrapping before committing.
+      </div>
+    </header>
+
+    <section class="section stack" data-gap="md">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">Headline KPIs</span>
+          <h2>Run-level deltas</h2>
+        </div>
+        <p class="caption">Seed A vs Candidate B on the same four-eval set; same model, same prompts.</p>
+      </div>
+      <div class="auto-grid" style="--grid-min: 160px">
+        <div class="stat-card">
+          <span class="caption">Pass rate</span>
+          <span class="stat-value">4 / 4</span>
+          <span class="caption">unchanged · no generation failures</span>
+        </div>
+        <div class="stat-card" data-tone="success">
+          <span class="caption">Final score</span>
+          <span class="stat-value">0.9655</span>
+          <span class="caption">+0.0480 vs 0.9175 seed</span>
+        </div>
+        <div class="stat-card" data-tone="success">
+          <span class="caption">Checker warnings</span>
+          <span class="stat-value">2</span>
+          <span class="caption">−3 vs 5 seed</span>
+        </div>
+        <div class="stat-card">
+          <span class="caption">Checker failures</span>
+          <span class="stat-value">0</span>
+          <span class="caption">unchanged · 0 → 0</span>
+        </div>
+        <div class="stat-card" data-tone="warning">
+          <span class="caption">Wall time</span>
+          <span class="stat-value">489 s</span>
+          <span class="caption">+77 s · +18.7% vs 412 s</span>
+        </div>
+        <div class="stat-card" data-tone="warning">
+          <span class="caption">Total tokens</span>
+          <span class="stat-value">124.7k</span>
+          <span class="caption">+8.7k · +7.5% vs 116.0k</span>
+        </div>
+        <div class="stat-card" data-tone="warning">
+          <span class="caption">Estimated cost</span>
+          <span class="stat-value">$2.14</span>
+          <span class="caption">+$0.22 · +11.5% vs $1.92</span>
+        </div>
+        <div class="stat-card" data-tone="success">
+          <span class="caption">Hygiene score</span>
+          <span class="stat-value">0.99</span>
+          <span class="caption">−0.01 vs 1.00 · noise-level</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section stack" data-gap="md">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">Primary tradeoff</span>
+          <h2>Quality up, wall time up across every eval</h2>
+        </div>
+        <p class="caption">Matplotlib-generated inline SVG · grouped bars from <code>source.json</code> · per-eval score (left) and wall time (right).</p>
+      </div>
+      <div class="panel chart-panel stack" data-gap="sm">
+        <div class="chart-svg">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="633.35952pt" height="244.55952pt" viewBox="0 0 633.35952 244.55952" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 244.55952 
+L 633.35952 244.55952 
+L 633.35952 0 
+L 0 0 
+L 0 244.55952 
+z
+" style="fill: none"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 43.597188 215.891176 
+L 314.941916 215.891176 
+L 314.941916 18.757969 
+L 43.597188 18.757969 
+L 43.597188 215.891176 
+z
+" style="fill: none"/>
+   </g>
+   <g id="matplotlib.axis_1">
+    <g id="xtick_1">
+     <g id="line2d_1"/>
+     <g id="text_1">
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'; fill: #87867f" transform="translate(60.807336 229.72977)">numeric-</text>
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'; fill: #87867f" transform="translate(70.724914 239.807801)">data</text>
+     </g>
+    </g>
+    <g id="xtick_2">
+     <g id="line2d_2"/>
+     <g id="text_2">
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'; fill: #87867f" transform="translate(133.989803 229.72977)">code-</text>
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'; fill: #87867f" transform="translate(131.586521 239.807801)">review</text>
+     </g>
+    </g>
+    <g id="xtick_3">
+     <g id="line2d_3"/>
+     <g id="text_3">
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'; fill: #87867f" transform="translate(193.584379 229.72977)">module-</text>
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'; fill: #87867f" transform="translate(191.133285 239.807801)">explainer</text>
+     </g>
+    </g>
+    <g id="xtick_4">
+     <g id="line2d_4"/>
+     <g id="text_4">
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'; fill: #87867f" transform="translate(266.314034 229.72977)">impl-</text>
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'; fill: #87867f" transform="translate(267.961456 239.807801)">plan</text>
+     </g>
+    </g>
+   </g>
+   <g id="matplotlib.axis_2">
+    <g id="ytick_1">
+     <g id="line2d_5">
+      <path d="M 43.597188 203.172905 
+L 314.941916 203.172905 
+" clip-path="url(#p0d15538e08)" style="fill: none; stroke: #ded9cd; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_6"/>
+     <g id="text_5">
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #87867f" x="36.597188" y="206.592202" transform="rotate(-0 36.597188 206.592202)">0.86</text>
+     </g>
+    </g>
+    <g id="ytick_2">
+     <g id="line2d_7">
+      <path d="M 43.597188 177.736362 
+L 314.941916 177.736362 
+" clip-path="url(#p0d15538e08)" style="fill: none; stroke: #ded9cd; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_8"/>
+     <g id="text_6">
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #87867f" x="36.597188" y="181.155659" transform="rotate(-0 36.597188 181.155659)">0.88</text>
+     </g>
+    </g>
+    <g id="ytick_3">
+     <g id="line2d_9">
+      <path d="M 43.597188 152.299819 
+L 314.941916 152.299819 
+" clip-path="url(#p0d15538e08)" style="fill: none; stroke: #ded9cd; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_10"/>
+     <g id="text_7">
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #87867f" x="36.597188" y="155.719116" transform="rotate(-0 36.597188 155.719116)">0.90</text>
+     </g>
+    </g>
+    <g id="ytick_4">
+     <g id="line2d_11">
+      <path d="M 43.597188 126.863276 
+L 314.941916 126.863276 
+" clip-path="url(#p0d15538e08)" style="fill: none; stroke: #ded9cd; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_12"/>
+     <g id="text_8">
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #87867f" x="36.597188" y="130.282573" transform="rotate(-0 36.597188 130.282573)">0.92</text>
+     </g>
+    </g>
+    <g id="ytick_5">
+     <g id="line2d_13">
+      <path d="M 43.597188 101.426733 
+L 314.941916 101.426733 
+" clip-path="url(#p0d15538e08)" style="fill: none; stroke: #ded9cd; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_14"/>
+     <g id="text_9">
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #87867f" x="36.597188" y="104.84603" transform="rotate(-0 36.597188 104.84603)">0.94</text>
+     </g>
+    </g>
+    <g id="ytick_6">
+     <g id="line2d_15">
+      <path d="M 43.597188 75.99019 
+L 314.941916 75.99019 
+" clip-path="url(#p0d15538e08)" style="fill: none; stroke: #ded9cd; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_16"/>
+     <g id="text_10">
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #87867f" x="36.597188" y="79.409487" transform="rotate(-0 36.597188 79.409487)">0.96</text>
+     </g>
+    </g>
+    <g id="ytick_7">
+     <g id="line2d_17">
+      <path d="M 43.597188 50.553647 
+L 314.941916 50.553647 
+" clip-path="url(#p0d15538e08)" style="fill: none; stroke: #ded9cd; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_18"/>
+     <g id="text_11">
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #87867f" x="36.597188" y="53.972944" transform="rotate(-0 36.597188 53.972944)">0.98</text>
+     </g>
+    </g>
+    <g id="ytick_8">
+     <g id="line2d_19">
+      <path d="M 43.597188 25.117104 
+L 314.941916 25.117104 
+" clip-path="url(#p0d15538e08)" style="fill: none; stroke: #ded9cd; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_20"/>
+     <g id="text_12">
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #87867f" x="36.597188" y="28.536401" transform="rotate(-0 36.597188 28.536401)">1.00</text>
+     </g>
+    </g>
+    <g id="text_13">
+     <text style="font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #3d3d3a" x="10.478438" y="117.324572" transform="rotate(-90 10.478438 117.324572)">per-eval score</text>
+    </g>
+   </g>
+   <g id="patch_3">
+    <path d="M 55.931039 1296.94425 
+L 80.861164 1296.94425 
+L 80.861164 114.145005 
+L 55.931039 114.145005 
+z
+" clip-path="url(#p0d15538e08)" style="fill: #87867f"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 121.536631 1296.94425 
+L 146.466756 1296.94425 
+L 146.466756 139.581548 
+L 121.536631 139.581548 
+z
+" clip-path="url(#p0d15538e08)" style="fill: #87867f"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 187.142223 1296.94425 
+L 212.072348 1296.94425 
+L 212.072348 120.50414 
+L 187.142223 120.50414 
+z
+" clip-path="url(#p0d15538e08)" style="fill: #87867f"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 252.747815 1296.94425 
+L 277.67794 1296.94425 
+L 277.67794 145.940683 
+L 252.747815 145.940683 
+z
+" clip-path="url(#p0d15538e08)" style="fill: #87867f"/>
+   </g>
+   <g id="patch_7">
+    <path d="M 80.861164 1296.94425 
+L 105.791289 1296.94425 
+L 105.791289 63.271919 
+L 80.861164 63.271919 
+z
+" clip-path="url(#p0d15538e08)" style="fill: #d97757"/>
+   </g>
+   <g id="patch_8">
+    <path d="M 146.466756 1296.94425 
+L 171.396881 1296.94425 
+L 171.396881 82.349326 
+L 146.466756 82.349326 
+z
+" clip-path="url(#p0d15538e08)" style="fill: #d97757"/>
+   </g>
+   <g id="patch_9">
+    <path d="M 212.072348 1296.94425 
+L 237.002473 1296.94425 
+L 237.002473 96.339425 
+L 212.072348 96.339425 
+z
+" clip-path="url(#p0d15538e08)" style="fill: #d97757"/>
+   </g>
+   <g id="patch_10">
+    <path d="M 277.67794 1296.94425 
+L 302.608065 1296.94425 
+L 302.608065 34.019894 
+L 277.67794 34.019894 
+z
+" clip-path="url(#p0d15538e08)" style="fill: #d97757"/>
+   </g>
+   <g id="patch_11">
+    <path d="M 43.597188 215.891176 
+L 43.597188 18.757969 
+" style="fill: none; stroke: #d1cfc5; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="patch_12">
+    <path d="M 43.597187 215.891176 
+L 314.941916 215.891176 
+" style="fill: none; stroke: #d1cfc5; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="text_14">
+    <text style="font-size: 13px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #141413" x="179.269552" y="12.757969" transform="rotate(-0 179.269552 12.757969)">Quality — score by eval</text>
+   </g>
+   <g id="legend_1">
+    <g id="patch_13">
+     <path d="M 235.14426 192.709145 
+L 247.74426 192.709145 
+L 247.74426 186.409145 
+L 235.14426 186.409145 
+z
+" style="fill: #87867f"/>
+    </g>
+    <g id="text_15">
+     <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #141413" x="251.79426" y="192.709145" transform="rotate(-0 251.79426 192.709145)">Seed A</text>
+    </g>
+    <g id="patch_14">
+     <path d="M 235.14426 205.919457 
+L 247.74426 205.919457 
+L 247.74426 199.619457 
+L 235.14426 199.619457 
+z
+" style="fill: #d97757"/>
+    </g>
+    <g id="text_16">
+     <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #141413" x="251.79426" y="205.919457" transform="rotate(-0 251.79426 205.919457)">Candidate B</text>
+    </g>
+   </g>
+  </g>
+  <g id="axes_2">
+   <g id="patch_15">
+    <path d="M 359.134791 215.891176 
+L 630.47952 215.891176 
+L 630.47952 18.757969 
+L 359.134791 18.757969 
+L 359.134791 215.891176 
+z
+" style="fill: none"/>
+   </g>
+   <g id="matplotlib.axis_3">
+    <g id="xtick_5">
+     <g id="line2d_21"/>
+     <g id="text_17">
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'; fill: #87867f" transform="translate(376.344939 229.72977)">numeric-</text>
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'; fill: #87867f" transform="translate(386.262518 239.807801)">data</text>
+     </g>
+    </g>
+    <g id="xtick_6">
+     <g id="line2d_22"/>
+     <g id="text_18">
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'; fill: #87867f" transform="translate(449.527406 229.72977)">code-</text>
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'; fill: #87867f" transform="translate(447.124125 239.807801)">review</text>
+     </g>
+    </g>
+    <g id="xtick_7">
+     <g id="line2d_23"/>
+     <g id="text_19">
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'; fill: #87867f" transform="translate(509.121983 229.72977)">module-</text>
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'; fill: #87867f" transform="translate(506.670889 239.807801)">explainer</text>
+     </g>
+    </g>
+    <g id="xtick_8">
+     <g id="line2d_24"/>
+     <g id="text_20">
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'; fill: #87867f" transform="translate(581.851637 229.72977)">impl-</text>
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'; fill: #87867f" transform="translate(583.499059 239.807801)">plan</text>
+     </g>
+    </g>
+   </g>
+   <g id="matplotlib.axis_4">
+    <g id="ytick_9">
+     <g id="line2d_25">
+      <path d="M 359.134791 215.891176 
+L 630.47952 215.891176 
+" clip-path="url(#p7f1b26d9e1)" style="fill: none; stroke: #ded9cd; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_26"/>
+     <g id="text_21">
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #87867f" x="352.134791" y="219.310473" transform="rotate(-0 352.134791 219.310473)">0</text>
+     </g>
+    </g>
+    <g id="ytick_10">
+     <g id="line2d_27">
+      <path d="M 359.134791 190.578746 
+L 630.47952 190.578746 
+" clip-path="url(#p7f1b26d9e1)" style="fill: none; stroke: #ded9cd; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_28"/>
+     <g id="text_22">
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #87867f" x="352.134791" y="193.998043" transform="rotate(-0 352.134791 193.998043)">20</text>
+     </g>
+    </g>
+    <g id="ytick_11">
+     <g id="line2d_29">
+      <path d="M 359.134791 165.266316 
+L 630.47952 165.266316 
+" clip-path="url(#p7f1b26d9e1)" style="fill: none; stroke: #ded9cd; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_30"/>
+     <g id="text_23">
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #87867f" x="352.134791" y="168.685612" transform="rotate(-0 352.134791 168.685612)">40</text>
+     </g>
+    </g>
+    <g id="ytick_12">
+     <g id="line2d_31">
+      <path d="M 359.134791 139.953885 
+L 630.47952 139.953885 
+" clip-path="url(#p7f1b26d9e1)" style="fill: none; stroke: #ded9cd; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_32"/>
+     <g id="text_24">
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #87867f" x="352.134791" y="143.373182" transform="rotate(-0 352.134791 143.373182)">60</text>
+     </g>
+    </g>
+    <g id="ytick_13">
+     <g id="line2d_33">
+      <path d="M 359.134791 114.641455 
+L 630.47952 114.641455 
+" clip-path="url(#p7f1b26d9e1)" style="fill: none; stroke: #ded9cd; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_34"/>
+     <g id="text_25">
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #87867f" x="352.134791" y="118.060752" transform="rotate(-0 352.134791 118.060752)">80</text>
+     </g>
+    </g>
+    <g id="ytick_14">
+     <g id="line2d_35">
+      <path d="M 359.134791 89.329025 
+L 630.47952 89.329025 
+" clip-path="url(#p7f1b26d9e1)" style="fill: none; stroke: #ded9cd; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_36"/>
+     <g id="text_26">
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #87867f" x="352.134791" y="92.748321" transform="rotate(-0 352.134791 92.748321)">100</text>
+     </g>
+    </g>
+    <g id="ytick_15">
+     <g id="line2d_37">
+      <path d="M 359.134791 64.016594 
+L 630.47952 64.016594 
+" clip-path="url(#p7f1b26d9e1)" style="fill: none; stroke: #ded9cd; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_38"/>
+     <g id="text_27">
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #87867f" x="352.134791" y="67.435891" transform="rotate(-0 352.134791 67.435891)">120</text>
+     </g>
+    </g>
+    <g id="ytick_16">
+     <g id="line2d_39">
+      <path d="M 359.134791 38.704164 
+L 630.47952 38.704164 
+" clip-path="url(#p7f1b26d9e1)" style="fill: none; stroke: #ded9cd; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_40"/>
+     <g id="text_28">
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #87867f" x="352.134791" y="42.123461" transform="rotate(-0 352.134791 42.123461)">140</text>
+     </g>
+    </g>
+    <g id="text_29">
+     <text style="font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #3d3d3a" x="328.876354" y="117.324572" transform="rotate(-90 328.876354 117.324572)">wall time (s)</text>
+    </g>
+   </g>
+   <g id="patch_16">
+    <path d="M 371.468643 215.891176 
+L 396.398768 215.891176 
+L 396.398768 96.922754 
+L 371.468643 96.922754 
+z
+" clip-path="url(#p7f1b26d9e1)" style="fill: #87867f"/>
+   </g>
+   <g id="patch_17">
+    <path d="M 437.074235 215.891176 
+L 462.00436 215.891176 
+L 462.00436 86.797782 
+L 437.074235 86.797782 
+z
+" clip-path="url(#p7f1b26d9e1)" style="fill: #87867f"/>
+   </g>
+   <g id="patch_18">
+    <path d="M 502.679827 215.891176 
+L 527.609952 215.891176 
+L 527.609952 75.407188 
+L 502.679827 75.407188 
+z
+" clip-path="url(#p7f1b26d9e1)" style="fill: #87867f"/>
+   </g>
+   <g id="patch_19">
+    <path d="M 568.285419 215.891176 
+L 593.215544 215.891176 
+L 593.215544 83.000917 
+L 568.285419 83.000917 
+z
+" clip-path="url(#p7f1b26d9e1)" style="fill: #87867f"/>
+   </g>
+   <g id="patch_20">
+    <path d="M 396.398768 215.891176 
+L 421.328893 215.891176 
+L 421.328893 72.875945 
+L 396.398768 72.875945 
+z
+" clip-path="url(#p7f1b26d9e1)" style="fill: #d97757"/>
+   </g>
+   <g id="patch_21">
+    <path d="M 462.00436 215.891176 
+L 486.934485 215.891176 
+L 486.934485 62.750973 
+L 462.00436 62.750973 
+z
+" clip-path="url(#p7f1b26d9e1)" style="fill: #d97757"/>
+   </g>
+   <g id="patch_22">
+    <path d="M 527.609952 215.891176 
+L 552.540077 215.891176 
+L 552.540077 48.829136 
+L 527.609952 48.829136 
+z
+" clip-path="url(#p7f1b26d9e1)" style="fill: #d97757"/>
+   </g>
+   <g id="patch_23">
+    <path d="M 593.215544 215.891176 
+L 618.145669 215.891176 
+L 618.145669 60.21973 
+L 593.215544 60.21973 
+z
+" clip-path="url(#p7f1b26d9e1)" style="fill: #d97757"/>
+   </g>
+   <g id="patch_24">
+    <path d="M 359.134791 215.891176 
+L 359.134791 18.757969 
+" style="fill: none; stroke: #d1cfc5; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="patch_25">
+    <path d="M 359.134791 215.891176 
+L 630.47952 215.891176 
+" style="fill: none; stroke: #d1cfc5; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="text_30">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #b04a3f" x="408.86383" y="68.680952" transform="rotate(-0 408.86383 68.680952)">+19s</text>
+   </g>
+   <g id="text_31">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #b04a3f" x="474.469422" y="58.55598" transform="rotate(-0 474.469422 58.55598)">+19s</text>
+   </g>
+   <g id="text_32">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #b04a3f" x="540.075014" y="44.634143" transform="rotate(-0 540.075014 44.634143)">+21s</text>
+   </g>
+   <g id="text_33">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #b04a3f" x="605.680606" y="56.024737" transform="rotate(-0 605.680606 56.024737)">+18s</text>
+   </g>
+   <g id="text_34">
+    <text style="font-size: 13px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #141413" x="494.807156" y="12.757969" transform="rotate(-0 494.807156 12.757969)">Cost — wall time by eval</text>
+   </g>
+   <g id="legend_2">
+    <g id="patch_26">
+     <path d="M 550.681864 192.709145 
+L 563.281864 192.709145 
+L 563.281864 186.409145 
+L 550.681864 186.409145 
+z
+" style="fill: #87867f"/>
+    </g>
+    <g id="text_35">
+     <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #141413" x="567.331864" y="192.709145" transform="rotate(-0 567.331864 192.709145)">Seed A</text>
+    </g>
+    <g id="patch_27">
+     <path d="M 550.681864 205.919457 
+L 563.281864 205.919457 
+L 563.281864 199.619457 
+L 550.681864 199.619457 
+z
+" style="fill: #d97757"/>
+    </g>
+    <g id="text_36">
+     <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #141413" x="567.331864" y="205.919457" transform="rotate(-0 567.331864 205.919457)">Candidate B</text>
+    </g>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p0d15538e08">
+   <rect x="43.597188" y="18.757969" width="271.344729" height="197.133207"/>
+  </clipPath>
+  <clipPath id="p7f1b26d9e1">
+   <rect x="359.134791" y="18.757969" width="271.344729" height="197.133207"/>
+  </clipPath>
+ </defs>
+</svg>
+
+        </div>
+        <p class="chart-caption">Every eval improves in score; every eval is slower. The largest score gain is <code>implementation-plan</code> (+0.088); the largest time penalty is <code>module-explainer</code> (+21 s, +18.9%).</p>
+      </div>
+
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">Exact values</span>
+          <h3>Per-eval comparison</h3>
+        </div>
+      </div>
+      <div class="numeric-table-wrap">
+        <table class="numeric-table">
+          <thead>
+            <tr>
+              <th>Eval</th>
+              <th class="metric">Seed score</th>
+              <th class="metric">Cand. score</th>
+              <th class="metric">Δ score</th>
+              <th class="metric">Warn S → C</th>
+              <th class="metric">Wall S → C (s)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><code>numeric-data</code></td><td class="metric">0.930</td><td class="metric">0.970</td><td class="metric">+0.040</td><td class="metric">2 → 1</td><td class="metric">94 → 113</td></tr>
+            <tr><td><code>code-review</code></td><td class="metric">0.910</td><td class="metric">0.955</td><td class="metric">+0.045</td><td class="metric">1 → 0</td><td class="metric">102 → 121</td></tr>
+            <tr><td><code>module-explainer</code></td><td class="metric">0.925</td><td class="metric">0.944</td><td class="metric">+0.019</td><td class="metric">1 → 1</td><td class="metric">111 → 132</td></tr>
+            <tr><td><code>implementation-plan</code></td><td class="metric">0.905</td><td class="metric">0.993</td><td class="metric">+0.088</td><td class="metric">1 → 0</td><td class="metric">105 → 123</td></tr>
+            <tr><td><strong>Run total</strong></td><td class="metric">0.9175</td><td class="metric">0.9655</td><td class="metric">+0.0480</td><td class="metric">5 → 2</td><td class="metric">412 → 489</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section-rail">
+      <div class="stack" data-gap="lg">
+        <section class="section stack" data-gap="md">
+          <div class="section-head">
+            <div>
+              <span class="eyebrow">Findings</span>
+              <h2>Where Candidate B helps — and where it doesn't</h2>
+            </div>
+          </div>
+          <div class="auto-grid" style="--grid-min: 240px">
+            <article class="card stack" data-gap="sm" data-tone="success">
+              <span class="eyebrow">Improvement</span>
+              <h3>Checker warnings cut 60%</h3>
+              <p>Mechanical contract warnings drop 5 → 2 with no new failures. The two remaining warnings are on <code>numeric-data</code> (1) and <code>module-explainer</code> (1).</p>
+            </article>
+            <article class="card stack" data-gap="sm" data-tone="success">
+              <span class="eyebrow">Improvement</span>
+              <h3>implementation-plan jumps +0.088</h3>
+              <p>Largest single-eval gain; warnings clear to 0. Source note: <span class="note">"Plan quality improved; no checker regression."</span></p>
+            </article>
+            <article class="card stack" data-gap="sm" data-tone="warning">
+              <span class="eyebrow">Regression risk</span>
+              <h3>Wall time +18.7% across the board</h3>
+              <p>Every eval is 18–21 s slower. Source caveat: wall time includes model latency and harness overhead, so small per-eval gaps are noisy — but the consistent direction is not.</p>
+            </article>
+            <article class="card stack" data-gap="sm" data-tone="warning">
+              <span class="eyebrow">Regression risk</span>
+              <h3>Cost +11.5%, tokens +7.5%</h3>
+              <p>Output tokens drive most of the spend (31.8k → 34.6k, +8.8%). Acceptable for a seed run; reassess if downstream GEPA runs amplify the per-call cost.</p>
+            </article>
+            <article class="card stack" data-gap="sm">
+              <span class="eyebrow">Open</span>
+              <h3>code-review diff wrapping</h3>
+              <p>Source decision note flags: <span class="note">"One code-review artifact still needs inspection for long diff wrapping."</span> Block promotion to broad suite until manually verified.</p>
+            </article>
+            <article class="card stack" data-gap="sm">
+              <span class="eyebrow">Open</span>
+              <h3>numeric-data SVG density</h3>
+              <p>Per-eval note: <span class="note">"Candidate chart is clearer but uses more SVG text."</span> Watch for 390px overflow regressions in later candidates.</p>
+            </article>
+          </div>
+        </section>
+
+        <aside class="reference-panel stack" data-gap="md">
+          <div class="section-head">
+            <div>
+              <span class="eyebrow">Reference</span>
+              <h2>Scoring &amp; provenance</h2>
+            </div>
+          </div>
+
+          <div class="stack" data-gap="sm">
+            <h3>Scoring formula</h3>
+            <div class="code-block" data-wrap="true"><code>final = 0.30·gen + 0.55·check + 0.15·hygiene</code></div>
+            <ul class="plain-list">
+              <li><code>gen</code> = generated_ok / total_evals</li>
+              <li><code>check</code> = max(0, 1 − 0.20·failures − 0.03·warnings)</li>
+              <li><code>hygiene</code> = avg artifact compliance after penalties for unsupported classes, external assets, missing CSS</li>
+            </ul>
+            <p class="caption">Verify: Seed checker = 1 − 0.03·5 = 0.85; Candidate = 1 − 0.03·2 = 0.94. Matches <code>source.json</code>.</p>
+          </div>
+
+          <div class="stack" data-gap="sm">
+            <h3>Run provenance</h3>
+            <div class="metric-list">
+              <div class="metric"><span class="caption">Model</span><code>codexresponses.gpt-5.5</code></div>
+              <div class="metric"><span class="caption">Eval set</span><code>numeric-data, code-review, module-explainer, implementation-plan</code></div>
+              <div class="metric"><span class="caption">Timestamp</span><code>2026-05-20T18:40:00Z</code></div>
+              <div class="metric"><span class="caption">Seed report</span><code>eval-runs/reports/skill-seed-gpt55/summary.json</code></div>
+              <div class="metric"><span class="caption">Cand. report</span><code>eval-runs/reports/skill-candidate-b-gpt55/summary.json</code></div>
+            </div>
+            <h3>Command</h3>
+            <div class="code-block" data-wrap="true"><code>python3 scripts/run_skill_evals.py --skill-dir birch-html --model codexresponses.gpt-5.5 --label skill-candidate-b-gpt55</code></div>
+          </div>
+
+          <div class="stack" data-gap="sm">
+            <h3>Caveats</h3>
+            <ul class="plain-list">
+              <li>Provider token schemas differ; cached / reasoning / effective tokens are not apples-to-apples — treat the +7.5% token delta as directional.</li>
+              <li>Checker warnings are mechanical contract signals, not a complete human quality score.</li>
+              <li>Same:same screenshot pairs primarily validate geometry &amp; rendering contracts, not aesthetic quality.</li>
+              <li>Wall time includes model latency &amp; harness overhead; per-eval gaps under ~10 s are noise, but the consistent +18–21 s shift is not.</li>
+              <li>n=4 evals, single model, single run — no variance estimate.</li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section stack" data-gap="md">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">Next experiment</span>
+          <h2>What to run before broad promotion</h2>
+        </div>
+        <p class="caption">From <code>source.json</code> → <code>recommendation.next_experiment</code>, plus regressions to verify.</p>
+      </div>
+      <ol class="flow-list">
+        <li class="flow-step">
+          <span class="flow-num">1</span>
+          <div class="stack" data-gap="sm">
+            <h3 class="flow-title">Manual inspection: code-review diff wrapping</h3>
+            <p class="flow-detail">Open the Candidate B <code>code-review</code> artifact at 390px and confirm <code>.diff-row</code> wrapping. Block promotion if any diff line overflows.</p>
+          </div>
+        </li>
+        <li class="flow-step">
+          <span class="flow-num">2</span>
+          <div class="stack" data-gap="sm">
+            <h3 class="flow-title">Single-model GEPA seed run on gpt-5.5</h3>
+            <p class="flow-detail">Promote Candidate B as seed. Compare GEPA-best vs Candidate B on the same four evals to confirm the lifted floor is real, not a single-run artefact.</p>
+          </div>
+        </li>
+        <li class="flow-step">
+          <span class="flow-num">3</span>
+          <div class="stack" data-gap="sm">
+            <h3 class="flow-title">Cross-model validation: Kimi &amp; Gemini</h3>
+            <p class="flow-detail">Re-run the eval set on Kimi and Gemini before broadening to the full model suite. Watch whether the +18.7% wall-time cost amplifies or compresses on other providers.</p>
+          </div>
+        </li>
+        <li class="flow-step">
+          <span class="flow-num">4</span>
+          <div class="stack" data-gap="sm">
+            <h3 class="flow-title">Tighten checker on remaining warnings</h3>
+            <p class="flow-detail">The two surviving warnings are on <code>numeric-data</code> and <code>module-explainer</code>. Decide whether the rubric should escalate "dense SVG text" / "dense mobile caption" to failures before the next GEPA round, so future candidates can't trade them away.</p>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <footer class="stack" data-gap="sm">
+      <p class="caption">Source of truth: <code>evals/benchmark-comparison/source.json</code>. All scores, warnings, tokens, wall times, and costs reproduced verbatim; deltas computed in-page. Audience: engineers optimizing the Birch HTML skill and selecting GEPA seed candidates.</p>
+    </footer>
+  </main>
+</body>
+</html>

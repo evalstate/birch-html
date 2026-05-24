@@ -1,0 +1,110 @@
+{
+  "artifacts": [
+    {
+      "artifact": "benchmark-comparison-deep.png",
+      "findings": []
+    },
+    {
+      "artifact": "benchmark-comparison-mobile-deep.png",
+      "findings": []
+    },
+    {
+      "artifact": "benchmark-comparison-desktop.png",
+      "findings": []
+    },
+    {
+      "artifact": "benchmark-comparison-mobile.png",
+      "findings": []
+    },
+    {
+      "artifact": "code-review-deep.png",
+      "findings": []
+    },
+    {
+      "artifact": "code-review-mobile-deep.png",
+      "findings": []
+    },
+    {
+      "artifact": "code-review-desktop.png",
+      "findings": []
+    },
+    {
+      "artifact": "code-review-mobile.png",
+      "findings": []
+    },
+    {
+      "artifact": "implementation-plan-deep.png",
+      "findings": []
+    },
+    {
+      "artifact": "implementation-plan-mobile-deep.png",
+      "findings": []
+    },
+    {
+      "artifact": "implementation-plan-desktop.png",
+      "findings": []
+    },
+    {
+      "artifact": "implementation-plan-mobile.png",
+      "findings": []
+    },
+    {
+      "artifact": "module-explainer-deep.png",
+      "findings": [
+        {
+          "level": "fail",
+          "name": "vision_flow_disconnected",
+          "evidence": "Targeted diagram audit: the optional bypass labeled \u201cIf capture disabled/browser missing:\u201d drops from the Contract node, runs under the Browser pass node, and terminates back near Browser pass rather than continuing to the Write .json/.md output. This makes the disabled-browser route ambiguous/misleading instead of showing a continuous path to reporting.",
+          "confidence": 0.9,
+          "bbox_px": {
+            "x": 748,
+            "y": 650,
+            "width": 470,
+            "height": 105
+          }
+        }
+      ]
+    },
+    {
+      "artifact": "module-explainer-mobile-deep.png",
+      "findings": [
+        {
+          "level": "warn",
+          "name": "vision_flow_disconnected",
+          "evidence": "Targeted diagram audit: in the mobile-scaled runtime diagram, the lower optional route appears to drop from Contract and stop around the Browser pass area instead of visibly connecting to the final Write node. The label and connector are also extremely small/faint, so the alternate flow is not reliably readable.",
+          "confidence": 0.74,
+          "bbox_px": {
+            "x": 203,
+            "y": 735,
+            "width": 143,
+            "height": 42
+          }
+        }
+      ]
+    },
+    {
+      "artifact": "module-explainer-desktop.png",
+      "findings": []
+    },
+    {
+      "artifact": "module-explainer-mobile.png",
+      "findings": []
+    },
+    {
+      "artifact": "numeric-data-deep.png",
+      "findings": []
+    },
+    {
+      "artifact": "numeric-data-mobile-deep.png",
+      "findings": []
+    },
+    {
+      "artifact": "numeric-data-desktop.png",
+      "findings": []
+    },
+    {
+      "artifact": "numeric-data-mobile.png",
+      "findings": []
+    }
+  ]
+}

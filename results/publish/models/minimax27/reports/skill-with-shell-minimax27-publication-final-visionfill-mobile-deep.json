@@ -1,0 +1,1517 @@
+{
+  "mode": "artifact",
+  "artifacts": [
+    {
+      "artifact": "eval-runs/skill-with-shell-minimax27-publication-final/numeric-data.html",
+      "stats": {
+        "path": "eval-runs/skill-with-shell-minimax27-publication-final/numeric-data.html",
+        "bytes": 27335,
+        "title": "Rendering Checker \u2014 numeric-data eval",
+        "doctype": true,
+        "viewport": true,
+        "stylesheet_links": [],
+        "birch_css_embedded": false,
+        "style_blocks": 2,
+        "style_bytes": 10616,
+        "script_blocks": 0,
+        "tag_counts": {
+          "html": 1,
+          "head": 1,
+          "meta": 2,
+          "title": 1,
+          "style": 2,
+          "body": 1,
+          "section": 4,
+          "p": 21,
+          "h1": 1,
+          "div": 13,
+          "table": 2,
+          "thead": 2,
+          "tr": 10,
+          "th": 10,
+          "tbody": 2,
+          "td": 42,
+          "span": 15,
+          "svg": 1,
+          "defs": 1,
+          "lineargradient": 3,
+          "stop": 6,
+          "line": 9,
+          "text": 29,
+          "rect": 6,
+          "polyline": 2,
+          "circle": 12,
+          "footer": 1,
+          "strong": 2,
+          "code": 1
+        },
+        "class_counts": {
+          "hero": 1,
+          "hero__eyebrow": 1,
+          "hero__headline": 1,
+          "hero__sub": 1,
+          "kpi-strip": 1,
+          "kpi": 4,
+          "kpi__label": 4,
+          "kpi__value": 4,
+          "kpi__value--success": 2,
+          "kpi__delta": 4,
+          "kpi__sub": 4,
+          "kpi__value--accent": 1,
+          "section-label": 2,
+          "metric-table": 1,
+          "artifact-name": 3,
+          "pass-pct": 3,
+          "pass-pct--best": 1,
+          "bar-cell": 3,
+          "bar-wrap": 3,
+          "bar-fill": 8,
+          "overflow-chip": 3,
+          "overflow-chip--good": 1,
+          "pass-pct--mid": 1,
+          "pass-pct--worst": 1,
+          "chart-section": 1,
+          "chart-title": 1,
+          "chart-svg": 1,
+          "grid-line": 5,
+          "axis-label": 26,
+          "line-overflow": 1,
+          "dot-overflow": 5,
+          "line-vision": 1,
+          "dot-vision": 5,
+          "legend-item": 3,
+          "numeric-table-wrap": 1,
+          "numeric-table": 1,
+          "td-mono": 25,
+          "td-badge": 5,
+          "td-good": 6,
+          "badge-new": 2,
+          "source-note": 1
+        },
+        "data_attrs": {},
+        "text_words": 182,
+        "unique_words": 93,
+        "css_vars_used": [
+          "--accent",
+          "--accent-strong",
+          "--bg",
+          "--border",
+          "--border-color",
+          "--border-thin",
+          "--color-clay",
+          "--color-clay-dark",
+          "--color-gray-100",
+          "--color-gray-300",
+          "--color-gray-500",
+          "--color-gray-700",
+          "--color-ivory",
+          "--color-oat",
+          "--color-olive",
+          "--color-rust",
+          "--color-sky",
+          "--color-slate",
+          "--color-white",
+          "--font-mono",
+          "--font-sans",
+          "--font-serif",
+          "--info",
+          "--leading-body",
+          "--leading-tight",
+          "--radius-lg",
+          "--radius-md",
+          "--radius-pill",
+          "--radius-xs",
+          "--shadow-md",
+          "--shadow-sm",
+          "--space-1",
+          "--space-2",
+          "--space-3",
+          "--space-4",
+          "--space-5",
+          "--space-6",
+          "--space-8",
+          "--success",
+          "--surface",
+          "--surface-tint",
+          "--surface-warm",
+          "--text",
+          "--text-2xl",
+          "--text-3xl",
+          "--text-base",
+          "--text-lg",
+          "--text-md",
+          "--text-muted",
+          "--text-sm",
+          "--text-soft",
+          "--text-xl",
+          "--text-xs",
+          "--warning"
+        ],
+        "css_vars_defined": [
+          "--accent",
+          "--accent-strong",
+          "--bg",
+          "--border",
+          "--border-color",
+          "--border-thin",
+          "--color-clay",
+          "--color-clay-dark",
+          "--color-gray-100",
+          "--color-gray-150",
+          "--color-gray-200",
+          "--color-gray-300",
+          "--color-gray-50",
+          "--color-gray-500",
+          "--color-gray-700",
+          "--color-ivory",
+          "--color-oat",
+          "--color-olive",
+          "--color-rust",
+          "--color-sky",
+          "--color-slate",
+          "--color-white",
+          "--danger",
+          "--font-mono",
+          "--font-sans",
+          "--font-serif",
+          "--info",
+          "--leading-body",
+          "--leading-tight",
+          "--leading-title",
+          "--radius-lg",
+          "--radius-md",
+          "--radius-sm",
+          "--radius-xs",
+          "--shadow-md",
+          "--shadow-sm",
+          "--space-1",
+          "--space-2",
+          "--space-3",
+          "--space-4",
+          "--space-5",
+          "--space-6",
+          "--space-7",
+          "--space-8",
+          "--success",
+          "--surface",
+          "--surface-tint",
+          "--surface-warm",
+          "--text",
+          "--text-2xl",
+          "--text-3xl",
+          "--text-4xl",
+          "--text-base",
+          "--text-lg",
+          "--text-md",
+          "--text-muted",
+          "--text-sm",
+          "--text-soft",
+          "--text-xl",
+          "--text-xs",
+          "--warning"
+        ],
+        "hex_colors": [
+          "#141413",
+          "#3D3D3A",
+          "#6A8CAF",
+          "#788C5D",
+          "#87867F",
+          "#B04A3F",
+          "#B85C3E",
+          "#C78E3F",
+          "#D1CFC5",
+          "#D97757",
+          "#DED9CD",
+          "#E3DACC",
+          "#E8E4DA",
+          "#F0EEE6",
+          "#F7F5EE",
+          "#FAF9F5",
+          "#FFFFFF"
+        ],
+        "birch_css_bytes": 0,
+        "birch_css_valid": false
+      },
+      "screenshot": {
+        "png": "eval-runs/reports/skill-with-shell-minimax27-publication-final/screenshots/numeric-data-mobile-deep.png",
+        "size": [
+          390,
+          1692
+        ],
+        "mean_rgb": [
+          241.05,
+          240.73,
+          237.94
+        ],
+        "palette": {
+          "palette_close_fraction": 0.9458,
+          "ivory_fraction": 0.3659,
+          "blackish_fraction": 0.0
+        },
+        "background_fraction": 0.7504,
+        "non_background_fraction": 0.2496,
+        "blackish_fraction": 0.0,
+        "file_bytes": 130379
+      },
+      "geometry": {
+        "overflow": [],
+        "containerOverflow": [],
+        "statCardSqueeze": [],
+        "sectionRailOrder": [],
+        "pageOverflowX": 0,
+        "timelineProblems": [],
+        "metricGroups": [],
+        "metricRowSqueeze": [],
+        "splitRailGroups": [],
+        "numericHeaderGroups": [],
+        "codeWrapProblems": [],
+        "textWrapProblems": []
+      },
+      "findings": [
+        {
+          "level": "pass",
+          "name": "doctype",
+          "evidence": "doctype present"
+        },
+        {
+          "level": "pass",
+          "name": "viewport",
+          "evidence": "viewport meta present"
+        },
+        {
+          "level": "fail",
+          "name": "uses_birch_system_css",
+          "evidence": "stylesheet links: []; embedded=False; embedded_bytes=0"
+        },
+        {
+          "level": "fail",
+          "name": "has_page_shell",
+          "evidence": "candidate should use .page as the outer shell"
+        },
+        {
+          "level": "warn",
+          "name": "uses_layout_primitives",
+          "evidence": "too few Birch layout primitives; LLM layout may be brittle"
+        },
+        {
+          "level": "warn",
+          "name": "uses_semantic_components",
+          "evidence": "too few semantic components; likely still page-specific CSS"
+        },
+        {
+          "level": "pass",
+          "name": "no_unknown_css_vars",
+          "evidence": "all CSS variables are defined in Birch system or local CSS"
+        },
+        {
+          "level": "pass",
+          "name": "no_patch_markers",
+          "evidence": "no accidental patch marker lines"
+        },
+        {
+          "level": "warn",
+          "name": "local_css_size",
+          "evidence": "10616 bytes of local CSS; consider moving recurring patterns into birch-system.css"
+        },
+        {
+          "level": "note",
+          "name": "local_literal_colors",
+          "evidence": "literal colors outside canonical palette: #B85C3E, #C78E3F, #DED9CD, #E8E4DA, #F7F5EE"
+        },
+        {
+          "level": "note",
+          "name": "screenshot_capture",
+          "evidence": "captured eval-runs/reports/skill-with-shell-minimax27-publication-final/screenshots/numeric-data-mobile-deep.png at [390, 1692]"
+        },
+        {
+          "level": "pass",
+          "name": "layout_overflow",
+          "evidence": "no visible text/content overflow detected"
+        },
+        {
+          "level": "pass",
+          "name": "container_text_overflow",
+          "evidence": "text stays within its card/panel containers"
+        },
+        {
+          "level": "pass",
+          "name": "stat_card_squeeze",
+          "evidence": "KPI/stat cards have enough horizontal space"
+        },
+        {
+          "level": "pass",
+          "name": "timeline_geometry",
+          "evidence": "timeline markers/content stay within expected geometry"
+        },
+        {
+          "level": "pass",
+          "name": "numeric_header_alignment",
+          "evidence": "numeric table headers align with right-aligned numeric columns"
+        },
+        {
+          "level": "pass",
+          "name": "code_wrap_underfill",
+          "evidence": "wrapped code/diff blocks use available container width"
+        },
+        {
+          "level": "pass",
+          "name": "pathological_text_wrapping",
+          "evidence": "prose/list text uses available container width"
+        }
+      ]
+    },
+    {
+      "artifact": "eval-runs/skill-with-shell-minimax27-publication-final/code-review.html",
+      "stats": {
+        "path": "eval-runs/skill-with-shell-minimax27-publication-final/code-review.html",
+        "bytes": 43165,
+        "title": "Code review: Candle rendering checker updates",
+        "doctype": true,
+        "viewport": true,
+        "stylesheet_links": [],
+        "birch_css_embedded": true,
+        "style_blocks": 1,
+        "style_bytes": 611,
+        "script_blocks": 0,
+        "tag_counts": {
+          "html": 1,
+          "head": 1,
+          "meta": 2,
+          "title": 1,
+          "style": 2,
+          "body": 1,
+          "main": 1,
+          "header": 1,
+          "div": 37,
+          "h1": 1,
+          "p": 22,
+          "span": 30,
+          "section": 5,
+          "h2": 5,
+          "strong": 19,
+          "code": 34,
+          "ul": 4,
+          "li": 14
+        },
+        "class_counts": {
+          "page": 1,
+          "stack": 18,
+          "eyebrow": 6,
+          "lede": 1,
+          "cluster": 5,
+          "chip": 3,
+          "section": 5,
+          "section-head": 5,
+          "card": 11,
+          "finding-tag": 4,
+          "tag-fail": 2,
+          "diff": 2,
+          "diff-row": 4,
+          "del": 1,
+          "ln": 4,
+          "mark": 4,
+          "code": 4,
+          "add": 3,
+          "tag-warn": 2,
+          "code-block": 2,
+          "auto-grid": 2,
+          "caption": 9,
+          "plain-list": 3,
+          "checklist": 1
+        },
+        "data_attrs": {
+          "data-birch-system": 1,
+          "data-gap": 11,
+          "data-tone": 1,
+          "data-variant": 11,
+          "data-wrap": 4
+        },
+        "text_words": 532,
+        "unique_words": 268,
+        "css_vars_used": [
+          "--accent",
+          "--danger",
+          "--space-3",
+          "--surface",
+          "--warning"
+        ],
+        "css_vars_defined": [
+          "--grid-min"
+        ],
+        "hex_colors": [],
+        "birch_css_bytes": 31715,
+        "birch_css_valid": true
+      },
+      "screenshot": {
+        "png": "eval-runs/reports/skill-with-shell-minimax27-publication-final/screenshots/code-review-mobile-deep.png",
+        "size": [
+          390,
+          5477
+        ],
+        "mean_rgb": [
+          221.91,
+          221.22,
+          219.27
+        ],
+        "palette": {
+          "palette_close_fraction": 0.8836,
+          "ivory_fraction": 0.3422,
+          "blackish_fraction": 0.0006
+        },
+        "background_fraction": 0.7181,
+        "non_background_fraction": 0.2819,
+        "blackish_fraction": 0.0006,
+        "file_bytes": 417839
+      },
+      "geometry": {
+        "overflow": [],
+        "containerOverflow": [],
+        "statCardSqueeze": [],
+        "sectionRailOrder": [],
+        "pageOverflowX": 0,
+        "timelineProblems": [],
+        "metricGroups": [],
+        "metricRowSqueeze": [],
+        "splitRailGroups": [],
+        "numericHeaderGroups": [],
+        "codeWrapProblems": [],
+        "textWrapProblems": []
+      },
+      "findings": [
+        {
+          "level": "pass",
+          "name": "doctype",
+          "evidence": "doctype present"
+        },
+        {
+          "level": "pass",
+          "name": "viewport",
+          "evidence": "viewport meta present"
+        },
+        {
+          "level": "pass",
+          "name": "uses_birch_system_css",
+          "evidence": "embeds or links Birch system CSS"
+        },
+        {
+          "level": "pass",
+          "name": "has_page_shell",
+          "evidence": ".page found"
+        },
+        {
+          "level": "pass",
+          "name": "uses_layout_primitives",
+          "evidence": "layout primitive count is healthy"
+        },
+        {
+          "level": "pass",
+          "name": "uses_semantic_components",
+          "evidence": "semantic component count is healthy"
+        },
+        {
+          "level": "pass",
+          "name": "no_unknown_css_vars",
+          "evidence": "all CSS variables are defined in Birch system or local CSS"
+        },
+        {
+          "level": "pass",
+          "name": "no_patch_markers",
+          "evidence": "no accidental patch marker lines"
+        },
+        {
+          "level": "note",
+          "name": "screenshot_capture",
+          "evidence": "captured eval-runs/reports/skill-with-shell-minimax27-publication-final/screenshots/code-review-mobile-deep.png at [390, 5477]"
+        },
+        {
+          "level": "pass",
+          "name": "layout_overflow",
+          "evidence": "no visible text/content overflow detected"
+        },
+        {
+          "level": "pass",
+          "name": "container_text_overflow",
+          "evidence": "text stays within its card/panel containers"
+        },
+        {
+          "level": "pass",
+          "name": "stat_card_squeeze",
+          "evidence": "KPI/stat cards have enough horizontal space"
+        },
+        {
+          "level": "pass",
+          "name": "timeline_geometry",
+          "evidence": "timeline markers/content stay within expected geometry"
+        },
+        {
+          "level": "pass",
+          "name": "numeric_header_alignment",
+          "evidence": "numeric table headers align with right-aligned numeric columns"
+        },
+        {
+          "level": "pass",
+          "name": "code_wrap_underfill",
+          "evidence": "wrapped code/diff blocks use available container width"
+        },
+        {
+          "level": "pass",
+          "name": "pathological_text_wrapping",
+          "evidence": "prose/list text uses available container width"
+        }
+      ]
+    },
+    {
+      "artifact": "eval-runs/skill-with-shell-minimax27-publication-final/module-explainer.html",
+      "stats": {
+        "path": "eval-runs/skill-with-shell-minimax27-publication-final/module-explainer.html",
+        "bytes": 50436,
+        "title": "Rendering Checker Pipeline \u2014 Module Explainer",
+        "doctype": true,
+        "viewport": true,
+        "stylesheet_links": [
+          "../styles/birch-system.css"
+        ],
+        "birch_css_embedded": false,
+        "style_blocks": 1,
+        "style_bytes": 4485,
+        "script_blocks": 0,
+        "tag_counts": {
+          "html": 1,
+          "head": 1,
+          "meta": 2,
+          "title": 1,
+          "link": 1,
+          "style": 1,
+          "body": 1,
+          "main": 1,
+          "header": 1,
+          "div": 58,
+          "h1": 1,
+          "p": 28,
+          "code": 309,
+          "section": 10,
+          "span": 37,
+          "h2": 10,
+          "article": 3,
+          "h3": 21,
+          "aside": 1,
+          "ul": 7,
+          "li": 31,
+          "ol": 2,
+          "svg": 1,
+          "defs": 1,
+          "marker": 2,
+          "path": 2,
+          "g": 10,
+          "rect": 12,
+          "text": 20,
+          "line": 13,
+          "table": 5,
+          "thead": 5,
+          "tr": 71,
+          "th": 14,
+          "tbody": 5,
+          "td": 192,
+          "h4": 6,
+          "br": 8,
+          "tdfewer": 1
+        },
+        "class_counts": {
+          "page": 1,
+          "stack": 19,
+          "eyebrow": 10,
+          "lede": 1,
+          "section": 10,
+          "section-head": 9,
+          "grid": 1,
+          "card": 4,
+          "chip": 3,
+          "muted": 5,
+          "callout-wrap": 1,
+          "callout": 1,
+          "callout-label": 1,
+          "plain-list": 1,
+          "step-card": 1,
+          "step-num": 1,
+          "flow-list": 2,
+          "flow-step": 12,
+          "flow-num": 12,
+          "flow-title": 12,
+          "flow-detail": 12,
+          "flow-wrap": 1,
+          "flow-node": 8,
+          "lvl": 5,
+          "lvl-note": 2,
+          "file-table": 1,
+          "two-col": 1,
+          "inspect-block": 6,
+          "ext-table": 4,
+          "cmd-row": 6,
+          "cmd-tag": 6,
+          "cmd-tag--bash": 6,
+          "cluster": 4,
+          "lvl-pass": 1,
+          "lvl-warn": 1,
+          "lvl-fail": 1,
+          "palette-grid": 1,
+          "palette-swatch": 8
+        },
+        "data_attrs": {
+          "data-gap": 15,
+          "data-cols": 1,
+          "data-variant": 4,
+          "data-tone": 1,
+          "data-shape": 1,
+          "data-kind": 4
+        },
+        "text_words": 2430,
+        "unique_words": 869,
+        "css_vars_used": [
+          "--border",
+          "--border-color",
+          "--border-thin",
+          "--danger",
+          "--font-mono",
+          "--info",
+          "--radius-md",
+          "--radius-sm",
+          "--space-1",
+          "--space-2",
+          "--space-3",
+          "--space-4",
+          "--space-5",
+          "--space-6",
+          "--space-7",
+          "--success",
+          "--surface",
+          "--surface-tint",
+          "--text-base",
+          "--text-lg",
+          "--text-muted",
+          "--text-sm",
+          "--text-soft",
+          "--text-xs",
+          "--warning"
+        ],
+        "css_vars_defined": [
+          "--tone-fail",
+          "--tone-note",
+          "--tone-ok",
+          "--tone-warn"
+        ],
+        "hex_colors": [],
+        "birch_css_bytes": 0,
+        "birch_css_valid": false
+      },
+      "screenshot": {
+        "png": "eval-runs/reports/skill-with-shell-minimax27-publication-final/screenshots/module-explainer-mobile-deep.png",
+        "size": [
+          390,
+          6000
+        ],
+        "mean_rgb": [
+          231.82,
+          231.85,
+          231.81
+        ],
+        "palette": {
+          "palette_close_fraction": 0.8294,
+          "ivory_fraction": 0.091,
+          "blackish_fraction": 0.0041
+        },
+        "background_fraction": 0.6765,
+        "non_background_fraction": 0.3235,
+        "blackish_fraction": 0.0041,
+        "file_bytes": 594033
+      },
+      "geometry": {
+        "overflow": [
+          {
+            "selector": "table.ext-table > tbody > tr > td > code",
+            "text": "check(name, passed, ok, bad, warn=False)",
+            "overX": 0,
+            "overY": 0,
+            "offRight": 114,
+            "offLeft": 0
+          },
+          {
+            "selector": "table.ext-table > tbody > tr > td > code",
+            "text": "Finding",
+            "overX": 0,
+            "overY": 0,
+            "offRight": 37,
+            "offLeft": 0
+          },
+          {
+            "selector": "table.ext-table > tbody > tr > td > code",
+            "text": "\"pass\"",
+            "overX": 0,
+            "overY": 0,
+            "offRight": 18,
+            "offLeft": 0
+          },
+          {
+            "selector": "table.ext-table > tbody > tr > td > code",
+            "text": "\"warn\"",
+            "overX": 0,
+            "overY": 0,
+            "offRight": 75,
+            "offLeft": 0
+          },
+          {
+            "selector": "table.ext-table > tbody > tr > td > code",
+            "text": "\"fail\"",
+            "overX": 0,
+            "overY": 0,
+            "offRight": 12,
+            "offLeft": 0
+          },
+          {
+            "selector": "table.ext-table > tbody > tr > td > code",
+            "text": "warn=True",
+            "overX": 0,
+            "overY": 0,
+            "offRight": 121,
+            "offLeft": 0
+          },
+          {
+            "selector": "table.ext-table > tbody > tr > td > code",
+            "text": "DiffRowParser",
+            "overX": 0,
+            "overY": 0,
+            "offRight": 67,
+            "offLeft": 0
+          },
+          {
+            "selector": "table.ext-table > tbody > tr > td > code",
+            "text": "MetricRowParser",
+            "overX": 0,
+            "overY": 0,
+            "offRight": 81,
+            "offLeft": 0
+          },
+          {
+            "selector": "table.ext-table > tbody > tr > td > code",
+            "text": "FlowStepParser",
+            "overX": 0,
+            "overY": 0,
+            "offRight": 71,
+            "offLeft": 0
+          },
+          {
+            "selector": "table.ext-table > tbody > tr > td > code",
+            "text": "TimelineParser",
+            "overX": 0,
+            "overY": 0,
+            "offRight": 67,
+            "offLeft": 0
+          },
+          {
+            "selector": "table.ext-table > tbody > tr > td > code",
+            "text": "contract_findings()",
+            "overX": 0,
+            "overY": 0,
+            "offRight": 119,
+            "offLeft": 0
+          },
+          {
+            "selector": "table.ext-table > tbody > tr > td > code",
+            "text": "Finding",
+            "overX": 0,
+            "overY": 0,
+            "offRight": 91,
+            "offLeft": 0
+          },
+          {
+            "selector": "table.ext-table > tbody > tr > td > code",
+            "text": ".bad_*",
+            "overX": 0,
+            "overY": 0,
+            "offRight": 20,
+            "offLeft": 0
+          },
+          {
+            "selector": "table.ext-table > tbody > tr > td > code",
+            "text": "data-birch-audit",
+            "overX": 0,
+            "overY": 0,
+            "offRight": 72,
+            "offLeft": 0
+          },
+          {
+            "selector": "table.ext-table > tbody > tr > td > code",
+            "text": "geometry_findings()",
+            "overX": 0,
+            "overY": 0,
+            "offRight": 98,
+            "offLeft": 0
+          },
+          {
+            "selector": "table.ext-table > tbody > tr > td > code",
+            "text": "\"pass\"",
+            "overX": 0,
+            "overY": 0,
+            "offRight": 64,
+            "offLeft": 0
+          },
+          {
+            "selector": "table.ext-table > tbody > tr > td > code",
+            "text": "palette_close_fraction < 0.55",
+            "overX": 0,
+            "overY": 0,
+            "offRight": 113,
+            "offLeft": 0
+          },
+          {
+            "selector": "table.ext-table > tbody > tr > td > code",
+            "text": "non_background_fraction < 0.025",
+            "overX": 0,
+            "overY": 0,
+            "offRight": 134,
+            "offLeft": 0
+          },
+          {
+            "selector": "table.ext-table > tbody > tr > td > code",
+            "text": "check_birch_renderings.py",
+            "overX": 0,
+            "overY": 0,
+            "offRight": 135,
+            "offLeft": 0
+          },
+          {
+            "selector": "table.ext-table > tbody > tr > td > code",
+            "text": "BIRCH_CLASSES",
+            "overX": 0,
+            "overY": 0,
+            "offRight": 97,
+            "offLeft": 0
+          },
+          {
+            "selector": "table.ext-table > tbody > tr > td > code",
+            "text": "LAYOUT_CLASSES",
+            "overX": 0,
+            "overY": 0,
+            "offRight": 106,
+            "offLeft": 0
+          },
+          {
+            "selector": "table.ext-table > tbody > tr > td > code",
+            "text": "SEMANTIC_CLASSES",
+            "overX": 0,
+            "overY": 0,
+            "offRight": 121,
+            "offLeft": 0
+          },
+          {
+            "selector": "table.ext-table > tbody > tr > td > code",
+            "text": "\"name:WidthxHeight\"",
+            "overX": 0,
+            "overY": 0,
+            "offRight": 108,
+            "offLeft": 0
+          },
+          {
+            "selector": "table.ext-table > tbody > tr > td > code",
+            "text": "desktop",
+            "overX": 0,
+            "overY": 0,
+            "offRight": 54,
+            "offLeft": 0
+          },
+          {
+            "selector": "table.ext-table > tbody > tr > td > code",
+            "text": "mobile",
+            "overX": 0,
+            "overY": 0,
+            "offRight": 112,
+            "offLeft": 0
+          },
+          {
+            "selector": "table.ext-table > tbody > tr > td > code",
+            "text": "deep",
+            "overX": 0,
+            "overY": 0,
+            "offRight": 8,
+            "offLeft": 0
+          },
+          {
+            "selector": "table.ext-table > tbody > tr > td > code",
+            "text": "mobile-deep",
+            "overX": 0,
+            "overY": 0,
+            "offRight": 114,
+            "offLeft": 0
+          },
+          {
+            "selector": "table.ext-table > tbody > tr > td > code",
+            "text": "is_palette_hex()",
+            "overX": 0,
+            "overY": 0,
+            "offRight": 72,
+            "offLeft": 0
+          },
+          {
+            "selector": "table.ext-table > tbody > tr > td > code",
+            "text": "mode",
+            "overX": 0,
+            "overY": 0,
+            "offRight": 38,
+            "offLeft": 0
+          },
+          {
+            "selector": "table.ext-table > tbody > tr > td > code",
+            "text": "stats",
+            "overX": 0,
+            "overY": 0,
+            "offRight": 3,
+            "offLeft": 0
+          },
+          {
+            "selector": "table.ext-table > tbody > tr > td > code",
+            "text": "screenshot",
+            "overX": 0,
+            "overY": 0,
+            "offRight": 81,
+            "offLeft": 0
+          }
+        ],
+        "containerOverflow": [],
+        "statCardSqueeze": [],
+        "sectionRailOrder": [],
+        "pageOverflowX": 135,
+        "timelineProblems": [],
+        "metricGroups": [],
+        "metricRowSqueeze": [],
+        "splitRailGroups": [],
+        "numericHeaderGroups": [],
+        "codeWrapProblems": [],
+        "textWrapProblems": []
+      },
+      "findings": [
+        {
+          "level": "pass",
+          "name": "doctype",
+          "evidence": "doctype present"
+        },
+        {
+          "level": "pass",
+          "name": "viewport",
+          "evidence": "viewport meta present"
+        },
+        {
+          "level": "fail",
+          "name": "uses_birch_system_css",
+          "evidence": "stylesheet links: ['../styles/birch-system.css']; embedded=False; embedded_bytes=0"
+        },
+        {
+          "level": "pass",
+          "name": "has_page_shell",
+          "evidence": ".page found"
+        },
+        {
+          "level": "pass",
+          "name": "uses_layout_primitives",
+          "evidence": "layout primitive count is healthy"
+        },
+        {
+          "level": "pass",
+          "name": "uses_semantic_components",
+          "evidence": "semantic component count is healthy"
+        },
+        {
+          "level": "pass",
+          "name": "no_unknown_css_vars",
+          "evidence": "all CSS variables are defined in Birch system or local CSS"
+        },
+        {
+          "level": "pass",
+          "name": "no_patch_markers",
+          "evidence": "no accidental patch marker lines"
+        },
+        {
+          "level": "warn",
+          "name": "local_css_size",
+          "evidence": "4485 bytes of local CSS; consider moving recurring patterns into birch-system.css"
+        },
+        {
+          "level": "note",
+          "name": "screenshot_capture",
+          "evidence": "captured eval-runs/reports/skill-with-shell-minimax27-publication-final/screenshots/module-explainer-mobile-deep.png at [390, 6000]"
+        },
+        {
+          "level": "fail",
+          "name": "layout_overflow",
+          "evidence": "table.ext-table > tbody > tr > td > code overX=0 overY=0 offRight=114; table.ext-table > tbody > tr > td > code overX=0 overY=0 offRight=37; table.ext-table > tbody > tr > td > code overX=0 overY=0 offRight=18; table.ext-table > tbody > tr > td > code overX=0 overY=0 offRight=75; table.ext-table > tbody > tr > td > code overX=0 overY=0 offRight=12"
+        },
+        {
+          "level": "pass",
+          "name": "container_text_overflow",
+          "evidence": "text stays within its card/panel containers"
+        },
+        {
+          "level": "pass",
+          "name": "stat_card_squeeze",
+          "evidence": "KPI/stat cards have enough horizontal space"
+        },
+        {
+          "level": "pass",
+          "name": "timeline_geometry",
+          "evidence": "timeline markers/content stay within expected geometry"
+        },
+        {
+          "level": "pass",
+          "name": "numeric_header_alignment",
+          "evidence": "numeric table headers align with right-aligned numeric columns"
+        },
+        {
+          "level": "pass",
+          "name": "code_wrap_underfill",
+          "evidence": "wrapped code/diff blocks use available container width"
+        },
+        {
+          "level": "pass",
+          "name": "pathological_text_wrapping",
+          "evidence": "prose/list text uses available container width"
+        }
+      ]
+    },
+    {
+      "artifact": "eval-runs/skill-with-shell-minimax27-publication-final/implementation-plan.html",
+      "stats": {
+        "path": "eval-runs/skill-with-shell-minimax27-publication-final/implementation-plan.html",
+        "bytes": 16516,
+        "title": "Birchline \u2192 Birch recipe migration plan",
+        "doctype": true,
+        "viewport": true,
+        "stylesheet_links": [],
+        "birch_css_embedded": true,
+        "style_blocks": 1,
+        "style_bytes": 249,
+        "script_blocks": 0,
+        "tag_counts": {
+          "html": 1,
+          "head": 1,
+          "meta": 2,
+          "title": 1,
+          "style": 2,
+          "body": 1,
+          "main": 1,
+          "header": 1,
+          "div": 20,
+          "h1": 1,
+          "p": 40,
+          "section": 9,
+          "h2": 9,
+          "article": 12,
+          "h3": 12,
+          "ul": 8,
+          "li": 38,
+          "code": 49,
+          "strong": 28,
+          "table": 2,
+          "thead": 2,
+          "tr": 17,
+          "th": 4,
+          "tbody": 2,
+          "td": 30,
+          "ol": 2,
+          "span": 18,
+          "aside": 1,
+          "footer": 1
+        },
+        "class_counts": {
+          "page": 1,
+          "stack": 24,
+          "eyebrow": 1,
+          "lede": 1,
+          "section": 10,
+          "section-head": 9,
+          "auto-grid": 3,
+          "card": 12,
+          "panel": 7,
+          "flow-title": 12,
+          "plain-list": 8,
+          "caption": 4,
+          "callout": 5,
+          "numeric-table-wrap": 2,
+          "scroll-x": 2,
+          "numeric-table": 2,
+          "metric": 15,
+          "flow-list": 1,
+          "flow-step": 4,
+          "flow-num": 4,
+          "flow-detail": 4,
+          "cluster": 5,
+          "chip": 14,
+          "section-rail": 1,
+          "reference-panel": 1,
+          "insight-list": 1
+        },
+        "data_attrs": {
+          "data-birch-system": 1,
+          "data-gap": 29,
+          "data-tone": 11
+        },
+        "text_words": 883,
+        "unique_words": 382,
+        "css_vars_used": [
+          "--accent",
+          "--space-2",
+          "--text-sm"
+        ],
+        "css_vars_defined": [
+          "--grid-min"
+        ],
+        "hex_colors": [],
+        "birch_css_bytes": 20,
+        "birch_css_valid": false
+      },
+      "screenshot": {
+        "png": "eval-runs/reports/skill-with-shell-minimax27-publication-final/screenshots/implementation-plan-mobile-deep.png",
+        "size": [
+          390,
+          5193
+        ],
+        "mean_rgb": [
+          234.96,
+          234.98,
+          234.97
+        ],
+        "palette": {
+          "palette_close_fraction": 0.8539,
+          "ivory_fraction": 0.0746,
+          "blackish_fraction": 0.0
+        },
+        "background_fraction": 0.7235,
+        "non_background_fraction": 0.2765,
+        "blackish_fraction": 0.0,
+        "file_bytes": 436473
+      },
+      "geometry": {
+        "overflow": [],
+        "containerOverflow": [],
+        "statCardSqueeze": [],
+        "sectionRailOrder": [],
+        "pageOverflowX": 0,
+        "timelineProblems": [],
+        "metricGroups": [],
+        "metricRowSqueeze": [],
+        "splitRailGroups": [],
+        "numericHeaderGroups": [],
+        "codeWrapProblems": [],
+        "textWrapProblems": []
+      },
+      "findings": [
+        {
+          "level": "pass",
+          "name": "doctype",
+          "evidence": "doctype present"
+        },
+        {
+          "level": "pass",
+          "name": "viewport",
+          "evidence": "viewport meta present"
+        },
+        {
+          "level": "fail",
+          "name": "uses_birch_system_css",
+          "evidence": "stylesheet links: []; embedded=True; embedded_bytes=20"
+        },
+        {
+          "level": "pass",
+          "name": "has_page_shell",
+          "evidence": ".page found"
+        },
+        {
+          "level": "pass",
+          "name": "uses_layout_primitives",
+          "evidence": "layout primitive count is healthy"
+        },
+        {
+          "level": "pass",
+          "name": "uses_semantic_components",
+          "evidence": "semantic component count is healthy"
+        },
+        {
+          "level": "pass",
+          "name": "no_unknown_css_vars",
+          "evidence": "all CSS variables are defined in Birch system or local CSS"
+        },
+        {
+          "level": "pass",
+          "name": "no_patch_markers",
+          "evidence": "no accidental patch marker lines"
+        },
+        {
+          "level": "note",
+          "name": "screenshot_capture",
+          "evidence": "captured eval-runs/reports/skill-with-shell-minimax27-publication-final/screenshots/implementation-plan-mobile-deep.png at [390, 5193]"
+        },
+        {
+          "level": "pass",
+          "name": "layout_overflow",
+          "evidence": "no visible text/content overflow detected"
+        },
+        {
+          "level": "pass",
+          "name": "container_text_overflow",
+          "evidence": "text stays within its card/panel containers"
+        },
+        {
+          "level": "pass",
+          "name": "stat_card_squeeze",
+          "evidence": "KPI/stat cards have enough horizontal space"
+        },
+        {
+          "level": "pass",
+          "name": "timeline_geometry",
+          "evidence": "timeline markers/content stay within expected geometry"
+        },
+        {
+          "level": "pass",
+          "name": "numeric_header_alignment",
+          "evidence": "numeric table headers align with right-aligned numeric columns"
+        },
+        {
+          "level": "pass",
+          "name": "code_wrap_underfill",
+          "evidence": "wrapped code/diff blocks use available container width"
+        },
+        {
+          "level": "pass",
+          "name": "pathological_text_wrapping",
+          "evidence": "prose/list text uses available container width"
+        }
+      ]
+    },
+    {
+      "artifact": "eval-runs/skill-with-shell-minimax27-publication-final/benchmark-comparison.html",
+      "stats": {
+        "path": "eval-runs/skill-with-shell-minimax27-publication-final/benchmark-comparison.html",
+        "bytes": 68272,
+        "title": "GEPA Seed Promotion \u2014 Candidate B vs. Seed A",
+        "doctype": true,
+        "viewport": true,
+        "stylesheet_links": [],
+        "birch_css_embedded": true,
+        "style_blocks": 3,
+        "style_bytes": 367,
+        "script_blocks": 0,
+        "tag_counts": {
+          "html": 1,
+          "head": 1,
+          "meta": 2,
+          "title": 1,
+          "style": 4,
+          "body": 1,
+          "main": 1,
+          "header": 1,
+          "div": 29,
+          "h1": 1,
+          "p": 6,
+          "section": 8,
+          "span": 19,
+          "code": 14,
+          "h2": 7,
+          "h3": 6,
+          "ul": 7,
+          "li": 28,
+          "svg": 2,
+          "defs": 31,
+          "g": 160,
+          "path": 94,
+          "use": 264,
+          "clippath": 2,
+          "rect": 2,
+          "aside": 1,
+          "table": 2,
+          "thead": 2,
+          "tr": 15,
+          "th": 11,
+          "tbody": 2,
+          "td": 64,
+          "strong": 8
+        },
+        "class_counts": {
+          "page": 1,
+          "stack": 23,
+          "eyebrow": 1,
+          "lede": 1,
+          "auto-grid": 1,
+          "card": 13,
+          "panel": 15,
+          "caption": 38,
+          "score-metric": 7,
+          "delta-pos": 9,
+          "delta-flat": 4,
+          "delta-neg": 11,
+          "section": 6,
+          "section-head": 7,
+          "cluster": 2,
+          "plain-list": 5,
+          "scroll-x": 4,
+          "section-rail": 1,
+          "chart-panel": 2,
+          "chart-svg": 2,
+          "chart-caption": 2,
+          "reference-panel": 1,
+          "numeric-table-wrap": 2,
+          "numeric-table": 2,
+          "metric": 60,
+          "insight-list": 2
+        },
+        "data_attrs": {
+          "data-birch-system": 1,
+          "data-gap": 24
+        },
+        "text_words": 374,
+        "unique_words": 202,
+        "css_vars_used": [
+          "--danger",
+          "--fg-muted",
+          "--info",
+          "--space-2",
+          "--space-3",
+          "--success"
+        ],
+        "css_vars_defined": [
+          "--grid-min",
+          "--wrap"
+        ],
+        "hex_colors": [],
+        "birch_css_bytes": 20,
+        "birch_css_valid": false
+      },
+      "screenshot": {
+        "png": "eval-runs/reports/skill-with-shell-minimax27-publication-final/screenshots/benchmark-comparison-mobile-deep.png",
+        "size": [
+          390,
+          3243
+        ],
+        "mean_rgb": [
+          232.41,
+          231.83,
+          231.1
+        ],
+        "palette": {
+          "palette_close_fraction": 0.8372,
+          "ivory_fraction": 0.071,
+          "blackish_fraction": 0.0001
+        },
+        "background_fraction": 0.6972,
+        "non_background_fraction": 0.3028,
+        "blackish_fraction": 0.0001,
+        "file_bytes": 287174
+      },
+      "geometry": {
+        "overflow": [],
+        "containerOverflow": [],
+        "statCardSqueeze": [],
+        "sectionRailOrder": [],
+        "pageOverflowX": 0,
+        "timelineProblems": [],
+        "metricGroups": [],
+        "metricRowSqueeze": [],
+        "splitRailGroups": [],
+        "numericHeaderGroups": [],
+        "codeWrapProblems": [],
+        "textWrapProblems": []
+      },
+      "findings": [
+        {
+          "level": "pass",
+          "name": "doctype",
+          "evidence": "doctype present"
+        },
+        {
+          "level": "pass",
+          "name": "viewport",
+          "evidence": "viewport meta present"
+        },
+        {
+          "level": "fail",
+          "name": "uses_birch_system_css",
+          "evidence": "stylesheet links: []; embedded=True; embedded_bytes=20"
+        },
+        {
+          "level": "pass",
+          "name": "has_page_shell",
+          "evidence": ".page found"
+        },
+        {
+          "level": "pass",
+          "name": "uses_layout_primitives",
+          "evidence": "layout primitive count is healthy"
+        },
+        {
+          "level": "pass",
+          "name": "uses_semantic_components",
+          "evidence": "semantic component count is healthy"
+        },
+        {
+          "level": "fail",
+          "name": "no_unknown_css_vars",
+          "evidence": "undefined CSS vars: --fg-muted"
+        },
+        {
+          "level": "pass",
+          "name": "no_patch_markers",
+          "evidence": "no accidental patch marker lines"
+        },
+        {
+          "level": "fail",
+          "name": "grid_list_item_children",
+          "evidence": "grid-based insight/takeaway list items should wrap content in one child; examples: numeric-data: Candidate chart is clearer but uses more SVG text; worth the +0.040 gain. | code-review: No mechanical regression; inspect finding severity wording manually before co | module-explainer: Runtime path improved; mobile flow caption remains dense \u2014 future improv | implementation-plan: Largest single gain (+0.088); no checker regression."
+        },
+        {
+          "level": "note",
+          "name": "screenshot_capture",
+          "evidence": "captured eval-runs/reports/skill-with-shell-minimax27-publication-final/screenshots/benchmark-comparison-mobile-deep.png at [390, 3243]"
+        },
+        {
+          "level": "pass",
+          "name": "layout_overflow",
+          "evidence": "no visible text/content overflow detected"
+        },
+        {
+          "level": "pass",
+          "name": "container_text_overflow",
+          "evidence": "text stays within its card/panel containers"
+        },
+        {
+          "level": "pass",
+          "name": "stat_card_squeeze",
+          "evidence": "KPI/stat cards have enough horizontal space"
+        },
+        {
+          "level": "pass",
+          "name": "timeline_geometry",
+          "evidence": "timeline markers/content stay within expected geometry"
+        },
+        {
+          "level": "pass",
+          "name": "numeric_header_alignment",
+          "evidence": "numeric table headers align with right-aligned numeric columns"
+        },
+        {
+          "level": "pass",
+          "name": "code_wrap_underfill",
+          "evidence": "wrapped code/diff blocks use available container width"
+        },
+        {
+          "level": "pass",
+          "name": "pathological_text_wrapping",
+          "evidence": "prose/list text uses available container width"
+        }
+      ]
+    }
+  ],
+  "pairs": [],
+  "summary": {
+    "artifacts": 5,
+    "pairs": 5,
+    "failures": 8,
+    "warnings": 4,
+    "notes": 6
+  }
+}

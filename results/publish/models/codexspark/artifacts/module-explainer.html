@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rendering checker pipeline — module explainer</title>
+  <link rel="stylesheet" href="styles/birch-system.css">
+</head>
+<body>
+<main class="page stack" data-gap="lg">
+  <header class="stack" data-gap="sm">
+    <div class="eyebrow">Module explainer</div>
+    <h1>Rendering checker pipeline</h1>
+    <p class="lede">Source-grounded contributor guide for the checker path that validates Birch rendering artifacts, captures screenshots, and emits JSON/Markdown findings.</p>
+    <div class="cluster" role="list" aria-label="Artifact tags">
+      <span class="chip" data-tone="olive">deterministic-first</span>
+      <span class="chip" data-tone="sky">browser-backed geometry</span>
+      <span class="chip" data-tone="clay">safe output contract</span>
+    </div>
+  </header>
+
+  <section class="section stack" data-gap="lg">
+    <div class="section-head">
+      <span class="eyebrow">Mental model</span>
+      <h2>One pipeline, two execution modes</h2>
+    </div>
+
+    <aside class="callout stack" data-tone="info" data-gap="xs">
+      <span class="callout-label">Core idea</span>
+      <p>The checker works in two phases: first deterministic HTML/CSS contract checks, then optional browser evidence (screenshots + in-page geometry audit). In candidate-only mode, it does not compare against a reference image; it validates that the artifact is styled, structured, and rendered without obvious breakage.</p>
+      <p class="muted">Mode is set by arguments, not by content: <code>--artifact</code> or <code>--pair</code>.</p>
+    </aside>
+
+    <div class="auto-grid" style="--grid-min: 220px" data-gap="md">
+      <article class="card stack" data-variant="outlined" data-tone="olive">
+        <span class="caption">Input abstraction</span>
+        <h3>Mode branch is early and strict</h3>
+        <p><code>--artifact</code> checks generated outputs only; <code>--pair</code> compares reference and candidate.</p>
+        <p class="muted">If both are provided, <code>main()</code> exits with an argument error.</p>
+      </article>
+
+      <article class="card stack" data-variant="outlined" data-tone="sky">
+        <span class="caption">Static stage</span>
+        <h3>Parser-based contract checks</h3>
+        <p><code>page_stats()</code> and parsers collect counts, classes, variables, and style metrics. <code>contract_findings()</code> enforces shell, viewport, Birch primitives, and component-contract rules.</p>
+        <p class="muted">This includes parsers for <code>.metric-row</code>, <code>.diff-row</code>, <code>.flow-step</code>, <code>.timeline</code>.</p>
+      </article>
+
+      <article class="card stack" data-variant="outlined" data-tone="clay">
+        <span class="caption">Evidence stage</span>
+        <h3>Optional screenshot + geometry evidence</h3>
+        <p><code>capture()</code> writes PNGs. <code>geometry_audit()</code> injects a script and returns page-wide overflow, wrap, rail-alignment, and timeline-metric geometry signals.</p>
+        <p class="muted">If no Chrome is available, visual checks are skipped with notes instead of fails.</p>
+      </article>
+
+      <article class="card stack" data-variant="outlined">
+        <span class="caption">Report stage</span>
+        <h3>Findings and hard exits</h3>
+        <p>The same payload is emitted to both JSON and Markdown. Non-zero exit happens on fails, or with <code>--fail-on-warn</code> when warnings are present.</p>
+        <p class="muted">Schema is intentionally stable: <code>mode</code>, <code>summary</code>, item list + findings list.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="section stack" data-gap="lg">
+    <div class="section-head">
+      <span class="eyebrow">Runtime path</span>
+      <h2>From input pairs to reports, screenshots, and findings</h2>
+    </div>
+
+    <ol class="flow-list" aria-label="Checker runtime flow from inputs to outputs">
+      <li class="flow-step">
+        <span class="flow-num">1</span>
+        <div>
+          <h3 class="flow-title">Argument parse and mode branch</h3>
+          <p class="flow-detail"><code>main()</code> reads <code>--artifact</code>, <code>--pair</code>, <code>--viewport</code>, <code>--capture</code>, <code>--delay-ms</code>, and <code>--fail-on-warn</code>. Mixed modes are rejected.</p>
+        </div>
+      </li>
+
+      <li class="flow-step">
+        <span class="flow-num">2</span>
+        <div>
+          <h3 class="flow-title">Target set construction</h3>
+          <p class="flow-detail">If <code>--pair</code> is empty, defaults are used: <code>05-design-system.html:05-design-system-birch.html</code> and <code>06-component-variants.html:06-component-variants-birch.html</code>. Artifact mode uses the exact paths passed by <code>--artifact</code>.</p>
+        </div>
+      </li>
+
+      <li class="flow-step">
+        <span class="flow-num">3</span>
+        <div>
+          <h3 class="flow-title">Static extraction</h3>
+          <p class="flow-detail"><code>page_stats()</code> parses HTML with <code>StatsParser</code>, counts tags/classes/words, detects local vars, and checks Birch-system CSS usage with <code>BIRCH_STYLE_RE</code> patterns.</p>
+          <p class="flow-detail"><code>contract_findings()</code> applies required checks like doctype, viewport meta, <code>.page</code> shell, Birch class density, and component contracts.</p>
+        </div>
+      </li>
+
+      <li class="flow-step">
+        <span class="flow-num">4</span>
+        <div>
+          <h3 class="flow-title">Pair mode extras</h3>
+          <p class="flow-detail">In pair mode, <code>compare_pair()</code> adds deltas and structure/text drift checks before visual capture. In artifact mode, <code>check_artifact()</code> emits only the single artifact row plus optional visual checks.</p>
+          <p class="flow-detail">Screenshot capture and geometry run on candidate/stem path(s) after contract checks pass.</p>
+        </div>
+      </li>
+
+      <li class="flow-step">
+        <span class="flow-num">5</span>
+        <div>
+          <h3 class="flow-title">Browser evidence path</h3>
+          <p class="flow-detail">If Chrome is found, <code>capture()</code> uses <code>--headless=new --screenshot</code>. File naming is consistent by stem and viewport suffix, for example <code>24-birch-chart-brief-desktop.png</code>.</p>
+          <p class="flow-detail">For <code>deep</code> viewports, height may be adapted via <code>capture_height_for_viewport()</code> using a measured document height script.</p>
+        </div>
+      </li>
+
+      <li class="flow-step">
+        <span class="flow-num">6</span>
+        <div>
+          <h3 class="flow-title">Payload assembly and output</h3>
+          <p class="flow-detail">All findings and metrics are serialized to <code>--out</code> (JSON) and <code>--markdown</code> (human report). Summary counters are computed from all item findings.</p>
+        </div>
+      </li>
+    </ol>
+
+    <p class="muted">This flow avoids brittle image-only judging in the first stage, then adds visual checks only where HTML structure cannot detect raster breakage.</p>
+  </section>
+
+  <section class="section stack" data-gap="lg">
+    <div class="section-head">
+      <span class="eyebrow">File tour</span>
+      <h2>Read order for safe edits</h2>
+    </div>
+
+    <div class="grid" data-cols="2">
+      <article class="card stack" data-variant="outlined">
+        <h3>1) scripts/check_birch_renderings.py</h3>
+        <p>Start here: entrypoint, CLI parsing, mode selection, and all static/visual checks.</p>
+        <ul class="plain-list">
+          <li><strong>Must read</strong>: <code>main()</code>, <code>check_artifact()</code>, <code>compare_pair()</code>.</li>
+          <li>Then: <code>page_stats()</code> and <code>contract_findings()</code>.</li>
+          <li>Then: <code>compare_stats()</code>, <code>deltas()</code>, <code>geometry_audit()</code>.</li>
+          <li><strong>Last</strong>: <code>render_markdown()</code> and failure/exit policy.</li>
+        </ul>
+      </article>
+
+      <article class="card stack" data-variant="outlined">
+        <h3>2) evals/charts/run_eval.py</h3>
+        <p>Execution driver for the chart-eval path.</p>
+        <ul class="plain-list">
+          <li>Calls <code>uv run --with matplotlib python evals/charts/build_chart_brief.py</code>.</li>
+          <li>Then runs the checker four times in artifact mode with different viewport names.</li>
+          <li>Good first passpoint when extending viewport and report naming conventions.</li>
+        </ul>
+      </article>
+
+      <article class="card stack" data-variant="outlined">
+        <h3>3) evals/charts/build_chart_brief.py</h3>
+        <p>Generates fixture HTML and embeds chart SVG.</p>
+        <ul class="plain-list">
+          <li>Loads <code>evals/charts/sample-data.csv</code>.</li>
+          <li>Builds Matplotlib chart via <code>birch_mpl.birch_theme()</code>.</li>
+          <li>Writes <code>24-birch-chart-brief.html</code>.</li>
+        </ul>
+      </article>
+
+      <article class="card stack" data-variant="outlined">
+        <h3>4) scripts/birch_mpl.py</h3>
+        <p>Rendering policy shared by chart generation.</p>
+        <ul class="plain-list">
+          <li><code>rc_params()</code> and <code>birch_theme()</code> set global style.</li>
+          <li><code>polish_axes()</code> and <code>svg_string()</code> standardize chart output.</li>
+        </ul>
+      </article>
+
+      <article class="card stack" data-variant="outlined">
+        <h3>5) styles/birch-system.css</h3>
+        <p>Defines layout primitives and semantic contracts used by the checker.</p>
+        <ul class="plain-list">
+          <li>Tokens: <code>var(--bg)</code>, <code>var(--surface)</code>, <code>var(--text)</code>.</li>
+          <li>Primitives: <code>.page</code>, <code>.stack</code>, <code>.grid</code>, <code>.split</code>, <code>.card</code>, <code>.panel</code>.</li>
+          <li>Flow utilities: <code>.flow-list</code>, <code>.flow-step</code>, <code>.flow-node</code>, <code>.flow-edge</code>.</li>
+        </ul>
+      </article>
+
+      <article class="card stack" data-variant="outlined">
+        <h3>6) docs/birch-llm-style-guide.md</h3>
+        <p>Source of component expectations and safe command/code-list patterns.</p>
+        <ul class="plain-list">
+          <li>Read contract guidance before changing generated output shape.</li>
+          <li>Use <code>.chart-panel</code> + <code>.numeric-table</code> for exact data, not inline chart hacks.</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <section class="section stack" data-gap="lg">
+    <div class="section-head">
+      <span class="eyebrow">Commands and concrete outputs</span>
+      <h2>Exact commands, file paths, and produced files</h2>
+    </div>
+
+    <pre class="code-block" data-kind="command" data-wrap="true">cd /home/shaun/source/birch-html
+
+# Quick local artifact run (candidate-only)
+python3 scripts/check_birch_renderings.py \
+  --artifact 24-birch-chart-brief.html \
+  --out reports/birch-rendering-check-chart-brief.json \
+  --markdown reports/birch-rendering-check-chart-brief.md \
+  --viewport chart-brief:1365x900
+
+# Pair run with explicit references
+python3 scripts/check_birch_renderings.py \
+  --pair 05-design-system.html:05-design-system-birch.html \
+  --pair 06-component-variants.html:06-component-variants-birch.html \
+  --out reports/birch-rendering-check-design-pair.json \
+  --markdown reports/birch-rendering-check-design-pair.md \
+  --viewport desktop:1365x900
+
+# Full chart fixture run in this eval module
+python3 evals/charts/run_eval.py
+
+# Equivalent command for build step (already in run_eval.py)
+uv run --with matplotlib python evals/charts/build_chart_brief.py
+
+# Equivalent command pattern for each chart-viewport in run_eval.py
+uv run --with pillow python scripts/check_birch_renderings.py --artifact 24-birch-chart-brief.html --out reports/birch-rendering-check-chart-brief.json --markdown reports/birch-rendering-check-chart-brief.md --viewport chart-brief-mobile:390x900</pre>
+
+    <div class="numeric-table-wrap">
+      <table class="numeric-table">
+        <thead>
+          <tr>
+            <th class="label-cell">Input stage</th>
+            <th class="metric">Commanded output</th>
+            <th class="metric">Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="entity">Fixture generation</td>
+            <td>24-birch-chart-brief.html</td>
+            <td>Rendered by <code>build_chart_brief.py</code> and includes inline <code>svg.chart-svg</code>.</td>
+          </tr>
+          <tr>
+            <td class="entity">Artifact checks</td>
+            <td>reports/birch-rendering-check-chart-brief.json</td>
+            <td>Findings, summary, and geometry/screenshot sections.</td>
+          </tr>
+          <tr>
+            <td class="entity">Artifact markdown</td>
+            <td>reports/birch-rendering-check-chart-brief.md</td>
+            <td>Human-readable ordered findings list.</td>
+          </tr>
+          <tr>
+            <td class="entity">Artifacts-only screenshots</td>
+            <td>reports/birch-screenshots/24-birch-chart-brief-{viewport}.png</td>
+            <td>viewport names in command map: <code>chart-brief</code>, <code>chart-brief-mobile</code>, <code>chart-brief-deep</code>, <code>chart-brief-mobile-deep</code>.</td>
+          </tr>
+          <tr>
+            <td class="entity">Pair checks</td>
+            <td>original-stem-{viewport}.png, candidate-stem-{viewport}.png, original__vs__candidate-diff.png, original__vs__candidate-contact.png</td>
+            <td>Stored in <code>reports/birch-screenshots/</code>. Pair report adds delta metrics and contact-sheet file references.</td>
+          </tr>
+          <tr>
+            <td class="entity">Existing check artifacts</td>
+            <td>reports/birch-rendering-check-module-explainer.json<br>reports/birch-rendering-check-module-explainer.md</td>
+            <td>Useful baseline examples for schema and markdown format.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <article class="panel stack" data-gap="md">
+      <h3>Payload shape at a glance</h3>
+      <pre class="code-block" data-wrap="true">{
+  "mode": "artifact" | "pair",
+  "artifacts": [...],
+  "pairs": [...],
+  "summary": {
+    "artifacts": 0,
+    "pairs": 0,
+    "failures": 0,
+    "warnings": 0,
+    "notes": 0
+  }
+}
+
+# artifact item shape keys:
+"artifact", "stats", "screenshot", "geometry", "findings"
+
+# pair item shape keys:
+"original", "candidate", "original_stats", "candidate_stats", "deltas", "screenshot", "geometry", "findings"</pre>
+    </article>
+  </section>
+
+  <section class="section stack" data-gap="lg">
+    <div class="section-head">
+      <span class="eyebrow">Gotchas and extension points</span>
+      <h2>What to change, and where to avoid regressions</h2>
+    </div>
+
+    <div class="grid" data-cols="2">
+      <article class="card stack" data-variant="outlined" data-tone="danger">
+        <h3>High-risk gotchas</h3>
+        <ul class="plain-list">
+          <li>Do not weaken defaults in <code>BIRCH_CSS_MIN_BYTES</code> or <code>BIRCH_CSS_SIGNATURES</code> without re-running existing fixtures.</li>
+          <li>Do not change parser contracts (<code>GridListParser</code>, <code>FlowStepParser</code>, <code>TimelineParser</code>) without updating expectations in source artifacts.</li>
+          <li>Do not remove <code>--pair</code> default behavior unless external orchestration owns those references.</li>
+          <li>Do not alter output key names in <code>payload</code> lightly; downstream consumers can be key-based.</li>
+          <li>Do not bypass <code>--viewport</code> handling for deep pages; <code>capture_height_for_viewport()</code> is there to prevent truncation or oversized captures.</li>
+        </ul>
+      </article>
+
+      <article class="card stack" data-variant="outlined" data-tone="success">
+        <h3>Safe extension points</h3>
+        <ul class="plain-list">
+          <li><strong>Add checks:</strong> add to <code>contract_findings()</code> and keep finding names stable.</li>
+          <li><strong>Threshold tuning:</strong> update <code>artifact_screenshot_findings()</code>, <code>screenshot_findings()</code>, and <code>geometry_findings()</code>.</li>
+          <li><strong>Diff logic:</strong> update <code>compare_pair()</code> when introducing new pair metadata fields.</li>
+          <li><strong>Viewport coverage:</strong> modify <code>VIEWPORTS</code> in <code>evals/charts/run_eval.py</code> and output naming conventions simultaneously.</li>
+          <li><strong>Style policy:</strong> update <code>scripts/birch_mpl.py</code> when chart rendering expectations need tighter consistency.</li>
+        </ul>
+      </article>
+    </div>
+
+    <aside class="callout stack" data-tone="warning">
+      <span class="callout-label">Contributor checklist</span>
+      <ul class="plain-list">
+        <li>Keep all edits grounded in tokens and primitives: <code>var(--accent)</code>, <code>.page</code>, <code>.stack</code>, <code>.flow-step</code>, <code>.numeric-table-wrap</code>.</li>
+        <li>When adding long commands or findings examples, use <code>code-block</code> with <code>data-wrap="true"</code> so mobile stays readable.</li>
+        <li>Run: <code>python3 scripts/check_birch_renderings.py --artifact 24-birch-chart-brief.html --out ...</code> after any checker-touching change.</li>
+        <li>Prefer updating and validating both report channels: JSON + markdown.</li>
+      </ul>
+    </aside>
+  </section>
+</main>
+</body>
+</html>

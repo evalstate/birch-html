@@ -1,0 +1,173 @@
+# Birch rendering check
+
+Checks rendered Birch artifacts for contract and visual smoke failures.
+
+## Summary
+
+- Mode: **artifact**
+- Artifacts: **5**
+- Pairs/checks: **5**
+- Failures: **0**
+- Warnings: **0**
+- Notes: **5**
+
+## `eval-runs/skill-with-shell-codexresponses-gpt-5-5-opus-gpt55-deepseek-experiment-20260524-164522/numeric-data.html`
+
+### Screenshot metrics
+
+- Screenshot: `eval-runs/reports/skill-with-shell-codexresponses-gpt-5-5-opus-gpt55-deepseek-experiment-20260524-164522/screenshots/numeric-data-mobile-deep.png`
+- Size: `[390, 3500]`
+- Palette close fraction: `0.9319`
+- Background fraction: `0.8225`
+- Non-background fraction: `0.1775`
+- Blackish fraction: `0.0`
+
+### Findings
+
+| level | check | evidence |
+|---|---|---|
+| pass | `doctype` | doctype present |
+| pass | `viewport` | viewport meta present |
+| pass | `uses_birch_system_css` | embeds or links Birch system CSS |
+| pass | `has_page_shell` | .page found |
+| pass | `uses_layout_primitives` | layout primitive count is healthy |
+| pass | `uses_semantic_components` | semantic component count is healthy |
+| pass | `no_unknown_css_vars` | all CSS variables are defined in Birch system or local CSS |
+| pass | `no_patch_markers` | no accidental patch marker lines |
+| note | `screenshot_capture` | captured eval-runs/reports/skill-with-shell-codexresponses-gpt-5-5-opus-gpt55-deepseek-experiment-20260524-164522/screenshots/numeric-data-mobile-deep.png at [390, 3500] |
+| pass | `layout_overflow` | no visible text/content overflow detected |
+| pass | `container_text_overflow` | text stays within its card/panel containers |
+| pass | `stat_card_squeeze` | KPI/stat cards have enough horizontal space |
+| pass | `timeline_geometry` | timeline markers/content stay within expected geometry |
+| pass | `metric_alignment` | metric meters align within each metric-list |
+| pass | `numeric_header_alignment` | numeric table headers align with right-aligned numeric columns |
+| pass | `code_wrap_underfill` | wrapped code/diff blocks use available container width |
+| pass | `pathological_text_wrapping` | prose/list text uses available container width |
+
+## `eval-runs/skill-with-shell-codexresponses-gpt-5-5-opus-gpt55-deepseek-experiment-20260524-164522/code-review.html`
+
+### Screenshot metrics
+
+- Screenshot: `eval-runs/reports/skill-with-shell-codexresponses-gpt-5-5-opus-gpt55-deepseek-experiment-20260524-164522/screenshots/code-review-mobile-deep.png`
+- Size: `[390, 5115]`
+- Palette close fraction: `0.9005`
+- Background fraction: `0.7433`
+- Non-background fraction: `0.2567`
+- Blackish fraction: `0.0`
+
+### Findings
+
+| level | check | evidence |
+|---|---|---|
+| pass | `doctype` | doctype present |
+| pass | `viewport` | viewport meta present |
+| pass | `uses_birch_system_css` | embeds or links Birch system CSS |
+| pass | `has_page_shell` | .page found |
+| pass | `uses_layout_primitives` | layout primitive count is healthy |
+| pass | `uses_semantic_components` | semantic component count is healthy |
+| pass | `no_unknown_css_vars` | all CSS variables are defined in Birch system or local CSS |
+| pass | `no_patch_markers` | no accidental patch marker lines |
+| note | `screenshot_capture` | captured eval-runs/reports/skill-with-shell-codexresponses-gpt-5-5-opus-gpt55-deepseek-experiment-20260524-164522/screenshots/code-review-mobile-deep.png at [390, 5115] |
+| pass | `layout_overflow` | no visible text/content overflow detected |
+| pass | `container_text_overflow` | text stays within its card/panel containers |
+| pass | `stat_card_squeeze` | KPI/stat cards have enough horizontal space |
+| pass | `timeline_geometry` | timeline markers/content stay within expected geometry |
+| pass | `numeric_header_alignment` | numeric table headers align with right-aligned numeric columns |
+| pass | `code_wrap_underfill` | wrapped code/diff blocks use available container width |
+| pass | `pathological_text_wrapping` | prose/list text uses available container width |
+
+## `eval-runs/skill-with-shell-codexresponses-gpt-5-5-opus-gpt55-deepseek-experiment-20260524-164522/module-explainer.html`
+
+### Screenshot metrics
+
+- Screenshot: `eval-runs/reports/skill-with-shell-codexresponses-gpt-5-5-opus-gpt55-deepseek-experiment-20260524-164522/screenshots/module-explainer-mobile-deep.png`
+- Size: `[390, 6000]`
+- Palette close fraction: `0.9204`
+- Background fraction: `0.7513`
+- Non-background fraction: `0.2487`
+- Blackish fraction: `0.0`
+
+### Findings
+
+| level | check | evidence |
+|---|---|---|
+| pass | `doctype` | doctype present |
+| pass | `viewport` | viewport meta present |
+| pass | `uses_birch_system_css` | embeds or links Birch system CSS |
+| pass | `has_page_shell` | .page found |
+| pass | `uses_layout_primitives` | layout primitive count is healthy |
+| pass | `uses_semantic_components` | semantic component count is healthy |
+| pass | `no_unknown_css_vars` | all CSS variables are defined in Birch system or local CSS |
+| pass | `no_patch_markers` | no accidental patch marker lines |
+| note | `screenshot_capture` | captured eval-runs/reports/skill-with-shell-codexresponses-gpt-5-5-opus-gpt55-deepseek-experiment-20260524-164522/screenshots/module-explainer-mobile-deep.png at [390, 6000] |
+| pass | `layout_overflow` | no visible text/content overflow detected |
+| pass | `container_text_overflow` | text stays within its card/panel containers |
+| pass | `stat_card_squeeze` | KPI/stat cards have enough horizontal space |
+| pass | `timeline_geometry` | timeline markers/content stay within expected geometry |
+| pass | `numeric_header_alignment` | numeric table headers align with right-aligned numeric columns |
+| pass | `code_wrap_underfill` | wrapped code/diff blocks use available container width |
+| pass | `pathological_text_wrapping` | prose/list text uses available container width |
+
+## `eval-runs/skill-with-shell-codexresponses-gpt-5-5-opus-gpt55-deepseek-experiment-20260524-164522/implementation-plan.html`
+
+### Screenshot metrics
+
+- Screenshot: `eval-runs/reports/skill-with-shell-codexresponses-gpt-5-5-opus-gpt55-deepseek-experiment-20260524-164522/screenshots/implementation-plan-mobile-deep.png`
+- Size: `[390, 6000]`
+- Palette close fraction: `0.9002`
+- Background fraction: `0.7445`
+- Non-background fraction: `0.2555`
+- Blackish fraction: `0.0`
+
+### Findings
+
+| level | check | evidence |
+|---|---|---|
+| pass | `doctype` | doctype present |
+| pass | `viewport` | viewport meta present |
+| pass | `uses_birch_system_css` | embeds or links Birch system CSS |
+| pass | `has_page_shell` | .page found |
+| pass | `uses_layout_primitives` | layout primitive count is healthy |
+| pass | `uses_semantic_components` | semantic component count is healthy |
+| pass | `no_unknown_css_vars` | all CSS variables are defined in Birch system or local CSS |
+| pass | `no_patch_markers` | no accidental patch marker lines |
+| note | `screenshot_capture` | captured eval-runs/reports/skill-with-shell-codexresponses-gpt-5-5-opus-gpt55-deepseek-experiment-20260524-164522/screenshots/implementation-plan-mobile-deep.png at [390, 6000] |
+| pass | `layout_overflow` | no visible text/content overflow detected |
+| pass | `container_text_overflow` | text stays within its card/panel containers |
+| pass | `stat_card_squeeze` | KPI/stat cards have enough horizontal space |
+| pass | `timeline_geometry` | timeline markers/content stay within expected geometry |
+| pass | `numeric_header_alignment` | numeric table headers align with right-aligned numeric columns |
+| pass | `code_wrap_underfill` | wrapped code/diff blocks use available container width |
+| pass | `pathological_text_wrapping` | prose/list text uses available container width |
+
+## `eval-runs/skill-with-shell-codexresponses-gpt-5-5-opus-gpt55-deepseek-experiment-20260524-164522/benchmark-comparison.html`
+
+### Screenshot metrics
+
+- Screenshot: `eval-runs/reports/skill-with-shell-codexresponses-gpt-5-5-opus-gpt55-deepseek-experiment-20260524-164522/screenshots/benchmark-comparison-mobile-deep.png`
+- Size: `[390, 6000]`
+- Palette close fraction: `0.9448`
+- Background fraction: `0.8254`
+- Non-background fraction: `0.1746`
+- Blackish fraction: `0.0`
+
+### Findings
+
+| level | check | evidence |
+|---|---|---|
+| pass | `doctype` | doctype present |
+| pass | `viewport` | viewport meta present |
+| pass | `uses_birch_system_css` | embeds or links Birch system CSS |
+| pass | `has_page_shell` | .page found |
+| pass | `uses_layout_primitives` | layout primitive count is healthy |
+| pass | `uses_semantic_components` | semantic component count is healthy |
+| pass | `no_unknown_css_vars` | all CSS variables are defined in Birch system or local CSS |
+| pass | `no_patch_markers` | no accidental patch marker lines |
+| note | `screenshot_capture` | captured eval-runs/reports/skill-with-shell-codexresponses-gpt-5-5-opus-gpt55-deepseek-experiment-20260524-164522/screenshots/benchmark-comparison-mobile-deep.png at [390, 6000] |
+| pass | `layout_overflow` | no visible text/content overflow detected |
+| pass | `container_text_overflow` | text stays within its card/panel containers |
+| pass | `stat_card_squeeze` | KPI/stat cards have enough horizontal space |
+| pass | `timeline_geometry` | timeline markers/content stay within expected geometry |
+| pass | `numeric_header_alignment` | numeric table headers align with right-aligned numeric columns |
+| pass | `code_wrap_underfill` | wrapped code/diff blocks use available container width |
+| pass | `pathological_text_wrapping` | prose/list text uses available container width |

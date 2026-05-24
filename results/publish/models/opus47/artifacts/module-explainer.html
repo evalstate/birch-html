@@ -1,0 +1,2069 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Birch rendering checker — module explainer</title>
+    <style data-birch-system>/*
+  Birch HTML Design System
+  Opinionated single-option stylesheet for reliable LLM-generated artifacts.
+
+  Model:
+    1. Design tokens as CSS variables.
+    2. Layout primitives as classes.
+    3. Semantic components as classes with data-* variants.
+*/
+
+/* ==================== 1. TOKENS ==================== */
+
+:root {
+  color-scheme: light;
+
+  /* Palette */
+  --color-ivory: #FAF9F5;
+  --color-slate: #141413;
+  --color-clay: #D97757;
+  --color-clay-dark: #B85C3E;
+  --color-oat: #E3DACC;
+  --color-olive: #788C5D;
+  --color-rust: #B04A3F;
+  --color-sky: #6A8CAF;
+  --color-white: #FFFFFF;
+
+  --color-gray-50: #F7F5EE;
+  --color-gray-100: #F0EEE6;
+  --color-gray-150: #E8E4DA;
+  --color-gray-200: #DED9CD;
+  --color-gray-300: #D1CFC5;
+  --color-gray-500: #87867F;
+  --color-gray-700: #3D3D3A;
+  --color-gray-800: #242421;
+
+  /* Semantic colors */
+  --bg: var(--color-ivory);
+  --surface: var(--color-white);
+  --surface-tint: var(--color-gray-100);
+  --surface-warm: var(--color-oat);
+  --text: var(--color-slate);
+  --text-muted: var(--color-gray-500);
+  --text-soft: var(--color-gray-700);
+  --muted: var(--text-muted);
+  --border-color: var(--color-gray-300);
+  --accent: var(--color-clay);
+  --accent-strong: var(--color-clay-dark);
+  --success: var(--color-olive);
+  --warning: #C78E3F;
+  --danger: var(--color-rust);
+  --info: var(--color-sky);
+
+  /* Typography */
+  --font-serif: ui-serif, Georgia, "Times New Roman", serif;
+  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  --text-xs: 11px;
+  --text-sm: 12px;
+  --text-md: 14px;
+  --text-base: 15px;
+  --text-lg: 17px;
+  --text-xl: 21px;
+  --text-2xl: 26px;
+  --text-3xl: 36px;
+  --text-4xl: 44px;
+
+  --leading-tight: 1.15;
+  --leading-title: 1.25;
+  --leading-body: 1.55;
+  --leading-loose: 1.7;
+
+  /* Spacing */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 96px;
+
+  /* Shape */
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --radius-pill: 999px;
+
+  --border: 1.5px solid var(--border-color);
+  --border-thin: 1px solid var(--border-color);
+
+  --shadow-sm: 0 1px 2px rgba(20, 20, 19, 0.06);
+  --shadow-md: 0 4px 14px rgba(20, 20, 19, 0.08);
+  --shadow-lg: 0 12px 28px rgba(20, 20, 19, 0.12);
+
+  /* Motion */
+  --ease: cubic-bezier(0.2, 0, 0, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --dur-fast: 120ms;
+  --dur: 180ms;
+  --hover-y: -2px;
+
+  /* Page sizing */
+  --page-max: 1100px;
+  --page-pad: 28px;
+  --page-pad-block: 48px;
+
+  /* Legacy aliases used by source examples */
+  --ivory: var(--color-ivory);
+  --slate: var(--color-slate);
+  --clay: var(--color-clay);
+  --clay-d: var(--color-clay-dark);
+  --oat: var(--color-oat);
+  --olive: var(--color-olive);
+  --rust: var(--color-rust);
+  --sky: var(--color-sky);
+  --white: var(--color-white);
+  --gray-50: var(--color-gray-50);
+  --gray-100: var(--color-gray-100);
+  --gray-150: var(--color-gray-150);
+  --gray-200: var(--color-gray-200);
+  --gray-300: var(--color-gray-300);
+  --gray-500: var(--color-gray-500);
+  --gray-700: var(--color-gray-700);
+  --gray-800: var(--color-gray-800);
+  --serif: var(--font-serif);
+  --sans: var(--font-sans);
+  --mono: var(--font-mono);
+}
+
+/* ==================== BASE ==================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: var(--leading-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+img,
+svg {
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration-color: rgba(217, 119, 87, 0.45);
+  text-underline-offset: 3px;
+}
+
+a:hover {
+  color: var(--accent);
+}
+
+h1,
+h2,
+h3,
+p {
+  margin-block: 0;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: var(--leading-title);
+}
+
+h1 {
+  font-size: clamp(32px, 5vw, var(--text-4xl));
+}
+
+h2 {
+  font-size: var(--text-2xl);
+}
+
+h3 {
+  font-size: var(--text-xl);
+}
+
+code,
+kbd,
+pre {
+  font-family: var(--font-mono);
+}
+
+code {
+  font-size: 0.92em;
+  white-space: normal;
+  word-break: normal;
+}
+
+h1 code,
+h2 code,
+h3 code {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+::selection {
+  background: rgba(217, 119, 87, 0.24);
+}
+
+/* ==================== 2. LAYOUT PRIMITIVES ==================== */
+
+.page {
+  width: min(100% - (var(--page-pad) * 2), var(--page-max));
+  margin-inline: auto;
+  padding-block: var(--page-pad-block) var(--space-9);
+}
+
+.page[data-size="narrow"] {
+  --page-max: 820px;
+}
+
+.page[data-size="wide"] {
+  --page-max: 1280px;
+}
+
+.page[data-size="full"] {
+  --page-max: 1440px;
+}
+
+.section {
+  margin-block: var(--section-gap, var(--space-5));
+}
+
+.section[data-gap="lg"] {
+  --section-gap: var(--space-6);
+}
+
+.section[data-gap="xl"] {
+  --section-gap: var(--space-7);
+}
+
+.section:first-child {
+  margin-block-start: 0;
+}
+
+.stack > .section {
+  margin-block: 0;
+}
+
+.rule {
+  border: 0;
+  border-top: var(--border-thin);
+  margin: var(--space-3) 0 var(--space-5);
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--stack-gap, var(--space-4));
+}
+
+.stack[data-gap="xs"] { --stack-gap: var(--space-2); }
+.stack[data-gap="sm"] { --stack-gap: var(--space-3); }
+.stack[data-gap="md"] { --stack-gap: var(--space-4); }
+.stack[data-gap="lg"] { --stack-gap: var(--space-6); }
+.stack[data-gap="xl"] { --stack-gap: var(--space-8); }
+
+.stack > :is(.button, .btn, .chip, .badge) {
+  align-self: flex-start;
+}
+
+.cluster {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--cluster-gap, var(--space-3));
+}
+
+.cluster[data-align="start"] { align-items: flex-start; }
+.cluster[data-align="end"] { align-items: flex-end; }
+.cluster[data-justify="between"] { justify-content: space-between; }
+.cluster[data-justify="end"] { justify-content: flex-end; }
+
+.grid {
+  display: grid;
+  gap: var(--grid-gap, var(--space-5));
+}
+
+.grid[data-cols="2"] {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.grid[data-cols="3"] {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.grid[data-cols="4"] {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.auto-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--grid-min, 240px)), 1fr));
+  gap: var(--grid-gap, var(--space-5));
+}
+
+.auto-grid > * {
+  min-width: 0;
+}
+
+.split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, var(--split-side, 360px));
+  gap: var(--split-gap, var(--space-6));
+  align-items: start;
+}
+
+.split > * {
+  min-width: 0;
+}
+
+.section-head {
+  min-width: 0;
+}
+
+.section-rail {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, var(--rail-width, 360px));
+  column-gap: var(--rail-gap, var(--space-6));
+  row-gap: var(--space-5);
+  align-items: start;
+}
+
+.section-rail > .section-head {
+  grid-column: 1 / -1;
+}
+
+.section-rail > .reference-panel,
+.section-rail > aside {
+  align-self: start;
+}
+
+.sidebar-layout {
+  display: grid;
+  grid-template-columns: var(--sidebar-width, 240px) minmax(0, 1fr);
+  gap: var(--sidebar-gap, var(--space-7));
+  align-items: start;
+}
+
+.sidebar-layout > :first-child,
+.sticky {
+  position: sticky;
+  top: var(--sticky-top, var(--space-5));
+}
+
+.bleed {
+  margin-inline: calc(var(--page-pad) * -1);
+}
+
+.scroll-x {
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+}
+
+.center {
+  display: grid;
+  place-items: center;
+}
+
+.spacer {
+  flex: 1;
+}
+
+@media (max-width: 860px) {
+  :root {
+    --page-pad: 20px;
+    --page-pad-block: 40px;
+  }
+
+  .grid[data-cols],
+  .split,
+  .section-rail,
+  .sidebar-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar-layout > :first-child,
+  .sticky {
+    position: static;
+  }
+}
+
+/* ==================== TYPOGRAPHY UTILITIES ==================== */
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.eyebrow::before {
+  content: "";
+  width: 24px;
+  height: 1.5px;
+  background: currentColor;
+}
+
+.lede {
+  max-width: 720px;
+  color: var(--text-soft);
+  font-size: var(--text-lg);
+  line-height: 1.6;
+}
+
+.muted {
+  color: var(--text-muted);
+}
+
+.caption {
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+}
+
+.stat-value {
+  display: block;
+  color: var(--text);
+  font-family: var(--font-serif);
+  font-size: clamp(30px, 3.2vw, 42px);
+  font-variant-numeric: tabular-nums;
+  font-weight: 550;
+  letter-spacing: -0.025em;
+  line-height: 1;
+}
+
+.stat-card {
+  gap: var(--space-2);
+}
+
+.stat-card .caption {
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.stat-card .muted {
+  max-width: 34ch;
+  font-size: var(--text-sm);
+}
+
+.mono {
+  font-family: var(--font-mono);
+}
+
+/* ==================== 3. SEMANTIC COMPONENTS ==================== */
+
+.panel,
+.card {
+  background: var(--surface);
+  border: var(--border);
+  border-radius: var(--radius-md);
+}
+
+.panel {
+  padding: var(--panel-pad, var(--space-5));
+}
+
+.card {
+  padding: var(--card-pad, var(--space-5));
+  transition:
+    transform var(--dur-fast) var(--ease),
+    border-color var(--dur-fast) var(--ease),
+    box-shadow var(--dur-fast) var(--ease),
+    background-color var(--dur-fast) var(--ease);
+}
+
+.card[data-hover="lift"]:hover,
+.card[data-clickable]:hover {
+  transform: translateY(var(--hover-y));
+  border-color: rgba(217, 119, 87, 0.55);
+  box-shadow: var(--shadow-md);
+}
+
+.card[data-clickable] {
+  cursor: pointer;
+}
+
+.card[data-variant="flat"] {
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
+}
+
+.card[data-variant="outlined"] {
+  background: var(--surface);
+  border: var(--border);
+}
+
+.card[data-variant="elevated"] {
+  border-color: transparent;
+  box-shadow: var(--shadow-md);
+}
+
+.card[data-variant="filled"],
+.card[data-tone="oat"] {
+  background: var(--surface-warm);
+}
+
+.card[data-tone],
+.panel[data-tone],
+.callout[data-tone] {
+  background: var(--surface);
+}
+
+.card[data-tone="danger"],
+.panel[data-tone="danger"],
+.callout[data-tone="danger"] {
+  border-color: rgba(176, 74, 63, 0.36);
+}
+
+.card[data-tone="warning"],
+.panel[data-tone="warning"],
+.callout[data-tone="warning"] {
+  border-color: rgba(199, 142, 63, 0.38);
+}
+
+.card[data-tone="success"],
+.panel[data-tone="success"],
+.callout[data-tone="success"] {
+  border-color: rgba(120, 140, 93, 0.38);
+}
+
+.card[data-tone="info"],
+.panel[data-tone="info"],
+.callout[data-tone="info"] {
+  border-color: rgba(106, 140, 175, 0.36);
+}
+
+.card[data-accent] {
+  position: relative;
+  overflow: hidden;
+}
+
+.card[data-accent]::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 5px;
+  background: var(--accent);
+}
+
+.card-head {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-width: 0;
+  max-width: 100%;
+}
+
+.card-head > :first-child {
+  flex: 0 0 auto;
+}
+
+.card-titles {
+  flex: 1 1 0;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.card-title {
+  max-width: 100%;
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: var(--text-xl);
+  font-weight: 550;
+  line-height: var(--leading-title);
+  overflow-wrap: anywhere;
+}
+
+.card-sub {
+  margin: 2px 0 0;
+  color: var(--text-muted);
+  font-size: var(--text-sm);
+  overflow-wrap: anywhere;
+}
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-4) var(--space-5);
+  background: var(--surface);
+  border: var(--border);
+  border-radius: var(--radius-md);
+}
+
+.toolbar[data-sticky] {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.chip,
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border-radius: var(--radius-pill);
+  white-space: nowrap;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 650;
+  line-height: 1;
+}
+
+.chip {
+  min-height: 24px;
+  padding: 0 10px;
+  color: var(--text-soft);
+  background: var(--surface-tint);
+  border: 1px solid transparent;
+}
+
+.badge {
+  min-height: 22px;
+  padding: 0 9px;
+  color: var(--text-muted);
+  background: var(--surface);
+  border: var(--border-thin);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.chip[data-tone="clay"],
+.badge[data-tone="clay"] {
+  color: var(--accent);
+  background: rgba(217, 119, 87, 0.14);
+}
+
+.chip[data-tone="olive"],
+.badge[data-tone="olive"],
+.chip[data-tone="success"],
+.badge[data-tone="success"] {
+  color: var(--success);
+  background: rgba(120, 140, 93, 0.15);
+}
+
+.chip[data-tone="warning"],
+.badge[data-tone="warning"] {
+  color: var(--warning);
+  background: rgba(199, 142, 63, 0.16);
+}
+
+.chip[data-tone="rust"],
+.badge[data-tone="rust"],
+.chip[data-tone="danger"],
+.badge[data-tone="danger"] {
+  color: var(--danger);
+  background: rgba(176, 74, 63, 0.13);
+}
+
+.chip[data-tone="sky"],
+.badge[data-tone="sky"],
+.chip[data-tone="info"],
+.badge[data-tone="info"] {
+  color: var(--info);
+  background: rgba(106, 140, 175, 0.14);
+}
+
+.finding {
+  border-left: 6px solid var(--border-color);
+}
+
+.finding[data-severity="blocker"],
+.finding[data-severity="critical"],
+.finding[data-severity="danger"],
+.finding[data-tone="danger"] {
+  border-left-color: var(--danger);
+}
+
+.finding[data-severity="high"],
+.finding[data-severity="warning"],
+.finding[data-tone="warning"] {
+  border-left-color: var(--warning);
+}
+
+.finding[data-severity="medium"],
+.finding[data-severity="info"],
+.finding[data-tone="info"] {
+  border-left-color: var(--info);
+}
+
+.finding[data-severity="low"],
+.finding[data-severity="success"],
+.finding[data-tone="success"] {
+  border-left-color: var(--success);
+}
+
+.button,
+.btn {
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 36px;
+  padding: 0 14px;
+  border: 1.5px solid transparent;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-sans);
+  font-size: var(--text-md);
+  font-weight: 650;
+  line-height: 1;
+  text-decoration: none;
+  transition:
+    transform var(--dur-fast) var(--ease),
+    background-color var(--dur-fast) var(--ease),
+    border-color var(--dur-fast) var(--ease),
+    box-shadow var(--dur-fast) var(--ease);
+}
+
+.button:hover,
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.button[data-variant="primary"],
+.btn-primary {
+  color: var(--color-white);
+  background: var(--color-slate);
+}
+
+.button[data-variant="primary"]:hover,
+.btn-primary:hover {
+  background: var(--color-gray-700);
+}
+
+.button[data-variant="secondary"],
+.btn-secondary {
+  color: var(--text);
+  background: var(--surface-tint);
+  border-color: var(--border-color);
+}
+
+.button[data-variant="ghost"],
+.btn-ghost {
+  color: var(--text-soft);
+  background: transparent;
+}
+
+.button[data-variant="ghost"]:hover,
+.btn-ghost:hover {
+  color: var(--text);
+  background: var(--surface-tint);
+}
+
+.button[data-variant="danger"],
+.btn-danger {
+  color: var(--color-white);
+  background: var(--danger);
+}
+
+.input {
+  width: 100%;
+  min-height: 38px;
+  padding: 0 12px;
+  color: var(--text);
+  background: var(--surface);
+  border: var(--border);
+  border-radius: var(--radius-sm);
+  outline: none;
+}
+
+.input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(217, 119, 87, 0.16);
+}
+
+.avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--avatar-size, 38px);
+  height: var(--avatar-size, 38px);
+  border-radius: 50%;
+  color: var(--text-soft);
+  background: var(--surface-warm);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  flex: 0 0 auto;
+}
+
+.code-block {
+  margin: 0;
+  padding: var(--space-4) var(--space-5);
+  overflow-x: auto;
+  color: #E8E6DC;
+  background: var(--color-slate);
+  border-radius: var(--radius-md);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  line-height: var(--leading-loose);
+}
+
+.code-block[data-kind="command"],
+.code-block[data-wrap="true"],
+.command-block {
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  overflow-x: hidden;
+}
+
+.code-block[data-wrap="true"] code,
+.code-block[data-kind="command"] code {
+  display: block;
+  max-width: 100%;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.copyable {
+  position: relative;
+}
+
+.copyable > .code-block {
+  padding-inline-end: 88px;
+}
+
+.copy-button {
+  appearance: none;
+  position: absolute;
+  inset-block-start: var(--space-2);
+  inset-inline-end: var(--space-2);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 26px;
+  padding: 0 9px;
+  border: 1px solid rgba(250, 249, 245, 0.18);
+  border-radius: var(--radius-sm);
+  color: var(--color-gray-100);
+  background: rgba(255, 255, 255, 0.08);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  transition:
+    background-color var(--dur-fast) var(--ease),
+    border-color var(--dur-fast) var(--ease),
+    transform var(--dur-fast) var(--ease);
+}
+
+.copy-button:hover {
+  transform: translateY(-1px);
+  border-color: rgba(250, 249, 245, 0.35);
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.copy-button[data-copied="true"] {
+  color: var(--color-white);
+  background: rgba(120, 140, 93, 0.55);
+  border-color: rgba(120, 140, 93, 0.75);
+}
+
+.reference-panel {
+  --panel-pad: var(--space-5);
+}
+
+.callout {
+  padding: var(--space-5);
+  color: var(--text-soft);
+  background: var(--surface-tint);
+  border: var(--border);
+  border-inline-start: 4px solid var(--accent);
+  border-radius: var(--radius-md);
+}
+
+.callout[data-tone="success"] {
+  border-inline-start-color: var(--success);
+  background: rgba(120, 140, 93, 0.10);
+}
+
+.callout[data-tone="warning"] {
+  border-inline-start-color: var(--warning);
+  background: rgba(199, 142, 63, 0.11);
+}
+
+.callout[data-tone="danger"] {
+  border-inline-start-color: var(--danger);
+  background: rgba(176, 74, 63, 0.10);
+}
+
+.callout[data-tone="info"] {
+  border-inline-start-color: var(--info);
+  background: rgba(106, 140, 175, 0.11);
+}
+
+.callout-label {
+  display: block;
+  margin-bottom: var(--space-2);
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.callout > :last-child {
+  margin-bottom: 0;
+}
+
+.checklist {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-3);
+}
+
+.checklist li {
+  display: block !important;
+  position: relative !important;
+  min-width: 0;
+  padding-inline-start: calc(18px + var(--space-3));
+  overflow-wrap: anywhere;
+}
+
+.checklist li::before {
+  content: "✓";
+  position: absolute !important;
+  inset-block-start: 2px;
+  inset-inline-start: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  color: var(--success);
+  background: rgba(120, 140, 93, 0.12);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.checklist code {
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.plain-list {
+  margin: 0;
+  padding-inline-start: 1.15em;
+  color: var(--text-soft);
+}
+
+.plain-list li {
+  overflow-wrap: anywhere;
+}
+
+.plain-list li + li {
+  margin-top: var(--space-2);
+}
+
+.plain-list li::marker {
+  color: var(--text-muted);
+}
+
+.insight-list,
+.takeaway-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-3);
+}
+
+.insight-list li,
+.takeaway-list li {
+  position: relative;
+  display: block;
+  padding-inline-start: calc(10px + var(--space-3));
+  color: var(--text-soft);
+}
+
+.insight-list li::before,
+.takeaway-list li::before {
+  content: "";
+  position: absolute;
+  inset-block-start: 0.65em;
+  inset-inline-start: 0;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.insight-list li > *,
+.takeaway-list li > * {
+  min-width: 0;
+}
+
+.insight-list[data-tone="success"] li::before,
+.takeaway-list[data-tone="success"] li::before {
+  background: var(--success);
+}
+
+.insight-list[data-tone="info"] li::before,
+.takeaway-list[data-tone="info"] li::before {
+  background: var(--info);
+}
+
+.metric-list {
+  --metric-label: 132px;
+  --metric-value: 64px;
+  display: grid;
+  gap: var(--space-3);
+}
+
+.metric-row {
+  display: grid;
+  grid-template-columns: var(--metric-label) minmax(120px, 1fr) var(--metric-value);
+  gap: var(--space-3);
+  align-items: center;
+}
+
+.metric-row > :first-child {
+  min-width: 0;
+}
+
+.metric-row > :last-child {
+  justify-self: end;
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+}
+
+.meter {
+  height: 9px;
+  overflow: hidden;
+  border-radius: var(--radius-pill);
+  background: var(--surface-tint);
+}
+
+.meter span {
+  display: block;
+  width: var(--value);
+  height: 100%;
+  background: var(--tone, var(--accent));
+}
+
+.flow-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-3);
+}
+
+.flow-step {
+  position: relative;
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr);
+  gap: var(--space-3);
+  align-items: start;
+  padding: var(--space-4);
+  background: var(--surface);
+  border: var(--border);
+  border-radius: var(--radius-md);
+}
+
+.flow-step > .flow-num {
+  grid-column: 1;
+}
+
+.flow-step > :not(.flow-num) {
+  grid-column: 2;
+  min-width: 0;
+}
+
+.flow-step::after {
+  content: "";
+  position: absolute;
+  inset-block-start: calc(100% + 1px);
+  inset-inline-start: 36px;
+  width: 1.5px;
+  height: var(--space-3);
+  background: var(--border-color);
+}
+
+.flow-step:last-child::after {
+  display: none;
+}
+
+.flow-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-pill);
+  color: var(--text);
+  background: var(--surface-warm);
+  box-shadow: inset 0 0 0 1px rgba(20, 20, 19, 0.10);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  font-weight: 700;
+}
+
+.flow-title {
+  margin: 0 0 var(--space-1);
+  font-family: var(--font-serif);
+  font-size: var(--text-xl);
+  font-weight: 550;
+  line-height: var(--leading-title);
+}
+
+.flow-detail {
+  margin: 0;
+  color: var(--text-soft);
+}
+
+.flow-branch {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-3);
+}
+
+.flow-branch .flow-step::after {
+  display: none;
+}
+
+.flow-step[data-tone="success"] {
+  border-color: rgba(120, 140, 93, 0.38);
+  background: rgba(120, 140, 93, 0.08);
+}
+
+.flow-step[data-tone="warning"] {
+  border-color: rgba(199, 142, 63, 0.42);
+  background: rgba(199, 142, 63, 0.09);
+}
+
+@media (max-width: 620px) {
+  .metric-row {
+    grid-template-columns: 1fr max-content;
+  }
+
+  .metric-row .meter {
+    grid-column: 1 / -1;
+    order: 3;
+  }
+
+  .flow-branch {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- Charts and numeric data ---------- */
+
+.chart-panel {
+  max-width: 100%;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.chart-panel > * {
+  min-width: 0;
+}
+
+.chart-panel svg,
+svg.chart-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.chart-caption {
+  color: var(--text-muted);
+  font-size: var(--text-sm);
+}
+
+.numeric-table-wrap {
+  overflow-x: auto;
+  background: var(--surface);
+  border: var(--border);
+  border-radius: var(--radius-md);
+}
+
+.numeric-table {
+  width: 100%;
+  min-width: 720px;
+  border-collapse: collapse;
+}
+
+.numeric-table th,
+.numeric-table td {
+  padding: var(--space-3) var(--space-4);
+  border-bottom: 1px solid var(--color-gray-200);
+  vertical-align: middle;
+}
+
+.numeric-table th {
+  color: var(--text-muted);
+  background: var(--surface-tint);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-align: left;
+  text-transform: uppercase;
+}
+
+.numeric-table tr:last-child td {
+  border-bottom: 0;
+}
+
+.numeric-table .metric,
+.numeric-table .num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.numeric-table .entity,
+.numeric-table .label-cell {
+  font-weight: 650;
+}
+
+.numeric-table .note {
+  color: var(--text-soft);
+}
+
+.numeric-table code {
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.numeric-table .subtle {
+  display: block;
+  margin-top: 2px;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 400;
+}
+
+@media (max-width: 620px) {
+  .numeric-table {
+    min-width: 0;
+  }
+
+  .numeric-table thead {
+    display: none;
+  }
+
+  .numeric-table tbody,
+  .numeric-table tr,
+  .numeric-table td {
+    display: block;
+  }
+
+  .numeric-table tr {
+    padding: var(--space-3) var(--space-4);
+    border-bottom: 1px solid var(--color-gray-200);
+  }
+
+  .numeric-table tr:last-child {
+    border-bottom: 0;
+  }
+
+  .numeric-table td {
+    padding: var(--space-1) 0;
+    border-bottom: 0;
+  }
+
+  .numeric-table td[data-label] {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-4);
+  }
+
+  .numeric-table td[data-label]::before {
+    content: attr(data-label);
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    text-transform: uppercase;
+  }
+}
+
+/* ---------- Diff ---------- */
+
+.diff {
+  overflow-x: auto;
+  color: #E8E6DC;
+  background: var(--color-slate);
+  border-radius: var(--radius-md);
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  line-height: var(--leading-loose);
+}
+
+.diff-row {
+  display: grid;
+  grid-template-columns: 48px 18px minmax(max-content, 1fr);
+  align-items: baseline;
+  min-width: max-content;
+  padding-inline-end: var(--space-4);
+  white-space: pre;
+}
+
+.diff-row .ln {
+  padding-inline-end: 14px;
+  color: var(--color-gray-500);
+  text-align: right;
+  user-select: none;
+}
+
+.diff-row .mark {
+  color: var(--color-gray-500);
+  text-align: center;
+}
+
+.diff-row .code {
+  color: #E8E6DC;
+}
+
+.diff-row.ctx .code,
+.diff-row[data-kind="ctx"] .code {
+  color: #B8B6AC;
+}
+
+.diff-row.add,
+.diff-row[data-kind="add"] {
+  background: rgba(120, 140, 93, 0.24);
+  box-shadow: inset 3px 0 0 rgba(120, 140, 93, 0.78);
+}
+
+.diff-row.add .mark,
+.diff-row[data-kind="add"] .mark {
+  color: #B9D394;
+  font-weight: 800;
+}
+
+.diff-row.del,
+.diff-row[data-kind="del"] {
+  background: rgba(176, 74, 63, 0.24);
+  box-shadow: inset 3px 0 0 rgba(176, 74, 63, 0.82);
+}
+
+.diff-row.del .mark,
+.diff-row[data-kind="del"] .mark {
+  color: #F19A8D;
+  font-weight: 800;
+}
+
+.diff-row.hunk,
+.diff-row[data-kind="hunk"] {
+  background: rgba(255, 255, 255, 0.045);
+}
+
+.diff-row.hunk .code,
+.diff-row[data-kind="hunk"] .code {
+  color: var(--color-gray-500);
+}
+
+.diff[data-wrap="true"] {
+  overflow-x: hidden;
+}
+
+.diff[data-wrap="true"] .diff-row {
+  grid-template-columns: 42px 18px minmax(0, 1fr);
+  min-width: 0;
+  white-space: normal;
+}
+
+.diff[data-wrap="true"] .code {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+/* ---------- Timeline ---------- */
+
+.timeline {
+  position: relative;
+  display: grid;
+  gap: 0;
+  padding-inline-start: var(--space-6);
+}
+
+.timeline:is(ol, ul) {
+  margin: 0;
+  list-style: none;
+}
+
+.timeline::before {
+  content: "";
+  position: absolute;
+  inset-block: 4px 4px;
+  inset-inline-start: 9px;
+  width: 1.5px;
+  background: var(--border-color);
+}
+
+.timeline-item,
+.tl-entry {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(84px, max-content) minmax(0, 1fr);
+  gap: var(--space-4);
+  padding-block: 0 var(--space-5);
+}
+
+.timeline-item:last-child,
+.tl-entry:last-child {
+  padding-block-end: 0;
+}
+
+.timeline-item::before,
+.tl-entry::before {
+  content: "";
+  position: absolute;
+  inset-block-start: 4px;
+  inset-inline-start: calc(4.25px - var(--space-6));
+  width: 11px;
+  height: 11px;
+  border: 2px solid var(--surface);
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 1.5px var(--accent);
+}
+
+.timeline-item:not(:has(> .timeline-time, > .tl-time)),
+.tl-entry:not(:has(> .timeline-time, > .tl-time)) {
+  display: block;
+}
+
+.timeline-time,
+.tl-time {
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  white-space: nowrap;
+}
+
+.timeline-body,
+.tl-body {
+  min-width: 0;
+  color: var(--text-soft);
+}
+
+.timeline-body strong,
+.tl-body strong {
+  color: var(--text);
+}
+
+@media (max-width: 620px) {
+  .timeline-item,
+  .tl-entry {
+    grid-template-columns: 1fr;
+    gap: var(--space-1);
+  }
+}
+
+/* ---------- Flowchart ---------- */
+
+.flowchart {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+svg.flow,
+svg.flowchart {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.flow text,
+.flowchart text {
+  fill: var(--text);
+  font-family: var(--font-sans);
+  font-size: 12px;
+}
+
+.flow .sub,
+.flowchart .sub {
+  fill: var(--text-muted);
+  font-size: 10px;
+}
+
+.flow-edge,
+.edge {
+  fill: none;
+  stroke: var(--text-muted);
+  stroke-width: 1.5;
+}
+
+.flow-edge[data-kind="yes"],
+.edge.yes {
+  stroke: var(--success);
+}
+
+.flow-edge[data-kind="no"],
+.edge.no {
+  stroke: var(--danger);
+  stroke-dasharray: 4 4;
+}
+
+/* SVG flow nodes */
+.flow-node,
+.flow .node {
+  cursor: pointer;
+  transition: transform var(--dur-fast) var(--ease);
+}
+
+.flow-node:hover,
+.flow .node:hover {
+  transform: translateY(-1px);
+}
+
+.flow-node rect,
+.flow .node rect {
+  fill: var(--surface);
+  stroke: var(--border-color);
+  stroke-width: 1.5;
+  rx: 8;
+}
+
+.flow-node path,
+.flow .node.gate path {
+  fill: var(--surface);
+  stroke: var(--border-color);
+  stroke-width: 1.5;
+}
+
+.flow-node[data-shape="term"] rect,
+.flow .node.term rect {
+  fill: var(--surface-tint);
+  rx: 22;
+}
+
+.flow-node[data-kind="ok"] rect,
+.flow .node.ok rect {
+  fill: rgba(120, 140, 93, 0.12);
+  stroke: var(--success);
+}
+
+.flow-node[data-kind="bad"] rect,
+.flow .node.bad rect {
+  fill: rgba(176, 74, 63, 0.10);
+  stroke: var(--danger);
+}
+
+.flow-node.active rect,
+.flow-node.active path,
+.flow .node.active rect,
+.flow .node.active path {
+  stroke: var(--accent);
+  stroke-width: 2;
+}
+
+/* HTML flow nodes, for non-SVG diagrams */
+div.flow-node {
+  padding: var(--space-3) var(--space-4);
+  background: var(--surface);
+  border: var(--border);
+  border-radius: var(--radius-sm);
+  transition:
+    transform var(--dur-fast) var(--ease),
+    border-color var(--dur-fast) var(--ease),
+    box-shadow var(--dur-fast) var(--ease);
+}
+
+div.flow-node:hover {
+  transform: translateY(var(--hover-y));
+  border-color: rgba(217, 119, 87, 0.55);
+  box-shadow: var(--shadow-sm);
+}
+
+div.flow-node[data-shape="term"] {
+  border-radius: var(--radius-pill);
+  background: var(--surface-tint);
+}
+
+div.flow-node[data-kind="ok"] {
+  border-color: var(--success);
+  background: rgba(120, 140, 93, 0.12);
+}
+
+div.flow-node[data-kind="bad"] {
+  border-color: var(--danger);
+  background: rgba(176, 74, 63, 0.10);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+/* Responsive safety net for generated artifacts. */
+p,
+li {
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 860px) {
+  .split,
+  .section-rail,
+  .sidebar-layout {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  .split > *,
+  .section-rail > *,
+  .sidebar-layout > *,
+  .chart-panel {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+}</style>
+    <style>
+      .flow-svg { width: 100%; height: auto; max-width: 720px; }
+      .flow-svg text { font-family: inherit; font-size: 11px; fill: var(--text-muted); }
+      .flow-svg .node-num { font-size: 13px; font-weight: 600; fill: var(--surface); }
+      .flow-svg .node-label { font-size: 11px; fill: var(--text); }
+      .numeric-table code,
+      .numeric-table .note { white-space: normal; overflow-wrap: anywhere; word-break: break-word; }
+    </style>
+  </head>
+  <body>
+    <main class="page stack" data-gap="lg">
+
+      <header class="stack" data-gap="sm">
+        <div class="eyebrow">Module explainer</div>
+        <h1>How the Birch rendering checker turns HTML into a report.</h1>
+        <p class="lede">A new-contributor map of <code>scripts/check_birch_renderings.py</code>: the static parsers, the optional headless-Chrome geometry audit, and the JSON/Markdown/PNG outputs you must keep stable when you modify a rendering eval.</p>
+        <div class="cluster">
+          <span class="chip" data-tone="olive">Static + visual smoke</span>
+          <span class="chip">Two CLI modes</span>
+          <span class="chip" data-tone="info">Deterministic-first</span>
+        </div>
+      </header>
+
+      <!-- 1. Mental model -->
+      <section class="section stack" data-gap="lg">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">1. Mental model</span>
+            <h2>One pipeline, two input shapes, one report.</h2>
+          </div>
+        </div>
+
+        <div class="auto-grid" style="--grid-min: 240px">
+          <article class="card stack" data-variant="outlined" data-gap="sm">
+            <span class="caption">Input</span>
+            <h3>Pairs or artifacts</h3>
+            <p>Either <code>--pair reference:candidate</code> or repeated <code>--artifact path</code>. The two modes are mutually exclusive; mixing them raises <code>SystemExit("use either --artifact or --pair, not both")</code>.</p>
+          </article>
+          <article class="card stack" data-variant="outlined" data-gap="sm">
+            <span class="caption">Engine</span>
+            <h3>Parse, then optionally render</h3>
+            <p>An <code>html.parser.HTMLParser</code> stack extracts tags, classes, CSS vars and structural contracts. If a Chrome binary is on <code>PATH</code>, the same HTML is rendered headless and a JS audit is injected to measure geometry.</p>
+          </article>
+          <article class="card stack" data-variant="outlined" data-gap="sm">
+            <span class="caption">Output</span>
+            <h3>Findings, not opinions</h3>
+            <p>Every check produces a <code>Finding(level, name, evidence)</code>. Levels are <code>pass</code>, <code>warn</code>, <code>fail</code>, <code>note</code>. The process exits non-zero on any <code>fail</code> (or any <code>warn</code> under <code>--fail-on-warn</code>).</p>
+          </article>
+        </div>
+
+        <aside class="callout stack" data-tone="info" data-gap="xs">
+          <span class="callout-label">Key distinction</span>
+          <p><strong>Artifact mode is candidate-only.</strong> The module docstring states it explicitly: artifact mode "does not self-compare screenshots; it captures rendered evidence and flags egregious visible breakage that static parsing cannot see." True <code>--pair</code> mode is for the small <code>DEFAULT_PAIRS</code> set in <code>scripts/check_birch_renderings.py</code>.</p>
+        </aside>
+      </section>
+
+      <!-- 2. Runtime path -->
+      <section class="section stack" data-gap="lg">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">2. Runtime path</span>
+            <h2>From an HTML file to <code>reports/birch-rendering-check.{json,md}</code>.</h2>
+          </div>
+        </div>
+
+        <div class="panel chart-panel stack" data-gap="sm">
+          <svg class="flow-svg chart-svg" viewBox="0 0 720 170" role="img" aria-label="Six-stage flow: parse HTML, run contract parsers, optional Chrome render, optional Pillow palette metrics, geometry audit, write JSON and Markdown report.">
+            <title>Rendering checker runtime path</title>
+            <desc>Numbered nodes 1 through 6 connected left-to-right. Nodes 3, 4 and 5 sit on the optional headless-Chrome branch. The full ordered list follows the diagram.</desc>
+
+            <!-- connectors -->
+            <line x1="80"  y1="70" x2="170" y2="70" stroke="var(--border-color)" stroke-width="1.5" fill="none"/>
+            <line x1="230" y1="70" x2="320" y2="70" stroke="var(--border-color)" stroke-width="1.5" fill="none"/>
+            <line x1="380" y1="70" x2="470" y2="70" stroke="var(--border-color)" stroke-width="1.5" fill="none"/>
+            <line x1="530" y1="70" x2="620" y2="70" stroke="var(--border-color)" stroke-width="1.5" fill="none"/>
+            <!-- branch from node 3 down to optional render lane (visual annotation) -->
+            <line x1="350" y1="100" x2="350" y2="130" stroke="var(--border-color)" stroke-width="1" stroke-dasharray="3 3" fill="none"/>
+
+            <!-- node 1: parse -->
+            <circle cx="50"  cy="70" r="22" fill="var(--accent)" stroke="none"/>
+            <text class="node-num" x="50" y="74" text-anchor="middle">1</text>
+            <text class="node-label" x="50" y="118" text-anchor="middle">page_stats</text>
+
+            <!-- node 2: contract -->
+            <circle cx="200" cy="70" r="22" fill="var(--accent)" stroke="none"/>
+            <text class="node-num" x="200" y="74" text-anchor="middle">2</text>
+            <text class="node-label" x="200" y="118" text-anchor="middle">contract_findings</text>
+
+            <!-- node 3: optional capture -->
+            <circle cx="350" cy="70" r="22" fill="var(--olive, #788C5D)" stroke="none"/>
+            <text class="node-num" x="350" y="74" text-anchor="middle">3</text>
+            <text class="node-label" x="350" y="118" text-anchor="middle">Chrome capture</text>
+            <text x="350" y="148" text-anchor="middle" font-style="italic">optional</text>
+
+            <!-- node 4: pillow metrics -->
+            <circle cx="500" cy="70" r="22" fill="var(--olive, #788C5D)" stroke="none"/>
+            <text class="node-num" x="500" y="74" text-anchor="middle">4</text>
+            <text class="node-label" x="500" y="118" text-anchor="middle">palette / blackish</text>
+
+            <!-- node 5: geometry -->
+            <circle cx="650" cy="70" r="22" fill="var(--olive, #788C5D)" stroke="none"/>
+            <text class="node-num" x="650" y="74" text-anchor="middle">5</text>
+            <text class="node-label" x="650" y="118" text-anchor="middle">geometry_audit</text>
+          </svg>
+          <p class="chart-caption">Nodes correspond to functions in <code>scripts/check_birch_renderings.py</code>. The clay nodes (1–2) always run; the olive nodes (3–5) only run when <code>find_chrome()</code> finds a Chromium/Chrome binary. A final write step (node 6 below) always runs.</p>
+        </div>
+
+        <ol class="flow-list">
+          <li class="flow-step">
+            <span class="flow-num">1</span>
+            <div class="stack" data-gap="xs">
+              <h3 class="flow-title">Parse HTML into <code>PageStats</code></h3>
+              <p class="flow-detail"><code>page_stats(path)</code> reads the file, locates the <code>&lt;style data-birch-system&gt;</code> block, runs <code>StatsParser</code> (tag/class/data-attr counts, inline styles, stylesheet links, text words), and collects defined/used CSS variables.</p>
+            </div>
+          </li>
+          <li class="flow-step">
+            <span class="flow-num">2</span>
+            <div class="stack" data-gap="xs">
+              <h3 class="flow-title">Run static contract parsers</h3>
+              <p class="flow-detail"><code>contract_findings()</code> runs seven structural parsers — <code>GridListParser</code>, <code>ChecklistParser</code>, <code>MetricRowParser</code>, <code>DiffRowParser</code>, <code>DiffPolarityParser</code>, <code>FlowStepParser</code>, <code>TimelineParser</code> — plus <code>svg_visual_findings()</code> for <code>fill</code>/<code>stroke</code> defaults.</p>
+            </div>
+          </li>
+          <li class="flow-step">
+            <span class="flow-num">3</span>
+            <div class="stack" data-gap="xs">
+              <h3 class="flow-title">Capture a headless screenshot (optional)</h3>
+              <p class="flow-detail">If <code>find_chrome()</code> returns a binary, <code>capture()</code> invokes <code>--headless=new --screenshot</code>. For <code>deep:*</code> viewports, <code>measure_document_height()</code> first injects a temp HTML in the same directory to read <code>scrollHeight</code>.</p>
+            </div>
+          </li>
+          <li class="flow-step">
+            <span class="flow-num">4</span>
+            <div class="stack" data-gap="xs">
+              <h3 class="flow-title">Compute Pillow palette/blackish metrics</h3>
+              <p class="flow-detail"><code>artifact_screenshot_metrics()</code> (or <code>screenshot_metrics()</code> in pair mode) downsamples the PNG, then compares pixels against the <code>PALETTE</code> dict to flag <code>palette_drift</code>, <code>blank_render</code>, or <code>black_pixel_fraction</code>.</p>
+            </div>
+          </li>
+          <li class="flow-step">
+            <span class="flow-num">5</span>
+            <div class="stack" data-gap="xs">
+              <h3 class="flow-title">Inject the JS geometry audit</h3>
+              <p class="flow-detail"><code>geometry_audit()</code> writes the HTML to a temp directory with a <code>&lt;base&gt;</code> tag plus a window-load script. Chrome dumps the DOM; the audit reads <code>data-birch-audit</code> JSON and turns it into overflow, squeeze, metric-alignment, and code-wrap findings.</p>
+            </div>
+          </li>
+          <li class="flow-step" data-tone="success">
+            <span class="flow-num">6</span>
+            <div class="stack" data-gap="xs">
+              <h3 class="flow-title">Write JSON + Markdown, exit code</h3>
+              <p class="flow-detail"><code>main()</code> writes <code>--out</code> (default <code>reports/birch-rendering-check.json</code>) and <code>--markdown</code> via <code>render_markdown()</code>. Process exits <code>1</code> when <code>summary.failures &gt; 0</code> or <code>summary.warnings &gt; 0</code> under <code>--fail-on-warn</code>.</p>
+            </div>
+          </li>
+        </ol>
+      </section>
+
+      <!-- 3. File tour -->
+      <section class="section stack" data-gap="lg">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">3. File tour</span>
+            <h2>Read these six files in this order.</h2>
+          </div>
+        </div>
+
+        <ol class="flow-list">
+          <li class="flow-step">
+            <span class="flow-num">1</span>
+            <div class="stack" data-gap="xs">
+              <h3 class="flow-title">scripts/check_birch_renderings.py</h3>
+              <p class="flow-detail">Start at <code>main()</code> → <code>check_artifact()</code> / <code>compare_pair()</code> → <code>page_stats()</code> → <code>contract_findings()</code> → the seven <code>*Parser</code> classes → <code>geometry_audit()</code> → <code>render_markdown()</code>. The module docstring at the top is the cleanest single-paragraph mental model.</p>
+            </div>
+          </li>
+          <li class="flow-step">
+            <span class="flow-num">2</span>
+            <div class="stack" data-gap="xs">
+              <h3 class="flow-title">styles/birch-system.css</h3>
+              <p class="flow-detail">The 1673-line source of truth for tokens, classes, and grid contracts (<code>.flow-step</code>, <code>.metric-row</code>, <code>.diff-row</code>, <code>.timeline-item</code>). <code>css_defined_vars()</code> reads this file to populate <code>system_defined_vars</code>, which drives <code>no_unknown_css_vars</code>.</p>
+            </div>
+          </li>
+          <li class="flow-step">
+            <span class="flow-num">3</span>
+            <div class="stack" data-gap="xs">
+              <h3 class="flow-title">docs/birch-llm-style-guide.md</h3>
+              <p class="flow-detail">Recipe routing and the primitive index. The "Quick primitive index" and the strict-component descriptions match the checker's parsers one-for-one; treat it as the user-facing spec the checker enforces.</p>
+            </div>
+          </li>
+          <li class="flow-step">
+            <span class="flow-num">4</span>
+            <div class="stack" data-gap="xs">
+              <h3 class="flow-title">evals/charts/build_chart_brief.py</h3>
+              <p class="flow-detail">A worked example of producing an artifact the checker is happy with: composes <code>.chart-panel</code>, <code>.numeric-table</code>, <code>.metric-row</code>, and a Matplotlib SVG. Useful as a regression fixture when you modify a parser.</p>
+            </div>
+          </li>
+          <li class="flow-step">
+            <span class="flow-num">5</span>
+            <div class="stack" data-gap="xs">
+              <h3 class="flow-title">scripts/birch_mpl.py</h3>
+              <p class="flow-detail">Defines the <code>COLORS</code> and <code>PALETTE</code> the checker's Pillow stage tries to match (<code>palette_close_fraction</code>). <code>svg_string()</code> strips Matplotlib metadata; if you change the SVG postprocessing here, expect <code>svg_chart_mark_presentation</code> in the checker to react.</p>
+            </div>
+          </li>
+          <li class="flow-step">
+            <span class="flow-num">6</span>
+            <div class="stack" data-gap="xs">
+              <h3 class="flow-title">evals/charts/run_eval.py</h3>
+              <p class="flow-detail">The minimal end-to-end driver. It calls the builder, then runs the checker at four viewports (<code>desktop</code>, <code>mobile</code>, <code>deep</code>, <code>mobile-deep</code>). Copy this shape when adding a new eval; the checker has no opinion on builders, only on outputs.</p>
+            </div>
+          </li>
+        </ol>
+      </section>
+
+      <!-- 4. Gotchas -->
+      <section class="section stack" data-gap="lg">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">4. Gotchas</span>
+            <h2>Quiet ways to break an existing eval.</h2>
+          </div>
+        </div>
+
+        <ul class="insight-list">
+          <li><span><strong>Birch CSS minimum bytes.</strong> The <code>uses_birch_system_css</code> check requires both <code>BIRCH_CSS_MIN_BYTES = 10_000</code> bytes inside <code>&lt;style data-birch-system&gt;</code> <em>and</em> every signature in <code>BIRCH_CSS_SIGNATURES</code>. Truncating the placeholder for token savings is a silent failure.</span></li>
+          <li><span><strong>Any line starting with <code>+</code> fails.</strong> <code>no_patch_markers</code> checks <code>html.splitlines()</code>; even a leading <code>+</code> in an unindented prose line will flip the check. Wrap diff polarity in <code>&lt;span class="mark"&gt;</code>.</span></li>
+          <li><span><strong>Diff polarity is independent of the marker.</strong> A <code>.diff-row</code> with mark <code>+</code> must also carry <code>.add</code> or <code>data-kind="add"</code>; otherwise <code>diff_row_polarity</code> flags it. Same for <code>-</code> / <code>.del</code>.</span></li>
+          <li><span><strong>Strict-children parsers count loose text.</strong> <code>FlowStepParser</code>, <code>DiffRowParser</code>, and <code>MetricRowParser</code> walk direct children at <code>depth == 1</code>. Whitespace text nodes are fine, but a stray <code>&lt;p&gt;</code> beside <code>.flow-num</code> will fail <code>flow_step_contract</code>.</span></li>
+          <li><span><strong>Geometry audit needs a working <code>&lt;base&gt;</code>.</strong> <code>geometry_audit()</code> copies the HTML to a temp dir and prepends <code>&lt;base href="file://.../"&gt;</code> so <code>styles/birch-system.css</code> resolves. If you pre-injected your own <code>&lt;base&gt;</code>, the relative stylesheet link may break and the audit will silently run against unstyled HTML.</span></li>
+          <li><span><strong>SVG chart marks default to black fill.</strong> Any <code>&lt;polyline&gt;</code> or chart-class <code>&lt;path&gt;</code> without <code>fill="none"</code> and an explicit <code>stroke</code> raises <code>svg_chart_mark_presentation</code>. Hand-written charts are the usual offenders.</span></li>
+          <li><span><strong>Local CSS budget is loose but watched.</strong> Over <code>2500</code> bytes of page-local CSS produces a warning (<code>local_css_size</code>); gradients in local CSS produce a hard failure (<code>no_birch_gradients</code>).</span></li>
+          <li><span><strong>Deep viewports rewrite themselves.</strong> <code>measure_document_height()</code> writes <code>.{stem}-measure-*.html</code> next to your artifact for the height probe. If the artifact directory is read-only, deep capture quietly falls back to the requested window height.</span></li>
+        </ul>
+      </section>
+
+      <!-- 5. Extension points -->
+      <section class="section stack" data-gap="lg">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">5. Extension points</span>
+            <h2>Where to plug new behavior in.</h2>
+          </div>
+        </div>
+
+        <div class="auto-grid" style="--grid-min: 260px">
+          <article class="card stack" data-variant="outlined" data-gap="sm">
+            <span class="caption">Add a structural contract</span>
+            <h3>New <code>HTMLParser</code> subclass</h3>
+            <p>Model it on <code>MetricRowParser</code>: track <code>in_*</code> + <code>depth</code>, capture direct children at <code>depth == 1</code>, append to a <code>bad_*</code> list, then feed and consume in <code>contract_findings()</code>.</p>
+          </article>
+          <article class="card stack" data-variant="outlined" data-gap="sm">
+            <span class="caption">Add a class to the vocabulary</span>
+            <h3><code>BIRCH_CLASSES</code> / <code>LAYOUT_CLASSES</code> / <code>SEMANTIC_CLASSES</code></h3>
+            <p>Three sets at the top of the module. Adding a class to <code>SEMANTIC_CLASSES</code> changes the <code>uses_semantic_components</code> warning threshold (currently <code>SEMANTIC_CLASS_MIN = 6</code>).</p>
+          </article>
+          <article class="card stack" data-variant="outlined" data-gap="sm">
+            <span class="caption">Add a geometry check</span>
+            <h3>JS branch in <code>geometry_audit()</code></h3>
+            <p>Extend the embedded <code>&lt;script&gt;</code> to push a new array onto <code>data-birch-audit</code>, then add a matching branch in <code>geometry_findings()</code>. Mirror the pass/fail symmetry of <code>layout_overflow</code>.</p>
+          </article>
+          <article class="card stack" data-variant="outlined" data-gap="sm">
+            <span class="caption">Add a palette tone</span>
+            <h3><code>PALETTE</code> dict</h3>
+            <p>Adds the colour to the Pillow palette-close comparison and the <code>is_palette_hex()</code> tolerance check. Keep the tuple aligned with <code>scripts/birch_mpl.py:COLORS</code>.</p>
+          </article>
+          <article class="card stack" data-variant="outlined" data-gap="sm">
+            <span class="caption">Add a viewport profile</span>
+            <h3><code>VIEWPORTS</code> in <code>evals/charts/run_eval.py</code></h3>
+            <p>The checker accepts any <code>name:WIDTHxHEIGHT</code> via <code>--viewport</code>. Names containing <code>deep</code> activate <code>measure_document_height()</code>; everything else uses the literal height.</p>
+          </article>
+          <article class="card stack" data-variant="outlined" data-gap="sm">
+            <span class="caption">Tune a threshold</span>
+            <h3>Module-level constants</h3>
+            <p><code>BIRCH_CSS_MIN_BYTES</code>, <code>SEMANTIC_CLASS_MIN</code>, the <code>0.55</code> palette floor in <code>screenshot_findings()</code>, and the <code>2500</code>-byte local-CSS warning all live as named constants. Change them one at a time; the eval drivers expect stable thresholds.</p>
+          </article>
+        </div>
+      </section>
+
+      <!-- 6. Where to change behavior (precise pointers) -->
+      <section class="section stack" data-gap="lg">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">6. Where to change behavior</span>
+            <h2>Precise pointers for common edits.</h2>
+          </div>
+        </div>
+
+        <div class="numeric-table-wrap">
+          <table class="numeric-table">
+            <thead>
+              <tr>
+                <th class="label-cell">If you want to change…</th>
+                <th>Edit here</th>
+                <th>Affects finding</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="entity">CSS vocabulary tolerated by the checker</td>
+                <td><code>styles/birch-system.css</code></td>
+                <td><code>no_unknown_css_vars</code></td>
+              </tr>
+              <tr>
+                <td class="entity">Default <code>--pair</code> set</td>
+                <td><code>DEFAULT_PAIRS</code> in <code>scripts/check_birch_renderings.py</code></td>
+                <td>which files run when no <code>--pair</code> is given</td>
+              </tr>
+              <tr>
+                <td class="entity">Required minimum Birch CSS size</td>
+                <td><code>BIRCH_CSS_MIN_BYTES</code></td>
+                <td><code>uses_birch_system_css</code></td>
+              </tr>
+              <tr>
+                <td class="entity">Strict child contract for a primitive</td>
+                <td>The matching <code>*Parser</code> class</td>
+                <td><code>flow_step_contract</code>, <code>metric_row_contract</code>, <code>diff_row_contract</code>, <code>timeline_item_contract</code></td>
+              </tr>
+              <tr>
+                <td class="entity">Palette tolerance / new tone</td>
+                <td><code>PALETTE</code> and <code>is_palette_hex()</code></td>
+                <td><code>local_literal_colors</code>, <code>palette_drift</code></td>
+              </tr>
+              <tr>
+                <td class="entity">Geometry threshold (overflow, squeeze, code wrap)</td>
+                <td>JS audit + <code>geometry_findings()</code></td>
+                <td><code>layout_overflow</code>, <code>code_wrap_underfill</code>, <code>pathological_text_wrapping</code></td>
+              </tr>
+              <tr>
+                <td class="entity">Report destination</td>
+                <td>CLI defaults <code>--out</code>, <code>--markdown</code>, <code>--screenshots-dir</code></td>
+                <td>file paths only</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- 7. Commands and outputs -->
+      <section class="section stack" data-gap="lg">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">7. Commands and outputs</span>
+            <h2>Run it locally; know what you wrote.</h2>
+          </div>
+        </div>
+
+        <div class="section-rail">
+          <div class="stack" data-gap="md">
+            <article class="card stack" data-variant="outlined" data-gap="sm">
+              <h3>Check one artifact</h3>
+              <pre class="code-block" data-kind="command" data-wrap="true">uv run --with pillow python scripts/check_birch_renderings.py --artifact 24-birch-chart-brief.html</pre>
+              <p class="muted">Writes <code>reports/birch-rendering-check.json</code> and <code>reports/birch-rendering-check.md</code>; prints both paths.</p>
+            </article>
+
+            <article class="card stack" data-variant="outlined" data-gap="sm">
+              <h3>Run the bundled eval at four viewports</h3>
+              <pre class="code-block" data-kind="command" data-wrap="true">uv run python evals/charts/run_eval.py</pre>
+              <p class="muted">Rebuilds <code>24-birch-chart-brief.html</code> via <code>build_chart_brief.py</code>, then runs the checker for <code>desktop:1365x900</code>, <code>mobile:390x900</code>, <code>deep:1365x2400</code>, and <code>mobile-deep:390x3000</code>.</p>
+            </article>
+
+            <article class="card stack" data-variant="outlined" data-gap="sm">
+              <h3>Compare a reference / candidate pair</h3>
+              <pre class="code-block" data-kind="command" data-wrap="true">uv run --with pillow python scripts/check_birch_renderings.py --pair 05-design-system.html:05-design-system-birch.html</pre>
+              <p class="muted">Adds <code>deltas</code>, an amplified diff PNG, and a three-up contact sheet to the report.</p>
+            </article>
+          </div>
+
+          <aside class="reference-panel stack" data-gap="md">
+            <h3>Outputs you can rely on</h3>
+            <ul class="plain-list">
+              <li><code>reports/birch-rendering-check.json</code> — full payload with <code>mode</code>, <code>artifacts</code>/<code>pairs</code>, <code>summary</code>.</li>
+              <li><code>reports/birch-rendering-check.md</code> — table of findings with level/check/evidence per artifact.</li>
+              <li><code>reports/birch-screenshots/&lt;stem&gt;-&lt;viewport&gt;.png</code> — one PNG per artifact × viewport.</li>
+              <li><code>reports/birch-screenshots/&lt;ref&gt;__vs__&lt;cand&gt;-diff.png</code> — pair mode only, brightness-amplified.</li>
+              <li><code>reports/birch-screenshots/&lt;ref&gt;__vs__&lt;cand&gt;-contact.png</code> — pair mode three-up source / candidate / diff.</li>
+            </ul>
+            <h3>Process exit</h3>
+            <ul class="plain-list">
+              <li><code>0</code> when <code>summary.failures == 0</code>.</li>
+              <li><code>1</code> on any <code>fail</code>, or any <code>warn</code> under <code>--fail-on-warn</code>.</li>
+            </ul>
+          </aside>
+        </div>
+      </section>
+
+      <!-- 8. Don't break this -->
+      <section class="section stack" data-gap="md">
+        <aside class="callout stack" data-tone="warning" data-gap="xs">
+          <span class="callout-label">Before you commit</span>
+          <p>Run the eval driver against an artifact you have not touched (<code>evals/charts/run_eval.py</code> is the cheapest). If <code>summary.failures</code> changes for an unrelated artifact, your parser, threshold, or audit edit has broader reach than intended — bisect by reverting one constant or one parser at a time.</p>
+        </aside>
+      </section>
+
+    </main>
+  </body>
+</html>

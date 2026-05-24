@@ -1,0 +1,12 @@
+{
+  "scoring": {
+    "quality_score": "100-point sum over five equal 20-point tasks. Each task starts at 20 - 1.2*deterministic_failure_units - 1.6*vlm_failure_units - 0.2*deterministic_warning_units - 0.2*vlm_warning_units. Missing artifacts score 0/20. Artifacts missing valid Birch CSS are capped at 7/20, or 4/20 when VLM also reports vision_unstyled_render; artifacts missing .page are capped at 10/20. Units are distinct (eval, finding_name), so repeated viewport sightings of the same issue are not charged repeatedly.",
+    "artifact_score_100": "Compatibility field for the same task score on a 0..100 per-artifact scale: 100 - 6*deterministic_failure_units - 8*vlm_failure_units - deterministic_warning_units - vlm_warning_units, with the equivalent caps 35/100, 20/100, and 50/100.",
+    "efficiency_score": "0.40*duration_score + 0.40*token_score + 0.20*tool_call_score; each component is min/max normalized with lower-is-better",
+    "quality_efficiency_score": "0.75*quality_score + 0.25*efficiency_score"
+  },
+  "notes": [
+    "Scores are descriptive aids, not hidden ground truth.",
+    "Leaderboard sorting should keep source_kind/suite labels visible."
+  ]
+}

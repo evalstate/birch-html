@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rendering checker pipeline — module explainer</title>
+<link rel="stylesheet" href="../styles/birch-system.css">
+<style>
+  :root {
+    --page-max: 960px;
+  }
+  pre {
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+  .sig-block {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    background: var(--color-gray-50);
+    border: 1px solid var(--color-gray-200);
+    border-radius: var(--radius-sm);
+    padding: var(--space-4) var(--space-5);
+    overflow-x: auto;
+  }
+  .file-marker {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--accent);
+    background: rgba(217,119,87,0.10);
+    border: 1px solid rgba(217,119,87,0.25);
+    border-radius: var(--radius-xs);
+    padding: 1px 6px;
+  }
+  .cmd-block {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    background: var(--color-slate);
+    color: #E8E6DC;
+    border-radius: var(--radius-sm);
+    padding: var(--space-3) var(--space-4);
+  }
+  @media (max-width: 620px) {
+    .flow-step { grid-template-columns: 36px minmax(0,1fr); }
+    .metric-row { grid-template-columns: 1fr; }
+    .metric-row .meter { order: 3; }
+  }
+</style>
+</head>
+<body>
+<main class="page stack" data-gap="xl">
+  <header class="stack" data-gap="sm">
+    <div class="eyebrow">Module explainer</div>
+    <h1>Rendering checker pipeline</h1>
+    <p class="lede">How <code>scripts/check_birch_renderings.py</code> validates Birch artifacts — from HTML input to findings, screenshots, and reports.</p>
+    <div class="cluster">
+      <span class="chip">Static contract checks</span>
+      <span class="chip">Pillow screenshot metrics</span>
+      <span class="chip">Browser geometry audit</span>
+      <span class="chip">--artifact and --pair modes</span>
+    </div>
+  </header>
+
+  <!-- ════════════════════════════════════ MENTAL MODEL ════════════════════════════════════ -->
+  <section class="section stack" data-gap="lg">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Start here</span>
+        <h2>Mental model</h2>
+      </div>
+    </div>
+
+    <div class="card stack" data-variant="outlined" data-gap="md">
+      <p>The checker is a <strong>deterministic, layered pipeline</strong>. Each layer catches a different class of failure:</p>
+
+      <ol class="flow-list">
+        <li class="flow-step">
+          <span class="flow-num">1</span>
+          <div>
+            <h3 class="flow-title">Static HTML/CSS contract</h3>
+            <p class="flow-detail">HTMLParser-based checks for doctype, viewport meta, embedded Birch CSS (≥10,000 bytes with required signatures), <code>.page</code> shell, layout primitive density, semantic component density, undefined CSS variables, forbidden patch-marker lines (<code>+</code> at line start), gradient backgrounds, and canonical palette colors.</p>
+          </div>
+        </li>
+        <li class="flow-step">
+          <span class="flow-num">2</span>
+          <div>
+            <h3 class="flow-title">Component contract validation</h3>
+            <p class="flow-detail">Eight specialized HTMLParser subclasses validate grid-child contracts: <code>.insight-list</code>/<code>.takeaway-list</code> items must have one direct child (else they become accidental grid columns); <code>.checklist</code> items must not have multiple direct children when the CSS sets <code>display: flex</code>; <code>.metric-row</code> must be caption + <code>.meter</code> + <code>code</code>; <code>.diff-row</code> must be <code>.ln</code> + <code>.mark</code> + <code>.code</code>; <code>+/-</code> diff rows need <code>.add</code>/<code>.del</code> class or <code>data-kind</code> attribute; <code>.flow-step</code> must have <code>.flow-num</code> + one content wrapper; <code>.timeline-item</code> needs <code>.timeline-time</code> + <code>.timeline-body</code>; chart SVG <code>polyline</code>/<code>path</code> must have <code>fill=none</code> and explicit stroke.</p>
+          </div>
+        </li>
+        <li class="flow-step">
+          <span class="flow-num">3</span>
+          <div>
+            <h3 class="flow-title">Screenshot capture &amp; Pillow metrics</h3>
+            <p class="flow-detail">Chrome headless captures a PNG. Pillow measures palette-close fraction (how much of the image uses canonical Birch palette colors), ivory fraction, and blackish fraction. In <code>--pair</code> mode it computes mean RGB delta and RMS delta between original and candidate.</p>
+          </div>
+        </li>
+        <li class="flow-step">
+          <span class="flow-num">4</span>
+          <div>
+            <h3 class="flow-title">Browser geometry audit</h3>
+            <p class="flow-detail">An in-page JS audit runs after load. It measures overflow (text spilling outside boxes), container text overflow, stat card squeeze, section rail ordering, timeline marker alignment, metric bar x-position alignment across a <code>.metric-list</code>, metric row value clipping, split rail heading alignment, numeric table header alignment, wrapped code/diff underfill (lines consuming &lt;45% of container width), and pathological text wrapping (&lt;14 chars/visual line).</p>
+          </div>
+        </li>
+        <li class="flow-step" data-tone="success">
+          <span class="flow-num">5</span>
+          <div>
+            <h3 class="flow-title">Findings → JSON + Markdown reports</h3>
+            <p class="flow-detail">All findings (fail/warn/note) are collected and written to <code>reports/birch-rendering-check.json</code> and <code>reports/birch-rendering-check.md</code>. Screenshots go in <code>reports/birch-screenshots/</code>. Contact sheets and amplified diffs are generated in <code>--pair</code> mode.</p>
+          </div>
+        </li>
+      </ol>
+
+      <div class="callout" data-tone="info" data-gap="xs">
+        <span class="callout-label">Key design decision</span>
+        <p>The checker is intentionally simpler than a full visual regression suite. Screenshots are evidence-capture and smoke tests, not pixel-perfect diffs. Most checks are deterministic static analysis that runs without a browser.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════ RUNTIME PATH ════════════════════════════════════ -->
+  <section class="section stack" data-gap="lg">
+    <div class="section-head">
+      <span class="eyebrow">Runtime path</span>
+      <h2>From input pairs to reports</h2>
+    </div>
+
+    <div class="split">
+      <div class="stack" data-gap="md">
+        <h3>Artifact mode (generated evals)</h3>
+        <pre class="sig-block">python scripts/check_birch_renderings.py \
+  --artifact 24-birch-chart-brief.html \
+  --out reports/birch-rendering-check-{name}.json \
+  --viewport desktop:1365x900</pre>
+        <p class="muted">Single candidate artifact. Captures screenshot, runs contract + geometry checks, writes one report entry. No diff against a reference.</p>
+
+        <h3>Pair mode (development / before-after)</h3>
+        <pre class="sig-block">python scripts/check_birch_renderings.py \
+  --pair 05-design-system.html:05-design-system-birch.html \
+  --pair 06-component-variants.html:06-component-variants-birch.html \
+  --capture \
+  --viewport desktop:1365x900</pre>
+        <p class="muted">Original vs candidate. Captures both screenshots, computes RGB delta, generates contact sheet and amplified diff PNG. Default pairs are defined in the script's <code>DEFAULT_PAIRS</code> tuple.</p>
+
+        <h3>Multi-viewport eval runner</h3>
+        <pre class="sig-block">python evals/charts/run_eval.py</pre>
+        <p class="muted">Builds the chart brief first, then runs the checker at four viewports: <code>desktop:1365x900</code>, <code>mobile:390x900</code>, <code>deep:1365x2400</code>, <code>mobile-deep:390x3000</code>. Outputs four JSON/MD report pairs.</p>
+      </div>
+      <aside class="reference-panel stack" data-gap="md">
+        <h3>Output artifacts</h3>
+        <ul class="plain-list">
+          <li><code>reports/birch-rendering-check.json</code> — structured findings payload</li>
+          <li><code>reports/birch-rendering-check.md</code> — human-readable summary table</li>
+          <li><code>reports/birch-screenshots/{stem}-{viewport}.png</code> — captured renderings</li>
+          <li><code>reports/{orig}__vs__{cand}-diff.png</code> — amplified diff (pair mode)</li>
+          <li><code>reports/{orig}__vs__{cand}-contact.png</code> — source/candidate/diff contact sheet (pair mode)</li>
+        </ul>
+      </aside>
+    </div>
+
+    <div class="card stack" data-variant="outlined" data-gap="md">
+      <h3>JSON payload shape</h3>
+      <pre class="sig-block">{
+  "mode": "artifact",          // or "pair"
+  "artifacts": [...],          // only in artifact mode
+  "pairs": [...],              // only in pair mode
+  "summary": {
+    "artifacts": 1,            // checked artifacts (artifact mode)
+    "pairs": 1,                // checked artifacts (artifact mode) OR pairs (pair mode)
+    "failures": 0,
+    "warnings": 2,
+    "notes": 3
+  }
+}</pre>
+      <p class="muted">Each artifact/pair entry has <code>findings[]</code>, <code>stats</code> (PageStats), optional <code>screenshot</code> metrics, and optional <code>geometry</code> audit results.</p>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════ FLOW DIAGRAM ════════════════════════════════════ -->
+  <section class="section stack" data-gap="lg">
+    <div class="section-head">
+      <span class="eyebrow">Pipeline visualization</span>
+      <h2>Checker flow</h2>
+    </div>
+
+    <ol class="flow-list" style="max-width: 680px">
+      <li class="flow-step">
+        <span class="flow-num">①</span>
+        <div>
+          <h3 class="flow-title">Parse CLI args</h3>
+          <p class="flow-detail">Resolve <code>--artifact</code> (preferred for eval) or <code>--pair</code>. Read <code>styles/birch-system.css</code> to build the set of defined CSS variables.</p>
+        </div>
+      </li>
+      <li class="flow-step">
+        <span class="flow-num">②</span>
+        <div>
+          <h3 class="flow-title">Page stats extraction</h3>
+          <p class="flow-detail"><code>page_stats()</code> runs <code>StatsParser</code> on each HTML file. Collects tag counts, class counts, CSS vars used/defined, hex colors, embedded Birch CSS byte count and validity.</p>
+        </div>
+      </li>
+      <li class="flow-step">
+        <span class="flow-num">③</span>
+        <div>
+          <h3 class="flow-title">Contract findings</h3>
+          <p class="flow-detail"><code>contract_findings()</code> runs eight specialized parsers and structural checks. Each failure emits a <code>Finding(level, name, evidence)</code>. Undefined CSS vars, missing shell, too few primitives, bad grid children, bad diff polarity, missing chart SVG, SVG fill/stroke defaults — all caught here.</p>
+        </div>
+      </li>
+      <li class="flow-step">
+        <span class="flow-num">④</span>
+        <div>
+          <h3 class="flow-title">Screenshot capture (optional)</h3>
+          <p class="flow-detail">If Chrome is available and <code>--capture</code> is set, <code>capture()</code> runs Chrome headless with <code>--screenshot</code>. Document height is measured first via a temp HTML injection to avoid blank deep captures.</p>
+        </div>
+      </li>
+      <li class="flow-step">
+        <span class="flow-num">⑤</span>
+        <div>
+          <h3 class="flow-title">Pillow screenshot metrics</h3>
+          <p class="flow-detail">In artifact mode: <code>artifact_screenshot_metrics()</code> → palette-close fraction, ivory fraction, blackish fraction. In pair mode: <code>screenshot_metrics()</code> → mean RGB delta, RMS delta, amplified diff PNG, contact sheet.</p>
+        </div>
+      </li>
+      <li class="flow-step">
+        <span class="flow-num">⑥</span>
+        <div>
+          <h3 class="flow-title">Browser geometry audit</h3>
+          <p class="flow-detail"><code>geometry_audit()</code> injects a JS audit script, runs Chrome headless with <code>--dump-dom</code>, parses <code>data-birch-audit</code> JSON from the output. Measures overflow, container overflow, timeline marker alignment, metric bar spread, stat card squeeze, split rail heading alignment, code underfill, pathological text wrapping.</p>
+        </div>
+      </li>
+      <li class="flow-step">
+        <span class="flow-num">⑦</span>
+        <div>
+          <h3 class="flow-title">Findings aggregation</h3>
+          <p class="flow-detail"><code>geometry_findings()</code> converts audit JSON into <code>Finding</code> objects. <code>artifact_screenshot_findings()</code> or <code>screenshot_findings()</code> converts Pillow metrics into findings. All findings merged into the report payload.</p>
+        </div>
+      </li>
+      <li class="flow-step" data-tone="success">
+        <span class="flow-num">⑧</span>
+        <div>
+          <h3 class="flow-title">Write reports</h3>
+          <p class="flow-detail"><code>render_markdown()</code> generates a table of findings per artifact/pair. JSON and Markdown written to disk. <code>main()</code> exits with code 1 if any failures (or warnings when <code>--fail-on-warn</code> is set).</p>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <!-- ════════════════════════════════════ FILE TOUR ════════════════════════════════════ -->
+  <section class="section stack" data-gap="lg">
+    <div class="section-head">
+      <span class="eyebrow">Source tour</span>
+      <h2>File reading order for new contributors</h2>
+    </div>
+
+    <p>Read these files in order. Each one builds context for the next.</p>
+
+    <div class="stack" data-gap="md">
+      <!-- Step 1 -->
+      <article class="card stack" data-variant="outlined" data-gap="sm">
+        <div class="cluster" data-justify="between">
+          <h3>1. <span class="file-marker">styles/birch-system.css</span></h3>
+          <span class="chip" data-tone="olive">Start here</span>
+        </div>
+        <p>Read this first to understand the design system. The checker validates that artifacts use classes and CSS variables defined in this file. Key sections: CSS custom properties (design tokens), layout primitives (<code>.page</code>, <code>.stack</code>, <code>.grid</code>, <code>.split</code>, etc.), semantic components (<code>.card</code>, <code>.metric-row</code>, <code>.diff-row</code>, <code>.timeline-item</code>, etc.), chart and numeric components. The checker's <code>BIRCH_CSS_SIGNATURES</code>, <code>BIRCH_CLASSES</code>, <code>LAYOUT_CLASSES</code>, <code>SEMANTIC_CLASSES</code>, and <code>PALETTE</code> constants are derived from this file.</p>
+        <p class="muted">Also read: <code>docs/birch-llm-style-guide.md</code> for the contract that LLMs must follow when generating artifacts.</p>
+      </article>
+
+      <!-- Step 2 -->
+      <article class="card stack" data-variant="outlined" data-gap="sm">
+        <div class="cluster" data-justify="between">
+          <h3>2. <span class="file-marker">scripts/check_birch_renderings.py</span> — <code>main()</code> and entry point</h3>
+          <span class="chip" data-tone="olive">Core</span>
+        </div>
+        <p>Read the <code>main()</code> function first. It shows the overall flow: parse args → find Chrome → iterate artifacts or pairs → call <code>check_artifact()</code> or <code>compare_pair()</code> → aggregate findings → write reports. Then read <code>compare_pair()</code> and <code>check_artifact()</code> to understand the two modes. The <code>Finding</code> and <code>PageStats</code> dataclasses define the data model for all findings.</p>
+        <p class="muted">Key constants: <code>DEFAULT_PAIRS</code>, <code>BIRCH_CSS_SIGNATURES</code>, <code>BIRCH_CSS_MIN_BYTES=10_000</code>, <code>SEMANTIC_CLASS_MIN=6</code>.</p>
+      </article>
+
+      <!-- Step 3 -->
+      <article class="card stack" data-variant="outlined" data-gap="sm">
+        <div class="cluster" data-justify="between">
+          <h3>3. <span class="file-marker">scripts/check_birch_renderings.py</span> — <code>page_stats()</code> and <code>StatsParser</code></h3>
+          <span class="chip" data-tone="olive">Static analysis</span>
+        </div>
+        <p><code>StatsParser</code> is the workhorse HTML parser. It collects: page title, tag counts (<code>tag_counts</code>), class counts (<code>class_counts</code>), CSS variable definitions and usage, hex colors, embedded Birch CSS byte count, doctype presence, viewport meta presence. <code>page_stats()</code> runs it and returns a <code>PageStats</code> dataclass. All other parsers are variants of this pattern.</p>
+      </article>
+
+      <!-- Step 4 -->
+      <article class="card stack" data-variant="outlined" data-gap="sm">
+        <div class="cluster" data-justify="between">
+          <h3>4. <span class="file-marker">scripts/check_birch_renderings.py</span> — component contract parsers</h3>
+          <span class="chip" data-tone="clay">Land mines</span>
+        </div>
+        <p>Read all eight contract parsers in order. Each targets a specific grid/flex layout that breaks when content is not wrapped correctly:</p>
+        <ul class="plain-list">
+          <li><code>GridListParser</code> — <code>.insight-list</code>/<code>.takeaway-list</code> items with multiple direct children collapse to 1–2 characters per line in narrow columns because they become extra grid children</li>
+          <li><code>ChecklistParser</code> — <code>.checklist</code> rows with multiple direct children wrap incorrectly when the CSS sets <code>display: flex</code></li>
+          <li><code>MetricRowParser</code> — <code>.metric-row</code> requires exactly three children: caption + <code>.meter</code> + <code>code</code>; any extra children break meter alignment</li>
+          <li><code>DiffRowParser</code> — <code>.diff-row</code> is a three-column grid; loose text auto-places into the narrow line-number column</li>
+          <li><code>DiffPolarityParser</code> — <code>+/-</code> diff rows without <code>.add</code>/<code>.del</code> class or <code>data-kind</code> attribute render without green/red Birch coloring</li>
+          <li><code>FlowStepParser</code> — <code>.flow-step</code> is a two-column grid; loose title/detail children auto-place into the narrow number column</li>
+          <li><code>TimelineParser</code> — <code>.timeline-item</code> must use <code>.timeline-time</code> + <code>.timeline-body</code> (or a custom scoped class)</li>
+        </ul>
+        <p>Also read <code>svg_visual_findings()</code> for the SVG chart fill/stroke default check.</p>
+      </article>
+
+      <!-- Step 5 -->
+      <article class="card stack" data-variant="outlined" data-gap="sm">
+        <div class="cluster" data-justify="between">
+          <h3>5. <span class="file-marker">scripts/check_birch_renderings.py</span> — <code>contract_findings()</code></h3>
+          <span class="chip" data-tone="olive">Entry point for checks</span>
+        </div>
+        <p>This is the main function that orchestrates all static checks. It calls each parser, collects bad items, and emits <code>Finding</code> objects. To add a new static check, add a parser or a direct check here and append findings. The function signature is: <code>contract_findings(candidate: Path, stats: PageStats, system_defined_vars: set[str]) → list[Finding]</code>.</p>
+      </article>
+
+      <!-- Step 6 -->
+      <article class="card stack" data-variant="outlined" data-gap="sm">
+        <div class="cluster" data-justify="between">
+          <h3>6. <span class="file-marker">scripts/check_birch_renderings.py</span> — screenshot and geometry</h3>
+          <span class="chip" data-tone="info">Visual</span>
+        </div>
+        <p>Read <code>capture()</code>, <code>capture_height_for_viewport()</code>, <code>measure_document_height()</code>, <code>screenshot_metrics()</code>, <code>artifact_screenshot_metrics()</code>, <code>palette_metrics()</code>, and <code>make_contact_sheet()</code>. These handle Chrome-based screenshot capture and Pillow-based image analysis. Then read <code>geometry_audit()</code> — the large JS audit string is inline in the Python file. It runs in the browser and dumps a JSON object via <code>data-birch-audit</code> attribute.</p>
+        <p class="muted">The geometry audit is the most complex piece. It handles overflow detection, timeline marker alignment, metric bar spread, stat card squeeze, split rail heading alignment, code wrap underfill, and pathological text wrapping.</p>
+      </article>
+
+      <!-- Step 7 -->
+      <article class="card stack" data-variant="outlined" data-gap="sm">
+        <div class="cluster" data-justify="between">
+          <h3>7. <span class="file-marker">scripts/birch_mpl.py</span></h3>
+          <span class="chip" data-tone="info">Chart generation</span>
+        </div>
+        <p>Matplotlib helpers for Birch-styled inline SVG charts. Four public functions: <code>rc_params()</code> (returns Birch rcParams dict), <code>birch_theme()</code> (context manager), <code>polish_axes()</code> (removes top/right spines, adds y-axis grid), <code>svg_string()</code> (exports figure as inline SVG string), <code>close()</code> (closes Matplotlib figure). Palette: clay <code>#D97757</code>, olive <code>#788C5D</code>, sky <code>#6A8CAF</code>, rust <code>#B04A3F</code>.</p>
+        <p class="muted">Used by <code>evals/charts/build_chart_brief.py</code> to generate the chart fixture.</p>
+      </article>
+
+      <!-- Step 8 -->
+      <article class="card stack" data-variant="outlined" data-gap="sm">
+        <div class="cluster" data-justify="between">
+          <h3>8. <span class="file-marker">evals/charts/run_eval.py</span></h3>
+          <span class="chip">Eval runner</span>
+        </div>
+        <p>The chart eval driver. Builds the chart brief first (using <code>build_chart_brief.py</code>), then runs the checker at four viewports. Each viewport produces a separate JSON and MD report. The <code>VIEWPORTS</code> dict shows all tested configurations.</p>
+      </article>
+
+      <!-- Step 9 -->
+      <article class="card stack" data-variant="outlined" data-gap="sm">
+        <div class="cluster" data-justify="between">
+          <h3>9. <span class="file-marker">evals/charts/build_chart_brief.py</span></h3>
+          <span class="chip">Fixture generator</span>
+        </div>
+        <p>Reads <code>evals/charts/sample-data.csv</code>, generates a <code>24-birch-chart-brief.html</code> fixture using <code>scripts/birch_mpl.py</code>. Uses <code>.numeric-table</code>, <code>.metric-list</code>, <code>.chart-panel</code>, <code>.chart-svg</code> with <code>role="img"</code> and <code>aria-label</code>. Demonstrates the complete Birch numeric artifact contract.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════ GOTCHAS ════════════════════════════════════ -->
+  <section class="section stack" data-gap="lg">
+    <div class="section-head">
+      <span class="eyebrow">Land mines</span>
+      <h2>Gotchas and where behavior hides</h2>
+    </div>
+
+    <div class="auto-grid" style="--grid-min: 300px">
+      <article class="card stack" data-variant="outlined" data-gap="sm">
+        <h3>Grid list item children</h3>
+        <p><code>.insight-list</code> and <code>.takeaway-list</code> are CSS grids. Each <code>&lt;li&gt;</code> is a grid child. If an item has multiple direct children (e.g., <code>&lt;strong&gt;</code> plus loose text), the text becomes a second grid column. In a narrow rail, that column is ~60px and text wraps as one or two characters per line. The fix: wrap all item content in one <code>&lt;span&gt;</code> or <code>&lt;div&gt;</code>.</p>
+        <pre class="sig-block" style="font-size: 12px">✓ &lt;li&gt;&lt;span&gt;&lt;strong&gt;Title.&lt;/strong&gt; Detail text.&lt;/span&gt;&lt;/li&gt;
+✗ &lt;li&gt;&lt;strong&gt;Title.&lt;/strong&gt; Detail text.&lt;/li&gt;</pre>
+      </article>
+
+      <article class="card stack" data-variant="outlined" data-gap="sm">
+        <h3>Checklist inline layout collision</h3>
+        <p><code>.checklist li</code> gets <code>display: block !important</code> from <code>birch-system.css</code>. But if the LLM adds <code>.checklist li { display: flex }</code> in page-local CSS, items with multiple direct children will wrap incorrectly. The checker detects this: it runs <code>ChecklistParser</code> and if bad items exist AND <code>.checklist li { display: flex }</code> is in the CSS, it emits a <code>checklist_inline_layout</code> fail.</p>
+      </article>
+
+      <article class="card stack" data-variant="outlined" data-gap="sm">
+        <h3>Diff row child order</h3>
+        <p><code>.diff-row</code> is a three-column grid: <code>grid-template-columns: 48px 18px minmax(max-content, 1fr)</code>. Loose text between <code>&lt;span&gt;</code> elements gets auto-placed into the narrow <code>.ln</code> column, producing a 1-character-per-line underfilled block. The checker validates the exact child sequence: tag/class of children[0] must include <code>ln</code>, children[1] must include <code>mark</code>, children[2] must be <code>code</code>. Exactly three children required.</p>
+      </article>
+
+      <article class="card stack" data-variant="outlined" data-gap="sm">
+        <h3>Diff polarity metadata required</h3>
+        <p>A <code>+</code> or <code>-</code> in <code>.mark</code> alone is not enough to get green/red row styling. The checker requires <code>.add</code> or <code>.del</code> class OR <code>data-kind="add"</code>/<code>data-kind="del"</code> attribute on the <code>.diff-row</code>. <code>DiffPolarityParser</code> checks this. Without it, added/deleted rows render as context (gray) rows.</p>
+      </article>
+
+      <article class="card stack" data-variant="outlined" data-gap="sm">
+        <h3>Flow step content wrapper</h3>
+        <p><code>.flow-step</code> is a two-column grid: <code>grid-template-columns: 42px minmax(0, 1fr)</code>. The first child must be <code>.flow-num</code>. All content must be in one wrapper element (e.g., <code>&lt;div&gt;</code>) in column 2. If <code>&lt;h3 class="flow-title"&gt;</code> and <code>&lt;p class="flow-detail"&gt;</code> are direct children of <code>.flow-step</code>, both get grid-placed: the title goes to column 1 (narrow), the detail goes to column 2, producing one-character-per-line in the title.</p>
+        <pre class="sig-block" style="font-size: 12px">✓ &lt;li class="flow-step"&gt;
+    &lt;span class="flow-num"&gt;1&lt;/span&gt;
+    &lt;div&gt;
+      &lt;h3 class="flow-title"&gt;...&lt;/h3&gt;
+      &lt;p class="flow-detail"&gt;...&lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/li&gt;</pre>
+      </article>
+
+      <article class="card stack" data-variant="outlined" data-gap="sm">
+        <h3>Split rail section chrome alignment</h3>
+        <p>CSS Grid aligns boxes, not semantic intent. If the first child of a <code>.split</code> starts with an <code>.eyebrow</code>, the side rail will align to that eyebrow instead of the content heading. The checker emits <code>section_rail_order</code> warning when the aside/reference rail appears before main content cards in the DOM. Fix: put section chrome above the <code>.split</code> so the rail aligns with the content heading, not the eyebrow.</p>
+      </article>
+
+      <article class="card stack" data-variant="outlined" data-gap="sm">
+        <h3>Geometry audit needs &lt;base&gt; tag</h3>
+        <p><code>geometry_audit()</code> injects a <code>&lt;base href="{ROOT.resolve().as_uri()}/"&gt;</code> tag before the audit JS. This is critical: without it, relative stylesheet links resolve against the temp file's path and the audit runs against unstyled HTML. The code inserts the base before the audit JS, before <code>&lt;/head&gt;</code>.</p>
+      </article>
+
+      <article class="card stack" data-variant="outlined" data-gap="sm">
+        <h3>Document height measurement</h3>
+        <p>Chrome's <code>--screenshot</code> captures the requested window height, not a stitched full page. <code>capture_height_for_viewport()</code> uses a two-pass approach: measure document height first via a temp HTML injection with <code>--dump-dom</code> and a <code>data-birch-doc-height</code> attribute, then capture at that height (capped). Without this, deep captures of short pages waste VLM budget on blank space, and tall pages get cropped.</p>
+      </article>
+
+      <article class="card stack" data-variant="outlined" data-gap="sm">
+        <h3>SVG chart fill=none trap</h3>
+        <p>LLMs often write <code>&lt;polyline points="..."&gt;</code> for charts without setting <code>fill="none"</code>. Browsers default to <code>fill: black</code>, producing a large black wedge instead of a line chart. The checker runs <code>svg_visual_findings()</code> to catch chartish polyline/path elements lacking explicit <code>fill="none"</code> and explicit stroke. The CSS is also checked for <code>.fill-none</code> classes.</p>
+      </article>
+
+      <article class="card stack" data-variant="outlined" data-gap="sm">
+        <h3>Gradient backgrounds forbidden</h3>
+        <p>Birch artifacts use flat token surfaces. The checker detects <code>linear-gradient</code>, <code>radial-gradient</code>, or <code>conic-gradient</code> in local CSS (not in <code>data-birch-system</code> embedded blocks) and emits a <code>no_birch_gradients</code> fail. This is enforced in <code>contract_findings()</code> via a regex search on the extracted local CSS.</p>
+      </article>
+
+      <article class="card stack" data-variant="outlined" data-gap="sm">
+        <h3>Metric row contract and narrow panels</h3>
+        <p>In narrow reference panels, <code>.metric-row</code> content can overflow. The geometry audit measures this: if the value <code>&lt;code&gt;</code> element's text width exceeds its bounding rect, or if the row overflows the owner container, it emits <code>metric_row_squeeze</code>. Fix: keep labels and values short, or set compact <code>--metric-label</code> / <code>--metric-value</code> on the <code>.metric-list</code>.</p>
+      </article>
+
+      <article class="card stack" data-variant="outlined" data-gap="sm">
+        <h3>Pair vs artifact mode output shape</h3>
+        <p>The JSON payload has different structure in each mode. In <code>--artifact</code> mode: <code>payload["artifacts"]</code> holds the report entries and <code>payload["summary"]["pairs"]</code> = checked artifact count. In <code>--pair</code> mode: <code>payload["pairs"]</code> holds the report entries and <code>payload["summary"]["pairs"]</code> = pair count. External summary scripts use <code>summary.pairs</code> as the item denominator. Do not confuse the two modes.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════ EXTENSION POINTS ════════════════════════════════════ -->
+  <section class="section stack" data-gap="lg">
+    <div class="section-head">
+      <span class="eyebrow">Extensibility</span>
+      <h2>Where to change behavior</h2>
+    </div>
+
+    <div class="grid" data-cols="2">
+      <article class="card stack" data-variant="outlined" data-gap="sm">
+        <h3>Add a new static check</h3>
+        <p>Subclass <code>HTMLParser</code> like the existing eight parsers, or add a direct regex/CSS check in <code>contract_findings()</code>. Append <code>Finding</code> objects to the list it returns. Set <code>warn=True</code> on <code>check()</code> for non-blocking warnings.</p>
+        <pre class="sig-block" style="font-size: 11px">def contract_findings(...):
+    # existing checks...
+    my_parser = MyNewParser()
+    my_parser.feed(html)
+    if my_parser.bad_items:
+        findings.append(Finding("fail", "my_new_check",
+            "examples: " + " | ".join(my_parser.bad_items[:4])))
+    return findings</pre>
+      </article>
+
+      <article class="card stack" data-variant="outlined" data-gap="sm">
+        <h3>Add a new geometry audit check</h3>
+        <p>Extend the inline JS audit string in <code>geometry_audit()</code>. Add a new key to the returned JSON object. Then add a corresponding branch in <code>geometry_findings()</code> to convert the JSON into <code>Finding</code> objects.</p>
+        <pre class="sig-block" style="font-size: 11px"># In geometry_audit JS string:
+var newCheck = [];
+document.querySelectorAll('.my-component').forEach(function(el) {
+  // measure, push to newCheck
+});
+// Append to audit output object
+document.body.setAttribute('data-birch-audit', JSON.stringify({
+  // existing keys...
+  newCheck: newCheck
+}));
+
+# In geometry_findings():
+new_check = audit.get("newCheck") or []
+if isinstance(new_check, list) and new_check:
+    findings.append(Finding("fail", "new_check_name",
+        "; ".join(f"{item['selector']} ..." for item in new_check[:5])))</pre>
+      </article>
+
+      <article class="card stack" data-variant="outlined" data-gap="sm">
+        <h3>Add a new viewport configuration</h3>
+        <p>Add an entry to the <code>VIEWPORTS</code> dict in <code>evals/charts/run_eval.py</code>. Use the format <code>"name:widthxheight"</code>. Special names: <code>deep</code> triggers document-height measurement for the capture height; <code>mobile</code> tests narrow layout.</p>
+        <pre class="sig-block" style="font-size: 11px">VIEWPORTS = {
+    "chart-brief": "desktop:1365x900",
+    "chart-brief-mobile": "mobile:390x900",
+    "chart-brief-deep": "deep:1365x2400",   # add new viewport here
+    "chart-brief-mobile-deep": "mobile-deep:390x3000",
+}</pre>
+      </article>
+
+      <article class="card stack" data-variant="outlined" data-gap="sm">
+        <h3>Change the Birch CSS signature requirements</h3>
+        <p>The minimum byte count and required signature strings are in <code>check_birch_renderings.py</code>:</p>
+        <pre class="sig-block" style="font-size: 11px">BIRCH_CSS_MIN_BYTES = 10_000
+BIRCH_CSS_SIGNATURES = (
+    "--color-ivory", "--font-serif",
+    ".page", ".section", ".card"
+)</pre>
+        <p>These are used in <code>page_stats()</code> to set <code>birch_css_valid</code> and in <code>contract_findings()</code> for the <code>uses_birch_system_css</code> check.</p>
+      </article>
+
+      <article class="card stack" data-variant="outlined" data-gap="sm">
+        <h3>Adjust palette tolerance for screenshot metrics</h3>
+        <p><code>palette_metrics()</code> uses a tolerance of 34 for palette-close detection and 18 for ivory detection. <code>is_palette_hex()</code> in static checks uses tolerance 3. These are tuned for the Birch palette; changing them affects <code>palette_close_fraction</code> thresholds in screenshot findings.</p>
+      </article>
+
+      <article class="card stack" data-variant="outlined" data-gap="sm">
+        <h3>Add a new Birch class to the watch list</h3>
+        <p>Update the constant sets in <code>check_birch_renderings.py</code>. <code>BIRCH_CLASSES</code> drives the <code>birch_class_delta</code> note in pair comparisons. <code>LAYOUT_CLASSES</code> and <code>SEMANTIC_CLASSES</code> drive density checks. <code>SEMANTIC_CLASS_MIN=6</code> sets the minimum semantic component count.</p>
+      </article>
+
+      <article class="card stack" data-variant="outlined" data-gap="sm">
+        <h3>Customize screenshot output paths</h3>
+        <p>Screenshot directory is set via <code>--screenshots-dir</code> (default: <code>reports/birch-screenshots</code>). Filenames are derived from the HTML file stem plus viewport name. Diff and contact sheet filenames are derived from the original and candidate stems. All paths go through <code>display_path()</code> to show relative paths in JSON output.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════ COMMANDS QUICK REF ════════════════════════════════════ -->
+  <section class="section stack" data-gap="lg">
+    <div class="section-head">
+      <span class="eyebrow">Reference</span>
+      <h2>Commands and data outputs</h2>
+    </div>
+
+    <div class="grid" data-cols="2">
+      <div class="card stack" data-variant="outlined" data-gap="sm">
+        <h3>Run checker (artifact mode)</h3>
+        <pre class="cmd-block">uv run python scripts/check_birch_renderings.py \
+  --artifact evals/output/24-birch-chart-brief.html \
+  --out reports/birch-rendering-check.json \
+  --markdown reports/birch-rendering-check.md \
+  --viewport desktop:1365x900 \
+  --delay-ms 140</pre>
+        <p class="muted">Preferred for generated eval artifacts. No reference comparison; captures evidence and flags visible breakage.</p>
+      </div>
+
+      <div class="card stack" data-variant="outlined" data-gap="sm">
+        <h3>Run checker (pair mode)</h3>
+        <pre class="cmd-block">uv run python scripts/check_birch_renderings.py \
+  --pair 05-design-system.html:05-design-system-birch.html \
+  --pair 06-component-variants.html:06-component-variants-birch.html \
+  --capture \
+  --viewport desktop:1365x900</pre>
+        <p class="muted">Use when a meaningful reference exists. Produces RGB delta, amplified diff, contact sheet.</p>
+      </div>
+
+      <div class="card stack" data-variant="outlined" data-gap="sm">
+        <h3>Run full chart eval at all viewports</h3>
+        <pre class="cmd-block">uv run python evals/charts/run_eval.py</pre>
+        <p class="muted">Builds the chart brief fixture first, then runs four viewport checks. Output: <code>reports/birch-rendering-check-{name}.json</code> and <code>.md</code> for each viewport.</p>
+      </div>
+
+      <div class="card stack" data-variant="outlined" data-gap="sm">
+        <h3>Fail on warnings too</h3>
+        <pre class="cmd-block">uv run python scripts/check_birch_renderings.py \
+  --artifact 24-birch-chart-brief.html \
+  --fail-on-warn</pre>
+        <p class="muted">Exit code 1 if any warnings are present, not just failures. Useful in strict CI pipelines.</p>
+      </div>
+
+      <div class="card stack" data-variant="outlined" data-gap="sm">
+        <h3>Generate a Birch-styled Matplotlib chart</h3>
+        <pre class="cmd-block">uv run --with matplotlib python -c "
+from scripts.birch_mpl import birch_theme, polish_axes, svg_string, close
+import matplotlib.pyplot as plt
+with birch_theme():
+    fig, ax = plt.subplots(figsize=(5.8, 3.45))
+    ax.plot([1,2,3], [0.82, 0.91, 0.96], marker='o')
+    polish_axes(ax)
+    svg = svg_string(fig)
+    close(fig)
+print(svg)
+"</pre>
+        <p class="muted">Inline the SVG output into a <code>.chart-panel</code> or <code>.card.chart-panel</code>. Use <code>role="img"</code> and <code>aria-label</code> on the <code>&lt;svg&gt;</code>.</p>
+      </div>
+
+      <div class="card stack" data-variant="outlined" data-gap="sm">
+        <h3>Check available Chrome</h3>
+        <pre class="cmd-block">which google-chrome || which chromium || echo "no chrome"</pre>
+        <p class="muted">The checker looks for <code>google-chrome</code>, <code>google-chrome-stable</code>, <code>chromium</code>, or <code>chromium-browser</code>. If none is found, screenshot capture and geometry audit are skipped with a note.</p>
+      </div>
+    </div>
+
+    <div class="card stack" data-variant="outlined" data-gap="md">
+      <h3>Report data model — key fields</h3>
+      <div class="numeric-table-wrap">
+        <table class="numeric-table">
+          <thead>
+            <tr>
+              <th class="label-cell">Field</th>
+              <th class="metric">Type</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="entity">findings</td>
+              <td class="metric">array</td>
+              <td class="note"><code>{level, name, evidence}</code>. Level is <code>pass|fail|warn|note</code>.</td>
+            </tr>
+            <tr>
+              <td class="entity">stats.birch_css_valid</td>
+              <td class="metric">bool</td>
+              <td class="note">≥10,000 bytes and all signatures present.</td>
+            </tr>
+            <tr>
+              <td class="entity">stats.class_counts</td>
+              <td class="metric">object</td>
+              <td class="note">Counts per Birch class. Drives layout/semantic density checks.</td>
+            </tr>
+            <tr>
+              <td class="entity">screenshot.mean_abs_rgb_delta</td>
+              <td class="metric">float</td>
+              <td class="note">Pair mode only. Average per-channel pixel difference.</td>
+            </tr>
+            <tr>
+              <td class="entity">screenshot.palette_close_fraction</td>
+              <td class="metric">float</td>
+              <td class="note">Fraction of pixels within tolerance of any Birch palette color.</td>
+            </tr>
+            <tr>
+              <td class="entity">geometry.overflow</td>
+              <td class="metric">array</td>
+              <td class="note">Elements with scrollWidth &gt; clientWidth or off-right/off-left &gt; 2px.</td>
+            </tr>
+            <tr>
+              <td class="entity">geometry.metricRowSqueeze</td>
+              <td class="metric">array</td>
+              <td class="note">Metric rows where the value text exceeds its bounding box.</td>
+            </tr>
+            <tr>
+              <td class="entity">geometry.codeWrapProblems</td>
+              <td class="metric">array</td>
+              <td class="note">Code blocks where visual lines ≥ 3× logical lines and &lt;18 chars/line.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════ KEY FINDINGS INDEX ════════════════════════════════════ -->
+  <section class="section stack" data-gap="lg">
+    <div class="section-head">
+      <span class="eyebrow">Reference</span>
+      <h2>All findings by check name</h2>
+    </div>
+
+    <div class="card stack" data-variant="flat" data-gap="md">
+      <div class="numeric-table-wrap">
+        <table class="numeric-table">
+          <thead>
+            <tr>
+              <th class="label-cell">Check name</th>
+              <th class="metric">Level</th>
+              <th>What it catches</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="entity">doctype</td><td class="metric">fail</td><td class="note">Missing <code>&lt;!doctype html&gt;</code>.</td></tr>
+            <tr><td class="entity">viewport</td><td class="metric">fail</td><td class="note">Missing viewport meta tag.</td></tr>
+            <tr><td class="entity">uses_birch_system_css</td><td class="metric">fail</td><td class="note">Birch system CSS not embedded or linked, or too small / missing signatures.</td></tr>
+            <tr><td class="entity">has_page_shell</td><td class="metric">fail</td><td class="note">No <code>.page</code> element found.</td></tr>
+            <tr><td class="entity">uses_layout_primitives</td><td class="metric">warn</td><td class="note">Fewer than 8 layout primitive uses; layout may be brittle.</td></tr>
+            <tr><td class="entity">uses_semantic_components</td><td class="metric">warn</td><td class="note">Fewer than 6 semantic component uses; likely still page-specific CSS.</td></tr>
+            <tr><td class="entity">no_unknown_css_vars</td><td class="metric">fail</td><td class="note">CSS variables used but not defined in Birch system or local CSS.</td></tr>
+            <tr><td class="entity">no_patch_markers</td><td class="metric">fail</td><td class="note">Lines beginning with <code>+</code> found; likely a diff patch artifact.</td></tr>
+            <tr><td class="entity">no_birch_gradients</td><td class="metric">fail</td><td class="note">Local CSS contains gradient backgrounds; not allowed in Birch artifacts.</td></tr>
+            <tr><td class="entity">grid_list_item_children</td><td class="metric">fail</td><td class="note"><code>.insight-list</code>/<code>.takeaway-list</code> items with &gt;1 direct child become extra grid columns.</td></tr>
+            <tr><td class="entity">checklist_inline_layout</td><td class="metric">fail</td><td class="note"><code>.checklist</code> items with multiple children when CSS sets <code>display: flex</code>.</td></tr>
+            <tr><td class="entity">metric_row_contract</td><td class="metric">fail</td><td class="note"><code>.metric-row</code> must be caption + <code>.meter</code> + <code>code</code>.</td></tr>
+            <tr><td class="entity">diff_row_contract</td><td class="metric">fail</td><td class="note"><code>.diff-row</code> must be <code>.ln</code> + <code>.mark</code> + <code>.code</code>.</td></tr>
+            <tr><td class="entity">diff_row_polarity</td><td class="metric">fail</td><td class="note"><code>+/-</code> diff rows missing <code>.add</code>/<code>.del</code> class or <code>data-kind</code> attribute.</td></tr>
+            <tr><td class="entity">flow_step_contract</td><td class="metric">fail</td><td class="note"><code>.flow-step</code> must contain <code>.flow-num</code> plus one content wrapper.</td></tr>
+            <tr><td class="entity">timeline_item_contract</td><td class="metric">fail</td><td class="note"><code>.timeline-item</code> must use <code>.timeline-time</code> + <code>.timeline-body</code> or custom scoped class.</td></tr>
+            <tr><td class="entity">svg_chart_mark_presentation</td><td class="metric">fail</td><td class="note">Chart SVG polyline/path lacks <code>fill="none"</code> or explicit stroke; renders as black wedge.</td></tr>
+            <tr><td class="entity">missing_data_visualization</td><td class="metric">fail</td><td class="note">Numeric-rich report has KPI/table data but no chart SVG.</td></tr>
+            <tr><td class="entity">local_css_size</td><td class="metric">warn</td><td class="note">&gt;2,500 bytes of local CSS; consider moving patterns into <code>birch-system.css</code>.</td></tr>
+            <tr><td class="entity">layout_overflow</td><td class="metric">fail</td><td class="note">Element text/content overflows its box by &gt;2px or page overflows viewport horizontally.</td></tr>
+            <tr><td class="entity">container_text_overflow</td><td class="metric">fail</td><td class="note">Text overflows its card/panel container.</td></tr>
+            <tr><td class="entity">stat_card_squeeze</td><td class="metric">fail</td><td class="note">KPI/stat card width &lt;150px or value overflows card right edge.</td></tr>
+            <tr><td class="entity">timeline_geometry</td><td class="metric">fail</td><td class="note">Timeline content overflows or timeline marker delta &gt;2.5px from expected position.</td></tr>
+            <tr><td class="entity">metric_alignment</td><td class="metric">warn</td><td class="note">Metric meters in a <code>.metric-list</code> have x-position spread &gt;2px; alignment is off.</td></tr>
+            <tr><td class="entity">metric_row_squeeze</td><td class="metric">warn</td><td class="note">Metric row value text width exceeds its bounding box; value is clipped.</td></tr>
+            <tr><td class="entity">split_rail_heading_alignment</td><td class="metric">warn</td><td class="note">Split rail headings are &gt;3px vertically apart; they should align with content headings.</td></tr>
+            <tr><td class="entity">numeric_header_alignment</td><td class="metric">warn</td><td class="note">Numeric table has right-aligned body cells with non-right-aligned headers.</td></tr>
+            <tr><td class="entity">code_wrap_underfill</td><td class="metric">fail</td><td class="note">Wrapped code/diff block has visual lines ≥3× logical lines and &lt;18 chars/line.</td></tr>
+            <tr><td class="entity">pathological_text_wrapping</td><td class="metric">fail</td><td class="note">Prose block has &lt;14 chars/visual line and median line width &lt;32% of container width.</td></tr>
+            <tr><td class="entity">palette_drift</td><td class="metric">warn</td><td class="note">Palette-close fraction below threshold (0.55 pair / 0.40 artifact); visual style is drifting.</td></tr>
+            <tr><td class="entity">blackish_fraction</td><td class="metric">warn</td><td class="note">&gt;5% (pair) or &gt;8% (artifact) blackish pixels; may indicate unstyled SVG/code blocks.</td></tr>
+            <tr><td class="entity">blank_render</td><td class="metric">fail</td><td class="note">Screenshot file &lt;2,048 bytes or non-background fraction &lt;2.5%; page likely renders blank.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════ SOURCE GROUNDING ════════════════════════════════════ -->
+  <section class="section stack" data-gap="md">
+    <div class="card stack" data-variant="flat" data-gap="sm">
+      <p class="muted" style="font-size: var(--text-sm)">Source files inspected: <code>scripts/check_birch_renderings.py</code>, <code>scripts/birch_mpl.py</code>, <code>evals/charts/run_eval.py</code>, <code>evals/charts/build_chart_brief.py</code>, <code>docs/birch-llm-style-guide.md</code>, <code>styles/birch-system.css</code>. All claims, class names, function names, constants, thresholds, and code examples in this artifact are grounded in those files.</p>
+    </div>
+  </section>
+</main>
+</body>
+</html>

@@ -1,0 +1,162 @@
+{
+  "artifacts": [
+    {
+      "artifact": "benchmark-comparison-deep.png",
+      "findings": [
+        {
+          "level": "warn",
+          "name": "vision_overlap",
+          "evidence": "In the quality-vs-cost chart, the x-axis title overlaps the tick labels around 15\u201320%, making the axis labeling harder to read.",
+          "confidence": 0.76,
+          "bbox_px": {
+            "x": 417,
+            "y": 937,
+            "width": 155,
+            "height": 25
+          }
+        }
+      ]
+    },
+    {
+      "artifact": "benchmark-comparison-mobile-deep.png",
+      "findings": [
+        {
+          "level": "warn",
+          "name": "vision_overlap",
+          "evidence": "In the mobile chart, the x-axis title overlaps the tick labels and baseline labels near the bottom of the plot.",
+          "confidence": 0.78,
+          "bbox_px": {
+            "x": 151,
+            "y": 1362,
+            "width": 84,
+            "height": 21
+          }
+        }
+      ]
+    },
+    {
+      "artifact": "benchmark-comparison-desktop.png",
+      "findings": [
+        {
+          "level": "warn",
+          "name": "vision_overlap",
+          "evidence": "In the visible quality-vs-cost chart, the x-axis title overlaps the tick labels near the bottom of the plot.",
+          "confidence": 0.72,
+          "bbox_px": {
+            "x": 420,
+            "y": 887,
+            "width": 150,
+            "height": 13
+          }
+        }
+      ]
+    },
+    {
+      "artifact": "benchmark-comparison-mobile.png",
+      "findings": []
+    },
+    {
+      "artifact": "code-review-deep.png",
+      "findings": []
+    },
+    {
+      "artifact": "code-review-mobile-deep.png",
+      "findings": [
+        {
+          "level": "warn",
+          "name": "vision_clipped_content",
+          "evidence": "Mobile render has page-level horizontal overflow: a horizontal scrollbar is visible, the top 'Files: ...' badge is cut off at the right edge, and multiple code blocks extend beyond the viewport. Main prose remains readable, so this is a warning rather than a fail.",
+          "confidence": 0.86,
+          "bbox_px": {
+            "x": 0,
+            "y": 0,
+            "width": 393,
+            "height": 5008
+          }
+        }
+      ]
+    },
+    {
+      "artifact": "code-review-desktop.png",
+      "findings": []
+    },
+    {
+      "artifact": "code-review-mobile.png",
+      "findings": [
+        {
+          "level": "warn",
+          "name": "vision_clipped_content",
+          "evidence": "Mobile viewport shows page-level horizontal overflow with a horizontal scrollbar; the 'Files: scripts/check_candle_renderings.py + 2 new fi...' badge is clipped offscreen and the first code block extends beyond the visible area. Main content is still mostly readable.",
+          "confidence": 0.86,
+          "bbox_px": {
+            "x": 0,
+            "y": 0,
+            "width": 393,
+            "height": 900
+          }
+        }
+      ]
+    },
+    {
+      "artifact": "implementation-plan-deep.png",
+      "findings": []
+    },
+    {
+      "artifact": "implementation-plan-mobile-deep.png",
+      "findings": []
+    },
+    {
+      "artifact": "implementation-plan-desktop.png",
+      "findings": []
+    },
+    {
+      "artifact": "implementation-plan-mobile.png",
+      "findings": []
+    },
+    {
+      "artifact": "module-explainer-deep.png",
+      "findings": []
+    },
+    {
+      "artifact": "module-explainer-mobile-deep.png",
+      "findings": []
+    },
+    {
+      "artifact": "module-explainer-desktop.png",
+      "findings": []
+    },
+    {
+      "artifact": "module-explainer-mobile.png",
+      "findings": []
+    },
+    {
+      "artifact": "numeric-data-deep.png",
+      "findings": []
+    },
+    {
+      "artifact": "numeric-data-mobile-deep.png",
+      "findings": [
+        {
+          "level": "fail",
+          "name": "vision_chart_malformed",
+          "evidence": "In the 'Artifact Progress (Latest Week)' panel, the mobile rendering shows each progress row as a mostly blank card with only the label and percentage; the green horizontal progress bars visible in the desktop rendering are missing, making the chart visually incomplete/misleading.",
+          "confidence": 0.91,
+          "bbox_px": {
+            "x": 16,
+            "y": 1034,
+            "width": 343,
+            "height": 646
+          }
+        }
+      ]
+    },
+    {
+      "artifact": "numeric-data-desktop.png",
+      "findings": []
+    },
+    {
+      "artifact": "numeric-data-mobile.png",
+      "findings": []
+    }
+  ]
+}
