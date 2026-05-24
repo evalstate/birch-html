@@ -233,7 +233,6 @@ def run_fast_agent(
 ) -> subprocess.CompletedProcess[str]:
     cmd = [
         "fast-agent",
-        "--no-update-check",
         "--env",
         str(ROOT / ".fast-agent"),
         "go",
