@@ -31,8 +31,8 @@ EVAL_NAMES = [
 VIEWPORTS = [
     ("desktop", "desktop:1365x900"),
     ("mobile", "mobile:390x900"),
-    ("deep", "deep:1365x2400"),
-    ("mobile-deep", "mobile-deep:390x2400"),
+    ("deep", "deep:1365x6000"),
+    ("mobile-deep", "mobile-deep:390x6000"),
 ]
 
 

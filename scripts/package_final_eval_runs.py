@@ -6,12 +6,12 @@ results/clean-final/manifest.json and results/clean-final/models/<slug>/{artifac
 """
 from __future__ import annotations
 import argparse
+import datetime as dt
 import json, re, shutil
 from collections import Counter
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-OUT = ROOT / 'results' / 'clean-final'
 VIEWPORTS = ['desktop','mobile','deep','mobile-deep']
 
 MODEL_NAMES = {
@@ -28,6 +28,27 @@ MODEL_NAMES = {
     'gpt-5-3-codex': 'gpt-5.3-codex',
     'glm51': 'glm51',
     'sonnet46': 'sonnet46',
+}
+
+PUBLISH_RUN_SLUG_ALIASES = {
+    # Treat the last Kimi retry as the canonical Kimi record for publication.
+    'kimi-finaltry': 'kimi',
+    # Promote better final retries as the canonical model records.
+    'opus47-finaltry': 'opus47',
+    'deepseek-finaltry': 'deepseek',
+}
+
+PUBLISH_RUN_EXCLUDE_SLUGS = {
+    # Superseded by kimi-finaltry.
+    'kimi',
+    'kimi-k26-together',
+    # Superseded by promoted final retries.
+    'opus47',
+    'deepseek',
+    # Retried but not better than the base record.
+    'codexspark-finaltry',
+    # Tie with the base record; keep the original publish-run record.
+    'codexresponses-gpt-5-5-finaltry',
 }
 
 def read_json(p):
@@ -47,7 +68,10 @@ def det_summary(reports_dir, label):
     out = {}
     total_f = total_w = 0
     for vp in VIEWPORTS:
-        d = read_json(reports_dir / f'{label}-{vp}.json')
+        p = reports_dir / f'{label}-{vp}.json'
+        if not p.exists():
+            p = reports_dir / f'{label}-visionfill-{vp}.json'
+        d = read_json(p)
         s = d.get('summary') or {}
         out[vp] = {
             'artifacts': s.get('artifacts', 0),
@@ -77,27 +101,37 @@ def main():
         help="Run label suffix to package, e.g. final-run or publish-run.",
     )
     ap.add_argument(
+        "--suite",
+        default="clean-final",
+        help="Output suite under results/, e.g. clean-final or publish-20260524.",
+    )
+    ap.add_argument(
         "--description",
         help="Manifest description. Defaults to a description derived from --label-suffix.",
     )
     args = ap.parse_args()
     suffix = args.label_suffix.strip("-")
+    suite = args.suite.strip("/")
+    out = ROOT / 'results' / suite
 
-    if OUT.exists(): shutil.rmtree(OUT)
-    (OUT / 'models').mkdir(parents=True)
+    if out.exists(): shutil.rmtree(out)
+    (out / 'models').mkdir(parents=True)
     records = []
     run_jsons = sorted((ROOT / 'eval-runs' / 'reports').glob(f'skill-with-shell-*-{suffix}/*-run.json'))
     for run_json in run_jsons:
         label = run_json.parent.name
         m = re.match(rf'skill-with-shell-(.+)-{re.escape(suffix)}$', label)
         if not m: continue
-        slug = m.group(1)
+        raw_slug = m.group(1)
+        if suffix == 'publish-run' and raw_slug in PUBLISH_RUN_EXCLUDE_SLUGS:
+            continue
+        slug = PUBLISH_RUN_SLUG_ALIASES.get(raw_slug, raw_slug) if suffix == 'publish-run' else raw_slug
         model = MODEL_NAMES.get(slug, slug)
         src_artifacts = ROOT / 'eval-runs' / label
         src_reports = ROOT / 'eval-runs' / 'reports' / label
         src_prompts = ROOT / 'eval-runs' / 'prompts' / label
         src_logs = ROOT / 'eval-runs' / 'logs'
-        dst = OUT / 'models' / slug
+        dst = out / 'models' / slug
         copytree(src_artifacts, dst / 'artifacts')
         copytree(src_reports, dst / 'reports')
         copytree(src_prompts, dst / 'prompts')
@@ -125,20 +159,20 @@ def main():
             'vision_findings_present': (src_reports / 'vision-findings.json').exists(),
             'vision_counts': vc,
             'publication_paths': {
-                'artifacts': f'results/clean-final/models/{slug}/artifacts',
-                'reports': f'results/clean-final/models/{slug}/reports',
-                'prompts': f'results/clean-final/models/{slug}/prompts',
-                'logs': f'results/clean-final/models/{slug}/logs',
+                'artifacts': f'results/{suite}/models/{slug}/artifacts',
+                'reports': f'results/{suite}/models/{slug}/reports',
+                'prompts': f'results/{suite}/models/{slug}/prompts',
+                'logs': f'results/{suite}/models/{slug}/logs',
             }
         })
     manifest = {
-        'created_at': '2026-05-23',
+        'created_at': dt.date.today().isoformat(),
         'description': args.description or f'Clean final run packaged from eval-runs/*-{suffix} records. Includes generation and VLM fast-agent traces where available.',
         'label_suffix': suffix,
         'records': records,
     }
-    (OUT / 'manifest.json').write_text(json.dumps(manifest, indent=2) + '\n')
-    (OUT / 'README.md').write_text(f'# Clean final results\n\nPackaged {len(records)} model records from `eval-runs/*-{suffix}`.\n')
-    print(f'packaged {len(records)} records into {OUT.relative_to(ROOT)}')
+    (out / 'manifest.json').write_text(json.dumps(manifest, indent=2) + '\n')
+    (out / 'README.md').write_text(f'# {suite} results\n\nPackaged {len(records)} model records from `eval-runs/*-{suffix}`.\n')
+    print(f'packaged {len(records)} records into {out.relative_to(ROOT)}')
 
 if __name__ == '__main__': main()

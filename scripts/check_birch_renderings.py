@@ -33,6 +33,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 SYSTEM_CSS = ROOT / "styles" / "birch-system.css"
 BIRCH_STYLE_RE = re.compile(r"<style\b(?=[^>]*\bdata-birch-system\b)[^>]*>.*?</style>", re.I | re.S)
+BIRCH_STYLE_BODY_RE = re.compile(r"<style\b(?=[^>]*\bdata-birch-system\b)[^>]*>(.*?)</style>", re.I | re.S)
+BIRCH_CSS_MIN_BYTES = 10_000
+BIRCH_CSS_SIGNATURES = ("--color-ivory", "--font-serif", ".page", ".section", ".card")
 
 DEFAULT_PAIRS = (
     ("05-design-system.html", "05-design-system-birch.html"),
@@ -95,7 +98,22 @@ SEMANTIC_CLASSES = {
     "timeline-item",
     "flow-node",
     "flow-edge",
+    "stat-card",
+    "metric-row",
+    "metric-list",
+    "meter",
+    "numeric-table",
+    "numeric-table-wrap",
+    "chart-panel",
+    "chart-svg",
+    "callout",
+    "checklist",
+    "flow-step",
+    "flow-list",
+    "section-head",
+    "reference-panel",
 }
+SEMANTIC_CLASS_MIN = 6
 
 PALETTE = {
     "ivory": (250, 249, 245),
@@ -140,6 +158,8 @@ class PageStats:
     css_vars_used: list[str]
     css_vars_defined: list[str]
     hex_colors: list[str]
+    birch_css_bytes: int
+    birch_css_valid: bool
 
 
 class StatsParser(HTMLParser):
@@ -685,13 +705,14 @@ def compare_pair(
     screenshot = None
     if browser:
         viewport_name, width, height = viewport
+        capture_height = capture_height_for_viewport(browser, candidate, viewport_name, width, height)
         original_png = screenshots_dir / f"{original.stem}-{viewport_name}.png"
         candidate_png = screenshots_dir / f"{candidate.stem}-{viewport_name}.png"
-        capture(browser, original, original_png, width=width, height=height, delay_ms=delay_ms)
-        capture(browser, candidate, candidate_png, width=width, height=height, delay_ms=delay_ms)
+        capture(browser, original, original_png, width=width, height=capture_height, delay_ms=delay_ms)
+        capture(browser, candidate, candidate_png, width=width, height=capture_height, delay_ms=delay_ms)
         screenshot = screenshot_metrics(original_png, candidate_png)
         findings.extend(screenshot_findings(screenshot))
-        geometry = geometry_audit(browser, candidate, width=width, height=height)
+        geometry = geometry_audit(browser, candidate, width=width, height=capture_height)
         findings.extend(geometry_findings(geometry))
     else:
         geometry = None
@@ -728,11 +749,12 @@ def check_artifact(
     screenshot = None
     if browser:
         viewport_name, width, height = viewport
+        capture_height = capture_height_for_viewport(browser, artifact, viewport_name, width, height)
         artifact_png = screenshots_dir / f"{artifact.stem}-{viewport_name}.png"
-        capture(browser, artifact, artifact_png, width=width, height=height, delay_ms=delay_ms)
+        capture(browser, artifact, artifact_png, width=width, height=capture_height, delay_ms=delay_ms)
         screenshot = artifact_screenshot_metrics(artifact_png)
         findings.extend(artifact_screenshot_findings(screenshot))
-        geometry = geometry_audit(browser, artifact, width=width, height=height)
+        geometry = geometry_audit(browser, artifact, width=width, height=capture_height)
         findings.extend(geometry_findings(geometry))
     else:
         geometry = None
@@ -749,7 +771,14 @@ def check_artifact(
 
 def page_stats(path: Path) -> PageStats:
     html = path.read_text(encoding="utf-8")
-    birch_css_embedded = bool(BIRCH_STYLE_RE.search(html))
+    birch_blocks = BIRCH_STYLE_BODY_RE.findall(html)
+    birch_css_bytes = sum(len(block.encode("utf-8")) for block in birch_blocks)
+    birch_css_embedded = bool(birch_blocks)
+    birch_css_text = "\n".join(birch_blocks)
+    birch_css_valid = (
+        birch_css_bytes >= BIRCH_CSS_MIN_BYTES
+        and all(signature in birch_css_text for signature in BIRCH_CSS_SIGNATURES)
+    )
     html_without_birch_css = BIRCH_STYLE_RE.sub("", html)
     parser = StatsParser()
     parser.feed(html)
@@ -777,6 +806,8 @@ def page_stats(path: Path) -> PageStats:
         css_vars_used=sorted(css_used_vars(html_without_birch_css)),
         css_vars_defined=sorted(css_defined_vars(css_with_inline)),
         hex_colors=sorted(set(re.findall(r"#[0-9a-fA-F]{3,8}\b", css))),
+        birch_css_bytes=birch_css_bytes,
+        birch_css_valid=birch_css_valid,
     )
 
 
@@ -802,9 +833,9 @@ def contract_findings(candidate: Path, stats: PageStats, system_defined_vars: se
         check("viewport", stats.viewport, "viewport meta present", "missing viewport meta"),
         check(
             "uses_birch_system_css",
-            stats.birch_css_embedded or "styles/birch-system.css" in stats.stylesheet_links,
+            stats.birch_css_valid or "styles/birch-system.css" in stats.stylesheet_links,
             "embeds or links Birch system CSS",
-            f"stylesheet links: {stats.stylesheet_links}; embedded={stats.birch_css_embedded}",
+            f"stylesheet links: {stats.stylesheet_links}; embedded={stats.birch_css_embedded}; embedded_bytes={stats.birch_css_bytes}",
         ),
         check(
             "has_page_shell",
@@ -821,7 +852,7 @@ def contract_findings(candidate: Path, stats: PageStats, system_defined_vars: se
         ),
         check(
             "uses_semantic_components",
-            sum(stats.class_counts.get(cls, 0) for cls in SEMANTIC_CLASSES) >= 8,
+            sum(stats.class_counts.get(cls, 0) for cls in SEMANTIC_CLASSES) >= SEMANTIC_CLASS_MIN,
             "semantic component count is healthy",
             "too few semantic components; likely still page-specific CSS",
             warn=True,
@@ -1107,6 +1138,79 @@ def find_chrome() -> str | None:
         if path:
             return path
     return None
+
+
+def capture_height_for_viewport(browser: str, html: Path, viewport_name: str, width: int, height: int) -> int:
+    """Use dynamic page height for deep captures, capped by the viewport spec.
+
+    Chrome's ``--screenshot`` captures the requested window height, not a
+    stitched full page. Measuring document height first avoids both missing
+    below-the-fold content on normal pages and wasting VLM budget on blank
+    4800px screenshots for short pages.
+    """
+    if "deep" not in viewport_name:
+        return height
+    measured = measure_document_height(browser, html, width=width, height=min(900, height))
+    if not measured:
+        return height
+    return max(min(900, height), min(height, measured + 80))
+
+
+def measure_document_height(browser: str, html: Path, *, width: int, height: int) -> int | None:
+    script = """
+<script>
+window.addEventListener('load', function () {
+  var h = Math.max(
+    document.documentElement.scrollHeight || 0,
+    document.body ? document.body.scrollHeight || 0 : 0,
+    document.documentElement.offsetHeight || 0,
+    document.body ? document.body.offsetHeight || 0 : 0,
+    document.documentElement.clientHeight || 0
+  );
+  document.documentElement.setAttribute('data-birch-doc-height', String(Math.ceil(h)));
+});
+</script>
+"""
+    text = html.read_text(encoding="utf-8")
+    if re.search(r"</body\s*>", text, flags=re.I):
+        measured_html = re.sub(r"</body\s*>", script + "\n</body>", text, count=1, flags=re.I)
+    else:
+        measured_html = text + script
+    tmp_path: Path | None = None
+    try:
+        with tempfile.NamedTemporaryFile(
+            "w",
+            encoding="utf-8",
+            suffix=".html",
+            prefix=f".{html.stem}-measure-",
+            dir=html.parent,
+            delete=False,
+        ) as tmp:
+            tmp.write(measured_html)
+            tmp_path = Path(tmp.name)
+        proc = subprocess.run(
+            [
+                browser,
+                "--headless=new",
+                "--disable-gpu",
+                "--no-sandbox",
+                f"--window-size={width},{height}",
+                "--dump-dom",
+                "--virtual-time-budget=300",
+                tmp_path.resolve().as_uri(),
+            ],
+            text=True,
+            capture_output=True,
+            timeout=45,
+            check=False,
+        )
+        match = re.search(r'data-birch-doc-height=["\'](\d+)["\']', proc.stdout)
+        return int(match.group(1)) if match else None
+    except Exception:
+        return None
+    finally:
+        if tmp_path:
+            tmp_path.unlink(missing_ok=True)
 
 
 def capture(browser: str, html: Path, out: Path, *, width: int, height: int, delay_ms: int) -> None:

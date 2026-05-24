@@ -32,11 +32,11 @@ index 0000000..35b01ed
 +ROOT = Path(__file__).resolve().parents[2]
 +sys.path.insert(0, str(ROOT / "scripts"))
 +
-+from birch_mpl import birch_theme, close, polish_axes, svg_string  # noqa: E402
++from candle_mpl import candle_theme, close, polish_axes, svg_string  # noqa: E402
 +
 +
 +DATA = ROOT / "evals" / "charts" / "sample-data.csv"
-+OUT = ROOT / "24-birch-chart-brief.html"
++OUT = ROOT / "24-candle-chart-brief.html"
 +
 +
 +def pct(value: float) -> str:
@@ -69,7 +69,7 @@ index 0000000..35b01ed
 +    for row in rows:
 +        by_artifact[str(row["artifact"])][str(row["week"])] = row
 +
-+    with birch_theme():
++    with candle_theme():
 +        fig, ax = plt.subplots(figsize=(5.8, 3.45))
 +        for artifact in sorted(by_artifact):
 +            values = [by_artifact[artifact][week]["static_pass_rate"] for week in weeks]
@@ -160,18 +160,18 @@ index 0000000..35b01ed
 +<head>
 +<meta charset="utf-8">
 +<meta name="viewport" content="width=device-width, initial-scale=1">
-+<title>Birch chart brief — rendering checker adoption signal</title>
-+<link rel="stylesheet" href="styles/birch-system.css">
++<title>Candle chart brief — rendering checker adoption signal</title>
++<link rel="stylesheet" href="styles/candle-system.css">
 +</head>
 +<body>
 +<main class="page stack" data-gap="lg">
 +  <header class="stack" data-gap="sm">
 +    <div class="eyebrow">Numeric data brief</div>
 +    <h1>Rendering checker stability is trending toward adoption.</h1>
-+    <p class="lede">Sample evaluation data shows higher static pass rates, lower visible overflow, and improving vision scores across the three tracked Birch artifacts.</p>
++    <p class="lede">Sample evaluation data shows higher static pass rates, lower visible overflow, and improving vision scores across the three tracked Candle artifacts.</p>
 +    <div class="cluster">
 +      <span class="chip" data-tone="olive">Matplotlib SVG</span>
-+      <span class="chip">Birch numeric table</span>
++      <span class="chip">Candle numeric table</span>
 +      <span class="chip">Evidence first</span>
 +    </div>
 +  </header>
@@ -220,7 +220,7 @@ index 0000000..35b01ed
 +
 +        <div class="panel chart-panel stack" data-gap="sm">
 +          {svg}
-+          <p class="chart-caption">Generated with <code>scripts/birch_mpl.py</code> and inlined as SVG. The plotted values are exact weekly static pass rates from <code>evals/charts/sample-data.csv</code>.</p>
++          <p class="chart-caption">Generated with <code>scripts/candle_mpl.py</code> and inlined as SVG. The plotted values are exact weekly static pass rates from <code>evals/charts/sample-data.csv</code>.</p>
 +        </div>
 +      </div>
 +
@@ -264,7 +264,7 @@ index 0000000..35b01ed
 +  <section class="section stack" data-gap="md">
 +    <div class="card stack" data-variant="flat">
 +      <h2>Source and caveat</h2>
-+      <p>Data is a synthetic chart-eval fixture for validating Birch chart generation. It is useful for exercising layout, Matplotlib SVG rendering, numeric tables, ranking bars, and visual validation, but it is not a production quality metric source.</p>
++      <p>Data is a synthetic chart-eval fixture for validating Candle chart generation. It is useful for exercising layout, Matplotlib SVG rendering, numeric tables, ranking bars, and visual validation, but it is not a production quality metric source.</p>
 +    </div>
 +  </section>
 +</main>
@@ -284,11 +284,11 @@ index 0000000..f32f694
 +++ b/evals/charts/run_eval.py
 @@ -0,0 +1,55 @@
 +#!/usr/bin/env python3
-+"""Regenerate and validate the Birch chart fixture.
++"""Regenerate and validate the Candle chart fixture.
 +
 +This is intentionally a tiny reusable eval runner around the fixture data in
 +`evals/charts/sample-data.csv`. It exercises the Matplotlib SVG path and the
-+Birch rendering checker at desktop and mobile viewports.
++Candle rendering checker at desktop and mobile viewports.
 +"""
 +
 +from __future__ import annotations
@@ -323,13 +323,13 @@ index 0000000..f32f694
 +                "--with",
 +                "pillow",
 +                "python",
-+                "scripts/check_birch_renderings.py",
++                "scripts/check_candle_renderings.py",
 +                "--pair",
-+                "24-birch-chart-brief.html:24-birch-chart-brief.html",
++                "24-candle-chart-brief.html:24-candle-chart-brief.html",
 +                "--out",
-+                f"reports/birch-rendering-check-{name}.json",
++                f"reports/candle-rendering-check-{name}.json",
 +                "--markdown",
-+                f"reports/birch-rendering-check-{name}.md",
++                f"reports/candle-rendering-check-{name}.md",
 +                "--viewport",
 +                viewport,
 +            ]
@@ -338,10 +338,10 @@ index 0000000..f32f694
 +
 +if __name__ == "__main__":
 +    main()
-diff --git a/scripts/check_birch_renderings.py b/scripts/check_birch_renderings.py
+diff --git a/scripts/check_candle_renderings.py b/scripts/check_candle_renderings.py
 index 14760ed..54410ac 100644
---- a/scripts/check_birch_renderings.py
-+++ b/scripts/check_birch_renderings.py
+--- a/scripts/check_candle_renderings.py
++++ b/scripts/check_candle_renderings.py
 @@ -111,160 +111,306 @@ PALETTE = {
  }
  
@@ -467,7 +467,7 @@ index 14760ed..54410ac 100644
 +
 +
 +class MetricRowParser(HTMLParser):
-+    """Validate the Birch metric-row child contract."""
++    """Validate the Candle metric-row child contract."""
 +
 +    def __init__(self) -> None:
 +        super().__init__(convert_charrefs=True)
@@ -574,11 +574,11 @@ index 14760ed..54410ac 100644
      parser.add_argument(
          "--pair",
          action="append",
-         help="original:candidate pair. Can be repeated. Defaults to 05/06 Birch rewrites.",
+         help="original:candidate pair. Can be repeated. Defaults to 05/06 Candle rewrites.",
      )
-     parser.add_argument("--out", type=Path, default=ROOT / "reports" / "birch-rendering-check.json")
-     parser.add_argument("--markdown", type=Path, default=ROOT / "reports" / "birch-rendering-check.md")
-     parser.add_argument("--screenshots-dir", type=Path, default=ROOT / "reports" / "birch-screenshots")
+     parser.add_argument("--out", type=Path, default=ROOT / "reports" / "candle-rendering-check.json")
+     parser.add_argument("--markdown", type=Path, default=ROOT / "reports" / "candle-rendering-check.md")
+     parser.add_argument("--screenshots-dir", type=Path, default=ROOT / "reports" / "candle-screenshots")
      parser.add_argument("--capture", action=argparse.BooleanOptionalAction, default=True)
      parser.add_argument("--viewport", default="desktop:1365x900")
      parser.add_argument("--delay-ms", type=int, default=140)
@@ -673,9 +673,9 @@ index 14760ed..54410ac 100644
          check("doctype", stats.doctype, "doctype present", "missing doctype"),
          check("viewport", stats.viewport, "viewport meta present", "missing viewport meta"),
          check(
-             "uses_birch_system_css",
-             "styles/birch-system.css" in stats.stylesheet_links,
-             "links styles/birch-system.css",
+             "uses_candle_system_css",
+             "styles/candle-system.css" in stats.stylesheet_links,
+             "links styles/candle-system.css",
              f"stylesheet links: {stats.stylesheet_links}",
          ),
          check(
@@ -688,7 +688,7 @@ index 14760ed..54410ac 100644
              "uses_layout_primitives",
              sum(stats.class_counts.get(cls, 0) for cls in LAYOUT_CLASSES) >= 8,
              "layout primitive count is healthy",
-             "too few Birch layout primitives; LLM layout may be brittle",
+             "too few Candle layout primitives; LLM layout may be brittle",
              warn=True,
          ),
          check(
@@ -701,7 +701,7 @@ index 14760ed..54410ac 100644
          check(
              "no_unknown_css_vars",
              not unknown,
-             "all CSS variables are defined in Birch system or local CSS",
+             "all CSS variables are defined in Candle system or local CSS",
              "undefined CSS vars: " + ", ".join(unknown[:8]),
          ),
          check(
@@ -716,7 +716,7 @@ index 14760ed..54410ac 100644
              Finding(
                  "warn",
                  "local_css_size",
-                 f"{stats.style_bytes} bytes of local CSS; consider moving recurring patterns into birch-system.css",
+                 f"{stats.style_bytes} bytes of local CSS; consider moving recurring patterns into candle-system.css",
              )
          )
      hard_colors = [
@@ -817,13 +817,13 @@ index 14760ed..54410ac 100644
              Finding("warn", "component_density_drop", f"candidate card/panel count {cand_cards}, source rough count {orig_cards}")
          )
  
-     source_birch_classes = sum(original.class_counts.get(cls, 0) for cls in BIRCH_CLASSES)
-     candidate_birch_classes = sum(candidate.class_counts.get(cls, 0) for cls in BIRCH_CLASSES)
+     source_candle_classes = sum(original.class_counts.get(cls, 0) for cls in CANDLE_CLASSES)
+     candidate_candle_classes = sum(candidate.class_counts.get(cls, 0) for cls in CANDLE_CLASSES)
      findings.append(
          Finding(
              "note",
-             "birch_class_delta",
-             f"source Birch-contract class uses {source_birch_classes}; candidate {candidate_birch_classes}",
+             "candle_class_delta",
+             f"source Candle-contract class uses {source_candle_classes}; candidate {candidate_candle_classes}",
          )
      )
      return findings
@@ -834,7 +834,7 @@ index 14760ed..54410ac 100644
  
  
  def deltas(original: PageStats, candidate: PageStats) -> dict[str, object]:
-     watched = sorted(BIRCH_CLASSES)
+     watched = sorted(CANDLE_CLASSES)
      return {
          "bytes": candidate.bytes - original.bytes,
          "style_bytes": candidate.style_bytes - original.style_bytes,
@@ -878,7 +878,7 @@ index 14760ed..54410ac 100644
      tiles = [thumb(original), thumb(candidate), thumb(diff)]
      sheet = Image.new("RGB", (thumb_w * 3 + gutter * 2, thumb_h + label_h), (250, 249, 245))
      draw = ImageDraw.Draw(sheet)
-     labels = ["source", "birch candidate", "amplified diff"]
+     labels = ["source", "candle candidate", "amplified diff"]
      for i, tile in enumerate(tiles):
          x = i * (thumb_w + gutter)
          sheet.paste(tile, (x, label_h))
@@ -1091,7 +1091,7 @@ index 14760ed..54410ac 100644
 +    });
 +  });
 +
-   document.body.setAttribute('data-birch-audit', JSON.stringify({
+   document.body.setAttribute('data-candle-audit', JSON.stringify({
      overflow: overflow,
 -    metricGroups: metricGroups
 +    pageOverflowX: Math.round(document.documentElement.scrollWidth - document.documentElement.clientWidth),
@@ -1115,7 +1115,7 @@ index 14760ed..54410ac 100644
 +        source = re.sub(r"</head>", lambda _m: audit_js + "</head>", source, count=1, flags=re.I)
      else:
          source = base + audit_js + source
-     with tempfile.TemporaryDirectory(prefix="birch-audit-") as tmp:
+     with tempfile.TemporaryDirectory(prefix="candle-audit-") as tmp:
          temp = Path(tmp) / html.name
          temp.write_text(source, encoding="utf-8")
          cmd = [
@@ -1129,7 +1129,7 @@ index 14760ed..54410ac 100644
              temp.resolve().as_uri(),
          ]
          completed = subprocess.run(cmd, text=True, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, timeout=45, check=False)
-     match = re.search(r'data-birch-audit="([^"]+)"', completed.stdout)
+     match = re.search(r'data-candle-audit="([^"]+)"', completed.stdout)
      if not match:
          return None
      import html as html_lib
@@ -1240,9 +1240,9 @@ index 14760ed..54410ac 100644
  
  def render_markdown(payload: dict[str, object]) -> str:
      lines = [
-         "# Birch rendering check",
+         "# Candle rendering check",
          "",
-         "Compares original HTML examples with the Birch-system rewrites.",
+         "Compares original HTML examples with the Candle-system rewrites.",
          "",
          "## Summary",
          "",

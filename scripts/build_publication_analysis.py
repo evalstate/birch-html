@@ -123,8 +123,13 @@ def load_deterministic_counts(reports_dir: Path, label: str):
 
     for vp in VIEWPORTS:
         p = reports_dir / f"{label}-{vp}.json"
+        if not p.exists():
+            p = reports_dir / f"{label}-visionfill-{vp}.json"
         data = read_json(p, {}) or {}
-        for art in data.get("artifacts", []) or []:
+        artifacts = data.get("artifacts", []) or []
+        if p.exists() and len(artifacts) != len(EVALS):
+            raise SystemExit(f"{p}: expected {len(EVALS)} artifacts, found {len(artifacts)}")
+        for art in artifacts:
             ev = eval_from_artifact_path(art.get("artifact", ""))
             if not ev:
                 continue
@@ -166,7 +171,7 @@ def load_vision_counts(reports_dir: Path):
             elif level == "warn":
                 counts[ev]["warnings"] += 1
             if level in {"fail", "warn"}:
-                findings.append({
+                row = {
                     "eval": ev,
                     "source": "vlm",
                     "viewport": vp or "",
@@ -175,7 +180,10 @@ def load_vision_counts(reports_dir: Path):
                     "evidence": f.get("evidence", ""),
                     "screenshot_name": art.get("artifact", ""),
                     "report_path": rel(p),
-                })
+                }
+                if isinstance(f.get("bbox_px"), dict):
+                    row["bbox_px"] = f["bbox_px"]
+                findings.append(row)
     return counts, findings
 
 
@@ -235,17 +243,198 @@ def load_trace_usage(trace_path: Path) -> dict:
     return out
 
 
-def quality_score(det_fail, vlm_fail, det_warn, vlm_warn, missing_artifacts):
+def _tool_text(result: object) -> str:
+    try:
+        return json.dumps(result, ensure_ascii=False)
+    except Exception:
+        return str(result)
+
+
+def _is_checker_run(command: str) -> bool:
+    """Conservatively detect model-invoked checker executions.
+
+    The older run JSON has self-check fields too, but those can overcount when a
+    model writes prose/code mentioning the checker path. Here we require either
+    a direct Python/uv invocation of check_birch_renderings.py, an import, or a
+    subprocess-like Python heredoc that contains the checker path. Plain
+    artifact writes that merely include the string are excluded.
+    """
+    stripped = command.strip()
+    if not stripped:
+        return False
+    if "import check_birch_renderings" in stripped:
+        return True
+    if "check_birch_renderings.py" not in stripped:
+        return False
+    if re.match(r"^(cat|tee)\b", stripped):
+        return False
+    return bool(re.search(r"(^|[;&|]\s*)(uv\s+run\b[^;&|]*\s+)?python3?\b[^;&|]*check_birch_renderings\.py\b", stripped, re.S))
+
+
+def _is_artifact_edit(command: str, eval_name: str) -> bool:
+    artifact = f"{eval_name}.html"
+    if artifact not in command:
+        return False
+    stripped = command.strip()
+    if re.search(rf"\b(cat|tee)\s*>\s*[^;&|]*{re.escape(artifact)}\b", stripped):
+        return True
+    if re.search(rf"\b(cat|tee)\s+[^;&|]*\s*>\s*[^;&|]*{re.escape(artifact)}\b", stripped):
+        return True
+    edit_markers = ("write_text(", ".write_text", "sed -i", "perl -0pi", "Path(")
+    return any(marker in stripped for marker in edit_markers) and any(
+        marker in stripped for marker in ("write_text", "replace(", "sed -i", "perl -0pi")
+    )
+
+
+def _checker_failed(text: str) -> bool:
+    if "process exit code was 1" in text or "process exit code was 2" in text:
+        return True
+    if re.search(r'"failures"\s*:\s*[1-9]\d*', text):
+        return True
+    if '"level": "fail"' in text or "'level': 'fail'" in text:
+        return True
+    return False
+
+
+def _checker_succeeded(text: str) -> bool:
+    if "process exit code was 0" in text:
+        return True
+    return bool(re.search(r'"failures"\s*:\s*0\b', text))
+
+
+def load_trace_behavior(trace_path: Path, eval_name: str) -> dict:
+    """Extract self-check and self-correction behavior from a fast-agent trace."""
+    out = {
+        "self_check_attempted": False,
+        "self_check_ran": False,
+        "self_check_succeeded": False,
+        "self_check_runs": 0,
+        "self_check_failed_runs": 0,
+        "self_check_successful_runs": 0,
+        "self_correction_edits": 0,
+        "self_corrected_after_checker": False,
+        "self_correction_verified": False,
+        "assistant_turns": 0,
+    }
+    data = read_json(trace_path, {}) or {}
+    pending: dict[str, dict] = {}
+    saw_failed_checker = False
+    saw_edit_after_failed_checker = False
+
+    for msg in data.get("messages", []) or []:
+        if msg.get("role") == "assistant":
+            out["assistant_turns"] += 1
+        tool_calls = msg.get("tool_calls") or {}
+        if isinstance(tool_calls, dict):
+            for call_id, call in tool_calls.items():
+                params = call.get("params", {}) if isinstance(call, dict) else {}
+                name = params.get("name")
+                args = params.get("arguments", {}) if isinstance(params, dict) else {}
+                if name != "execute":
+                    if name == "read_text_file" and "check_birch_renderings.py" in str(args.get("path", "")):
+                        out["self_check_attempted"] = True
+                    continue
+                command = str(args.get("command", ""))
+                if "check_birch_renderings.py" in command or "import check_birch_renderings" in command:
+                    out["self_check_attempted"] = True
+                is_checker = _is_checker_run(command)
+                is_edit = _is_artifact_edit(command, eval_name)
+                if is_checker:
+                    out["self_check_ran"] = True
+                    out["self_check_runs"] += 1
+                    pending[str(call_id)] = {"kind": "checker"}
+                elif is_edit:
+                    pending[str(call_id)] = {"kind": "edit"}
+                    if saw_failed_checker:
+                        saw_edit_after_failed_checker = True
+                        out["self_corrected_after_checker"] = True
+                        out["self_correction_edits"] += 1
+
+        tool_results = msg.get("tool_results") or {}
+        if isinstance(tool_results, dict):
+            for call_id, result in tool_results.items():
+                event = pending.pop(str(call_id), None)
+                if not event or event.get("kind") != "checker":
+                    continue
+                text = _tool_text(result)
+                failed = _checker_failed(text)
+                succeeded = _checker_succeeded(text)
+                if failed:
+                    saw_failed_checker = True
+                    out["self_check_failed_runs"] += 1
+                if succeeded:
+                    out["self_check_succeeded"] = True
+                    out["self_check_successful_runs"] += 1
+                    if saw_failed_checker:
+                        out["self_correction_verified"] = True
+
+    return out
+
+
+def quality_score(det_fail_units, vlm_fail_units, det_warn_units, vlm_warn_units, missing_artifacts):
     """Transparent descriptive quality score, 0..100.
 
     Penalties are intentionally simple and documented in output metadata:
       - missing artifact: 20
-      - deterministic failure: 8
-      - VLM failure: 8
-      - deterministic warning: 1
-      - VLM warning: 1
+      - unique deterministic failure unit: 6
+      - unique VLM failure unit: 8
+      - unique deterministic warning unit: 1
+      - unique VLM warning unit: 1
+
+    Finding units collapse repeated viewport sightings by ``(eval, finding name)``.
+    This avoids charging four times for a single static contract failure seen in
+    desktop, mobile, deep, and mobile-deep checker passes.
     """
-    return clamp(100 - 20*missing_artifacts - 8*det_fail - 8*vlm_fail - det_warn - vlm_warn)
+    return clamp(100 - 20*missing_artifacts - 6*det_fail_units - 8*vlm_fail_units - det_warn_units - vlm_warn_units)
+
+
+def finding_units(findings, *, level: str, eval_name: str | None = None) -> int:
+    """Count distinct scoring units by eval and finding name."""
+    return len({
+        (f.get("eval"), f.get("name", ""))
+        for f in findings
+        if f.get("level") == level and (eval_name is None or f.get("eval") == eval_name)
+    })
+
+
+def has_finding(findings, *, level: str, name: str, eval_name: str) -> bool:
+    return any(
+        f.get("level") == level and f.get("name") == name and f.get("eval") == eval_name
+        for f in findings
+    )
+
+
+def artifact_quality_score(row: dict, det_findings: list[dict], vlm_findings: list[dict]) -> tuple[float, str]:
+    """Score one artifact opportunity, applying caps for missing/non-Birch renders."""
+    if not row["artifact_present"]:
+        return 0.0, "missing_artifact"
+
+    score = quality_score(
+        row["deterministic_failure_units"], row["vlm_failure_units"],
+        row["deterministic_warning_units"], row["vlm_warning_units"],
+        0,
+    )
+    ev = row["eval"]
+    missing_birch_css = has_finding(det_findings, level="fail", name="uses_birch_system_css", eval_name=ev)
+    missing_page_shell = has_finding(det_findings, level="fail", name="has_page_shell", eval_name=ev)
+    visibly_unstyled = has_finding(vlm_findings, level="fail", name="vision_unstyled_render", eval_name=ev)
+
+    cap_reason = ""
+    if missing_birch_css and visibly_unstyled:
+        score = min(score, 20.0)
+        cap_reason = "missing_birch_css_and_visibly_unstyled"
+    elif missing_birch_css:
+        score = min(score, 35.0)
+        cap_reason = "missing_birch_css"
+    elif missing_page_shell:
+        score = min(score, 50.0)
+        cap_reason = "missing_page_shell"
+    return score, cap_reason
+
+
+def task_score(artifact_score_100: float) -> float:
+    """Convert a 0..100 artifact score into one 20-point task contribution."""
+    return artifact_score_100 / 5.0
 
 
 def build(root: Path, suite_names: list[str] | None = None):
@@ -284,7 +473,9 @@ def build(root: Path, suite_names: list[str] | None = None):
 
             for ev in EVALS:
                 g = gen_by_eval.get(ev, {})
-                trace_usage = load_trace_usage(reports / "fast-agent-results" / f"{ev}.json")
+                trace_path = reports / "fast-agent-results" / f"{ev}.json"
+                trace_usage = load_trace_usage(trace_path)
+                trace_behavior = load_trace_behavior(trace_path, ev)
                 row = {
                     "suite": suite,
                     "model": model,
@@ -315,10 +506,26 @@ def build(root: Path, suite_names: list[str] | None = None):
                     "usage_event_count": trace_usage["usage_event_count"],
                     "tool_calls": int(g.get("tool_calls") or 0),
                     "turn_count": int(g.get("turn_count") or 0),
+                    "self_check_attempted": bool(trace_behavior["self_check_attempted"]),
+                    "self_check_ran": bool(trace_behavior["self_check_ran"]),
+                    "self_check_succeeded": bool(trace_behavior["self_check_succeeded"]),
+                    "self_check_runs": int(trace_behavior["self_check_runs"]),
+                    "self_check_failed_runs": int(trace_behavior["self_check_failed_runs"]),
+                    "self_check_successful_runs": int(trace_behavior["self_check_successful_runs"]),
+                    "self_correction_edits": int(trace_behavior["self_correction_edits"]),
+                    "self_corrected_after_checker": bool(trace_behavior["self_corrected_after_checker"]),
+                    "self_correction_verified": bool(trace_behavior["self_correction_verified"]),
+                    "assistant_turns_trace": int(trace_behavior["assistant_turns"]),
+                    "self_check_mode": g.get("self_check_mode", ""),
+                    "self_check_evidence": g.get("self_check_evidence", ""),
                     "deterministic_failures": sum(det_counts[ev][vp]["failures"] for vp in VIEWPORTS),
                     "deterministic_warnings": sum(det_counts[ev][vp]["warnings"] for vp in VIEWPORTS),
                     "vlm_failures": vlm_counts[ev]["failures"],
                     "vlm_warnings": vlm_counts[ev]["warnings"],
+                    "deterministic_failure_units": finding_units(det_findings, level="fail", eval_name=ev),
+                    "deterministic_warning_units": finding_units(det_findings, level="warn", eval_name=ev),
+                    "vlm_failure_units": finding_units(vlm_findings, level="fail", eval_name=ev),
+                    "vlm_warning_units": finding_units(vlm_findings, level="warn", eval_name=ev),
                     "desktop_failures": det_counts[ev]["desktop"]["failures"],
                     "desktop_warnings": det_counts[ev]["desktop"]["warnings"],
                     "mobile_failures": det_counts[ev]["mobile"]["failures"],
@@ -328,23 +535,25 @@ def build(root: Path, suite_names: list[str] | None = None):
                     "mobile_deep_failures": det_counts[ev]["mobile-deep"]["failures"],
                     "mobile_deep_warnings": det_counts[ev]["mobile-deep"]["warnings"],
                 }
-                row["quality_score"] = quality_score(
-                    row["deterministic_failures"], row["vlm_failures"],
-                    row["deterministic_warnings"], row["vlm_warnings"],
-                    0 if row["generation_ok"] else 1,
-                )
+                row["artifact_present"] = row["artifact_bytes"] > 0
+                artifact_score_100, cap_reason = artifact_quality_score(row, det_findings, vlm_findings)
+                row["artifact_score_100"] = artifact_score_100
+                row["task_score"] = round(task_score(artifact_score_100), 2)
+                row["task_score_max"] = 20
+                row["quality_score"] = artifact_score_100
+                row["quality_cap_reason"] = cap_reason
                 if row["deterministic_failures"] or row["vlm_failures"]:
                     row["quality_class"] = "fail"
                 elif row["deterministic_warnings"] or row["vlm_warnings"]:
                     row["quality_class"] = "warn"
-                elif row["generation_ok"]:
+                elif row["artifact_present"]:
                     row["quality_class"] = "clean"
                 else:
                     row["quality_class"] = "missing"
                 artifact_rows.append(row)
 
             model_artifacts = [r for r in artifact_rows if r["model_slug"] == slug and r["suite"] == suite]
-            missing = sum(1 for r in model_artifacts if not r["generation_ok"])
+            missing = sum(1 for r in model_artifacts if not r["artifact_present"])
             model_row = {
                 "suite": suite,
                 "model": model,
@@ -354,6 +563,7 @@ def build(root: Path, suite_names: list[str] | None = None):
                 "artifact_count": len([p for p in (mdir / "artifacts").glob("*.html")]) if (mdir / "artifacts").exists() else 0,
                 "generation_ok": safe_sum(model_artifacts, "generation_ok"),
                 "generation_total": len(EVALS),
+                "artifact_present": safe_sum(model_artifacts, "artifact_present"),
                 "generation_duration_s": round(safe_sum(model_artifacts, "generation_duration_s"), 3),
                 "input_tokens": safe_sum(model_artifacts, "input_tokens"),
                 "output_tokens": safe_sum(model_artifacts, "output_tokens"),
@@ -370,18 +580,31 @@ def build(root: Path, suite_names: list[str] | None = None):
                 "usage_event_count": safe_sum(model_artifacts, "usage_event_count"),
                 "tool_calls": safe_sum(model_artifacts, "tool_calls"),
                 "turn_count": safe_sum(model_artifacts, "turn_count"),
+                "self_check_attempted": safe_sum(model_artifacts, "self_check_attempted"),
+                "self_check_ran": safe_sum(model_artifacts, "self_check_ran"),
+                "self_check_succeeded": safe_sum(model_artifacts, "self_check_succeeded"),
+                "self_check_runs": safe_sum(model_artifacts, "self_check_runs"),
+                "self_check_failed_runs": safe_sum(model_artifacts, "self_check_failed_runs"),
+                "self_check_successful_runs": safe_sum(model_artifacts, "self_check_successful_runs"),
+                "self_correction_edits": safe_sum(model_artifacts, "self_correction_edits"),
+                "self_corrected_after_checker": safe_sum(model_artifacts, "self_corrected_after_checker"),
+                "self_correction_verified": safe_sum(model_artifacts, "self_correction_verified"),
+                "assistant_turns_trace": safe_sum(model_artifacts, "assistant_turns_trace"),
                 "deterministic_failures": safe_sum(model_artifacts, "deterministic_failures"),
                 "deterministic_warnings": safe_sum(model_artifacts, "deterministic_warnings"),
                 "vlm_failures": safe_sum(model_artifacts, "vlm_failures"),
                 "vlm_warnings": safe_sum(model_artifacts, "vlm_warnings"),
+                "deterministic_failure_units": finding_units(det_findings, level="fail"),
+                "deterministic_warning_units": finding_units(det_findings, level="warn"),
+                "vlm_failure_units": finding_units(vlm_findings, level="fail"),
+                "vlm_warning_units": finding_units(vlm_findings, level="warn"),
                 "generation_trace_count": trace_count(reports, "fast-agent-results"),
                 "vlm_trace_count": trace_count(reports, "fast-agent-vision-results"),
                 "selected_record_path": rel(mdir),
             }
-            model_row["quality_score"] = quality_score(
-                model_row["deterministic_failures"], model_row["vlm_failures"],
-                model_row["deterministic_warnings"], model_row["vlm_warnings"], missing,
-            )
+            model_row["quality_score"] = round(safe_sum(model_artifacts, "task_score"), 2)
+            model_row["quality_score_basis"] = "sum_of_five_20_point_task_scores"
+            model_row["missing_final_artifacts"] = missing
             model_rows.append(model_row)
 
     # Efficiency score: lower duration, tokens, and tool calls are better, each min/max-normalized.
@@ -405,7 +628,8 @@ def write_json_csv(root: Path, model_rows, artifact_rows, finding_rows):
     (root / "analysis/tables").mkdir(parents=True, exist_ok=True)
     metadata = {
         "scoring": {
-            "quality_score": "100 - 20*missing_artifacts - 8*deterministic_failures - 8*vlm_failures - deterministic_warnings - vlm_warnings, clipped to 0..100",
+            "quality_score": "100-point sum over five equal 20-point tasks. Each task starts at 20 - 1.2*deterministic_failure_units - 1.6*vlm_failure_units - 0.2*deterministic_warning_units - 0.2*vlm_warning_units. Missing artifacts score 0/20. Artifacts missing valid Birch CSS are capped at 7/20, or 4/20 when VLM also reports vision_unstyled_render; artifacts missing .page are capped at 10/20. Units are distinct (eval, finding_name), so repeated viewport sightings of the same issue are not charged repeatedly.",
+            "artifact_score_100": "Compatibility field for the same task score on a 0..100 per-artifact scale: 100 - 6*deterministic_failure_units - 8*vlm_failure_units - deterministic_warning_units - vlm_warning_units, with the equivalent caps 35/100, 20/100, and 50/100.",
             "efficiency_score": "0.40*duration_score + 0.40*token_score + 0.20*tool_call_score; each component is min/max normalized with lower-is-better",
             "quality_efficiency_score": "0.75*quality_score + 0.25*efficiency_score",
         },

@@ -1,5 +1,7 @@
 Create a standalone code-review artifact from `evals/code-review/source.diff`.
 
+The patch under review is for a fictional Candle style-system project. Review Candle-specific code as the subject of the patch, but produce your final review artifact using the `birch-html` skill and Birch visual system.
+
 Use grep/sed or another local read-only tool path if helpful to identify touched
 files, hunks, and risky changes.
 

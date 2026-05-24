@@ -11,7 +11,9 @@ Usage:
 
 Environment:
   BIRCH_VISION_MODEL       default: codexresponses.gpt-5.5
-  BIRCH_VISION_MAX_IMAGES  default: 80
+  BIRCH_VISION_MAX_IMAGES  default: 120
+  BIRCH_VISION_MAX_DIMENSION default: 6000
+  BIRCH_VISION_TILE_MODE   default: auto (tile deep screenshots for non-GPT-5.5 models or oversize images)
   BIRCH_VISION_BATCH_MODE  default: per-artifact
   BIRCH_VISION_TIMEOUT     default: 300 seconds per VLM request
 """
@@ -85,6 +87,11 @@ Ignore:
 - content/rubric quality unless it creates a visible rendering defect.
 
 Return JSON only. Use the exact screenshot file name for each artifact entry.
+When reporting a finding, include `bbox_px` if you can localize the affected
+region. Coordinates must be integer pixels in the attached image coordinate
+system: x/y are the top-left corner and width/height are the visible affected
+region. If the issue affects the whole screenshot, use the full image bounds. If
+you are uncertain, omit `bbox_px` rather than guessing.
 
 Use fail only for clearly broken renders. Use warn for suspicious but still
 readable visual defects. Return an empty findings list when no aberration is
@@ -100,6 +107,14 @@ readable, because the diagram conveys the wrong process structure. Do not limit
 this to literal line-end gaps: isolated node columns, missing cross-column
 links, or a pipeline with no continuous path through the major boxes should be
 reported as `vision_flow_disconnected`.
+
+For diagrams, do not only check whether boxes and labels are visible. Trace each
+implied route from its start node to its expected output/end node. Follow main
+routes, side branches, bypasses, fallback paths, and optional paths. If any
+route terminates in empty space, loops back ambiguously, skips the expected
+downstream report/output node, or is connected only through a different optional
+branch, report `vision_flow_disconnected`. If the path is tiny but still appears
+ambiguous in mobile/deep screenshots, report a warn rather than ignoring it.
 """
 
 JSON_SCHEMA = {
@@ -136,6 +151,17 @@ JSON_SCHEMA = {
                                 },
                                 "evidence": {"type": "string"},
                                 "confidence": {"type": "number"},
+                                "bbox_px": {
+                                    "type": "object",
+                                    "additionalProperties": False,
+                                    "properties": {
+                                        "x": {"type": "integer"},
+                                        "y": {"type": "integer"},
+                                        "width": {"type": "integer"},
+                                        "height": {"type": "integer"},
+                                    },
+                                    "required": ["x", "y", "width", "height"],
+                                },
                             },
                             "required": ["level", "name", "evidence", "confidence"],
                         },
@@ -154,7 +180,14 @@ def main() -> None:
     parser.add_argument("candidate_dir", type=Path)
     parser.add_argument("reports_dir", type=Path)
     parser.add_argument("--model", default=os.environ.get("BIRCH_VISION_MODEL", "codexresponses.gpt-5.5"))
-    parser.add_argument("--max-images", type=int, default=int(os.environ.get("BIRCH_VISION_MAX_IMAGES", "80")))
+    parser.add_argument("--max-images", type=int, default=int(os.environ.get("BIRCH_VISION_MAX_IMAGES", "120")))
+    parser.add_argument("--max-dimension", type=int, default=int(os.environ.get("BIRCH_VISION_MAX_DIMENSION", "6000")))
+    parser.add_argument(
+        "--tile-mode",
+        choices=["auto", "always", "never"],
+        default=os.environ.get("BIRCH_VISION_TILE_MODE", "auto"),
+        help="Tile deep screenshots always, never, or automatically for smaller/unknown VLMs and oversize images.",
+    )
     parser.add_argument(
         "--batch-mode",
         choices=["per-artifact", "per-screenshot", "all"],
@@ -165,13 +198,19 @@ def main() -> None:
     args = parser.parse_args()
 
     out = args.reports_dir / "vision-findings.json"
-    screenshots = find_screenshots(args.reports_dir, args.max_images)
+    screenshots = find_screenshots(
+        args.reports_dir,
+        args.max_images,
+        model=args.model,
+        tile_mode=args.tile_mode,
+        max_dimension=args.max_dimension,
+    )
     if not screenshots:
         write_json(out, {"artifacts": [], "skipped": "no screenshots found"})
         return
 
     try:
-        payload = review_with_fast_agent(args.model, screenshots, args.batch_mode, args.timeout)
+        payload = review_with_fast_agent(args.model, screenshots, args.batch_mode, args.timeout, args.max_dimension)
     except Exception as exc:  # noqa: BLE001 - preserve GEPA run, surface as feedback
         write_json(
             out,
@@ -196,7 +235,14 @@ def main() -> None:
     write_json(out, normalize_payload(payload, screenshots))
 
 
-def find_screenshots(reports_dir: Path, max_images: int) -> list[Path]:
+def find_screenshots(
+    reports_dir: Path,
+    max_images: int,
+    *,
+    model: str,
+    tile_mode: str,
+    max_dimension: int,
+) -> list[Path]:
     screenshots_dir = reports_dir / "screenshots"
     if not screenshots_dir.exists():
         return []
@@ -217,16 +263,17 @@ def find_screenshots(reports_dir: Path, max_images: int) -> list[Path]:
         return (3, name)
 
     prioritized = sorted(images, key=priority)
-    review_images = make_deep_tiles(prioritized, reports_dir)
+    review_images = make_deep_tiles(prioritized, reports_dir, model=model, tile_mode=tile_mode, max_dimension=max_dimension)
     return review_images[:max(1, max_images)]
 
 
-def make_deep_tiles(images: list[Path], reports_dir: Path) -> list[Path]:
+def make_deep_tiles(images: list[Path], reports_dir: Path, *, model: str, tile_mode: str, max_dimension: int) -> list[Path]:
     """Add readable vertical tiles for deep screenshots.
 
     Full-page screenshots are useful context, but VLMs often miss below-the-fold
-    chart defects after the image is downsampled. Tiles keep chart panels at a
-    similar scale to first-viewport screenshots.
+    chart defects after the image is downsampled. GPT-5.5-class models can
+    accept large images directly, so the default auto mode only tiles deep
+    screenshots for non-GPT-5.5 models or images above ``max_dimension``.
     """
 
     try:
@@ -241,12 +288,12 @@ def make_deep_tiles(images: list[Path], reports_dir: Path) -> list[Path]:
 
     out: list[Path] = []
     for path in images:
-        if "-deep" not in path.name:
+        if "-deep" not in path.name or not should_tile(path, model=model, tile_mode=tile_mode, max_dimension=max_dimension):
             out.append(path)
             continue
         image = Image.open(path).convert("RGB")
-        tile_h = 900 if image.width > 700 else 1000
-        overlap = 140
+        tile_h = max(900, min(max_dimension, 2400 if image.width > 700 else 3200))
+        overlap = min(220, max(120, tile_h // 10))
         y = 0
         idx = 1
         while y < image.height:
@@ -265,7 +312,23 @@ def make_deep_tiles(images: list[Path], reports_dir: Path) -> list[Path]:
     return out
 
 
-def review_with_fast_agent(model: str, screenshots: list[Path], batch_mode: str, timeout: int) -> dict[str, Any]:
+def should_tile(path: Path, *, model: str, tile_mode: str, max_dimension: int) -> bool:
+    if tile_mode == "never":
+        return False
+    if tile_mode == "always":
+        return True
+    try:
+        from PIL import Image
+        with Image.open(path) as image:
+            oversize = max(image.width, image.height) > max_dimension
+    except Exception:
+        oversize = False
+    model_key = model.lower()
+    gpt55_like = "gpt-5.5" in model_key or "gpt5.5" in model_key
+    return oversize or not gpt55_like
+
+
+def review_with_fast_agent(model: str, screenshots: list[Path], batch_mode: str, timeout: int, max_dimension: int) -> dict[str, Any]:
     """Review screenshots with `fast-agent go --attach`."""
 
     groups = (
@@ -285,7 +348,7 @@ def review_with_fast_agent(model: str, screenshots: list[Path], batch_mode: str,
         for index, group in enumerate(groups, start=1):
             prompt_path = tmpdir / f"prompt-{index:02d}.txt"
             prompt_path.write_text(prompt_for_group(group), encoding="utf-8")
-            attachments = [attachment_path(path, tmpdir) for path in group]
+            attachments = [attachment_path(path, tmpdir, max_dimension=max_dimension) for path in group]
             result_stem = artifact_key(group[0]) if group else f"batch-{index:02d}"
             result_stem = re.sub(r"[^A-Za-z0-9_.-]+", "-", result_stem).strip("-") or f"batch-{index:02d}"
             results_path = results_dir / f"{index:02d}-{result_stem}.json"
@@ -348,16 +411,17 @@ def artifact_key(path: Path) -> str:
     return stem
 
 
-def attachment_path(path: Path, tmpdir: Path, max_width: int = 1000) -> Path:
+def attachment_path(path: Path, tmpdir: Path, max_dimension: int = 6000) -> Path:
     try:
         from PIL import Image
     except Exception:
         return path
     image = Image.open(path).convert("RGB")
-    if image.width <= max_width:
+    largest = max(image.width, image.height)
+    if largest <= max_dimension:
         return path
-    ratio = max_width / image.width
-    resized = image.resize((max_width, max(1, int(image.height * ratio))))
+    ratio = max_dimension / largest
+    resized = image.resize((max(1, int(image.width * ratio)), max(1, int(image.height * ratio))))
     out = tmpdir / path.name
     if out.exists():
         out = tmpdir / f"{path.stem}-{abs(hash(path))}{path.suffix}"
@@ -373,6 +437,21 @@ def strip_json_fence(text: str) -> str:
 
 def normalize_payload(payload: Any, screenshots: list[Path]) -> dict[str, Any]:
     names = {p.name for p in screenshots}
+    by_index = {f"screenshot_{i}": p.name for i, p in enumerate(screenshots, start=1)}
+    by_index.update({f"screenshot_{i}.png": p.name for i, p in enumerate(screenshots, start=1)})
+    by_viewport_alias: dict[str, str] = {}
+    for path in screenshots:
+        name = path.name
+        stem = path.stem
+        if stem.endswith("-mobile-deep"):
+            by_viewport_alias.setdefault("mobile-deep.png", name)
+        elif stem.endswith("-deep"):
+            by_viewport_alias.setdefault("desktop-deep.png", name)
+            by_viewport_alias.setdefault("deep.png", name)
+        elif stem.endswith("-desktop"):
+            by_viewport_alias.setdefault("desktop.png", name)
+        elif stem.endswith("-mobile"):
+            by_viewport_alias.setdefault("mobile.png", name)
     items = payload.get("artifacts") if isinstance(payload, dict) else payload
     if not isinstance(items, list):
         return {"artifacts": []}
@@ -381,6 +460,8 @@ def normalize_payload(payload: Any, screenshots: list[Path]) -> dict[str, Any]:
         if not isinstance(item, dict):
             continue
         artifact = str(item.get("artifact") or item.get("screenshot") or "")
+        artifact = by_index.get(artifact, artifact)
+        artifact = by_viewport_alias.get(artifact, artifact)
         if artifact and artifact not in names:
             # Keep VLM output, but make unclear labels obvious to downstream readers.
             artifact = artifact
@@ -391,14 +472,23 @@ def normalize_payload(payload: Any, screenshots: list[Path]) -> dict[str, Any]:
             level = finding.get("level")
             if level not in {"fail", "warn"}:
                 continue
-            findings.append(
-                {
-                    "level": level,
-                    "name": str(finding.get("name") or "vision_other"),
-                    "evidence": str(finding.get("evidence") or "")[:500],
-                    "confidence": float(finding.get("confidence") or 0.0),
-                }
-            )
+            normalized = {
+                "level": level,
+                "name": str(finding.get("name") or "vision_other"),
+                "evidence": str(finding.get("evidence") or "")[:500],
+                "confidence": float(finding.get("confidence") or 0.0),
+            }
+            bbox = finding.get("bbox_px")
+            if isinstance(bbox, dict):
+                try:
+                    x = max(0, int(bbox.get("x")))
+                    y = max(0, int(bbox.get("y")))
+                    width = max(1, int(bbox.get("width")))
+                    height = max(1, int(bbox.get("height")))
+                    normalized["bbox_px"] = {"x": x, "y": y, "width": width, "height": height}
+                except Exception:
+                    pass
+            findings.append(normalized)
         out.append({"artifact": artifact or "screenshot", "findings": findings})
     return {"artifacts": out}
 

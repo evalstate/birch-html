@@ -23,7 +23,8 @@ But... what about producing good, consistent *standalone* artifacts in a sophist
 
 Produces visually consistent standalone HTML artifacts, with some standard presentation recipes .
 
-See for yourself! (LINK TO SPACE WITH RESULTS) It has been tested against these models. 
+See for yourself: <https://evalstate-birch-html.hf.space/analysis/report.html>.
+It has been tested against these models.
 
 
 This has been benchmarked with 13 different models to see how well they manage to follow the instructions and produce a visually consistent output.
@@ -212,6 +213,31 @@ uv run scripts/run_multimodel_skill_evals.py \
   --model codexresponses.gpt-5.5 \
   --vision \
   --jobs 2
+```
+
+Regenerate and publish the browsing site to Hugging Face:
+
+```bash
+hf auth login
+scripts/publish_hf_space.sh
+```
+
+The publish helper rebuilds `results/clean-final` and `analysis/report.html`,
+syncs the static payload to `hf://buckets/<hf-user>/birch-html`, and uploads a
+small Docker Space that mounts the bucket read-only and serves the report.
+
+Current published URL:
+
+```text
+https://evalstate-birch-html.hf.space/analysis/report.html
+```
+
+Useful overrides:
+
+```bash
+HF_NAMESPACE=evalstate scripts/publish_hf_space.sh
+LABEL_SUFFIX=publish-run scripts/publish_hf_space.sh
+DRY_RUN=1 scripts/publish_hf_space.sh
 ```
 
 Run the Birch rendering checker directly against generated artifacts:
