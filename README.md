@@ -38,8 +38,6 @@ But... what about producing good, consistent *standalone* artifacts in a sophist
 Produces visually consistent standalone HTML artifacts, with some standard presentation recipes .
 
 See for yourself: <https://evalstate-birch-html.hf.space/analysis/report.html>.
-It has been tested against these models.
-
 
 This has been benchmarked with 13 different models to see how well they manage to follow the instructions and produce a visually consistent output.
 
