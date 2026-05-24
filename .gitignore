@@ -25,5 +25,8 @@ results/publish/models/*/reports/fast-agent-vision-results/
 # Local handover/scratch files.
 /docs/
 /*.png
+!/vlm-checker.png
+!/comparison-report.png
+!/sample-output.png
 /-
 /skill/-

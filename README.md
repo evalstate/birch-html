@@ -5,6 +5,20 @@ A skill for producing self-contained HTML Artifacts in a consistent visual style
 https://thariqs.github.io/html-effectiveness/
 https://github.com/ThariqS/html-effectiveness/
 
+## Screenshots
+
+### VLM checker
+
+<img src="vlm-checker.png" alt="VLM checker report screenshot" width="800">
+
+### Comparison Report
+
+<img src="comparison-report.png" alt="Benchmark comparison report screenshot" width="800">
+
+### Sample Skill Output
+
+<img src="sample-output.png" alt="Sample Birch HTML skill output screenshot" width="800">
+
 ## What's Here
 
 - The `birch-html` skill itself.
